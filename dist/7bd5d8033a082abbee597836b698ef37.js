@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({9:[function(require,module,exports) {
+})({7:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -101,13 +101,16 @@ function getRandomAction(actionList) {
 };
 
 function getObjectByRarity(objectList) {
-  var minimRarity = Math.random() * 100;
-  var availableObjects = objectList.filter(function (object) {
-    return object.rarity > minimRarity;
+  var lootTable = [];
+  objectList.forEach(function (element) {
+    var rarity = element.rarity;
+    for (var i = 0; i < rarity; i++) {
+      lootTable.push(element);
+    }
   });
-  return availableObjects[Math.floor(Math.random() * availableObjects.length)];
+  return lootTable[Math.floor(Math.random() * lootTable.length)];
 }
-},{}],10:[function(require,module,exports) {
+},{}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -162,12 +165,14 @@ function writeRoom(currentRoom) {
 
 function getNewRoom(monsters, loot, swipeActions, player) {
     if (player.getLevel() === 1) {
-        return loot.unique.starting(player, swipeActions, 100);
+        return loot.lootGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
-        return (0, _utils.getObjectByRarity)(loot.chest(player, swipeActions));
+        var currentRoom = (0, _utils.getObjectByRarity)(loot.chestList);
+        return loot.lootGenerator[currentRoom.name](player, swipeActions);
     } else {
-        return (0, _utils.getObjectByRarity)(monsters.basicMonsterList(player, swipeActions));
+        var currentRoom = (0, _utils.getObjectByRarity)(monsters.basicMonsterList);
+        return monsters.monsterGenerator[currentRoom.name](player, swipeActions);
     }
 }
 
@@ -186,7 +191,7 @@ function feedbackMessage(message) {
     setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
     */
 }
-},{"./utils":9}],8:[function(require,module,exports) {
+},{"./utils":7}],3:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -198,30 +203,24 @@ var _utils = require('./utils');
 var _game = require('./game');
 
 exports.default = {
-  basicMonsterList: basicMonsterList,
+  basicMonsterList: [{ name: 'wolf', rarity: 10 }, { name: 'rogue', rarity: 4 }],
 
-  monsterGenerator: monsterGenerator
+  monsterGenerator: {
+    wolf: wolfGenerator,
+    rogue: rogueGenerator
+  }
 };
 
 
-var basicMonsterList = [{ name: 'wolf', rarity: 100 }, { name: 'rogue', rarity: 100 }];
-
-var monsterGenerator = {
-  wolf: wolfGenerator,
-  rogue: rogueGenerator
-};
-
-function rogueGenerator(player, swipeActions, rarity) {
+function rogueGenerator(player, swipeActions) {
   var name = 'voleur';
-  var rarity = rarity;
   var img = 'voleur.png';
   var desc = "Donne moi des pièces ou je te tue!";
-  var swipeLeft = swipeActions.monsters.unique.givecoins(player, 100);
-  var swipeRight = swipeActions.monsters.unique.attack(player, 100);
+  var swipeLeft = swipeActions.actionsGenerator.giveCoins(player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
 
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img,
     swipeLeft: swipeLeft,
@@ -229,15 +228,13 @@ function rogueGenerator(player, swipeActions, rarity) {
   };
 }
 
-function wolfGenerator(player, swipeActions, rarity) {
+function wolfGenerator(player, swipeActions) {
   var name = 'loup sauvage';
-  var rarity = rarity;
   var img = 'wolf.png';
   var desc = "Wouaf wouaf!";
-  var availableActions = swipeActions.monsters.animals(player);
-  var swipeLeft = (0, _utils.getObjectByRarity)(availableActions);
-  var swipeRight = swipeActions.monsters.unique.attack(player, 100);
-
+  var availableActions = swipeActions.monsterAnimals.concat(swipeActions.monsterGeneral);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
   // Exceptions 
 
   if (swipeLeft.name == "scream") {
@@ -247,7 +244,6 @@ function wolfGenerator(player, swipeActions, rarity) {
 
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img,
     swipeLeft: swipeLeft,
@@ -303,7 +299,7 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
   wolf: generateWolf,
 }
 */
-},{"./utils":9,"./game":10}],11:[function(require,module,exports) {
+},{"./utils":7,"./game":8}],4:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -312,19 +308,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _utils = require('./utils');
 
-function chestGenerator(player, swipeActions, rarity) {
+exports.default = {
+  chestList: [{ name: 'basicChest', rarity: 100 }],
+
+  lootGenerator: {
+    basicChest: BasicChestGenerator,
+    starting: startingGenerator
+  }
+};
+
+
+function BasicChestGenerator(player, swipeActions) {
   var name = "coffre";
-  var rarity = rarity;
   var desc = "Il y a deux objets dans ce coffre, lequel utiliser ?";
   var img = "coffre.png";
 
-  var availableActions = swipeActions.loot.chest(player);
+  var availableActions = swipeActions.basicChest;
   var actionNoDupe = generateTwoActionsNoDupe(availableActions);
-  var swipeLeft = actionNoDupe[0];
-  var swipeRight = actionNoDupe[1];
+  var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player);
+  var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player);
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img,
     swipeLeft: swipeLeft,
@@ -332,37 +336,23 @@ function chestGenerator(player, swipeActions, rarity) {
   };
 }
 
-function startingGenerator(player, swipeActions, rarity) {
+function startingGenerator(player, swipeActions) {
   var name = 'Garde du donjon';
-  var rarity = rarity;
   var desc = 'Equipe toi aventurier';
   var img = 'dungeonGuard.png';
 
-  var availableActions = swipeActions.special.starting(player);
+  var availableActions = swipeActions.starting;
   var actionNoDupe = generateTwoActionsNoDupe(availableActions);
-  var actionLeft = actionNoDupe[0];
-  var actionRight = actionNoDupe[1];
+  var actionLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player);
+  var actionRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player);
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img,
     swipeLeft: actionLeft,
     swipeRight: actionRight
   };
 }
-
-exports.default = {
-  chest: function getChest(player, swipeActions) {
-    var chest = [];
-    chest.push(chestGenerator(player, swipeActions, 100));
-    return chest;
-  },
-  unique: {
-    starting: startingGenerator
-  }
-};
-
 
 function generateTwoActionsNoDupe(availableActions) {
   var actionLeft = (0, _utils.getObjectByRarity)(availableActions);
@@ -371,7 +361,7 @@ function generateTwoActionsNoDupe(availableActions) {
   }));
   return [actionLeft, actionRight];
 }
-},{"./utils":9}],6:[function(require,module,exports) {
+},{"./utils":7}],5:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -458,7 +448,7 @@ exports.default = {
 function gainLevel(player) {
   player.setLevel(player.getLevel() + 1);
 }
-},{"./utils":9}],7:[function(require,module,exports) {
+},{"./utils":7}],6:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -472,59 +462,44 @@ var _game = require('./game');
 // -------------------------------- EXPORT DEFAULT -------------------------------------------------- //
 
 exports.default = {
-	monsters: {
-		general: function getActionGeneral(player) {
-			var actions = [];
-			actions.push(generateEscape(player, 100));
-			return actions;
-		},
-		animals: function getActionAnimals(player) {
-			var actions = [];
-			actions.push(generateScream(player, 100));
-			actions.push(generateFeed(player, 100));
-			//actions.push(generatePet(player, 100));
-			return actions;
-		},
-		humanoid: function getActionHumanoid(player) {
-			var actions = [];
-			actions.push(generateSteal(player, 100));
-			return actions;
-		},
-		unique: {
-			attack: generateAttack,
-			givecoins: generateGiveCoins
-		}
-	},
-	loot: {
-		chest: function getActionChest(player) {
-			var actions = [];
-			actions.push(generateHpPotion(player, 100));
-			actions.push(generateBagOfCoins(player, 100));
-			actions.push(generateSpinach(player, 50));
-			actions.push(generateMagicBook(player, 50));
-			actions.push(generateSpeedShoes(player, 50));
-			actions.push(generateDumbBell(player, 50));
-			actions.push(generateMagicMushroom(player, 30));
-			return actions;
-		}
-	},
-	special: {
-		starting: function getActionStarting(player) {
-			var actions = [];
-			actions.push(generateWand(player, 100));
-			actions.push(generateSword(player, 100));
-			actions.push(generateBow(player, 100));
-			return actions;
-		}
+	monsterGeneral: [{ name: 'escape', rarity: 1 }],
+
+	monsterAnimals: [{ name: 'scream', rarity: 1 }, { name: 'feed', rarity: 1 }],
+
+	monsterHumanoid: [{ name: 'steal', rarity: 1 }],
+
+	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 1 }, { name: 'magicBook', rarity: 1 }, { name: 'speedShoes', rarity: 1 }, { name: 'dumbBell', rarity: 1 }, { name: 'magicmushroom', rarity: 5 }],
+
+	starting: [{ name: 'wand', rarity: 1 }, { name: 'sword', rarity: 1 }, { name: 'bow', rarity: 1 }],
+
+	actionsGenerator: {
+		wand: generateWand,
+		sword: generateSword,
+		bow: generateBow,
+
+		hpPotion: generateHpPotion,
+		bagOfCoins: generateBagOfCoins,
+		spinach: generateSpinach,
+		magicBook: generateMagicBook,
+		speedShoes: generateSpeedShoes,
+		dumbBell: generateDumbBell,
+		magicmushroom: generateMagicMushroom,
+
+		escape: generateEscape,
+		scream: generateScream,
+		feed: generateFeed,
+		steal: generateSteal,
+
+		attack: generateAttack,
+		giveCoins: generateGiveCoins
 	}
 };
 
 // -------------------------------- ACTIONS_FUNCTIONS ------------------------------------------- //
 
-function generateWand(player, rarity) {
+function generateWand(player) {
 	return {
 		name: "wandstart",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre le baton magique";
 		},
@@ -538,10 +513,9 @@ function generateWand(player, rarity) {
 	};
 }
 
-function generateSword(player, rarity) {
+function generateSword(player) {
 	return {
 		name: "swordstart",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre l'epée";
 		},
@@ -557,10 +531,9 @@ function generateSword(player, rarity) {
 	};
 }
 
-function generateBow(player, rarity) {
+function generateBow(player) {
 	return {
 		name: "bowstart",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre l'arc";
 		},
@@ -579,10 +552,9 @@ function generateBow(player, rarity) {
 // -------------------------------- MONSTERS ------------------------------------------------------------------------------------------ //
 
 
-function generateAttack(player, rarity) {
+function generateAttack(player) {
 	return {
 		name: "attack",
-		rarity: rarity,
 		damage: 3,
 		text: function text() {
 			return player.stats.defaultAttack;
@@ -613,10 +585,9 @@ function generateAttack(player, rarity) {
 	};
 }
 
-function generateGiveCoins(player, rarity) {
+function generateGiveCoins(player) {
 	return {
 		name: "givecoins",
-		rarity: rarity,
 		coinsGiven: (0, _utils.getRandomNumber)(1, 6),
 		text: function text() {
 			return "Donner " + this.coinsGiven + " pièces";
@@ -640,10 +611,9 @@ function generateGiveCoins(player, rarity) {
 	};
 }
 
-function generateScream(player, rarity) {
+function generateScream(player) {
 	return {
 		name: "scream",
-		rarity: rarity,
 		require: 10,
 		damage: 5,
 		text: function text() {
@@ -654,7 +624,7 @@ function generateScream(player, rarity) {
 		},
 		action: function action() {
 			if (player.getStr() >= this.require) {
-				(0, _game.feedbackMessage)("L'ennemi s'est chier dessus et est partit en courant");
+				(0, _game.feedbackMessage)("L'ennemi a eu peur et s'est enfuis en courant");
 			} else {
 				(0, _game.feedbackMessage)("Votre cris n'est pas assez fort, gagnez un peu plus de force!");
 				player.setHp(player.getHp() - this.damage, player);
@@ -663,10 +633,9 @@ function generateScream(player, rarity) {
 	};
 }
 
-function generateEscape(player, rarity) {
+function generateEscape(player) {
 	return {
 		name: "escape",
-		rarity: rarity,
 		text: function text() {
 			return "S'echapper";
 		},
@@ -689,10 +658,9 @@ function generateEscape(player, rarity) {
 	};
 }
 
-function generateFeed(player, rarity) {
+function generateFeed(player) {
 	return {
 		name: "feed",
-		rarity: rarity,
 		text: function text() {
 			return "Nourrir l'animal";
 		},
@@ -713,11 +681,10 @@ function generateFeed(player, rarity) {
 	};
 }
 
-function generateSteal(player, rarity) {
+function generateSteal(player) {
 	var coinsStealed = (0, _utils.getRandomNumber)(3, 10);
 	return {
 		name: "steal",
-		rarity: rarity,
 		text: function text() {
 			return "Steal " + coinsStealed + " coins";
 		},
@@ -742,10 +709,9 @@ function generateSteal(player, rarity) {
 // -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
 // -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
 
-function generateHpPotion(player, rarity) {
+function generateHpPotion(player) {
 	return {
 		name: "hppotion",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre la potion (+5 Hp)";
 		},
@@ -758,10 +724,9 @@ function generateHpPotion(player, rarity) {
 	};
 }
 
-function generateMagicMushroom(player, rarity) {
+function generateMagicMushroom(player) {
 	return {
 		name: "magicmushroom",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre le champignon magique (+5 MaxHp";
 		},
@@ -775,11 +740,10 @@ function generateMagicMushroom(player, rarity) {
 	};
 }
 
-function generateBagOfCoins(player, rarity) {
+function generateBagOfCoins(player) {
 	var coinsGained = (0, _utils.getRandomNumber)(3, 6);
 	return {
 		name: "bagofcoins",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre le sac de pièces (" + coinsGained + " pièces)";
 		},
@@ -792,10 +756,9 @@ function generateBagOfCoins(player, rarity) {
 	};
 }
 
-function generateSpinach(player, rarity) {
+function generateSpinach(player) {
 	return {
 		name: "spinach",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre les épinards (+2 Hp + 2 Force";
 		},
@@ -809,10 +772,9 @@ function generateSpinach(player, rarity) {
 	};
 }
 
-function generateMagicBook(player, rarity) {
+function generateMagicBook(player) {
 	return {
 		name: "magicbook",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre le livre sur la magie (+5 Intel)";
 		},
@@ -825,10 +787,9 @@ function generateMagicBook(player, rarity) {
 	};
 }
 
-function generateSpeedShoes(player, rarity) {
+function generateSpeedShoes(player) {
 	return {
 		name: "speedshoes",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre les chaussures (+3 Agilité)";
 		},
@@ -841,10 +802,9 @@ function generateSpeedShoes(player, rarity) {
 	};
 }
 
-function generateDumbBell(player, rarity) {
+function generateDumbBell(player) {
 	return {
 		name: "dumbbell",
-		rarity: rarity,
 		text: function text() {
 			return "Prendre l'altère et faire quelques répetitions (+5 Force)";
 		},
@@ -865,7 +825,7 @@ function generateDumbBell(player, rarity) {
 		}
 	};
 }
-},{"./utils":9,"./game":10}],4:[function(require,module,exports) {
+},{"./utils":7,"./game":8}],2:[function(require,module,exports) {
 'use strict';
 
 var _monsters = require('./monsters');
@@ -990,7 +950,7 @@ currentRoom.swipeLeft.action();
 
 console.log('player:', player);
 */
-},{"./monsters":8,"./loot":11,"./player":6,"./swipeActions":7,"./utils":9,"./game":10}],18:[function(require,module,exports) {
+},{"./monsters":3,"./loot":4,"./player":5,"./swipeActions":6,"./utils":7,"./game":8}],14:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -1012,7 +972,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61709' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49583' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -1113,5 +1073,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[18,4])
+},{}]},{},[14,2])
 //# sourceMappingURL=/dist/7bd5d8033a082abbee597836b698ef37.map

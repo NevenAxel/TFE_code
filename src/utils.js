@@ -17,8 +17,15 @@ export function getRandomAction(actionList) {
     return actionList[Math.floor(Math.random() * actionList.length)];
   };
 
+
+
 export function getObjectByRarity(objectList){
-  var minimRarity = Math.random() * 100;
-  var availableObjects = objectList.filter(object => object.rarity > minimRarity);
-  return availableObjects[Math.floor(Math.random()* availableObjects.length)];
+  var lootTable = []
+  objectList.forEach(function(element) {
+    var rarity = element.rarity;
+    for (var i = 0; i < rarity; i++) {
+      lootTable.push(element);
+    }    
+  });
+  return lootTable[Math.floor(Math.random() * lootTable.length)];
 }

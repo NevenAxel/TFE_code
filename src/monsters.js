@@ -3,34 +3,26 @@ import { getObjectByRarity } from './utils';
 import { feedbackMessage } from './game';
 
 export default {
-  basicMonsterList : basicMonsterList,
+  basicMonsterList : [
+    {name: 'wolf', rarity: 10},
+    {name: 'rogue', rarity: 4},
+  ],
 
-  
-  monsterGenerator : monsterGenerator,
+  monsterGenerator : {
+    wolf: wolfGenerator,
+    rogue: rogueGenerator,
+  }
 }
 
-var basicMonsterList = [
-  {name: 'wolf', rarity: 100},
-  {name: 'rogue', rarity: 100},
-]
-
-var monsterGenerator = {
-  wolf: wolfGenerator,
-  rogue: rogueGenerator,
-}
-
-
-function rogueGenerator(player, swipeActions, rarity) {
+function rogueGenerator(player, swipeActions) {
   var name = 'voleur';
-  var rarity = rarity;
   var img = 'voleur.png';
   var desc = "Donne moi des pièces ou je te tue!";
-  var swipeLeft = swipeActions.monsters.unique.givecoins(player, 100);
-  var swipeRight = swipeActions.monsters.unique.attack(player, 100);
+  var swipeLeft = swipeActions.actionsGenerator.giveCoins(player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
 
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img, 
     swipeLeft: swipeLeft,
@@ -39,15 +31,13 @@ function rogueGenerator(player, swipeActions, rarity) {
 }
 
 
-function wolfGenerator(player, swipeActions, rarity) {
+function wolfGenerator(player, swipeActions) {
   var name = 'loup sauvage';
-  var rarity = rarity;
   var img = 'wolf.png';
   var desc = "Wouaf wouaf!";
-  var availableActions = swipeActions.monsters.animals(player);
-  var swipeLeft = getObjectByRarity(availableActions);
-  var swipeRight = swipeActions.monsters.unique.attack(player, 100);
-
+  var availableActions = swipeActions.monsterAnimals.concat(swipeActions.monsterGeneral);
+  var swipeLeft = swipeActions.actionsGenerator[getObjectByRarity(availableActions).name](player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
   // Exceptions 
 
   if(swipeLeft.name == "scream"){
@@ -57,7 +47,6 @@ function wolfGenerator(player, swipeActions, rarity) {
 
   return {
     name: name,
-    rarity: rarity,
     desc: desc,
     img: img, 
     swipeLeft: swipeLeft,

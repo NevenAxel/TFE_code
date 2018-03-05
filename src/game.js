@@ -44,13 +44,15 @@ export function writeRoom(currentRoom){
 
 export function getNewRoom(monsters, loot, swipeActions, player){
     if (player.getLevel() === 1) {
-        return loot.unique.starting(player, swipeActions, 100);
+        return loot.lootGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
-        return getObjectByRarity(loot.chest(player, swipeActions));
+        var currentRoom = getObjectByRarity(loot.chestList);
+        return loot.lootGenerator[currentRoom.name](player, swipeActions);
     }
     else {       
-        return getObjectByRarity(monsters.basicMonsterList(player, swipeActions));
+        var currentRoom = getObjectByRarity(monsters.basicMonsterList);
+        return monsters.monsterGenerator[currentRoom.name](player, swipeActions);
     }
 }
 
