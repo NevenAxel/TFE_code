@@ -82,6 +82,7 @@ exports.randomProperties = randomProperties;
 exports.randomOne = randomOne;
 exports.getRandomAction = getRandomAction;
 exports.getObjectByRarity = getObjectByRarity;
+exports.createAvailableActions = createAvailableActions;
 function getRandomNumber(min, max) {
   return min + Math.round(Math.random() * (max - min));
 }
@@ -109,6 +110,86 @@ function getObjectByRarity(objectList) {
     }
   });
   return lootTable[Math.floor(Math.random() * lootTable.length)];
+}
+
+function createAvailableActions(player, swipeActions, objectList) {
+  var availableActions = [];
+
+  // Mettre toutes les actions dans la liste d'action dans la liste availableActions
+  objectList.forEach(function (element) {
+    swipeActions[element].forEach(function (element) {
+      availableActions.push(element);
+    });
+  });
+
+  // Ajouter les actions spécifique à la classe si le joueur est de cette classe
+  if (player.getRole() == "rogue") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Rogue';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "mage") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Mage';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "warrior") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Warrior';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "agility") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Agility';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "intelligence") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Intelligence';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "strenght") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Strenght';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  return availableActions;
 }
 },{}],8:[function(require,module,exports) {
 'use strict';
@@ -203,11 +284,12 @@ var _utils = require('./utils');
 var _game = require('./game');
 
 exports.default = {
-  basicMonsterList: [{ name: 'wolf', rarity: 10 }, { name: 'rogue', rarity: 4 }],
+  basicMonsterList: [{ name: 'wolf', rarity: 10 }, { name: 'rogue', rarity: 2 }, { name: 'gobelin', rarity: 8 }],
 
   monsterGenerator: {
     wolf: wolfGenerator,
-    rogue: rogueGenerator
+    rogue: rogueGenerator,
+    gobelin: gobelinGenerator
   }
 };
 
@@ -232,7 +314,7 @@ function wolfGenerator(player, swipeActions) {
   var name = 'loup sauvage';
   var img = 'wolf.png';
   var desc = "Wouaf wouaf!";
-  var availableActions = swipeActions.monsterAnimals.concat(swipeActions.monsterGeneral);
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterAnimals']);
   var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player);
   var swipeRight = swipeActions.actionsGenerator.attack(player);
   // Exceptions 
@@ -250,6 +332,47 @@ function wolfGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
+
+function gobelinGenerator(player, swipeActions) {
+  var name = 'Petit gobelin';
+  var img = 'gobelin.png';
+  var desc = "Je suis sur que tu as pleins de pièces d'or sur toi!";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterHumanoid']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
+  // Exceptions 
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+/*
+function gobelinGenerator(swipeActions, player) {
+  return {
+    name: 'Petit gobelin',
+    desc:function () {return "* Il ne vous a pas encore vu *"}, 
+    img:'gobelin.png', 
+    swipeRight: swipeActions.monsters.attack(player, 3),
+    swipeLeft: gobelinGeneratorSwipeLeft(swipeActions, player)
+    
+  }
+}
+function gobelinGeneratorSwipeLeft(swipeActions, player) {
+  var availableActions = [
+        swipeActions.monsters.escape(player, 5, 8),
+        swipeActions.monsters.scream(player, 4, 12),
+      ];
+      if (player.getAgility() > 10){
+        availableActions.push(swipeActions.monsters.steal(player, 5, 10))
+      }
+      return randomProperties(availableActions);
+}
+*/
 
 /*
 function hugeOgreGenerator(swipeActions, player) {
@@ -283,20 +406,6 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
         availableActions.push(swipeActions.monsters.steal(player, 5, 10))
       }
       return randomProperties(availableActions);
-}
-*/
-
-/*
-  var basicMonsterList = [
-    {name: 'troll', rarity: 100},
-    {name: 'goblin', rarity: 100},
-    {name: 'wolf', rarity: 100},
-  ]
-
-  var monsterGenerator = {
-  troll: generateTroll,
-  goblin: generateGobelin,
-  wolf: generateWolf,
 }
 */
 },{"./utils":7,"./game":8}],4:[function(require,module,exports) {
@@ -463,10 +572,25 @@ var _game = require('./game');
 
 exports.default = {
 	monsterGeneral: [{ name: 'escape', rarity: 1 }],
+	monsterGeneralRogue: [{ name: 'escape', rarity: 1 }],
+	monsterGeneralMage: [
+		//{name: 'fireball', rarity: 1},
+	],
+	monsterGeneralWarrior: [
+		//{name: 'block', rarity: 1},
+	],
 
 	monsterAnimals: [{ name: 'scream', rarity: 1 }, { name: 'feed', rarity: 1 }],
+	monsterAnimalsRogue: [
+		//{name: 'trap', rarity: 1},
+	],
+	monsterAnimalsIntelligence: [{ name: 'feed', rarity: 1 }],
 
-	monsterHumanoid: [{ name: 'steal', rarity: 1 }],
+	monsterSmallCreature: [{ name: 'scream', rarity: 1 }],
+
+	monsterHumanoid: [],
+	monsterHumanoidRogue: [{ name: 'steal', rarity: 1 }],
+	monsterHumanoidAgility: [{ name: 'steal', rarity: 1 }],
 
 	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 1 }, { name: 'magicBook', rarity: 1 }, { name: 'speedShoes', rarity: 1 }, { name: 'dumbBell', rarity: 1 }, { name: 'magicmushroom', rarity: 5 }],
 
@@ -972,7 +1096,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49583' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49355' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

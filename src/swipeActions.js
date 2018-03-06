@@ -7,15 +7,45 @@ export default {
   monsterGeneral: [
   	{name: 'escape', rarity: 1},
   ],
+  monsterGeneralRogue: [
+  	{name: 'escape', rarity: 1},
+  ],
+  monsterGeneralMage: [
+  	//{name: 'fireball', rarity: 1},
+  ],
+  monsterGeneralWarrior: [
+  	//{name: 'block', rarity: 1},
+  ],
+
 
   monsterAnimals: [
   	{name: 'scream', rarity: 1},
   	{name: 'feed', rarity: 1},
+  	//{name: 'pet', rarity: 1},
+  ],
+  monsterAnimalsRogue: [
+  	//{name: 'trap', rarity: 1},
+  ],
+  monsterAnimalsIntelligence: [
+  	{name: 'feed', rarity: 1},
+  	//{name: 'pet', rarity: 1},
   ],
 
+
+  monsterSmallCreature: [
+  	{name: 'scream', rarity: 1},
+  ],
+
+
   monsterHumanoid: [
+  ],
+  monsterHumanoidRogue: [
   	{name: 'steal', rarity: 1},
   ],
+  monsterHumanoidAgility: [
+  	{name: 'steal', rarity: 1},
+  ],
+
 
   basicChest: [
   	{name: 'hpPotion', rarity: 10},
