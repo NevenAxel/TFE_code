@@ -28,7 +28,7 @@ export default {
   ],
 
   starting: [
-  	{name: 'wand', rarity: 1},
+  	//{name: 'wand', rarity: 1},
   	{name: 'sword', rarity: 1},
   	{name: 'bow', rarity: 1},
   ],
@@ -55,6 +55,32 @@ export default {
   	attack: generateAttack,
   	giveCoins: generateGiveCoins,
   }
+  /*
+  Faire des actions complexes (en plusieurs cartes)
+  ça rend les actions plus intéressantes que d'avoir 
+  une seule réponse (50% de chance de réussite et c'est tout)
+
+  Et fonctionner avec plus d'actions typique à la classe
+
+  certaines actions peuvent loot un objet certaine non
+  (s'echapper ne permettra pas de loot d'objet)
+  les loot sont en général des choix entre deux objets
+
+  Action "préparer son armure"
+  prend du dmg maintenant mais pas la prochaine carte
+  ou donne un certain nombre d'armure
+
+  action "coup de bouclier"
+  si on a de l'armure a beaucoup de chance d'arriver
+  et permet de ne pas prendre de dmg
+
+  classe guerrier passif: berserk, si le guerrier a moins de 20% de pv
+  il se passe quelqueschose, plus de dmg, accès à d'autres abilité
+
+  Objet bière : gagner 10pv mais rend les 5 prochaines actions aléateoire
+
+  
+  */
 };
 
 // -------------------------------- ACTIONS_FUNCTIONS ------------------------------------------- //
