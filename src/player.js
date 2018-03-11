@@ -15,6 +15,10 @@ export default {
     weaponImg: "sword.png",
     defaultAttack: "Attaquer",
   },  
+  thisRoom: {
+    isLastRoom: true,
+    nextRoom: function() {console.log("newRoom")},
+  },
   setHp: function(nbr, player) {
     if(nbr > player.getMaxHp()){
       this.stats.hp = player.getMaxHp();

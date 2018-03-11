@@ -93,10 +93,17 @@ $(document).ready(function(){
 	      card.classList.remove("yesFade");
 	      setTimeout(function(){ card.classList.remove("noFade"); card.classList.remove("no"); }, 500);
 	      	currentRoom.swipeLeft.action();
-	    	gainLevel(player);
-	    	currentRoom = getNewRoom(monsters, loot, swipeActions, player);
-	    	writeStats(player);
-	    	writeRoom(currentRoom);	
+	      	if(player.thisRoom.isLastRoom == false){
+	      		currentRoom.desc = "player.thisRoom.nextRoom.desc";
+	      		writeStats(player);
+	      		writeRoom(currentRoom);	
+		    }
+	    	else{
+	    		gainLevel(player);
+		    	currentRoom = getNewRoom(monsters, loot, swipeActions, player);
+		    	writeStats(player);
+		    	writeRoom(currentRoom);	
+	    	}
 	    }
 	    else{
 	      elem.style.left = 0 + "px";
@@ -114,14 +121,3 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-/*
-console.log('current room: ', currentRoom);
-
-currentRoom.swipeLeft.action();
-
-console.log('player:', player);
-*/

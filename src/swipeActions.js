@@ -40,7 +40,7 @@ export default {
   monsterHumanoid: [
   ],
   monsterHumanoidRogue: [
-  	{name: 'steal', rarity: 1},
+  	{name: 'steal', rarity: 2},
   ],
   monsterHumanoidAgility: [
   	{name: 'steal', rarity: 1},
@@ -95,6 +95,10 @@ export default {
   certaines actions peuvent loot un objet certaine non
   (s'echapper ne permettra pas de loot d'objet)
   les loot sont en général des choix entre deux objets
+  certaines actions finissent le combat, d'autres pas.
+  Voler des pièces en voleur ne finit pas le combat?
+  Quand une action rate ça ne finit pas le combat?
+  
 
   Action "préparer son armure"
   prend du dmg maintenant mais pas la prochaine carte
@@ -209,10 +213,10 @@ function generateAttack(player){
 function generateGiveCoins(player){
   	return {
   		name: "givecoins",
-  		coinsGiven: getRandomNumber(1, 6),
+  		coinsGiven: getRandomNumber(1, 2),
 		text: function () {return "Donner " + this.coinsGiven + " pièces"},
 		img: function () {return "giveCoins.png"},
-		action: function() {
+		action: function () {
 			if (player.getCoin() - this.coinsGiven < 0){
 				feedbackMessage("N'ESSAYER PAS DE M'ARNAQUER J'AI VU QUE VOUS N'AVIEZ PAS ASSEZ!");
 				player.setCoin(0);
@@ -222,10 +226,10 @@ function generateGiveCoins(player){
 			}
 			else if(this.coinsGiven == 1){
 				feedbackMessage("Seulement une pièce ? Tu te fout de moi ?!");
+				player.getCoin() - this.coinsGiven
 				// nouveau dialogue, avec comme réponses "heuu non" ou "tien prend ces pièces en plus"
-				player.setHp(
-					player.getHp() - 5, player
-				);
+				player.thisRoom.isLastRoom = false;		
+				player.thisRoom.nextRoom.desc = "la suite du dialogue";
 			}
 			else {
 				player.setCoin(
@@ -235,6 +239,22 @@ function generateGiveCoins(player){
 		},
 	}
 }
+function generateGiveCoins_1coins(player){
+	var name = 'voleur';
+  var img = 'voleur.png';
+  var desc = "Donne moi des pièces ou je te tue!";
+  var swipeLeft = swipeActions.actionsGenerator.giveCoins(player);
+  var swipeRight = swipeActions.actionsGenerator.attack(player);
+
+  return {
+    name: name,
+    desc: desc,
+    img: img, 
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight,
+  }
+}
+
 
 function generateScream(player){
   	return {

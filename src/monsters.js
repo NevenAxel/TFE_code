@@ -5,9 +5,9 @@ import { feedbackMessage } from './game';
 
 export default {
   basicMonsterList : [
-    {name: 'wolf', rarity: 10},
+    {name: 'wolf', rarity: 0},
     {name: 'rogue', rarity: 2},
-    {name: 'gobelin', rarity: 8},
+    {name: 'gobelin', rarity: 0},
   ],
 
   monsterGenerator : {
@@ -70,7 +70,8 @@ function wolfGenerator(player, swipeActions) {
     --> peut être juste deux type d'action, les actions attaques (à droite)
     --> et les actions plus funky à gauche
 
-<<<<<<< HEAD
+*/
+
 function gobelinGenerator(player, swipeActions) {
   var name = 'Petit gobelin';
   var img = 'gobelin.png';
@@ -113,7 +114,9 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
       }
       return randomProperties(availableActions);
 }
-=======
+*/
+/*
+
     est ce qu'on met un systeme de vie au monstres ?? si oui comment ça fonctionne?
     avec des action dans le genre nourrir, caresser l'animal, crier etc.
     est ce que les dmg du monstre seraient indiquer sur la carte (bof, bof..)
@@ -128,7 +131,7 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
     - On peut passer par différentes zone, le chemin feuillu ou le chemin aux arbres morts
     - puis après quelqu'un indique la direction du trésor, dans une grotte par exemple
     - le perso rentre dans la grotte pour y trouver le fameux trésor
->>>>>>> cf93e364c1c2fed87d7745573ba446bd60091881
+
 */
 
 /*

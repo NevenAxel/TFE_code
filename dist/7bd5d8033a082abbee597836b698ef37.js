@@ -284,7 +284,7 @@ var _utils = require('./utils');
 var _game = require('./game');
 
 exports.default = {
-  basicMonsterList: [{ name: 'wolf', rarity: 10 }, { name: 'rogue', rarity: 2 }, { name: 'gobelin', rarity: 8 }],
+  basicMonsterList: [{ name: 'wolf', rarity: 0 }, { name: 'rogue', rarity: 2 }, { name: 'gobelin', rarity: 0 }],
 
   monsterGenerator: {
     wolf: wolfGenerator,
@@ -332,6 +332,18 @@ function wolfGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
+/*
+    Monstre zombie : si tu lui suce le sang (si ton perso est devenu un vampire)
+    tu perds de la vie, tu attrappe une maladie(prendre du dmg sur plusieurs tour)
+
+    possibilité d'apprendre des nouvelles aptitudes au près de personnage divers
+
+    ce serait une bonne idée de ne pas avoir le choix de droit lock sur une action!
+    --> mettre en point un algorithme qui permet d'avoir toujours 2 choix sensé ?
+    --> peut être juste deux type d'action, les actions attaques (à droite)
+    --> et les actions plus funky à gauche
+
+*/
 
 function gobelinGenerator(player, swipeActions) {
   var name = 'Petit gobelin';
@@ -373,6 +385,24 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
       return randomProperties(availableActions);
 }
 */
+/*
+
+    est ce qu'on met un systeme de vie au monstres ?? si oui comment ça fonctionne?
+    avec des action dans le genre nourrir, caresser l'animal, crier etc.
+    est ce que les dmg du monstre seraient indiquer sur la carte (bof, bof..)
+    
+    Scenario:
+    - on commence dans une auberge
+    - un personnage nous parle d'un trésor qui rend immortel caché dans la forêt
+    - grosse partie de dialogue
+    - finalement on décide de partir à la recherche du trésor
+    - que prendre pour partir à l'aventure (un arc, une épée ou un baton magique?)
+    - aller dans la forêt maudite où pourrait trouver le fameux trésor
+    - On peut passer par différentes zone, le chemin feuillu ou le chemin aux arbres morts
+    - puis après quelqu'un indique la direction du trésor, dans une grotte par exemple
+    - le perso rentre dans la grotte pour y trouver le fameux trésor
+
+*/
 
 /*
 function hugeOgreGenerator(swipeActions, player) {
@@ -408,7 +438,7 @@ function gobelinGeneratorSwipeLeft(swipeActions, player) {
       return randomProperties(availableActions);
 }
 */
-},{"./utils":7,"./game":8}],4:[function(require,module,exports) {
+},{"./utils":7,"./game":8}],5:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -470,7 +500,7 @@ function generateTwoActionsNoDupe(availableActions) {
   }));
   return [actionLeft, actionRight];
 }
-},{"./utils":7}],5:[function(require,module,exports) {
+},{"./utils":7}],6:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -494,6 +524,12 @@ exports.default = {
     weapon: "sword",
     weaponImg: "sword.png",
     defaultAttack: "Attaquer"
+  },
+  thisRoom: {
+    isLastRoom: true,
+    nextRoom: function nextRoom() {
+      console.log("newRoom");
+    }
   },
   setHp: function setHp(nbr, player) {
     if (nbr > player.getMaxHp()) {
@@ -557,7 +593,7 @@ exports.default = {
 function gainLevel(player) {
   player.setLevel(player.getLevel() + 1);
 }
-},{"./utils":7}],6:[function(require,module,exports) {
+},{"./utils":7}],4:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -589,12 +625,14 @@ exports.default = {
 	monsterSmallCreature: [{ name: 'scream', rarity: 1 }],
 
 	monsterHumanoid: [],
-	monsterHumanoidRogue: [{ name: 'steal', rarity: 1 }],
+	monsterHumanoidRogue: [{ name: 'steal', rarity: 2 }],
 	monsterHumanoidAgility: [{ name: 'steal', rarity: 1 }],
 
 	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 1 }, { name: 'magicBook', rarity: 1 }, { name: 'speedShoes', rarity: 1 }, { name: 'dumbBell', rarity: 1 }, { name: 'magicmushroom', rarity: 5 }],
 
-	starting: [{ name: 'wand', rarity: 1 }, { name: 'sword', rarity: 1 }, { name: 'bow', rarity: 1 }],
+	starting: [
+	//{name: 'wand', rarity: 1},
+	{ name: 'sword', rarity: 1 }, { name: 'bow', rarity: 1 }],
 
 	actionsGenerator: {
 		wand: generateWand,
@@ -616,8 +654,30 @@ exports.default = {
 
 		attack: generateAttack,
 		giveCoins: generateGiveCoins
-	}
-};
+		/*
+  Faire des actions complexes (en plusieurs cartes)
+  ça rend les actions plus intéressantes que d'avoir 
+  une seule réponse (50% de chance de réussite et c'est tout)
+    Et fonctionner avec plus d'actions typique à la classe
+    certaines actions peuvent loot un objet certaine non
+  (s'echapper ne permettra pas de loot d'objet)
+  les loot sont en général des choix entre deux objets
+  certaines actions finissent le combat, d'autres pas.
+  Voler des pièces en voleur ne finit pas le combat?
+  Quand une action rate ça ne finit pas le combat?
+  
+    Action "préparer son armure"
+  prend du dmg maintenant mais pas la prochaine carte
+  ou donne un certain nombre d'armure
+    action "coup de bouclier"
+  si on a de l'armure a beaucoup de chance d'arriver
+  et permet de ne pas prendre de dmg
+    classe guerrier passif: berserk, si le guerrier a moins de 20% de pv
+  il se passe quelqueschose, plus de dmg, accès à d'autres abilité
+    Objet bière : gagner 10pv mais rend les 5 prochaines actions aléateoire
+    
+  */
+	} };
 
 // -------------------------------- ACTIONS_FUNCTIONS ------------------------------------------- //
 
@@ -712,7 +772,7 @@ function generateAttack(player) {
 function generateGiveCoins(player) {
 	return {
 		name: "givecoins",
-		coinsGiven: (0, _utils.getRandomNumber)(1, 6),
+		coinsGiven: (0, _utils.getRandomNumber)(1, 2),
 		text: function text() {
 			return "Donner " + this.coinsGiven + " pièces";
 		},
@@ -727,7 +787,8 @@ function generateGiveCoins(player) {
 			} else if (this.coinsGiven == 1) {
 				(0, _game.feedbackMessage)("Seulement une pièce ? Tu te fout de moi ?!");
 				// nouveau dialogue, avec comme réponses "heuu non" ou "tien prend ces pièces en plus"
-				player.setHp(player.getHp() - 5, player);
+				player.thisRoom.isLastRoom = false;
+				player.thisRoom.nextRoom = "la suite du dialogue";
 			} else {
 				player.setCoin(player.getCoin() - this.coinsGiven);
 			}
@@ -1054,10 +1115,19 @@ $(document).ready(function () {
 					card.classList.remove("noFade");card.classList.remove("no");
 				}, 500);
 				currentRoom.swipeLeft.action();
-				(0, _player.gainLevel)(_player2.default);
-				currentRoom = (0, _game.getNewRoom)(_monsters2.default, _loot2.default, _swipeActions2.default, _player2.default);
-				(0, _game.writeStats)(_player2.default);
-				(0, _game.writeRoom)(currentRoom);
+				if (_player2.default.thisRoom.isLastRoom == false) {
+					alert('Generate the next dialogue here');
+					/*
+     	currentRoom = currentRoom.nextRoom;
+     	writeStats(player);
+     	writeRoom(currentRoom);	
+     */
+				} else {
+					(0, _player.gainLevel)(_player2.default);
+					currentRoom = (0, _game.getNewRoom)(_monsters2.default, _loot2.default, _swipeActions2.default, _player2.default);
+					(0, _game.writeStats)(_player2.default);
+					(0, _game.writeRoom)(currentRoom);
+				}
 			} else {
 				elem.style.left = 0 + "px";
 				card.classList.remove("yesFade");
@@ -1074,7 +1144,7 @@ currentRoom.swipeLeft.action();
 
 console.log('player:', player);
 */
-},{"./monsters":3,"./loot":4,"./player":5,"./swipeActions":6,"./utils":7,"./game":8}],14:[function(require,module,exports) {
+},{"./monsters":3,"./loot":5,"./player":6,"./swipeActions":4,"./utils":7,"./game":8}],9:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -1096,7 +1166,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49355' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62780' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -1197,5 +1267,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[14,2])
+},{}]},{},[9,2])
 //# sourceMappingURL=/dist/7bd5d8033a082abbee597836b698ef37.map
