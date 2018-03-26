@@ -4,59 +4,124 @@ import { feedbackMessage } from './game';
 // -------------------------------- EXPORT DEFAULT -------------------------------------------------- //
 
 export default {
-  monsters: {
-  	general: function getActionGeneral(player){
-		var actions = [];
-		actions.push(generateEscape(player, 100));
-		return actions
-	},
-	animals: function getActionAnimals(player){
-		var actions = [];
-		actions.push(generateScream(player, 100));
-		actions.push(generateFeed(player, 100));
-		//actions.push(generatePet(player, 100));
-		return actions
-	},
-	humanoid: function getActionHumanoid(player){
-		var actions = [];
-		actions.push(generateSteal(player, 100));
-		return actions
-	},
-	unique: {
-		attack: generateAttack,
-		givecoins: generateGiveCoins,
-	},
-  },
-  loot: {
-  	chest: function getActionChest(player){
-		var actions = [];
-		actions.push(generateHpPotion(player, 100));
-		actions.push(generateBagOfCoins(player, 100));
-		actions.push(generateSpinach(player, 50));
-		actions.push(generateMagicBook(player, 50));
-		actions.push(generateSpeedShoes(player, 50));
-		actions.push(generateDumbBell(player, 50));
-		actions.push(generateMagicMushroom(player, 30));
-		return actions
-	},
-  },
-  special: {
-  	starting: function getActionStarting(player){
-		var actions = [];
-		actions.push(generateWand(player, 100));
-		actions.push(generateSword(player, 100));
-		actions.push(generateBow(player, 100));
-		return actions
-	},
-  },
+  monsterGeneral: [
+  	{name: 'escape', rarity: 1},
+  ],
+  monsterGeneralRogue: [
+  	{name: 'escape', rarity: 1},
+  ],
+  monsterGeneralMage: [
+  	//{name: 'fireball', rarity: 1},
+  ],
+  monsterGeneralWarrior: [
+  	//{name: 'block', rarity: 1},
+  ],
+
+
+  monsterAnimals: [
+  	{name: 'scream', rarity: 1},
+  	{name: 'feed', rarity: 1},
+  	//{name: 'pet', rarity: 1},
+  ],
+  monsterAnimalsRogue: [
+  	//{name: 'trap', rarity: 1},
+  ],
+  monsterAnimalsIntelligence: [
+  	{name: 'feed', rarity: 1},
+  	//{name: 'pet', rarity: 1},
+  ],
+
+
+  monsterSmallCreature: [
+  	{name: 'scream', rarity: 1},
+  ],
+
+
+  monsterHumanoid: [
+  ],
+  monsterHumanoidRogue: [
+  	{name: 'steal', rarity: 2},
+  ],
+  monsterHumanoidAgility: [
+  	{name: 'steal', rarity: 1},
+  ],
+
+
+  basicChest: [
+  	{name: 'hpPotion', rarity: 10},
+  	{name: 'bagOfCoins', rarity: 10},
+  	{name: 'spinach', rarity: 1},
+  	{name: 'magicBook', rarity: 1},
+  	{name: 'speedShoes', rarity: 1},
+  	{name: 'dumbBell', rarity: 1},
+  	{name: 'magicmushroom', rarity: 5},
+  ],
+
+  starting: [
+  	//{name: 'wand', rarity: 1},
+  	{name: 'sword', rarity: 1},
+  	{name: 'bow', rarity: 1},
+  ],
+
+  actionsGenerator: {
+  	wand: generateWand,
+  	sword: generateSword,
+  	bow: generateBow,
+
+
+  	hpPotion: generateHpPotion,
+  	bagOfCoins: generateBagOfCoins,
+  	spinach: generateSpinach,
+  	magicBook: generateMagicBook,
+  	speedShoes: generateSpeedShoes,
+  	dumbBell: generateDumbBell,
+  	magicmushroom: generateMagicMushroom,
+
+  	escape: generateEscape,
+  	scream: generateScream,
+  	feed: generateFeed,
+  	steal: generateSteal,
+
+  	attack: generateAttack,
+  	giveCoins: generateGiveCoins,
+  }
+  /*
+  Faire des actions complexes (en plusieurs cartes)
+  ça rend les actions plus intéressantes que d'avoir 
+  une seule réponse (50% de chance de réussite et c'est tout)
+
+  Et fonctionner avec plus d'actions typique à la classe
+
+  certaines actions peuvent loot un objet certaine non
+  (s'echapper ne permettra pas de loot d'objet)
+  les loot sont en général des choix entre deux objets
+  certaines actions finissent le combat, d'autres pas.
+  Voler des pièces en voleur ne finit pas le combat?
+  Quand une action rate ça ne finit pas le combat?
+  
+
+  Action "préparer son armure"
+  prend du dmg maintenant mais pas la prochaine carte
+  ou donne un certain nombre d'armure
+
+  action "coup de bouclier"
+  si on a de l'armure a beaucoup de chance d'arriver
+  et permet de ne pas prendre de dmg
+
+  classe guerrier passif: berserk, si le guerrier a moins de 20% de pv
+  il se passe quelqueschose, plus de dmg, accès à d'autres abilité
+  (Plus de chance de chopper des loot par exemple)
+
+  Objet bière : gagner 10pv mais rend les 5 prochaines actions aléateoire
+  
+  */
 };
 
 // -------------------------------- ACTIONS_FUNCTIONS ------------------------------------------- //
 
-function generateWand(player, rarity){
+function generateWand(player, swipeActions){
 	return {
 		name: "wandstart",
-		rarity: rarity,
 		text: function () {return "Prendre le baton magique"},
 		img: function () {return "wand.png"},
 		action: function() {
@@ -68,10 +133,9 @@ function generateWand(player, rarity){
 	}
 }
 
-function generateSword(player, rarity){
+function generateSword(player, swipeActions){
 	return {
 		name: "swordstart",
-		rarity: rarity,
 		text: function () {return "Prendre l'epée"},
 		img: function () {return "epee.png"},
 		action: function() {
@@ -89,10 +153,9 @@ function generateSword(player, rarity){
 	}
 }
 
-function generateBow(player, rarity){
+function generateBow(player, swipeActions){
 	return {
 		name: "bowstart",
-		rarity: rarity,
 		text: function () {return "Prendre l'arc"},
 		img: function () {return "arc.png"},
 		action: function() {
@@ -109,10 +172,9 @@ function generateBow(player, rarity){
 // -------------------------------- MONSTERS ------------------------------------------------------------------------------------------ //
 
 
-function generateAttack(player, rarity){
+function generateAttack(player, swipeActions){
 	return {
 		name: "attack",
-		rarity: rarity,
 		damage: 3,
 		text: function () {return player.stats.defaultAttack},
 		img: function () {return player.stats.weaponImg},
@@ -148,16 +210,15 @@ function generateAttack(player, rarity){
 	}
 }
 
-function generateGiveCoins(player, rarity){
+function generateGiveCoins(player, swipeActions){
   	return {
   		name: "givecoins",
-  		rarity: rarity,
   		coinsGiven: getRandomNumber(1, 6),
 		text: function () {return "Donner " + this.coinsGiven + " pièces"},
 		img: function () {return "giveCoins.png"},
-		action: function() {
+		action: function () {
 			if (player.getCoin() - this.coinsGiven < 0){
-				feedbackMessage("N'ESSAYER PAS DE M'ARNAQUER J'AI VU QUE VOUS N'AVIEZ PAS ASSEZ!");
+				feedbackMessage("J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
 				player.setCoin(0);
 				player.setHp(
 					player.getHp() - 10, player
@@ -165,10 +226,26 @@ function generateGiveCoins(player, rarity){
 			}
 			else if(this.coinsGiven == 1){
 				feedbackMessage("Seulement une pièce ? Tu te fout de moi ?!");
-				// nouveau dialogue, avec comme réponses "heuu non" ou "tien prend ces pièces en plus"
-				player.setHp(
-					player.getHp() - 5, player
+				player.setCoin(
+					player.getCoin() - this.coinsGiven
 				);
+				player.thisRoom.isLastRoom = false;		
+				// Permet un noveau dialogue sur la même carte
+				player.thisRoom.nextRoom = {
+					desc: "Seulement une pièce ? Tu te fout de moi ?!",
+					swipeLeft: {
+						coinsGiven2: getRandomNumber(3, 8),
+						text: function () {return "Donner " + this.coinsGiven2 + " pièces en plus"},
+						img: function () {return "giveCoins.png"},
+						action: function() {
+							feedbackMessage("J'aime mieux ça!");
+							player.setCoin(
+								player.getCoin() - this.coinsGiven2
+							);
+						}
+					},
+					swipeRight: swipeActions.actionsGenerator.attack(player, swipeActions),
+				}
 			}
 			else {
 				player.setCoin(
@@ -179,17 +256,17 @@ function generateGiveCoins(player, rarity){
 	}
 }
 
-function generateScream(player, rarity){
+
+function generateScream(player, swipeActions){
   	return {
   		name: "scream",
-		rarity: rarity,
 		require: 10,
 		damage: 5,
 		text: function () {return "Crier pour l'effrayer"},
 		img: function () {return "scream.png"},
 		action: function() {
 			if (player.getStr() >= this.require) {
-				feedbackMessage("L'ennemi s'est chier dessus et est partit en courant")
+				feedbackMessage("L'ennemi a eu peur et s'est enfuis en courant")
 			}
 			else {
 				feedbackMessage("Votre cris n'est pas assez fort, gagnez un peu plus de force!")
@@ -201,18 +278,19 @@ function generateScream(player, rarity){
 	}
 }
 
-function generateEscape(player, rarity){
+function generateEscape(player, swipeActions){
   	return {
   		name: "escape",
-		rarity: rarity,
 		text: function () {return "S'echapper"},
 		img: function () {return "escape.png"},
+		require: 8,
+		damage: 3,
 		action: function() {
-			if (player.getAgility() >= 5) {
+			if (player.getAgility() >= this.require) {
 				if(Math.random() < 0.3 * 5 / player.getAgility()){
 					feedbackMessage('Pas de chance, vous avez trébucher sur une pierre')
 					player.setHp(
-						player.getHp() - 3, player
+						player.getHp() - this.damage, player
 					);					
 				}
 				else{
@@ -222,17 +300,16 @@ function generateEscape(player, rarity){
 			else {
 				feedbackMessage("Vous n'êtes pas assez rapide! Ouch!")
 				player.setHp(
-					player.getHp() - 3, player
+					player.getHp() - this.damage, player
 				);
 			}
 		},
 	}
 }
 
-function generateFeed(player, rarity){
+function generateFeed(player, swipeActions){
   	return {
   		name: "feed",
-		rarity: rarity,
 		text: function () {return "Nourrir l'animal"},
 		img: function () {return "feed.png"},
 		action: function() {
@@ -255,18 +332,18 @@ function generateFeed(player, rarity){
 	}
 }
 
-function generateSteal(player, rarity){
+function generateSteal(player, swipeActions){
 	var coinsStealed = getRandomNumber(3, 10);
   	return {
   		name: "steal",
-		rarity: rarity,
 		text: function () {return "Steal " + coinsStealed + " coins"},
 		img: function () {return "steal.png"},
+		damage: 5,
 		action: function() {
 			if(Math.random() < 0.4 * 10 / player.getAgility()){
 				feedbackMessage('Vous avez été pris sur le fait')
 				player.setHp(
-					player.getHp() - 3, player
+					player.getHp() - this.damage, player
 				);
 			}
 			else{
@@ -285,10 +362,9 @@ function generateSteal(player, rarity){
 // -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
 // -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
 
-function generateHpPotion(player, rarity){
+function generateHpPotion(player, swipeActions){
   	return {
   		name: "hppotion",
-		rarity: rarity,
 		text: function () {return "Prendre la potion (+5 Hp)"},
 		img: function () {return "hpPotion.png"},
 		action: function() {
@@ -299,10 +375,9 @@ function generateHpPotion(player, rarity){
 	}
 }
 
-function generateMagicMushroom(player, rarity){
+function generateMagicMushroom(player, swipeActions){
   	return {
   		name: "magicmushroom",
-		rarity: rarity,
 		text: function () {return "Prendre le champignon magique (+5 MaxHp"},
 		img: function () {return "champignon.png"},
 		action: function() {
@@ -316,11 +391,10 @@ function generateMagicMushroom(player, rarity){
 	}
 }
 
-function generateBagOfCoins(player, rarity){
+function generateBagOfCoins(player, swipeActions){
 	var coinsGained = getRandomNumber(3, 6);
   	return {
   		name: "bagofcoins",
-		rarity: rarity,
 		text: function () {return "Prendre le sac de pièces (" + coinsGained + " pièces)" },
 		img: function () {return "coinsBag.png"},
 		action: function() {
@@ -331,10 +405,9 @@ function generateBagOfCoins(player, rarity){
 	}
 }
 
-function generateSpinach(player, rarity){
+function generateSpinach(player, swipeActions){
   	return {
   		name: "spinach",
-		rarity: rarity,
 		text: function () {return "Prendre les épinards (+2 Hp + 2 Force"},
 		img: function () {return "spinach.png"},
 		action: function() {
@@ -348,10 +421,9 @@ function generateSpinach(player, rarity){
 	}
 }
 
-function generateMagicBook(player, rarity){
+function generateMagicBook(player, swipeActions){
   	return {
   		name: "magicbook",
-		rarity: rarity,
 		text: function () {return "Prendre le livre sur la magie (+5 Intel)"},
 		img: function () {return "magicBook.png"},
 		action: function() {
@@ -362,10 +434,9 @@ function generateMagicBook(player, rarity){
 	}
 }
 
-function generateSpeedShoes(player, rarity){
+function generateSpeedShoes(player, swipeActions){
   	return {
   		name: "speedshoes",
-		rarity: rarity,
 		text: function () {return "Prendre les chaussures (+3 Agilité)"},
 		img: function () {return "speedShoes.png"},
 		action: function() {
@@ -376,10 +447,9 @@ function generateSpeedShoes(player, rarity){
 	}
 }
 
-function generateDumbBell(player, rarity){
+function generateDumbBell(player, swipeActions){
   	return {
   		name: "dumbbell",
-		rarity: rarity,
 		text: function () {return "Prendre l'altère et faire quelques répetitions (+5 Force)"},
 		img: function () {return "DumbBell.png"},
 		action: function() {

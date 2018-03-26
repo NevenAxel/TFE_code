@@ -42,15 +42,17 @@ export function writeRoom(currentRoom){
     document.getElementById("btn_yes").textContent = currentRoom.swipeRight.text();
   }
 
-export function getNewRoom(monsters, loot, swipeActions, player){
+export function getNewRoom(room, swipeActions, player){
     if (player.getLevel() === 1) {
-        return loot.unique.starting(player, swipeActions, 100);
+        return room.roomGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
-        return getObjectByRarity(loot.chest(player, swipeActions));
+        var currentRoom = getObjectByRarity(room.chestList);
+        return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
     else {       
-        return getObjectByRarity(monsters.basicMonsterList(player, swipeActions));
+        var currentRoom = getObjectByRarity(room.basicMonsterList);
+        return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
 }
 

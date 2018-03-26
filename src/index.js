@@ -1,5 +1,4 @@
-import monsters from './monsters';
-import loot from './loot';
+import room from './room';
 import player from './player';
 import swipeActions from './swipeActions';
 
@@ -13,7 +12,7 @@ import { gainLevel } from './player';
 
 $(document).ready(function(){
 
-	var currentRoom = getNewRoom(monsters, loot, swipeActions, player);
+	var currentRoom = getNewRoom(room, swipeActions, player);
 	writeStats(player);
 	writeRoom(currentRoom);
 	console.log(player);
@@ -83,7 +82,7 @@ $(document).ready(function(){
 	      setTimeout(function(){ card.classList.remove("yesFade"); card.classList.remove("yes"); }, 500);
 	      	currentRoom.swipeRight.action();
 			gainLevel(player);
-			currentRoom = getNewRoom(monsters, loot, swipeActions, player);		
+			currentRoom = getNewRoom(room, swipeActions, player);		
 			writeStats(player);
 			writeRoom(currentRoom);  
 	    }
@@ -92,11 +91,24 @@ $(document).ready(function(){
 	      card.classList.add("noFade");
 	      card.classList.remove("yesFade");
 	      setTimeout(function(){ card.classList.remove("noFade"); card.classList.remove("no"); }, 500);
+	      	player.thisRoom.isLastRoom = true;
 	      	currentRoom.swipeLeft.action();
-	    	gainLevel(player);
-	    	currentRoom = getNewRoom(monsters, loot, swipeActions, player);
-	    	writeStats(player);
-	    	writeRoom(currentRoom);	
+	      	if(player.thisRoom.isLastRoom == false){
+	      		/*
+				Mettre en place un système qui si la desc, l'img ou le swipeLeft/swipeRight n'est pas définis
+				ne pas le remplacer par un "undefined" et donc laisser la valeur existante
+	      		*/
+	      		currentRoom.desc = player.thisRoom.nextRoom.desc;
+	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
+	      		writeStats(player);
+	      		writeRoom(currentRoom);	
+		    }
+	    	else{
+	    		gainLevel(player);
+		    	currentRoom = getNewRoom(room, swipeActions, player);
+		    	writeStats(player);
+		    	writeRoom(currentRoom);	
+	    	}
 	    }
 	    else{
 	      elem.style.left = 0 + "px";
@@ -114,14 +126,3 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-/*
-console.log('current room: ', currentRoom);
-
-currentRoom.swipeLeft.action();
-
-console.log('player:', player);
-*/
