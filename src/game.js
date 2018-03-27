@@ -1,6 +1,7 @@
 import { getObjectByRarity } from './utils';
 import { getRandomNumber } from './utils';
 
+
 export function writeStats(player){
     switch(player.getRole()) {
     case "mage":
@@ -36,7 +37,7 @@ export function writeStats(player){
   }
 
 export function writeRoom(currentRoom){
-    document.getElementById("room_img").innerHTML = currentRoom.img;
+    document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img; + ")";
     document.getElementById("room_desc").innerHTML= currentRoom.desc;
     document.getElementById("btn_no").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_yes").textContent = currentRoom.swipeRight.text();
@@ -47,11 +48,11 @@ export function getNewRoom(room, swipeActions, player){
         return room.roomGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
-        var currentRoom = getObjectByRarity(room.chestList);
+        var currentRoom = getObjectByRarity(room.forestLootList);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
     else {       
-        var currentRoom = getObjectByRarity(room.basicMonsterList);
+        var currentRoom = getObjectByRarity(room.forestMonsterList);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
 }

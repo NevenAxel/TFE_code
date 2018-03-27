@@ -6,6 +6,7 @@ import { getObjectByRarity } from '../utils';
 
 export default{
   basicChestGenerator,
+  mushroomGenerator,
 }
 
 function basicChestGenerator(player, swipeActions) {
@@ -25,3 +26,21 @@ function basicChestGenerator(player, swipeActions) {
       swipeRight: swipeRight,
     }
   }
+
+function mushroomGenerator(player, swipeActions) {
+    var name = "Champignon étrange";
+    var desc = "Il a l'air commestible, je tente de le manger ?";
+    var img = "mushroom.png";
+
+    var availableActions = swipeActions.mushroom;
+    var swipeLeft = swipeActions.actionsGenerator.noEat(player, swipeActions);
+    var swipeRight = swipeActions.actionsGenerator[getObjectByRarity(availableActions).name](player, swipeActions);
+    return {
+      name: name,
+      desc: desc, 
+      img: img, 
+      swipeLeft: swipeLeft,
+      swipeRight: swipeRight,
+    }
+  }
+

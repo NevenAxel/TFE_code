@@ -1,46 +1,38 @@
 import { getRandomNumber } from './utils';
 import { getObjectByRarity } from './utils';
 import swipeActions from './swipeActions';
+
+import forestMonster from './rooms/forestMonster';
+import forestLoot from './rooms/forestLoot';
+
 import startingroom from './rooms/startingroom';
 import monsters from './rooms/monsters';
 import chest from './rooms/chest';
 
 
 export default {
-  basicMonsterList : [
-    {name: 'wolf', rarity: 5},
-    {name: 'rogue', rarity: 2},
-    {name: 'gobelin', rarity: 3},
-    {name: 'spider', rarity: 4},
-    {name: 'ogre', rarity: 2}
-  ],
-
-  //for real
-
   forestMonsterList : [
-    {name: 'wolf', rarity: 5},
+    {name: 'wolf', rarity: 0},
     {name: 'rogue', rarity: 2},
     {name: 'gobelin', rarity: 3},
-    {name: 'spider', rarity: 2},
-    {name: 'boar', rarity: 5},
-    {name: 'shroom', rarity: 4},
-    // Monstre plus complexe (un buisson qui fait du bruit, que faire, en fait c'est un monstre caché)
-    {name: 'unicorn', rarity: 1},
+    {name: 'spider', rarity: 5},
+    {name: 'shroom', rarity: 0},
   ],
 
-  chestList : [
-    {name: 'basicChest', rarity: 100},
+  forestLootList : [
+    {name: 'shroom', rarity: 2},
+    {name: 'basicChest', rarity: 5},
   ],
 
   roomGenerator : {
-    basicChest: chest.BasicChestGenerator,
     starting: startingroom.startingGenerator,
 
-
-    wolf: monsters.wolfGenerator,
-    rogue: monsters.rogueGenerator,
-    gobelin: monsters.gobelinGenerator,
-    spider: monsters.spiderGenerator,
+    shroom: forestLoot.mushroomGenerator,
+    wolf: forestMonster.wolfGenerator,
+    rogue: forestMonster.rogueGenerator,
+    gobelin: forestMonster.gobelinGenerator,
+    spider: forestMonster.spiderGenerator,
+    basicChest: chest.basicChestGenerator,
     ogre: monsters.hugeOgreGenerator,
   }
 }

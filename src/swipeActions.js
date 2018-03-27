@@ -1,6 +1,11 @@
 import { getRandomNumber } from './utils';
 import { feedbackMessage } from './game';
 
+import loot from './actions/actionsLoots';
+import monster from './actions/actionsMonsters';
+import starting from './actions/actionsStarting';
+import forestMushroom from './actions/forestMushroom';
+
 // -------------------------------- EXPORT DEFAULT -------------------------------------------------- //
 
 export default {
@@ -54,7 +59,15 @@ export default {
   	{name: 'magicBook', rarity: 1},
   	{name: 'speedShoes', rarity: 1},
   	{name: 'dumbBell', rarity: 1},
-  	{name: 'magicmushroom', rarity: 5},
+  ],
+
+  mushroom: [
+  	{name: 'toxicMushroom', rarity: 20},
+  	{name: 'sleepMushroom', rarity: 12},
+  	{name: 'stupidMushroom', rarity: 8},
+  	{name: 'magicMushroom', rarity: 5},
+  	{name: 'agilityMushroom', rarity: 10},
+  	{name: 'yummyMushroom', rarity: 20},
   ],
 
   starting: [
@@ -64,26 +77,32 @@ export default {
   ],
 
   actionsGenerator: {
-  	wand: generateWand,
-  	sword: generateSword,
-  	bow: generateBow,
+  	wand: starting.generateWand,
+  	sword: starting.generateSword,
+  	bow: starting.generateBow,
 
+  	toxicMushroom: forestMushroom.generateToxicMushroom,
+  	sleepMushroom: forestMushroom.generateSleepMushroom,
+  	stupidMushroom: forestMushroom.generateStupidMushroom,
+  	magicMushroom: forestMushroom.generateMagicMushroom,
+  	agilityMushroom: forestMushroom.generateAgilityMushroom,
+  	yummyMushroom: forestMushroom.generateYummyMushroom,
 
-  	hpPotion: generateHpPotion,
-  	bagOfCoins: generateBagOfCoins,
-  	spinach: generateSpinach,
-  	magicBook: generateMagicBook,
-  	speedShoes: generateSpeedShoes,
-  	dumbBell: generateDumbBell,
-  	magicmushroom: generateMagicMushroom,
+  	hpPotion: loot.generateHpPotion,
+  	bagOfCoins: loot.generateBagOfCoins,
+  	spinach: loot.generateSpinach,
+  	magicBook: loot.generateMagicBook,
+  	speedShoes: loot.generateSpeedShoes,
+  	dumbBell: loot.generateDumbBell,
 
-  	escape: generateEscape,
-  	scream: generateScream,
-  	feed: generateFeed,
-  	steal: generateSteal,
+  	escape: monster.generateEscape,
+  	scream: monster.generateScream,
+  	feed: monster.generateFeed,
+  	steal: monster.generateSteal,
 
-  	attack: generateAttack,
-  	giveCoins: generateGiveCoins,
+  	attack: monster.generateAttack,
+  	noEat: forestMushroom.generateNoEat,
+  	giveCoins: monster.generateGiveCoins,
   }
   /*
   Faire des actions complexes (en plusieurs cartes)
