@@ -40,10 +40,10 @@
       opacity: 1;
       line-height: 250px;
       border-radius: 30px;
-      background: url("./img/bg/bg-forest.svg");
+      background: url("845bc018acac1986e047b6904fa67b66.svg");
     }
     #room_img{
-      background: url("./img/monsters/goblin.svg") center no-repeat;
+      background: url("35e2de55efce6747bb987a53a67e84e3.svg") center no-repeat;
       width: 220px;
       height: 220px;
       margin: 0 auto;
@@ -73,7 +73,7 @@
       opacity: 0;
     }
     #btn_no {
-      background: url("./img/actions/feed.svg") no-repeat center;
+      background: url("97fb19066fb387b7db5c10c7b78ec113.svg") no-repeat center;
       width: 80px;
       height: 80px;
       position: absolute;
@@ -83,7 +83,7 @@
       color: black;
     }
     #btn_yes {
-      background: url("./img/actions/sword.svg") no-repeat center;
+      background: url("a56ed14cb19445fa7e69776a35c2e8da.svg") no-repeat center;
       width: 80px;
       height: 80px;
       position: absolute;

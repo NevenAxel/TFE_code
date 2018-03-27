@@ -16,7 +16,7 @@ export default {
     {name: 'rogue', rarity: 2},
     {name: 'gobelin', rarity: 3},
     {name: 'spider', rarity: 5},
-    {name: 'shroom', rarity: 0},
+    {name: 'shroom', rarity: 5},
   ],
 
   forestLootList : [

@@ -1,6 +1,9 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
+import eat_svg from '../img/actions/eat.svg';
+import no_svg from '../img/actions/no.svg';
+
 export default {
   generateNoEat,
 
@@ -16,7 +19,7 @@ function generateNoEat(player, swipeActions){
   	return {
   		name: "no",
 		text: function () {return "Ne pas manger"},
-		img: function () {return "no.png"},
+		img: function () {return no_svg},
 		action: function() {
 		},
 	}
@@ -26,7 +29,7 @@ function generateToxicMushroom(player, swipeActions){
   	return {
   		name: "toxicMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("C'est un champignon toxique!");
 			player.setHp(
@@ -41,11 +44,14 @@ function generateSleepMushroom(player, swipeActions){
   	return {
   		name: "sleepMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("Ce champignon vous a amorti, endormi...");
-			player.setHp(
+			player.setStr(
 				player.getStr() - 3, player
+			);
+			player.setAgility(
+				player.getAgility() - 2, player
 			);
 		},
 	}
@@ -55,10 +61,10 @@ function generateStupidMushroom(player, swipeActions){
   	return {
   		name: "stupidMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("Vous avez perdu quelques neurones");
-			player.setHp(
+			player.setIntel(
 				player.getIntel() - 3, player
 			);
 		},
@@ -70,14 +76,14 @@ function generateMagicMushroom(player, swipeActions){
   	return {
   		name: "magicMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("Ce champignon vous a fait du bien");
 			player.setMaxHp(
-				player.getMaxHp() + 5
+				player.getMaxHp() + 3
 			);
 			player.setHp(
-				player.getHp() + 5, player
+				player.getHp() + 3, player
 			);
 		},
 	}
@@ -87,11 +93,11 @@ function generateAgilityMushroom(player, swipeActions){
   	return {
   		name: "agilityMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("Vous vous sentez plus vif");
-			player.setHp(
-				player.getAgility() + 3, player
+			player.setAgility(
+				player.getAgility() + 4, player
 			);
 		},
 	}
@@ -101,11 +107,11 @@ function generateYummyMushroom(player, swipeActions){
   	return {
   		name: "yummyMushroom",
 		text: function () {return "Manger"},
-		img: function () {return "eat.png"},
+		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage("Mhhh... il est délicieux!");
 			player.setHp(
-				player.getHp() + 8, player
+				player.getHp() + 5, player
 			);
 		},
 	}

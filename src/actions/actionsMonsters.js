@@ -1,7 +1,7 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
-import sword_svg from '../img/actions/sword.svg';
+import feed_svg from '../img/actions/feed.svg';
 
 export default {
   generateAttack,
@@ -151,7 +151,7 @@ function generateFeed(player, swipeActions){
   	return {
   		name: "feed",
 		text: function () {return "Nourrir l'animal"},
-		img: function () {return "feed.png"},
+		img: function () {return feed_svg},
 		action: function() {
 			if(player.getAgility() <= 5){
 				feedbackMessage("Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
