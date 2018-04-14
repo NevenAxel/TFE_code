@@ -48,7 +48,7 @@ function generateSleepMushroom(player, swipeActions){
 		action: function() {
 			feedbackMessage("Ce champignon vous a amorti, endormi...");
 			player.setStr(
-				player.getStr() - 3, player
+				player.getStr() - 2, player
 			);
 			player.setAgility(
 				player.getAgility() - 2, player
@@ -97,7 +97,7 @@ function generateAgilityMushroom(player, swipeActions){
 		action: function() {
 			feedbackMessage("Vous vous sentez plus vif");
 			player.setAgility(
-				player.getAgility() + 4, player
+				player.getAgility() + 2, player
 			);
 		},
 	}

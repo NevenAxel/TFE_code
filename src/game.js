@@ -10,19 +10,19 @@ export function writeStats(player){
         player.setRoleStats(player.getIntel());
         player.stats.weapon = "wand";
         player.stats.weaponImg = "wand.png";
-        player.stats.defaultAttack = "Lancer un sort";
+        player.stats.defaultAttack = "Attaquer";
         break;
     case "warrior":
         player.setRoleStats(player.getStr());
         player.stats.weapon = "sword";
         player.stats.weaponImg = sword_svg;
-        player.stats.defaultAttack = "Donner un coup d'épée";
+        player.stats.defaultAttack = "Attaquer";
         break;
     case "rogue":
         player.setRoleStats(player.getAgility());
         player.stats.weapon = "bow";
         player.stats.weaponImg = "bow.png"
-        player.stats.defaultAttack = "Tirer une flèche";
+        player.stats.defaultAttack = "Tirer";
         break;
     default:
         console.log("NO Role STATS")
@@ -41,9 +41,9 @@ export function writeStats(player){
 export function writeRoom(currentRoom){
     document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img; + ")";
     document.getElementById("room_desc").innerHTML= currentRoom.desc;
-    document.getElementById("btn_no").textContent = currentRoom.swipeLeft.text();
+    document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_no").style.backgroundImage = "url("+ currentRoom.swipeLeft.img() + ")";
-    document.getElementById("btn_yes").textContent = currentRoom.swipeRight.text();
+    document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
     document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";
   }
 
@@ -61,7 +61,7 @@ export function getNewRoom(room, swipeActions, player){
     }
 }
 
-export function feedbackMessage(message){
+export function feedbackMessage(message, player){
     var feedbackMessage = document.createElement("div");
     feedbackMessage.classList.add("feedback-message");
     feedbackMessage.innerHTML = message;

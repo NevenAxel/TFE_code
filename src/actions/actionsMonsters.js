@@ -2,6 +2,8 @@ import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
 import feed_svg from '../img/actions/feed.svg';
+import escape_svg from '../img/actions/escape.svg';
+import givecoins_svg from '../img/actions/givecoins.svg';
 
 export default {
   generateAttack,
@@ -55,7 +57,7 @@ function generateGiveCoins(player, swipeActions){
   		name: "givecoins",
   		coinsGiven: getRandomNumber(1, 6),
 		text: function () {return "Donner " + this.coinsGiven + " pièces"},
-		img: function () {return "giveCoins.png"},
+		img: function () {return givecoins_svg},
 		action: function () {
 			if (player.getCoin() - this.coinsGiven < 0){
 				feedbackMessage("J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
@@ -76,7 +78,7 @@ function generateGiveCoins(player, swipeActions){
 					swipeLeft: {
 						coinsGiven2: getRandomNumber(3, 8),
 						text: function () {return "Donner " + this.coinsGiven2 + " pièces en plus"},
-						img: function () {return "giveCoins.png"},
+						img: function () {return givecoins_svg},
 						action: function() {
 							feedbackMessage("J'aime mieux ça!");
 							player.setCoin(
@@ -102,7 +104,7 @@ function generateScream(player, swipeActions){
   		name: "scream",
 		require: 10,
 		damage: 5,
-		text: function () {return "Crier pour l'effrayer"},
+		text: function () {return "Crier"},
 		img: function () {return "scream.png"},
 		action: function() {
 			if (player.getStr() >= this.require) {
@@ -121,8 +123,8 @@ function generateScream(player, swipeActions){
 function generateEscape(player, swipeActions){
   	return {
   		name: "escape",
-		text: function () {return "S'echapper"},
-		img: function () {return "escape.png"},
+		text: function () {return "S'échapper"},
+		img: function () {return escape_svg},
 		require: 8,
 		damage: 3,
 		action: function() {
@@ -150,7 +152,7 @@ function generateEscape(player, swipeActions){
 function generateFeed(player, swipeActions){
   	return {
   		name: "feed",
-		text: function () {return "Nourrir l'animal"},
+		text: function () {return "Nourrir"},
 		img: function () {return feed_svg},
 		action: function() {
 			if(player.getAgility() <= 5){
@@ -176,7 +178,7 @@ function generateSteal(player, swipeActions){
 	var coinsStealed = getRandomNumber(3, 10);
   	return {
   		name: "steal",
-		text: function () {return "Steal " + coinsStealed + " coins"},
+		text: function () {return "Voler " + coinsStealed + " pièces"},
 		img: function () {return "steal.png"},
 		damage: 5,
 		action: function() {

@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({9:[function(require,module,exports) {
+})({12:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -211,9 +211,9 @@ function createAvailableActions(player, swipeActions, objectList) {
 
   return availableActions;
 }
-},{}],19:[function(require,module,exports) {
+},{}],6:[function(require,module,exports) {
 module.exports="/dist/a56ed14cb19445fa7e69776a35c2e8da.svg";
-},{}],12:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -238,19 +238,19 @@ function writeStats(player) {
             player.setRoleStats(player.getIntel());
             player.stats.weapon = "wand";
             player.stats.weaponImg = "wand.png";
-            player.stats.defaultAttack = "Lancer un sort";
+            player.stats.defaultAttack = "Attaquer";
             break;
         case "warrior":
             player.setRoleStats(player.getStr());
             player.stats.weapon = "sword";
             player.stats.weaponImg = _sword2.default;
-            player.stats.defaultAttack = "Donner un coup d'épée";
+            player.stats.defaultAttack = "Attaquer";
             break;
         case "rogue":
             player.setRoleStats(player.getAgility());
             player.stats.weapon = "bow";
             player.stats.weaponImg = "bow.png";
-            player.stats.defaultAttack = "Tirer une flèche";
+            player.stats.defaultAttack = "Tirer";
             break;
         default:
             console.log("NO Role STATS");
@@ -268,9 +268,9 @@ function writeStats(player) {
 function writeRoom(currentRoom) {
     document.getElementById("room_img").style.backgroundImage = "url(" + currentRoom.img;+")";
     document.getElementById("room_desc").innerHTML = currentRoom.desc;
-    document.getElementById("btn_no").textContent = currentRoom.swipeLeft.text();
+    document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_no").style.backgroundImage = "url(" + currentRoom.swipeLeft.img() + ")";
-    document.getElementById("btn_yes").textContent = currentRoom.swipeRight.text();
+    document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
     document.getElementById("btn_yes").style.backgroundImage = "url(" + currentRoom.swipeRight.img() + ")";
 }
 
@@ -287,7 +287,7 @@ function getNewRoom(room, swipeActions, player) {
     }
 }
 
-function feedbackMessage(message) {
+function feedbackMessage(message, player) {
     var feedbackMessage = document.createElement("div");
     feedbackMessage.classList.add("feedback-message");
     feedbackMessage.innerHTML = message;
@@ -302,7 +302,7 @@ function feedbackMessage(message) {
     setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
     */
 }
-},{"./utils":9,"./img/actions/sword.svg":19}],21:[function(require,module,exports) {
+},{"./utils":12,"./img/actions/sword.svg":6}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -327,7 +327,7 @@ function generateHpPotion(player, swipeActions) {
 	return {
 		name: "hppotion",
 		text: function text() {
-			return "Prendre la potion (+5 Hp)";
+			return "Potion de vie (+5 Hp)";
 		},
 		img: function img() {
 			return "hpPotion.png";
@@ -342,7 +342,7 @@ function generateMagicMushroom(player, swipeActions) {
 	return {
 		name: "magicmushroom",
 		text: function text() {
-			return "Prendre le champignon magique (+5 MaxHp";
+			return "Champignon magique (+5 MaxHp";
 		},
 		img: function img() {
 			return "champignon.png";
@@ -359,7 +359,7 @@ function generateBagOfCoins(player, swipeActions) {
 	return {
 		name: "bagofcoins",
 		text: function text() {
-			return "Prendre le sac de pièces (" + coinsGained + " pièces)";
+			return "Sac de pièces (" + coinsGained + " pièces)";
 		},
 		img: function img() {
 			return "coinsBag.png";
@@ -374,7 +374,7 @@ function generateSpinach(player, swipeActions) {
 	return {
 		name: "spinach",
 		text: function text() {
-			return "Prendre les épinards (+2 Hp + 2 Force";
+			return "Épinards (+2 Hp, +2 Force";
 		},
 		img: function img() {
 			return "spinach.png";
@@ -390,7 +390,7 @@ function generateMagicBook(player, swipeActions) {
 	return {
 		name: "magicbook",
 		text: function text() {
-			return "Prendre le livre sur la magie (+5 Intel)";
+			return "Livre sur la magie (+5 Intel)";
 		},
 		img: function img() {
 			return "magicBook.png";
@@ -405,7 +405,7 @@ function generateSpeedShoes(player, swipeActions) {
 	return {
 		name: "speedshoes",
 		text: function text() {
-			return "Prendre les chaussures (+3 Agilité)";
+			return "Chaussures (+3 Agilité)";
 		},
 		img: function img() {
 			return "speedShoes.png";
@@ -420,7 +420,7 @@ function generateDumbBell(player, swipeActions) {
 	return {
 		name: "dumbbell",
 		text: function text() {
-			return "Prendre l'altère et faire quelques répetitions (+5 Force)";
+			return "Haltères (+5 Force)";
 		},
 		img: function img() {
 			return "DumbBell.png";
@@ -430,7 +430,7 @@ function generateDumbBell(player, swipeActions) {
 				player.setStr(player.getStr() + 5);
 			} else {
 				if (Math.random() < 0.7) {
-					(0, _game.feedbackMessage)("Vous n'êtes pas assez intelligent pour porter l'altère, vous vous êtes blaissé");
+					(0, _game.feedbackMessage)("Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé");
 					player.setHp(player.getHp() - 5, player);
 				} else {
 					player.setStr(player.getStr() + 5);
@@ -439,9 +439,13 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":12}],7:[function(require,module,exports) {
+},{"../utils":12,"../game":13}],10:[function(require,module,exports) {
 module.exports="/dist/97fb19066fb387b7db5c10c7b78ec113.svg";
-},{}],20:[function(require,module,exports) {
+},{}],31:[function(require,module,exports) {
+module.exports="/dist/5b1fe61f3da6021cca1e2550a49f9226.svg";
+},{}],32:[function(require,module,exports) {
+module.exports="/dist/229e19b31e8a7e92ced75639dde53e6e.svg";
+},{}],21:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -455,6 +459,14 @@ var _game = require('../game');
 var _feed = require('../img/actions/feed.svg');
 
 var _feed2 = _interopRequireDefault(_feed);
+
+var _escape = require('../img/actions/escape.svg');
+
+var _escape2 = _interopRequireDefault(_escape);
+
+var _givecoins = require('../img/actions/givecoins.svg');
+
+var _givecoins2 = _interopRequireDefault(_givecoins);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -509,7 +521,7 @@ function generateGiveCoins(player, swipeActions) {
 			return "Donner " + this.coinsGiven + " pièces";
 		},
 		img: function img() {
-			return "giveCoins.png";
+			return _givecoins2.default;
 		},
 		action: function action() {
 			if (player.getCoin() - this.coinsGiven < 0) {
@@ -529,7 +541,7 @@ function generateGiveCoins(player, swipeActions) {
 							return "Donner " + this.coinsGiven2 + " pièces en plus";
 						},
 						img: function img() {
-							return "giveCoins.png";
+							return _givecoins2.default;
 						},
 						action: function action() {
 							(0, _game.feedbackMessage)("J'aime mieux ça!");
@@ -551,7 +563,7 @@ function generateScream(player, swipeActions) {
 		require: 10,
 		damage: 5,
 		text: function text() {
-			return "Crier pour l'effrayer";
+			return "Crier";
 		},
 		img: function img() {
 			return "scream.png";
@@ -571,10 +583,10 @@ function generateEscape(player, swipeActions) {
 	return {
 		name: "escape",
 		text: function text() {
-			return "S'echapper";
+			return "S'échapper";
 		},
 		img: function img() {
-			return "escape.png";
+			return _escape2.default;
 		},
 		require: 8,
 		damage: 3,
@@ -598,7 +610,7 @@ function generateFeed(player, swipeActions) {
 	return {
 		name: "feed",
 		text: function text() {
-			return "Nourrir l'animal";
+			return "Nourrir";
 		},
 		img: function img() {
 			return _feed2.default;
@@ -622,7 +634,7 @@ function generateSteal(player, swipeActions) {
 	return {
 		name: "steal",
 		text: function text() {
-			return "Steal " + coinsStealed + " coins";
+			return "Voler " + coinsStealed + " pièces";
 		},
 		img: function img() {
 			return "steal.png";
@@ -639,7 +651,7 @@ function generateSteal(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":12,"../img/actions/feed.svg":7}],22:[function(require,module,exports) {
+},{"../utils":12,"../game":13,"../img/actions/feed.svg":10,"../img/actions/escape.svg":31,"../img/actions/givecoins.svg":32}],20:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -667,7 +679,7 @@ function generateWand(player, swipeActions) {
 	return {
 		name: "wandstart",
 		text: function text() {
-			return "Prendre le baton magique";
+			return "Prendre le baton";
 		},
 		img: function img() {
 			return "wand.png";
@@ -683,7 +695,7 @@ function generateSword(player, swipeActions) {
 	return {
 		name: "swordstart",
 		text: function text() {
-			return "Prendre l'epée";
+			return "Prendre l'épée";
 		},
 		img: function img() {
 			return _sword2.default;
@@ -712,9 +724,9 @@ function generateBow(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":12,"../img/actions/sword.svg":19}],32:[function(require,module,exports) {
+},{"../utils":12,"../game":13,"../img/actions/sword.svg":6}],34:[function(require,module,exports) {
 module.exports="/dist/f1d3db3c7ba7492a723e11ad8d36a968.svg";
-},{}],31:[function(require,module,exports) {
+},{}],33:[function(require,module,exports) {
 module.exports="/dist/bc0280db8832b8d93cebec6625820778.svg";
 },{}],23:[function(require,module,exports) {
 'use strict';
@@ -789,7 +801,7 @@ function generateSleepMushroom(player, swipeActions) {
 		},
 		action: function action() {
 			(0, _game.feedbackMessage)("Ce champignon vous a amorti, endormi...");
-			player.setStr(player.getStr() - 3, player);
+			player.setStr(player.getStr() - 2, player);
 			player.setAgility(player.getAgility() - 2, player);
 		}
 	};
@@ -839,7 +851,7 @@ function generateAgilityMushroom(player, swipeActions) {
 		},
 		action: function action() {
 			(0, _game.feedbackMessage)("Vous vous sentez plus vif");
-			player.setAgility(player.getAgility() + 4, player);
+			player.setAgility(player.getAgility() + 2, player);
 		}
 	};
 }
@@ -859,7 +871,7 @@ function generateYummyMushroom(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":12,"../img/actions/eat.svg":32,"../img/actions/no.svg":31}],10:[function(require,module,exports) {
+},{"../utils":12,"../game":13,"../img/actions/eat.svg":34,"../img/actions/no.svg":33}],7:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -912,7 +924,7 @@ exports.default = {
 	monsterHumanoidRogue: [{ name: 'steal', rarity: 2 }],
 	monsterHumanoidAgility: [{ name: 'steal', rarity: 1 }],
 
-	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 1 }, { name: 'magicBook', rarity: 1 }, { name: 'speedShoes', rarity: 1 }, { name: 'dumbBell', rarity: 1 }],
+	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 5 }, { name: 'magicBook', rarity: 4 }, { name: 'speedShoes', rarity: 2 }, { name: 'dumbBell', rarity: 2 }],
 
 	mushroom: [{ name: 'toxicMushroom', rarity: 20 }, { name: 'sleepMushroom', rarity: 12 }, { name: 'stupidMushroom', rarity: 8 }, { name: 'magicMushroom', rarity: 5 }, { name: 'agilityMushroom', rarity: 10 }, { name: 'yummyMushroom', rarity: 20 }],
 
@@ -1324,11 +1336,11 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"./utils":9,"./game":12,"./actions/actionsLoots":21,"./actions/actionsMonsters":20,"./actions/actionsStarting":22,"./actions/forestMushroom":23}],6:[function(require,module,exports) {
+},{"./utils":12,"./game":13,"./actions/actionsLoots":22,"./actions/actionsMonsters":21,"./actions/actionsStarting":20,"./actions/forestMushroom":23}],5:[function(require,module,exports) {
 module.exports="/dist/35e2de55efce6747bb987a53a67e84e3.svg";
-},{}],25:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
 module.exports="/dist/66e35c65135c7d137b2862884e9d9f0d.svg";
-},{}],16:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1435,19 +1447,19 @@ function gobelinGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":12,"../img/monsters/goblin.svg":6,"../img/monsters/spider.svg":25}],39:[function(require,module,exports) {
+},{"../utils":12,"../game":13,"../img/monsters/goblin.svg":5,"../img/monsters/spider.svg":24}],26:[function(require,module,exports) {
 module.exports="/dist/9aafeb76ff1a2cf7ef32cb9c8894981b.svg";
-},{}],40:[function(require,module,exports) {
+},{}],30:[function(require,module,exports) {
 module.exports="/dist/f72dd6c5cb81609850b44b5b59e3f651.svg";
-},{}],41:[function(require,module,exports) {
+},{}],25:[function(require,module,exports) {
 module.exports="/dist/54134862b18e9826a6cc855055765655.svg";
-},{}],42:[function(require,module,exports) {
+},{}],27:[function(require,module,exports) {
 module.exports="/dist/d449bb93e14789887f03d8d88b57a792.svg";
-},{}],43:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 module.exports="/dist/cee08d8fc6d7ef1ba170ef555847f5b2.svg";
-},{}],44:[function(require,module,exports) {
+},{}],29:[function(require,module,exports) {
 module.exports="/dist/f54c958f338c297ff38b63918ba3d1ac.svg";
-},{}],17:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1546,7 +1558,7 @@ function mushroomGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":12,"../img/monsters/mushroom-a1.svg":39,"../img/monsters/mushroom-a2.svg":40,"../img/monsters/mushroom-b1.svg":41,"../img/monsters/mushroom-b2.svg":42,"../img/monsters/mushroom-c1.svg":43,"../img/monsters/mushroom-c2.svg":44}],14:[function(require,module,exports) {
+},{"../utils":12,"../game":13,"../img/monsters/mushroom-a1.svg":26,"../img/monsters/mushroom-a2.svg":30,"../img/monsters/mushroom-b1.svg":25,"../img/monsters/mushroom-b2.svg":27,"../img/monsters/mushroom-c1.svg":28,"../img/monsters/mushroom-c2.svg":29}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1579,7 +1591,7 @@ function startingGenerator(player, swipeActions) {
     swipeRight: actionRight
   };
 }
-},{"../utils":9,"../game":12}],15:[function(require,module,exports) {
+},{"../utils":12,"../game":13}],18:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1710,7 +1722,7 @@ function hugeOgreGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":12}],18:[function(require,module,exports) {
+},{"../utils":12,"../game":13}],19:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1743,7 +1755,7 @@ function basicChestGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":12}],8:[function(require,module,exports) {
+},{"../utils":12,"../game":13}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1836,7 +1848,7 @@ exports.default = {
     */
 
 };
-},{"./utils":9,"./swipeActions":10,"./rooms/forestMonster":16,"./rooms/forestLoot":17,"./rooms/startingroom":14,"./rooms/monsters":15,"./rooms/chest":18}],11:[function(require,module,exports) {
+},{"./utils":12,"./swipeActions":7,"./rooms/forestMonster":15,"./rooms/forestLoot":16,"./rooms/startingroom":17,"./rooms/monsters":18,"./rooms/chest":19}],9:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1935,7 +1947,7 @@ exports.default = {
 function gainLevel(player) {
   player.setLevel(player.getLevel() + 1);
 }
-},{"./utils":9,"./img/actions/sword.svg":19}],3:[function(require,module,exports) {
+},{"./utils":12,"./img/actions/sword.svg":6}],3:[function(require,module,exports) {
 'use strict';
 
 var _room = require('./room');
@@ -2060,7 +2072,7 @@ $(document).ready(function () {
 		}
 	}
 });
-},{"./room":8,"./player":11,"./swipeActions":10,"./utils":9,"./game":12}],50:[function(require,module,exports) {
+},{"./room":8,"./player":9,"./swipeActions":7,"./utils":12,"./game":13}],40:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -2082,7 +2094,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54828' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52484' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -2183,5 +2195,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[50,3])
+},{}]},{},[40,3])
 //# sourceMappingURL=/dist/5c38d609bba42fc055950690fcf65d72.map

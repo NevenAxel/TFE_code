@@ -1,6 +1,7 @@
     body{
       text-align: center;
       overflow: hidden;
+      font-family: 'Slabo 27px', serif;
     }
     li{
       list-style-type: none;
@@ -56,9 +57,14 @@
       -ms-transform: rotate(10deg) translateX(50px);
       transform: rotate(10deg) translateX(50px);
     }
+    .yes #btn_yes-text {
+      opacity: 1;
+      transition: .5s;
+    }
 
     .yesFade {
       opacity: 0;
+      transition: .5s;
     }
 
     .no {
@@ -68,6 +74,10 @@
     -ms-transform: rotate(-10deg) translateX(-20px);
     transform: rotate(-10deg) translateX(-50px);
     }
+    .no #btn_no-text {
+      opacity: 1;
+    }
+
 
     .noFade {
       opacity: 0;
@@ -78,9 +88,19 @@
       height: 80px;
       position: absolute;
       left: -30px;
-      bottom: 25px;
+      bottom: 35px;
       line-height: 1;
-      color: black;
+    }
+    #btn_no-text{
+      position: absolute;
+      bottom: -45px;
+      left: 45px;
+      width: 300px;
+      text-align: left;
+      color: white;
+      font-size: 22px;
+      opacity: 0;
+      
     }
     #btn_yes {
       background: url("a56ed14cb19445fa7e69776a35c2e8da.svg") no-repeat center;
@@ -88,9 +108,19 @@
       height: 80px;
       position: absolute;
       right: -30px;
-      bottom: 25px;
+      bottom: 35px;
       line-height: 1;
-      color: black;
+    }
+    #btn_yes-text{
+      position: absolute;
+      bottom: -45px;
+      right: 45px;
+      width: 300px;
+      text-align: right;
+      color: white;
+      font-size: 22px;
+      opacity: 0;
+      
     }
     #room_type{margin: 0; padding: 0; line-height: 1;}
     h3{margin: 10px 0; padding: 0; line-height: 0;}
