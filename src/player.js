@@ -1,5 +1,7 @@
 import { getRandomNumber } from './utils';
 
+import sword_svg from './img/actions/sword.svg';
+
 export default {
   stats: {
     hp: 20,

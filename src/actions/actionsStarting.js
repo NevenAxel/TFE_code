@@ -1,6 +1,8 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
+import sword_svg from '../img/actions/sword.svg';
+
 export default {
   generateWand,
   generateSword,
@@ -10,7 +12,7 @@ export default {
 function generateWand(player, swipeActions){
 	return {
 		name: "wandstart",
-		text: function () {return "Prendre le baton magique"},
+		text: function () {return "Prendre le baton"},
 		img: function () {return "wand.png"},
 		action: function() {
 			player.setRole('mage')
@@ -24,8 +26,8 @@ function generateWand(player, swipeActions){
 function generateSword(player, swipeActions){
 	return {
 		name: "swordstart",
-		text: function () {return "Prendre l'epée"},
-		img: function () {return "epee.png"},
+		text: function () {return "Prendre l'épée"},
+		img: function () {return sword_svg},
 		action: function() {
 			player.setRole('warrior')
 			player.setStr(

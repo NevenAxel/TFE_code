@@ -1,6 +1,8 @@
 import { getObjectByRarity } from './utils';
 import { getRandomNumber } from './utils';
 
+import sword_svg from './img/actions/sword.svg';
+
 
 export function writeStats(player){
     switch(player.getRole()) {
@@ -8,19 +10,19 @@ export function writeStats(player){
         player.setRoleStats(player.getIntel());
         player.stats.weapon = "wand";
         player.stats.weaponImg = "wand.png";
-        player.stats.defaultAttack = "Lancer un sort";
+        player.stats.defaultAttack = "Attaquer";
         break;
     case "warrior":
         player.setRoleStats(player.getStr());
         player.stats.weapon = "sword";
-        player.stats.weaponImg = "sword.png";
-        player.stats.defaultAttack = "Donner un coup d'épée";
+        player.stats.weaponImg = sword_svg;
+        player.stats.defaultAttack = "Attaquer";
         break;
     case "rogue":
         player.setRoleStats(player.getAgility());
         player.stats.weapon = "bow";
         player.stats.weaponImg = "bow.png"
-        player.stats.defaultAttack = "Tirer une flèche";
+        player.stats.defaultAttack = "Tirer";
         break;
     default:
         console.log("NO Role STATS")
@@ -33,14 +35,15 @@ export function writeStats(player){
     document.getElementById("stats_intel").innerHTML = player.getIntel();
     document.getElementById("stats_agility").innerHTML = player.getAgility();
     document.getElementById("stats_class").innerHTML = player.getRole();
-
   }
 
 export function writeRoom(currentRoom){
     document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img; + ")";
     document.getElementById("room_desc").innerHTML= currentRoom.desc;
-    document.getElementById("btn_no").textContent = currentRoom.swipeLeft.text();
-    document.getElementById("btn_yes").textContent = currentRoom.swipeRight.text();
+    document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
+    document.getElementById("btn_no").style.backgroundImage = "url("+ currentRoom.swipeLeft.img() + ")";
+    document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
+    document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";
   }
 
 export function getNewRoom(room, swipeActions, player){
@@ -57,12 +60,31 @@ export function getNewRoom(room, swipeActions, player){
     }
 }
 
-export function feedbackMessage(message){
-    var feedbackMessage = document.createElement("div");
-    feedbackMessage.classList.add("feedback-message");
-    feedbackMessage.innerHTML = message;
-    document.body.appendChild(feedbackMessage);
-    setTimeout(function(){ document.body.removeChild(feedbackMessage); }, 5000);
+export function feedbackMessage(player, message){
+    player.thisRoom.isLastRoom = false; 
+    player.thisRoom.nextRoom = {
+                    swipeLeft: {
+                        img: function () {return },
+                        action: function() {
+                            document.getElementById("feedback").style.opacity = 0;
+                        },
+                        text: function () {return ""},
+                    },
+                    swipeRight: {
+                        img: function () {return },
+                        action: function() {
+                            document.getElementById("feedback").style.opacity = 0;
+                        },
+                        text: function () {return ""},
+                    }
+                }
+
+    
+    var feedbackMessage = document.getElementsByClassName("card-visible");
+    feedbackMessage[0].classList.add("feedback-message");
+    document.getElementById("feedback").style.opacity = 1;
+    document.getElementById("feedback").innerHTML = message;
+    
 
     /*
     document.getElementById("feedback-message").innerHTML = message;

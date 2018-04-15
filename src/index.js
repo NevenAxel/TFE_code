@@ -80,11 +80,22 @@ $(document).ready(function(){
 	      card.classList.add("yesFade");
 	      card.classList.remove("noFade");
 	      setTimeout(function(){ card.classList.remove("yesFade"); card.classList.remove("yes"); }, 500);
+	      	player.thisRoom.isLastRoom = true;
 	      	currentRoom.swipeRight.action();
-			gainLevel(player);
-			currentRoom = getNewRoom(room, swipeActions, player);		
-			writeStats(player);
-			writeRoom(currentRoom);  
+	      	if(player.thisRoom.isLastRoom == false){
+				if (player.thisRoom.nextRoom.desc != undefined){currentRoom.desc = player.thisRoom.nextRoom.desc;}
+	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
+	      		currentRoom.swipeRight = player.thisRoom.nextRoom.swipeRight;
+	      		writeStats(player);
+	      		writeRoom(currentRoom);	
+			}
+			else{
+				gainLevel(player);
+				currentRoom = getNewRoom(room, swipeActions, player);		
+				writeStats(player);
+				writeRoom(currentRoom);  
+				document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
+			}
 	    }
 	    else if (elem.offsetLeft < -50) {
 	      elem.style.left = 0 + "px"; 
@@ -98,8 +109,9 @@ $(document).ready(function(){
 				Mettre en place un système qui si la desc, l'img ou le swipeLeft/swipeRight n'est pas définis
 				ne pas le remplacer par un "undefined" et donc laisser la valeur existante
 	      		*/
-	      		currentRoom.desc = player.thisRoom.nextRoom.desc;
+	      		if (player.thisRoom.nextRoom.desc != undefined){currentRoom.desc = player.thisRoom.nextRoom.desc;}
 	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
+	      		currentRoom.swipeRight = player.thisRoom.nextRoom.swipeRight;
 	      		writeStats(player);
 	      		writeRoom(currentRoom);	
 		    }
@@ -108,6 +120,7 @@ $(document).ready(function(){
 		    	currentRoom = getNewRoom(room, swipeActions, player);
 		    	writeStats(player);
 		    	writeRoom(currentRoom);	
+		    	document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
 	    	}
 	    }
 	    else{

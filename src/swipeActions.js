@@ -55,10 +55,10 @@ export default {
   basicChest: [
   	{name: 'hpPotion', rarity: 10},
   	{name: 'bagOfCoins', rarity: 10},
-  	{name: 'spinach', rarity: 1},
-  	{name: 'magicBook', rarity: 1},
-  	{name: 'speedShoes', rarity: 1},
-  	{name: 'dumbBell', rarity: 1},
+  	{name: 'spinach', rarity: 5},
+  	{name: 'magicBook', rarity: 4},
+  	{name: 'speedShoes', rarity: 2},
+  	{name: 'dumbBell', rarity: 2},
   ],
 
   mushroom: [
