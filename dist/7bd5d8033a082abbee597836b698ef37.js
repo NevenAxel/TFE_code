@@ -200,7 +200,7 @@ function createAvailableActions(player, swipeActions, objectList) {
 
   return availableActions;
 }
-},{}],11:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -281,7 +281,7 @@ function feedbackMessage(message) {
     setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
     */
 }
-},{"./utils":9}],21:[function(require,module,exports) {
+},{"./utils":9}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -418,9 +418,9 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":11}],31:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],11:[function(require,module,exports) {
 module.exports="/dist/d6939278153ea1a9e5e20047a11c31e2.svg";
-},{}],20:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -618,7 +618,7 @@ function generateSteal(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":11,"../img/actions/sword.svg":31}],18:[function(require,module,exports) {
+},{"../utils":9,"../game":13,"../img/actions/sword.svg":11}],18:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -685,7 +685,7 @@ function generateBow(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":11}],19:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -817,7 +817,7 @@ function generateYummyMushroom(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":9,"../game":11}],10:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1282,11 +1282,11 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"./utils":9,"./game":11,"./actions/actionsLoots":21,"./actions/actionsMonsters":20,"./actions/actionsStarting":18,"./actions/forestMushroom":19}],27:[function(require,module,exports) {
+},{"./utils":9,"./game":13,"./actions/actionsLoots":14,"./actions/actionsMonsters":16,"./actions/actionsStarting":18,"./actions/forestMushroom":17}],6:[function(require,module,exports) {
 module.exports="/dist/59d074125cf5a06a61465ff611789ea6.svg";
-},{}],28:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
 module.exports="/dist/2a72e5e4c1ee1b727fec072fd3d876a0.svg";
-},{}],15:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1393,7 +1393,7 @@ function gobelinGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":11,"../img/monsters/goblin.svg":27,"../img/monsters/spider.svg":28}],17:[function(require,module,exports) {
+},{"../utils":9,"../game":13,"../img/monsters/goblin.svg":6,"../img/monsters/spider.svg":24}],20:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1444,7 +1444,7 @@ function mushroomGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":11}],13:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],21:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1477,7 +1477,7 @@ function startingGenerator(player, swipeActions) {
     swipeRight: actionRight
   };
 }
-},{"../utils":9,"../game":11}],16:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1608,7 +1608,7 @@ function hugeOgreGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":11}],14:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],23:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1641,7 +1641,7 @@ function basicChestGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":9,"../game":11}],6:[function(require,module,exports) {
+},{"../utils":9,"../game":13}],7:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1734,7 +1734,7 @@ exports.default = {
     */
 
 };
-},{"./utils":9,"./swipeActions":10,"./rooms/forestMonster":15,"./rooms/forestLoot":17,"./rooms/startingroom":13,"./rooms/monsters":16,"./rooms/chest":14}],8:[function(require,module,exports) {
+},{"./utils":9,"./swipeActions":8,"./rooms/forestMonster":19,"./rooms/forestLoot":20,"./rooms/startingroom":21,"./rooms/monsters":22,"./rooms/chest":23}],12:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1952,7 +1952,7 @@ $(document).ready(function () {
 		}
 	}
 });
-},{"./room":6,"./player":8,"./swipeActions":10,"./utils":9,"./game":11}],32:[function(require,module,exports) {
+},{"./room":7,"./player":12,"./swipeActions":8,"./utils":9,"./game":13}],25:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -1974,7 +1974,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60717' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50494' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -2075,5 +2075,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[32,3])
+},{}]},{},[25,3])
 //# sourceMappingURL=/dist/7bd5d8033a082abbee597836b698ef37.map
