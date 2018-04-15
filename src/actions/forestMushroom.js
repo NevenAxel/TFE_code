@@ -31,7 +31,7 @@ function generateToxicMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("C'est un champignon toxique!");
+			feedbackMessage(player, "C'est un champignon toxique!");
 			player.setHp(
 				player.getHp() - 5, player
 			);
@@ -46,7 +46,7 @@ function generateSleepMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("Ce champignon vous a amorti, endormi...");
+			feedbackMessage(player, "Ce champignon vous a amorti, endormi...");
 			player.setStr(
 				player.getStr() - 2, player
 			);
@@ -63,7 +63,7 @@ function generateStupidMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("Vous avez perdu quelques neurones");
+			feedbackMessage(player, "Vous avez perdu quelques neurones");
 			player.setIntel(
 				player.getIntel() - 3, player
 			);
@@ -78,7 +78,7 @@ function generateMagicMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("Ce champignon vous a fait du bien");
+			feedbackMessage(player, "Ce champignon vous a fait du bien");
 			player.setMaxHp(
 				player.getMaxHp() + 3
 			);
@@ -95,7 +95,7 @@ function generateAgilityMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("Vous vous sentez plus vif");
+			feedbackMessage(player, "Vous vous sentez plus vif");
 			player.setAgility(
 				player.getAgility() + 2, player
 			);
@@ -109,7 +109,7 @@ function generateYummyMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage("Mhhh... il est délicieux!");
+			feedbackMessage(player, "Mhhh... il est délicieux!");
 			player.setHp(
 				player.getHp() + 5, player
 			);

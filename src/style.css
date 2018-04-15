@@ -43,6 +43,17 @@
       border-radius: 30px;
       background: url("./img/bg/bg-forest.svg");
     }
+    #feedback{
+      color: white;
+      position: absolute;
+      z-index: 5;
+      width: 280px;
+      left: 10px;
+      line-height: 1.4;
+      top: 135px;
+      filter: none;
+      /* Le placement pour centrer est à refaire!*/
+    }
     #room_img{
       background: url("./img/monsters/goblin.svg") center no-repeat;
       width: 220px;
@@ -125,6 +136,7 @@
     #room_type{margin: 0; padding: 0; line-height: 1;}
     h3{margin: 10px 0; padding: 0; line-height: 0;}
 
+      /*
     .feedback-message{
       position: absolute;
       width: 300px;
@@ -145,6 +157,11 @@
       animation-duration: 0.5s;
       -webkit-animation-fill-mode: both;
       animation-fill-mode: both;
+    }
+    */
+
+    .feedback-message{
+      filter: brightness(.25);
     }
     @keyframes fadeIn {
       0% {opacity: 0; transform: scale(0);}

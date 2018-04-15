@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({12:[function(require,module,exports) {
+})({11:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -211,7 +211,7 @@ function createAvailableActions(player, swipeActions, objectList) {
 
   return availableActions;
 }
-},{}],6:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 module.exports="/dist/a56ed14cb19445fa7e69776a35c2e8da.svg";
 },{}],13:[function(require,module,exports) {
 'use strict';
@@ -287,14 +287,37 @@ function getNewRoom(room, swipeActions, player) {
     }
 }
 
-function feedbackMessage(message, player) {
-    var feedbackMessage = document.createElement("div");
-    feedbackMessage.classList.add("feedback-message");
-    feedbackMessage.innerHTML = message;
-    document.body.appendChild(feedbackMessage);
-    setTimeout(function () {
-        document.body.removeChild(feedbackMessage);
-    }, 5000);
+function feedbackMessage(player, message) {
+    player.thisRoom.isLastRoom = false;
+    player.thisRoom.nextRoom = {
+        swipeLeft: {
+            img: function img() {
+                return;
+            },
+            action: function action() {
+                document.getElementById("feedback").style.opacity = 0;
+            },
+            text: function text() {
+                return "";
+            }
+        },
+        swipeRight: {
+            img: function img() {
+                return;
+            },
+            action: function action() {
+                document.getElementById("feedback").style.opacity = 0;
+            },
+            text: function text() {
+                return "";
+            }
+        }
+    };
+
+    var feedbackMessage = document.getElementsByClassName("card-visible");
+    feedbackMessage[0].classList.add("feedback-message");
+    document.getElementById("feedback").style.opacity = 1;
+    document.getElementById("feedback").innerHTML = message;
 
     /*
     document.getElementById("feedback-message").innerHTML = message;
@@ -302,7 +325,7 @@ function feedbackMessage(message, player) {
     setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
     */
 }
-},{"./utils":12,"./img/actions/sword.svg":6}],22:[function(require,module,exports) {
+},{"./utils":11,"./img/actions/sword.svg":9}],19:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -439,13 +462,13 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":12,"../game":13}],10:[function(require,module,exports) {
+},{"../utils":11,"../game":13}],6:[function(require,module,exports) {
 module.exports="/dist/97fb19066fb387b7db5c10c7b78ec113.svg";
 },{}],31:[function(require,module,exports) {
 module.exports="/dist/5b1fe61f3da6021cca1e2550a49f9226.svg";
 },{}],32:[function(require,module,exports) {
 module.exports="/dist/229e19b31e8a7e92ced75639dde53e6e.svg";
-},{}],21:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -501,9 +524,9 @@ function generateAttack(player, swipeActions) {
 				case "rogue":
 					if (Math.random() < 0.45) {
 						player.setHp(player.getHp() - this.damage * 2, player);
-						(0, _game.feedbackMessage)("Vous avez raté votre cible");
+						(0, _game.feedbackMessage)(player, "Vous avez raté votre cible");
 					} else {
-						(0, _game.feedbackMessage)("Touché!");
+						(0, _game.feedbackMessage)(player, "Touché!");
 					}
 					break;
 				default:
@@ -525,11 +548,11 @@ function generateGiveCoins(player, swipeActions) {
 		},
 		action: function action() {
 			if (player.getCoin() - this.coinsGiven < 0) {
-				(0, _game.feedbackMessage)("J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
+				(0, _game.feedbackMessage)(player, "J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
 				player.setCoin(0);
 				player.setHp(player.getHp() - 10, player);
 			} else if (this.coinsGiven == 1) {
-				(0, _game.feedbackMessage)("Seulement une pièce ? Tu te fout de moi ?!");
+				(0, _game.feedbackMessage)(player, "Seulement une pièce ? Tu te fout de moi ?!");
 				player.setCoin(player.getCoin() - this.coinsGiven);
 				player.thisRoom.isLastRoom = false;
 				// Permet un noveau dialogue sur la même carte
@@ -544,7 +567,7 @@ function generateGiveCoins(player, swipeActions) {
 							return _givecoins2.default;
 						},
 						action: function action() {
-							(0, _game.feedbackMessage)("J'aime mieux ça!");
+							(0, _game.feedbackMessage)(player, "J'aime mieux ça!");
 							player.setCoin(player.getCoin() - this.coinsGiven2);
 						}
 					},
@@ -570,9 +593,9 @@ function generateScream(player, swipeActions) {
 		},
 		action: function action() {
 			if (player.getStr() >= this.require) {
-				(0, _game.feedbackMessage)("L'ennemi a eu peur et s'est enfuis en courant");
+				(0, _game.feedbackMessage)(player, "L'ennemi a eu peur et s'est enfuis en courant");
 			} else {
-				(0, _game.feedbackMessage)("Votre cris n'est pas assez fort, gagnez un peu plus de force!");
+				(0, _game.feedbackMessage)(player, "Votre cris n'est pas assez fort, gagnez un peu plus de force!");
 				player.setHp(player.getHp() - this.damage, player);
 			}
 		}
@@ -593,13 +616,13 @@ function generateEscape(player, swipeActions) {
 		action: function action() {
 			if (player.getAgility() >= this.require) {
 				if (Math.random() < 0.3 * 5 / player.getAgility()) {
-					(0, _game.feedbackMessage)('Pas de chance, vous avez trébucher sur une pierre');
+					(0, _game.feedbackMessage)(player, 'Pas de chance, vous avez trébucher sur une pierre');
 					player.setHp(player.getHp() - this.damage, player);
 				} else {
-					(0, _game.feedbackMessage)("Vous vous êtes enfuis avec succes");
+					(0, _game.feedbackMessage)(player, "Vous vous êtes enfuis avec succes");
 				}
 			} else {
-				(0, _game.feedbackMessage)("Vous n'êtes pas assez rapide! Ouch!");
+				(0, _game.feedbackMessage)(player, "Vous n'êtes pas assez rapide! Ouch!");
 				player.setHp(player.getHp() - this.damage, player);
 			}
 		}
@@ -617,13 +640,13 @@ function generateFeed(player, swipeActions) {
 		},
 		action: function action() {
 			if (player.getAgility() <= 5) {
-				(0, _game.feedbackMessage)("Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
+				(0, _game.feedbackMessage)(player, "Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
 				player.setHp(player.getHp() - 5, player);
 			} else if (player.getIntel() <= 5) {
-				(0, _game.feedbackMessage)("Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent");
+				(0, _game.feedbackMessage)(player, "Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent");
 				player.setHp(player.getHp() - 5, player);
 			} else {
-				(0, _game.feedbackMessage)('Il a tout mangé et ne vous a pas attaqué');
+				(0, _game.feedbackMessage)(player, 'Il a tout mangé et ne vous a pas attaqué');
 			}
 		}
 	};
@@ -642,16 +665,16 @@ function generateSteal(player, swipeActions) {
 		damage: 5,
 		action: function action() {
 			if (Math.random() < 0.4 * 10 / player.getAgility()) {
-				(0, _game.feedbackMessage)('Vous avez été pris sur le fait');
+				(0, _game.feedbackMessage)(player, 'Vous avez été pris sur le fait');
 				player.setHp(player.getHp() - this.damage, player);
 			} else {
-				(0, _game.feedbackMessage)("Cool, " + coinsStealed + " pièces recuperées");
+				(0, _game.feedbackMessage)(player, "Cool, " + coinsStealed + " pièces recuperées");
 				player.setCoin(player.getCoin() + coinsStealed);
 			}
 		}
 	};
 }
-},{"../utils":12,"../game":13,"../img/actions/feed.svg":10,"../img/actions/escape.svg":31,"../img/actions/givecoins.svg":32}],20:[function(require,module,exports) {
+},{"../utils":11,"../game":13,"../img/actions/feed.svg":6,"../img/actions/escape.svg":31,"../img/actions/givecoins.svg":32}],21:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -724,7 +747,7 @@ function generateBow(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":12,"../game":13,"../img/actions/sword.svg":6}],34:[function(require,module,exports) {
+},{"../utils":11,"../game":13,"../img/actions/sword.svg":9}],34:[function(require,module,exports) {
 module.exports="/dist/f1d3db3c7ba7492a723e11ad8d36a968.svg";
 },{}],33:[function(require,module,exports) {
 module.exports="/dist/bc0280db8832b8d93cebec6625820778.svg";
@@ -784,7 +807,7 @@ function generateToxicMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("C'est un champignon toxique!");
+			(0, _game.feedbackMessage)(player, "C'est un champignon toxique!");
 			player.setHp(player.getHp() - 5, player);
 		}
 	};
@@ -800,7 +823,7 @@ function generateSleepMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("Ce champignon vous a amorti, endormi...");
+			(0, _game.feedbackMessage)(player, "Ce champignon vous a amorti, endormi...");
 			player.setStr(player.getStr() - 2, player);
 			player.setAgility(player.getAgility() - 2, player);
 		}
@@ -817,7 +840,7 @@ function generateStupidMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("Vous avez perdu quelques neurones");
+			(0, _game.feedbackMessage)(player, "Vous avez perdu quelques neurones");
 			player.setIntel(player.getIntel() - 3, player);
 		}
 	};
@@ -833,7 +856,7 @@ function generateMagicMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("Ce champignon vous a fait du bien");
+			(0, _game.feedbackMessage)(player, "Ce champignon vous a fait du bien");
 			player.setMaxHp(player.getMaxHp() + 3);
 			player.setHp(player.getHp() + 3, player);
 		}
@@ -850,7 +873,7 @@ function generateAgilityMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("Vous vous sentez plus vif");
+			(0, _game.feedbackMessage)(player, "Vous vous sentez plus vif");
 			player.setAgility(player.getAgility() + 2, player);
 		}
 	};
@@ -866,12 +889,12 @@ function generateYummyMushroom(player, swipeActions) {
 			return _eat2.default;
 		},
 		action: function action() {
-			(0, _game.feedbackMessage)("Mhhh... il est délicieux!");
+			(0, _game.feedbackMessage)(player, "Mhhh... il est délicieux!");
 			player.setHp(player.getHp() + 5, player);
 		}
 	};
 }
-},{"../utils":12,"../game":13,"../img/actions/eat.svg":34,"../img/actions/no.svg":33}],7:[function(require,module,exports) {
+},{"../utils":11,"../game":13,"../img/actions/eat.svg":34,"../img/actions/no.svg":33}],12:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1336,11 +1359,11 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"./utils":12,"./game":13,"./actions/actionsLoots":22,"./actions/actionsMonsters":21,"./actions/actionsStarting":20,"./actions/forestMushroom":23}],5:[function(require,module,exports) {
+},{"./utils":11,"./game":13,"./actions/actionsLoots":19,"./actions/actionsMonsters":17,"./actions/actionsStarting":21,"./actions/forestMushroom":23}],5:[function(require,module,exports) {
 module.exports="/dist/35e2de55efce6747bb987a53a67e84e3.svg";
-},{}],24:[function(require,module,exports) {
+},{}],30:[function(require,module,exports) {
 module.exports="/dist/66e35c65135c7d137b2862884e9d9f0d.svg";
-},{}],15:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1447,19 +1470,19 @@ function gobelinGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":12,"../game":13,"../img/monsters/goblin.svg":5,"../img/monsters/spider.svg":24}],26:[function(require,module,exports) {
+},{"../utils":11,"../game":13,"../img/monsters/goblin.svg":5,"../img/monsters/spider.svg":30}],24:[function(require,module,exports) {
 module.exports="/dist/9aafeb76ff1a2cf7ef32cb9c8894981b.svg";
-},{}],30:[function(require,module,exports) {
-module.exports="/dist/f72dd6c5cb81609850b44b5b59e3f651.svg";
-},{}],25:[function(require,module,exports) {
-module.exports="/dist/54134862b18e9826a6cc855055765655.svg";
-},{}],27:[function(require,module,exports) {
-module.exports="/dist/d449bb93e14789887f03d8d88b57a792.svg";
-},{}],28:[function(require,module,exports) {
-module.exports="/dist/cee08d8fc6d7ef1ba170ef555847f5b2.svg";
 },{}],29:[function(require,module,exports) {
+module.exports="/dist/f72dd6c5cb81609850b44b5b59e3f651.svg";
+},{}],27:[function(require,module,exports) {
+module.exports="/dist/54134862b18e9826a6cc855055765655.svg";
+},{}],26:[function(require,module,exports) {
+module.exports="/dist/d449bb93e14789887f03d8d88b57a792.svg";
+},{}],25:[function(require,module,exports) {
+module.exports="/dist/cee08d8fc6d7ef1ba170ef555847f5b2.svg";
+},{}],28:[function(require,module,exports) {
 module.exports="/dist/f54c958f338c297ff38b63918ba3d1ac.svg";
-},{}],16:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1558,7 +1581,7 @@ function mushroomGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":12,"../game":13,"../img/monsters/mushroom-a1.svg":26,"../img/monsters/mushroom-a2.svg":30,"../img/monsters/mushroom-b1.svg":25,"../img/monsters/mushroom-b2.svg":27,"../img/monsters/mushroom-c1.svg":28,"../img/monsters/mushroom-c2.svg":29}],17:[function(require,module,exports) {
+},{"../utils":11,"../game":13,"../img/monsters/mushroom-a1.svg":24,"../img/monsters/mushroom-a2.svg":29,"../img/monsters/mushroom-b1.svg":27,"../img/monsters/mushroom-b2.svg":26,"../img/monsters/mushroom-c1.svg":25,"../img/monsters/mushroom-c2.svg":28}],18:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1591,7 +1614,7 @@ function startingGenerator(player, swipeActions) {
     swipeRight: actionRight
   };
 }
-},{"../utils":12,"../game":13}],18:[function(require,module,exports) {
+},{"../utils":11,"../game":13}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1722,7 +1745,7 @@ function hugeOgreGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":12,"../game":13}],19:[function(require,module,exports) {
+},{"../utils":11,"../game":13}],20:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1755,7 +1778,7 @@ function basicChestGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":12,"../game":13}],8:[function(require,module,exports) {
+},{"../utils":11,"../game":13}],10:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1848,7 +1871,7 @@ exports.default = {
     */
 
 };
-},{"./utils":12,"./swipeActions":7,"./rooms/forestMonster":15,"./rooms/forestLoot":16,"./rooms/startingroom":17,"./rooms/monsters":18,"./rooms/chest":19}],9:[function(require,module,exports) {
+},{"./utils":11,"./swipeActions":12,"./rooms/forestMonster":16,"./rooms/forestLoot":15,"./rooms/startingroom":18,"./rooms/monsters":22,"./rooms/chest":20}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1947,7 +1970,7 @@ exports.default = {
 function gainLevel(player) {
   player.setLevel(player.getLevel() + 1);
 }
-},{"./utils":12,"./img/actions/sword.svg":6}],3:[function(require,module,exports) {
+},{"./utils":11,"./img/actions/sword.svg":9}],3:[function(require,module,exports) {
 'use strict';
 
 var _room = require('./room');
@@ -2035,11 +2058,23 @@ $(document).ready(function () {
 				setTimeout(function () {
 					card.classList.remove("yesFade");card.classList.remove("yes");
 				}, 500);
+				_player2.default.thisRoom.isLastRoom = true;
 				currentRoom.swipeRight.action();
-				(0, _player.gainLevel)(_player2.default);
-				currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
-				(0, _game.writeStats)(_player2.default);
-				(0, _game.writeRoom)(currentRoom);
+				if (_player2.default.thisRoom.isLastRoom == false) {
+					if (_player2.default.thisRoom.nextRoom.desc != undefined) {
+						currentRoom.desc = _player2.default.thisRoom.nextRoom.desc;
+					}
+					currentRoom.swipeLeft = _player2.default.thisRoom.nextRoom.swipeLeft;
+					currentRoom.swipeRight = _player2.default.thisRoom.nextRoom.swipeRight;
+					(0, _game.writeStats)(_player2.default);
+					(0, _game.writeRoom)(currentRoom);
+				} else {
+					(0, _player.gainLevel)(_player2.default);
+					currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
+					(0, _game.writeStats)(_player2.default);
+					(0, _game.writeRoom)(currentRoom);
+					document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
+				}
 			} else if (elem.offsetLeft < -50) {
 				elem.style.left = 0 + "px";
 				card.classList.add("noFade");
@@ -2054,8 +2089,11 @@ $(document).ready(function () {
      Mettre en place un système qui si la desc, l'img ou le swipeLeft/swipeRight n'est pas définis
      ne pas le remplacer par un "undefined" et donc laisser la valeur existante
      */
-					currentRoom.desc = _player2.default.thisRoom.nextRoom.desc;
+					if (_player2.default.thisRoom.nextRoom.desc != undefined) {
+						currentRoom.desc = _player2.default.thisRoom.nextRoom.desc;
+					}
 					currentRoom.swipeLeft = _player2.default.thisRoom.nextRoom.swipeLeft;
+					currentRoom.swipeRight = _player2.default.thisRoom.nextRoom.swipeRight;
 					(0, _game.writeStats)(_player2.default);
 					(0, _game.writeRoom)(currentRoom);
 				} else {
@@ -2063,6 +2101,7 @@ $(document).ready(function () {
 					currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
 					(0, _game.writeStats)(_player2.default);
 					(0, _game.writeRoom)(currentRoom);
+					document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
 				}
 			} else {
 				elem.style.left = 0 + "px";
@@ -2072,7 +2111,7 @@ $(document).ready(function () {
 		}
 	}
 });
-},{"./room":8,"./player":9,"./swipeActions":7,"./utils":12,"./game":13}],40:[function(require,module,exports) {
+},{"./room":10,"./player":8,"./swipeActions":12,"./utils":11,"./game":13}],57:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -2094,7 +2133,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52484' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61855' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -2195,5 +2234,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[40,3])
+},{}]},{},[57,3])
 //# sourceMappingURL=/dist/5c38d609bba42fc055950690fcf65d72.map
