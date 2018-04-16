@@ -2,6 +2,7 @@ import { getObjectByRarity } from './utils';
 import { getRandomNumber } from './utils';
 
 import sword_svg from './img/actions/sword.svg';
+import bow_svg from './img/actions/bow.svg';
 
 
 export function writeStats(player){
@@ -21,7 +22,7 @@ export function writeStats(player){
     case "rogue":
         player.setRoleStats(player.getAgility());
         player.stats.weapon = "bow";
-        player.stats.weaponImg = "bow.png"
+        player.stats.weaponImg = bow_svg;
         player.stats.defaultAttack = "Tirer";
         break;
     default:
@@ -39,6 +40,7 @@ export function writeStats(player){
 
 export function writeRoom(currentRoom){
     document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img; + ")";
+    document.getElementById("room_name").innerHTML= currentRoom.name.charAt(0).toUpperCase() + currentRoom.name.slice(1);
     document.getElementById("room_desc").innerHTML= currentRoom.desc;
     document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_no").style.backgroundImage = "url("+ currentRoom.swipeLeft.img() + ")";
@@ -80,8 +82,8 @@ export function feedbackMessage(player, message){
                 }
 
     
-    var feedbackMessage = document.getElementsByClassName("card-visible");
-    feedbackMessage[0].classList.add("feedback-message");
+    var feedbackMessage = document.getElementById("card");
+    feedbackMessage.classList.add("feedback-message");
     document.getElementById("feedback").style.opacity = 1;
     document.getElementById("feedback").innerHTML = message;
     

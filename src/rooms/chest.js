@@ -4,14 +4,16 @@ import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
 
+import chest_svg from '../img/monsters/chest.svg';
+
 export default{
   basicChestGenerator,
 }
 
 function basicChestGenerator(player, swipeActions) {
     var name = "coffre";
-    var desc = "Il y a deux objets dans ce coffre, lequel utiliser ?";
-    var img = "coffre.png";
+    var desc = "Il y a deux objets dans ce coffre, lequel prendre ?";
+    var img = chest_svg;
 
     var availableActions = swipeActions.basicChest;
     var actionNoDupe = generateTwoActionsNoDupe(availableActions);

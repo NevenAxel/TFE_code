@@ -1,7 +1,9 @@
     body{
       text-align: center;
       overflow: hidden;
-      font-family: 'Slabo 27px', serif;
+      font-family: 'Lato', sans-serif;
+      user-select: none;
+      background: url("./img/texture-wood.svg") center; 
     }
     li{
       list-style-type: none;
@@ -11,14 +13,25 @@
       width: 300px;
       margin: 0 auto;
     }
+    .niveau{
+      background: #724C33;
+      color: #AF7643;
+      border-radius: 10px;
+      padding: 5px;
+      font-size: 40px;
+      font-weight: 400;
+      width: 300px;
+      margin: 20px auto 25px auto;
+      box-shadow: inset -2px -2px 0px 2px #7C5337;
+    }
     #card-container{
       width: 300px;
-      height: 300px;
+      height: 350px;
       margin: 0 auto;
       position: relative;
     }
     #card-tracker{
-      height: 300px;
+      height: 350px;
       width: 500px;
       left: 0;   
       right: 0;
@@ -30,7 +43,17 @@
       transform: translateX(-100px);
     }
     .card-visible{
-      height: 300px;
+      height: 350px;
+      width: 300px;
+      left: 0;
+      right: 0;
+      position: absolute;
+      transition: 0.1s;
+      border-radius: 30px;
+      box-shadow: 6px 6px 29px -9px rgba(0,0,0,0.65);
+    }
+    #card{
+      height: 280px;
       width: 300px;
       left: 0;
       right: 0;
@@ -40,26 +63,59 @@
       transition: 0.1s;
       opacity: 1;
       line-height: 250px;
-      border-radius: 30px;
+      border-radius: 30px 30px 0 0;
       background: url("./img/bg/bg-forest.svg");
+      
+
     }
     #feedback{
       color: white;
       position: absolute;
-      z-index: 5;
       width: 280px;
       left: 10px;
       line-height: 1.4;
       top: 135px;
       filter: none;
+      font-size: 20px;
       /* Le placement pour centrer est à refaire!*/
+    }
+    #name{
+      position: absolute;
+      top: 0;
+      display: inline-block;
+      height: 30px;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      line-height: 1;
+      text-align: center;
+    }
+    #room_name{
+      padding: 8px 35px 10px 35px;
+      background: #333333;
+      display: inline-block;
+      margin: 0 auto;
+      clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
     }
     #room_img{
       background: url("./img/monsters/goblin.svg") center no-repeat;
       width: 220px;
       height: 220px;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 40px;
+    }
+    #room_desc{
+      background: #D8D3AF;
+      height: 46px;
+      line-height: 1;
+      margin-top: 20px;
+      padding: 12px;
+      line-height: 1.4;
+      
+      border-radius: 0 0 30px 30px;
+      color: #1A1A1A;
     }
     .yes {
       -moz-transform: rotate(10deg) translateX(50px);
@@ -99,8 +155,9 @@
       height: 80px;
       position: absolute;
       left: -30px;
-      bottom: 35px;
+      bottom: 30px;
       line-height: 1;
+      filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
     }
     #btn_no-text{
       position: absolute;
@@ -119,8 +176,9 @@
       height: 80px;
       position: absolute;
       right: -30px;
-      bottom: 35px;
+      bottom: 30px;
       line-height: 1;
+      filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
     }
     #btn_yes-text{
       position: absolute;
@@ -135,30 +193,6 @@
     }
     #room_type{margin: 0; padding: 0; line-height: 1;}
     h3{margin: 10px 0; padding: 0; line-height: 0;}
-
-      /*
-    .feedback-message{
-      position: absolute;
-      width: 300px;
-      background-color: white;
-      -webkit-box-shadow: 0px 4px 19px -6px rgba(0,0,0,1);
-      -moz-box-shadow: 0px 4px 19px -6px rgba(0,0,0,1);
-      box-shadow: 0px 4px 19px -6px rgba(0,0,0,1);
-      z-index: 1;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      top: 70px;
-      padding: 10px;
-      -webkit-animation-name: fadeIn;
-      animation-name: fadeIn;
-      -webkit-animation-duration: 1s;
-      animation-duration: 0.5s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-    }
-    */
 
     .feedback-message{
       filter: brightness(.25);

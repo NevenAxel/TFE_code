@@ -4,6 +4,7 @@ import { feedbackMessage } from '../game';
 import feed_svg from '../img/actions/feed.svg';
 import escape_svg from '../img/actions/escape.svg';
 import givecoins_svg from '../img/actions/givecoins.svg';
+import coinsbag_svg from '../img/loot/coinsbag.svg';
 
 export default {
   generateAttack,
@@ -55,7 +56,7 @@ function generateAttack(player, swipeActions){
 function generateGiveCoins(player, swipeActions){
   	return {
   		name: "givecoins",
-  		coinsGiven: getRandomNumber(1, 6),
+  		coinsGiven: getRandomNumber(1, 3),
 		text: function () {return "Donner " + this.coinsGiven + " pièces"},
 		img: function () {return givecoins_svg},
 		action: function () {
@@ -67,7 +68,6 @@ function generateGiveCoins(player, swipeActions){
 				);
 			}
 			else if(this.coinsGiven == 1){
-				feedbackMessage(player, "Seulement une pièce ? Tu te fout de moi ?!");
 				player.setCoin(
 					player.getCoin() - this.coinsGiven
 				);
@@ -76,7 +76,7 @@ function generateGiveCoins(player, swipeActions){
 				player.thisRoom.nextRoom = {
 					desc: "Seulement une pièce ? Tu te fout de moi ?!",
 					swipeLeft: {
-						coinsGiven2: getRandomNumber(3, 8),
+						coinsGiven2: getRandomNumber(2, 5),
 						text: function () {return "Donner " + this.coinsGiven2 + " pièces en plus"},
 						img: function () {return givecoins_svg},
 						action: function() {
@@ -130,7 +130,7 @@ function generateEscape(player, swipeActions){
 		action: function() {
 			if (player.getAgility() >= this.require) {
 				if(Math.random() < 0.3 * 5 / player.getAgility()){
-					feedbackMessage(player, 'Pas de chance, vous avez trébucher sur une pierre')
+					feedbackMessage(player, 'Pas de chance, vous avez trébuché sur une pierre')
 					player.setHp(
 						player.getHp() - this.damage, player
 					);					
@@ -179,7 +179,7 @@ function generateSteal(player, swipeActions){
   	return {
   		name: "steal",
 		text: function () {return "Voler " + coinsStealed + " pièces"},
-		img: function () {return "steal.png"},
+		img: function () {return coinsbag_svg},
 		damage: 5,
 		action: function() {
 			if(Math.random() < 0.4 * 10 / player.getAgility()){

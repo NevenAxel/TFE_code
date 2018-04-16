@@ -94,7 +94,7 @@ $(document).ready(function(){
 				currentRoom = getNewRoom(room, swipeActions, player);		
 				writeStats(player);
 				writeRoom(currentRoom);  
-				document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
+				document.getElementById("card").classList.remove("feedback-message");
 			}
 	    }
 	    else if (elem.offsetLeft < -50) {
@@ -120,7 +120,7 @@ $(document).ready(function(){
 		    	currentRoom = getNewRoom(room, swipeActions, player);
 		    	writeStats(player);
 		    	writeRoom(currentRoom);	
-		    	document.getElementsByClassName("card-visible")[0].classList.remove("feedback-message");
+		    	document.getElementById("card").classList.remove("feedback-message");
 	    	}
 	    }
 	    else{

@@ -1,6 +1,9 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
+import potionhp_svg from '../img/loot/potionhp.svg';
+import coinsbag_svg from '../img/loot/coinsbag.svg';
+
 export default {
   generateHpPotion,
   generateBagOfCoins,
@@ -14,7 +17,7 @@ function generateHpPotion(player, swipeActions){
   	return {
   		name: "hppotion",
 		text: function () {return "Potion de vie (+5 Hp)"},
-		img: function () {return "hpPotion.png"},
+		img: function () {return potionhp_svg},
 		action: function() {
 			player.setHp(
 				player.getHp() + 5, player
@@ -44,7 +47,7 @@ function generateBagOfCoins(player, swipeActions){
   	return {
   		name: "bagofcoins",
 		text: function () {return "Sac de pièces (" + coinsGained + " pièces)" },
-		img: function () {return "coinsBag.png"},
+		img: function () {return coinsbag_svg},
 		action: function() {
 			player.setCoin(
 				player.getCoin() + coinsGained
@@ -108,7 +111,7 @@ function generateDumbBell(player, swipeActions){
 			}
 			else{
 				if(Math.random() < 0.7){
-					feedbackMessage("Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé")
+					feedbackMessage(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé")
 					player.setHp(
 						player.getHp() - 5, player
 					);

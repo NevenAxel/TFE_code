@@ -2,6 +2,7 @@ import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 
 import sword_svg from '../img/actions/sword.svg';
+import bow_svg from '../img/actions/bow.svg';
 
 export default {
   generateWand,
@@ -47,7 +48,7 @@ function generateBow(player, swipeActions){
 	return {
 		name: "bowstart",
 		text: function () {return "Prendre l'arc"},
-		img: function () {return "arc.png"},
+		img: function () {return bow_svg},
 		action: function() {
 			player.setRole('rogue')
 			player.setAgility(
