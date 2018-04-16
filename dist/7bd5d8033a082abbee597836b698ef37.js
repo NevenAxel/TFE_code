@@ -1,67 +1,2282 @@
-require=function(r,e,n){function t(n,o){function i(r){return t(i.resolve(r))}function f(e){return r[n][1][e]||e}if(!e[n]){if(!r[n]){var c="function"==typeof require&&require;if(!o&&c)return c(n,!0);if(u)return u(n,!0);var l=new Error("Cannot find module '"+n+"'");throw l.code="MODULE_NOT_FOUND",l}i.resolve=f;var s=e[n]=new t.Module(n);r[n][0].call(s.exports,i,s,s.exports)}return e[n].exports}function o(r){this.id=r,this.bundle=t,this.exports={}}var u="function"==typeof require&&require;t.isParcelRequire=!0,t.Module=o,t.modules=r,t.cache=e,t.parent=u;for(var i=0;i<n.length;i++)t(n[i]);return t}({14:[function(require,module,exports) {
-"use strict";function o(o,r){return o+Math.round(Math.random()*(r-o))}function r(o){var r=Object.keys(o);return o[r[r.length*Math.random()<<0]]}function t(o){for(var r=o.length-1;r>0;r--){var t=Math.floor(Math.random()*(r+1)),n=[o[t],o[r]];o[r]=n[0],o[t]=n[1]}return o}function n(){return r(Array.prototype.slice.call(arguments))}function e(o){return o[Math.floor(Math.random()*o.length)]}function a(o){var r=[];return o.forEach(function(o){for(var t=o.rarity,n=0;n<t;n++)r.push(o)}),r[Math.floor(Math.random()*r.length)]}function c(o){var r=a(o),t=a(o.filter(function(o){return o.name!==r.name}));return[r,t]}function i(o,r,t){var n=[];return t.forEach(function(o){r[o].forEach(function(o){n.push(o)})}),"rogue"==o.getRole()&&t.forEach(function(o){var t=o+"Rogue";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),"mage"==o.getRole()&&t.forEach(function(o){var t=o+"Mage";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),"warrior"==o.getRole()&&t.forEach(function(o){var t=o+"Warrior";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),"agility"==o.getRole()&&t.forEach(function(o){var t=o+"Agility";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),"intelligence"==o.getRole()&&t.forEach(function(o){var t=o+"Intelligence";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),"strenght"==o.getRole()&&t.forEach(function(o){var t=o+"Strenght";void 0!==r[t]&&r[t].forEach(function(o){n.push(o)})}),n}Object.defineProperty(exports,"__esModule",{value:!0}),exports.getRandomNumber=o,exports.randomProperties=r,exports.shuffle=t,exports.randomOne=n,exports.getRandomAction=e,exports.getObjectByRarity=a,exports.generateTwoActionsNoDupe=c,exports.createAvailableActions=i;
-},{}],24:[function(require,module,exports) {
-module.exports="d6939278153ea1a9e5e20047a11c31e2.svg";
-},{}],44:[function(require,module,exports) {
-module.exports="536f3a044d2e30a4c2d68fb73583a656.svg";
-},{}],13:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.writeStats=r,exports.writeRoom=i,exports.getNewRoom=m,exports.feedbackMessage=g;var e=require("./utils"),t=require("./img/actions/sword.svg"),n=a(t),o=require("./img/actions/bow.svg"),s=a(o);function a(e){return e&&e.__esModule?e:{default:e}}function r(e){switch(e.getRole()){case"mage":e.setRoleStats(e.getIntel()),e.stats.weapon="wand",e.stats.weaponImg="wand.png",e.stats.defaultAttack="Attaquer";break;case"warrior":e.setRoleStats(e.getStr()),e.stats.weapon="sword",e.stats.weaponImg=n.default,e.stats.defaultAttack="Attaquer";break;case"rogue":e.setRoleStats(e.getAgility()),e.stats.weapon="bow",e.stats.weaponImg=s.default,e.stats.defaultAttack="Tirer";break;default:console.log("NO Role STATS")}document.getElementById("level").innerHTML=e.getLevel(),document.getElementById("stats_hp").innerHTML=e.getHp(),document.getElementById("stats_maxhp").innerHTML=e.getMaxHp(),document.getElementById("stats_coins").innerHTML=e.getCoin(),document.getElementById("stats_str").innerHTML=e.getStr(),document.getElementById("stats_intel").innerHTML=e.getIntel(),document.getElementById("stats_agility").innerHTML=e.getAgility(),document.getElementById("stats_class").innerHTML=e.getRole()}function i(e){document.getElementById("room_img").style.backgroundImage="url("+e.img,document.getElementById("room_name").innerHTML=e.name.charAt(0).toUpperCase()+e.name.slice(1),document.getElementById("room_desc").innerHTML=e.desc,document.getElementById("btn_no-text").textContent=e.swipeLeft.text(),document.getElementById("btn_no").style.backgroundImage="url("+e.swipeLeft.img()+")",document.getElementById("btn_yes-text").textContent=e.swipeRight.text(),document.getElementById("btn_yes").style.backgroundImage="url("+e.swipeRight.img()+")"}function m(t,n,o){if(1===o.getLevel())return t.roomGenerator.starting(o,n);if(o.getLevel()%5==0){var s=(0,e.getObjectByRarity)(t.forestLootList);return t.roomGenerator[s.name](o,n)}s=(0,e.getObjectByRarity)(t.forestMonsterList);return t.roomGenerator[s.name](o,n)}function g(e,t){e.thisRoom.isLastRoom=!1,e.thisRoom.nextRoom={swipeLeft:{img:function(){},action:function(){document.getElementById("feedback").style.opacity=0},text:function(){return""}},swipeRight:{img:function(){},action:function(){document.getElementById("feedback").style.opacity=0},text:function(){return""}}},document.getElementById("card").classList.add("feedback-message"),document.getElementById("feedback").style.opacity=1,document.getElementById("feedback").innerHTML=t}
-},{"./utils":14,"./img/actions/sword.svg":24,"./img/actions/bow.svg":44}],48:[function(require,module,exports) {
-module.exports="5256562c4f963db96a9a7a1004b83c02.svg";
-},{}],47:[function(require,module,exports) {
-module.exports="eb62ca2dc8c549ea7c4034501a7cdefa.svg";
-},{}],17:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game"),n=require("../img/loot/potionhp.svg"),i=u(n),r=require("../img/loot/coinsbag.svg"),o=u(r);function u(e){return e&&e.__esModule?e:{default:e}}function a(e,t){return{name:"hppotion",text:function(){return"Potion de vie (+5 Hp)"},img:function(){return i.default},action:function(){e.setHp(e.getHp()+5,e)}}}function c(e,t){return{name:"magicmushroom",text:function(){return"Champignon magique (+5 MaxHp"},img:function(){return"champignon.png"},action:function(){e.setMaxHp(e.getMaxHp()+5),e.setHp(e.getHp()+5,e)}}}function g(t,n){var i=(0,e.getRandomNumber)(3,6);return{name:"bagofcoins",text:function(){return"Sac de pièces ("+i+" pièces)"},img:function(){return o.default},action:function(){t.setCoin(t.getCoin()+i)}}}function s(e,t){return{name:"spinach",text:function(){return"Épinards (+2 Hp, +2 Force"},img:function(){return"spinach.png"},action:function(){e.setHp(e.getHp()+2,e),e.setStr(e.getStr()+2)}}}function p(e,t){return{name:"magicbook",text:function(){return"Livre sur la magie (+5 Intel)"},img:function(){return"magicBook.png"},action:function(){e.setIntel(e.getIntel()+5)}}}function f(e,t){return{name:"speedshoes",text:function(){return"Chaussures (+3 Agilité)"},img:function(){return"speedShoes.png"},action:function(){e.setAgility(e.getAgility()+3)}}}function m(e,n){return{name:"dumbbell",text:function(){return"Haltères (+5 Force)"},img:function(){return"DumbBell.png"},action:function(){e.getIntel()>=5?e.setStr(e.getStr()+5):Math.random()<.7?((0,t.feedbackMessage)(e,"Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé"),e.setHp(e.getHp()-5,e)):e.setStr(e.getStr()+5)}}}exports.default={generateHpPotion:a,generateBagOfCoins:g,generateSpinach:s,generateMagicBook:p,generateSpeedShoes:f,generateDumbBell:m};
-},{"../utils":14,"../game":13,"../img/loot/potionhp.svg":48,"../img/loot/coinsbag.svg":47}],23:[function(require,module,exports) {
-module.exports="ddbcf682c06d1c80b1b0499be65ef159.svg";
-},{}],45:[function(require,module,exports) {
-module.exports="9fe8c12c396ae19b0a63be53d353a9d4.svg";
-},{}],46:[function(require,module,exports) {
-module.exports="43dc1314cdca45410295b395092b5614.svg";
-},{}],18:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game"),n=require("../img/actions/feed.svg"),a=g(n),i=require("../img/actions/escape.svg"),s=g(i),r=require("../img/actions/givecoins.svg"),u=g(r),o=require("../img/loot/coinsbag.svg"),c=g(o);function g(e){return e&&e.__esModule?e:{default:e}}function m(e,n){return{name:"attack",damage:3,text:function(){return e.stats.defaultAttack},img:function(){return e.stats.weaponImg},action:function(){switch(e.getRole()){case"mage":case"warrior":e.setHp(e.getHp()-this.damage,e);break;case"rogue":Math.random()<.45?(e.setHp(e.getHp()-2*this.damage,e),(0,t.feedbackMessage)(e,"Vous avez raté votre cible")):(0,t.feedbackMessage)(e,"Touché!");break;default:e.setHp(e.getHp()-this.damage,e)}}}}function f(n,a){return{name:"givecoins",coinsGiven:(0,e.getRandomNumber)(1,3),text:function(){return"Donner "+this.coinsGiven+" pièces"},img:function(){return u.default},action:function(){n.getCoin()-this.coinsGiven<0?((0,t.feedbackMessage)(n,"J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!"),n.setCoin(0),n.setHp(n.getHp()-10,n)):1==this.coinsGiven?(n.setCoin(n.getCoin()-this.coinsGiven),n.thisRoom.isLastRoom=!1,n.thisRoom.nextRoom={desc:"Seulement une pièce ? Tu te fout de moi ?!",swipeLeft:{coinsGiven2:(0,e.getRandomNumber)(2,5),text:function(){return"Donner "+this.coinsGiven2+" pièces en plus"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(n,"J'aime mieux ça!"),n.setCoin(n.getCoin()-this.coinsGiven2)}},swipeRight:a.actionsGenerator.attack(n,a)}):n.setCoin(n.getCoin()-this.coinsGiven)}}}function d(e,n){return{name:"scream",require:10,damage:5,text:function(){return"Crier"},img:function(){return"scream.png"},action:function(){e.getStr()>=this.require?(0,t.feedbackMessage)(e,"L'ennemi a eu peur et s'est enfuis en courant"):((0,t.feedbackMessage)(e,"Votre cris n'est pas assez fort, gagnez un peu plus de force!"),e.setHp(e.getHp()-this.damage,e))}}}function p(e,n){return{name:"escape",text:function(){return"S'échapper"},img:function(){return s.default},require:8,damage:3,action:function(){e.getAgility()>=this.require?Math.random()<1.5/e.getAgility()?((0,t.feedbackMessage)(e,"Pas de chance, vous avez trébuché sur une pierre"),e.setHp(e.getHp()-this.damage,e)):(0,t.feedbackMessage)(e,"Vous vous êtes enfuis avec succes"):((0,t.feedbackMessage)(e,"Vous n'êtes pas assez rapide! Ouch!"),e.setHp(e.getHp()-this.damage,e))}}}function l(e,n){return{name:"feed",text:function(){return"Nourrir"},img:function(){return a.default},action:function(){e.getAgility()<=5?((0,t.feedbackMessage)(e,"Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué"),e.setHp(e.getHp()-5,e)):e.getIntel()<=5?((0,t.feedbackMessage)(e,"Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent"),e.setHp(e.getHp()-5,e)):(0,t.feedbackMessage)(e,"Il a tout mangé et ne vous a pas attaqué")}}}function v(n,a){var i=(0,e.getRandomNumber)(3,10);return{name:"steal",text:function(){return"Voler "+i+" pièces"},img:function(){return c.default},damage:5,action:function(){Math.random()<4/n.getAgility()?((0,t.feedbackMessage)(n,"Vous avez été pris sur le fait"),n.setHp(n.getHp()-this.damage,n)):((0,t.feedbackMessage)(n,"Cool, "+i+" pièces recuperées"),n.setCoin(n.getCoin()+i))}}}exports.default={generateAttack:m,generateGiveCoins:f,generateScream:d,generateEscape:p,generateFeed:l,generateSteal:v};
-},{"../utils":14,"../game":13,"../img/actions/feed.svg":23,"../img/actions/escape.svg":45,"../img/actions/givecoins.svg":46,"../img/loot/coinsbag.svg":47}],20:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game"),n=require("../img/actions/sword.svg"),r=o(n),u=require("../img/actions/bow.svg"),i=o(u);function o(e){return e&&e.__esModule?e:{default:e}}function a(e,t){return{name:"wandstart",text:function(){return"Prendre le baton"},img:function(){return"wand.png"},action:function(){e.setRole("mage"),e.setIntel(e.getIntel()+5)}}}function s(e,t){return{name:"swordstart",text:function(){return"Prendre l'épée"},img:function(){return r.default},action:function(){e.setRole("warrior"),e.setStr(e.getStr()+5),e.setMaxHp(e.getMaxHp()+5),e.setHp(e.getHp()+5,e)}}}function c(e,t){return{name:"bowstart",text:function(){return"Prendre l'arc"},img:function(){return i.default},action:function(){e.setRole("rogue"),e.setAgility(e.getAgility()+5)}}}exports.default={generateWand:a,generateSword:s,generateBow:c};
-},{"../utils":14,"../game":13,"../img/actions/sword.svg":24,"../img/actions/bow.svg":44}],35:[function(require,module,exports) {
-module.exports="6379f562e3d18f714a957369254bf1d6.svg";
-},{}],36:[function(require,module,exports) {
-module.exports="d9d88b7ecb495c9d910d61fbcd27be56.svg";
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+// eslint-disable-next-line no-global-assign
+require = (function (modules, cache, entry) {
+  // Save the require from previous bundle to this closure if any
+  var previousRequire = typeof require === "function" && require;
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire = typeof require === "function" && require;
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        var err = new Error('Cannot find module \'' + name + '\'');
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+
+      var module = cache[name] = new newRequire.Module(name);
+
+      modules[name][0].call(module.exports, localRequire, module, module.exports);
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x){
+      return newRequire(localRequire.resolve(x));
+    }
+
+    function resolve(x){
+      return modules[name][1][x] || x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  // Override the current require with this new one
+  return newRequire;
+})({13:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getRandomNumber = getRandomNumber;
+exports.randomProperties = randomProperties;
+exports.shuffle = shuffle;
+exports.randomOne = randomOne;
+exports.getRandomAction = getRandomAction;
+exports.getObjectByRarity = getObjectByRarity;
+exports.generateTwoActionsNoDupe = generateTwoActionsNoDupe;
+exports.createAvailableActions = createAvailableActions;
+function getRandomNumber(min, max) {
+  return min + Math.round(Math.random() * (max - min));
+}
+
+function randomProperties(obj) {
+  var keys = Object.keys(obj);
+  return obj[keys[keys.length * Math.random() << 0]];
+};
+
+function shuffle(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+function randomOne() {
+  var args = Array.prototype.slice.call(arguments);
+  return randomProperties(args);
+}
+
+function getRandomAction(actionList) {
+  return actionList[Math.floor(Math.random() * actionList.length)];
+};
+
+function getObjectByRarity(objectList) {
+  var lootTable = [];
+  objectList.forEach(function (element) {
+    var rarity = element.rarity;
+    for (var i = 0; i < rarity; i++) {
+      lootTable.push(element);
+    }
+  });
+  return lootTable[Math.floor(Math.random() * lootTable.length)];
+}
+
+function generateTwoActionsNoDupe(availableActions) {
+  var actionLeft = getObjectByRarity(availableActions);
+  var actionRight = getObjectByRarity(availableActions.filter(function (action) {
+    return action.name !== actionLeft.name;
+  }));
+  return [actionLeft, actionRight];
+}
+
+function createAvailableActions(player, swipeActions, objectList) {
+  var availableActions = [];
+
+  // Mettre toutes les actions dans la liste d'action dans la liste availableActions
+  objectList.forEach(function (element) {
+    swipeActions[element].forEach(function (element) {
+      availableActions.push(element);
+    });
+  });
+
+  // Ajouter les actions spécifique à la classe si le joueur est de cette classe
+  if (player.getRole() == "rogue") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Rogue';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "mage") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Mage';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "warrior") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Warrior';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "agility") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Agility';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "intelligence") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Intelligence';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  if (player.getRole() == "strenght") {
+    objectList.forEach(function (element) {
+      var actionList = element + 'Strenght';
+      if (typeof swipeActions[actionList] !== "undefined") {
+        swipeActions[actionList].forEach(function (element) {
+          availableActions.push(element);
+        });
+      }
+    });
+  }
+
+  return availableActions;
+}
+},{}],9:[function(require,module,exports) {
+module.exports="/dist/d6939278153ea1a9e5e20047a11c31e2.svg";
+},{}],25:[function(require,module,exports) {
+module.exports="/dist/536f3a044d2e30a4c2d68fb73583a656.svg";
+},{}],12:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.writeStats = writeStats;
+exports.writeRoom = writeRoom;
+exports.getNewRoom = getNewRoom;
+exports.feedbackMessage = feedbackMessage;
+
+var _utils = require('./utils');
+
+var _sword = require('./img/actions/sword.svg');
+
+var _sword2 = _interopRequireDefault(_sword);
+
+var _bow = require('./img/actions/bow.svg');
+
+var _bow2 = _interopRequireDefault(_bow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function writeStats(player) {
+    switch (player.getRole()) {
+        case "mage":
+            player.setRoleStats(player.getIntel());
+            player.stats.weapon = "wand";
+            player.stats.weaponImg = "wand.png";
+            player.stats.defaultAttack = "Attaquer";
+            break;
+        case "warrior":
+            player.setRoleStats(player.getStr());
+            player.stats.weapon = "sword";
+            player.stats.weaponImg = _sword2.default;
+            player.stats.defaultAttack = "Attaquer";
+            break;
+        case "rogue":
+            player.setRoleStats(player.getAgility());
+            player.stats.weapon = "bow";
+            player.stats.weaponImg = _bow2.default;
+            player.stats.defaultAttack = "Tirer";
+            break;
+        default:
+            console.log("NO Role STATS");
+    }
+    document.getElementById("level").innerHTML = player.getLevel();
+    document.getElementById("stats_hp").innerHTML = player.getHp();
+    document.getElementById("stats_maxhp").innerHTML = player.getMaxHp();
+    document.getElementById("stats_coins").innerHTML = player.getCoin();
+    document.getElementById("stats_str").innerHTML = player.getStr();
+    document.getElementById("stats_intel").innerHTML = player.getIntel();
+    document.getElementById("stats_agility").innerHTML = player.getAgility();
+    document.getElementById("stats_class").innerHTML = player.getRole();
+}
+
+function writeRoom(currentRoom) {
+    document.getElementById("room_img").style.backgroundImage = "url(" + currentRoom.img;+")";
+    document.getElementById("room_name").innerHTML = currentRoom.name.charAt(0).toUpperCase() + currentRoom.name.slice(1);
+    document.getElementById("room_desc").innerHTML = currentRoom.desc;
+    document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
+    document.getElementById("btn_no").style.backgroundImage = "url(" + currentRoom.swipeLeft.img() + ")";
+    document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
+    document.getElementById("btn_yes").style.backgroundImage = "url(" + currentRoom.swipeRight.img() + ")";
+}
+
+function getNewRoom(room, swipeActions, player) {
+    if (player.getLevel() === 1) {
+        return room.roomGenerator.starting(player, swipeActions);
+    }
+    if (player.getLevel() % 5 === 0) {
+        var currentRoom = (0, _utils.getObjectByRarity)(room.forestLootList);
+        return room.roomGenerator[currentRoom.name](player, swipeActions);
+    } else {
+        var currentRoom = (0, _utils.getObjectByRarity)(room.forestMonsterList);
+        return room.roomGenerator[currentRoom.name](player, swipeActions);
+    }
+}
+
+function feedbackMessage(player, message) {
+    player.thisRoom.isLastRoom = false;
+    player.thisRoom.nextRoom = {
+        swipeLeft: {
+            img: function img() {
+                return;
+            },
+            action: function action() {
+                document.getElementById("feedback").style.opacity = 0;
+            },
+            text: function text() {
+                return "";
+            }
+        },
+        swipeRight: {
+            img: function img() {
+                return;
+            },
+            action: function action() {
+                document.getElementById("feedback").style.opacity = 0;
+            },
+            text: function text() {
+                return "";
+            }
+        }
+    };
+
+    var feedbackMessage = document.getElementById("card");
+    feedbackMessage.classList.add("feedback-message");
+    document.getElementById("feedback").style.opacity = 1;
+    document.getElementById("feedback").innerHTML = message;
+
+    /*
+    document.getElementById("feedback-message").innerHTML = message;
+    document.getElementById("feedback-message").style.opacity = 1;
+    setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
+    */
+}
+},{"./utils":13,"./img/actions/sword.svg":9,"./img/actions/bow.svg":25}],27:[function(require,module,exports) {
+module.exports="/dist/5256562c4f963db96a9a7a1004b83c02.svg";
+},{}],28:[function(require,module,exports) {
+module.exports="/dist/eb62ca2dc8c549ea7c4034501a7cdefa.svg";
 },{}],19:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game"),n=require("../img/actions/eat.svg"),u=o(n),r=require("../img/actions/no.svg"),i=o(r);function o(e){return e&&e.__esModule?e:{default:e}}function a(e,t){return{name:"no",text:function(){return"Ne pas manger"},img:function(){return i.default},action:function(){}}}function s(e,n){return{name:"toxicMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"C'est un champignon toxique!"),e.setHp(e.getHp()-5,e)}}}function c(e,n){return{name:"sleepMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"Ce champignon vous a amorti, endormi..."),e.setStr(e.getStr()-2,e),e.setAgility(e.getAgility()-2,e)}}}function g(e,n){return{name:"stupidMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"Vous avez perdu quelques neurones"),e.setIntel(e.getIntel()-3,e)}}}function f(e,n){return{name:"magicMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"Ce champignon vous a fait du bien"),e.setMaxHp(e.getMaxHp()+3),e.setHp(e.getHp()+3,e)}}}function m(e,n){return{name:"agilityMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"Vous vous sentez plus vif"),e.setAgility(e.getAgility()+2,e)}}}function M(e,n){return{name:"yummyMushroom",text:function(){return"Manger"},img:function(){return u.default},action:function(){(0,t.feedbackMessage)(e,"Mhhh... il est délicieux!"),e.setHp(e.getHp()+5,e)}}}exports.default={generateNoEat:a,generateToxicMushroom:s,generateSleepMushroom:c,generateStupidMushroom:g,generateMagicMushroom:f,generateAgilityMushroom:m,generateYummyMushroom:M};
-},{"../utils":14,"../game":13,"../img/actions/eat.svg":35,"../img/actions/no.svg":36}],12:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("./utils"),t=require("./game"),n=require("./actions/actionsLoots"),a=g(n),r=require("./actions/actionsMonsters"),i=g(r),o=require("./actions/actionsStarting"),s=g(o),u=require("./actions/forestMushroom"),c=g(u);function g(e){return e&&e.__esModule?e:{default:e}}function m(e,t){return{name:"wandstart",text:function(){return"Prendre le baton magique"},img:function(){return"wand.png"},action:function(){e.setRole("mage"),e.setIntel(e.getIntel()+5)}}}function f(e,t){return{name:"swordstart",text:function(){return"Prendre l'epée"},img:function(){return"epee.png"},action:function(){e.setRole("warrior"),e.setStr(e.getStr()+5),e.setMaxHp(e.getMaxHp()+5),e.setHp(e.getHp()+5,e)}}}function l(e,t){return{name:"bowstart",text:function(){return"Prendre l'arc"},img:function(){return"arc.png"},action:function(){e.setRole("rogue"),e.setAgility(e.getAgility()+5)}}}function p(e,n){return{name:"attack",damage:3,text:function(){return e.stats.defaultAttack},img:function(){return e.stats.weaponImg},action:function(){switch(e.getRole()){case"mage":case"warrior":e.setHp(e.getHp()-this.damage,e);break;case"rogue":Math.random()<.45?(e.setHp(e.getHp()-2*this.damage,e),(0,t.feedbackMessage)("Vous avez raté votre cible")):(0,t.feedbackMessage)("Touché!");break;default:e.setHp(e.getHp()-this.damage,e)}}}}function d(n,a){return{name:"givecoins",coinsGiven:(0,e.getRandomNumber)(1,6),text:function(){return"Donner "+this.coinsGiven+" pièces"},img:function(){return"giveCoins.png"},action:function(){n.getCoin()-this.coinsGiven<0?((0,t.feedbackMessage)("J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!"),n.setCoin(0),n.setHp(n.getHp()-10,n)):1==this.coinsGiven?((0,t.feedbackMessage)("Seulement une pièce ? Tu te fout de moi ?!"),n.setCoin(n.getCoin()-this.coinsGiven),n.thisRoom.isLastRoom=!1,n.thisRoom.nextRoom={desc:"Seulement une pièce ? Tu te fout de moi ?!",swipeLeft:{coinsGiven2:(0,e.getRandomNumber)(3,8),text:function(){return"Donner "+this.coinsGiven2+" pièces en plus"},img:function(){return"giveCoins.png"},action:function(){(0,t.feedbackMessage)("J'aime mieux ça!"),n.setCoin(n.getCoin()-this.coinsGiven2)}},swipeRight:a.actionsGenerator.attack(n,a)}):n.setCoin(n.getCoin()-this.coinsGiven)}}}function h(e,n){return{name:"scream",require:10,damage:5,text:function(){return"Crier pour l'effrayer"},img:function(){return"scream.png"},action:function(){e.getStr()>=this.require?(0,t.feedbackMessage)("L'ennemi a eu peur et s'est enfuis en courant"):((0,t.feedbackMessage)("Votre cris n'est pas assez fort, gagnez un peu plus de force!"),e.setHp(e.getHp()-this.damage,e))}}}function M(e,n){return{name:"escape",text:function(){return"S'echapper"},img:function(){return"escape.png"},require:8,damage:3,action:function(){e.getAgility()>=this.require?Math.random()<1.5/e.getAgility()?((0,t.feedbackMessage)("Pas de chance, vous avez trébucher sur une pierre"),e.setHp(e.getHp()-this.damage,e)):(0,t.feedbackMessage)("Vous vous êtes enfuis avec succes"):((0,t.feedbackMessage)("Vous n'êtes pas assez rapide! Ouch!"),e.setHp(e.getHp()-this.damage,e))}}}function b(e,n){return{name:"feed",text:function(){return"Nourrir l'animal"},img:function(){return"feed.png"},action:function(){e.getAgility()<=5?((0,t.feedbackMessage)("Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué"),e.setHp(e.getHp()-5,e)):e.getIntel()<=5?((0,t.feedbackMessage)("Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent"),e.setHp(e.getHp()-5,e)):(0,t.feedbackMessage)("Il a tout mangé et ne vous a pas attaqué")}}}function y(n,a){var r=(0,e.getRandomNumber)(3,10);return{name:"steal",text:function(){return"Steal "+r+" coins"},img:function(){return"steal.png"},damage:5,action:function(){Math.random()<4/n.getAgility()?((0,t.feedbackMessage)("Vous avez été pris sur le fait"),n.setHp(n.getHp()-this.damage,n)):((0,t.feedbackMessage)("Cool, "+r+" pièces recuperées"),n.setCoin(n.getCoin()+r))}}}function H(e,t){return{name:"hppotion",text:function(){return"Prendre la potion (+5 Hp)"},img:function(){return"hpPotion.png"},action:function(){e.setHp(e.getHp()+5,e)}}}function v(e,t){return{name:"magicmushroom",text:function(){return"Prendre le champignon magique (+5 MaxHp"},img:function(){return"champignon.png"},action:function(){e.setMaxHp(e.getMaxHp()+5),e.setHp(e.getHp()+5,e)}}}function x(t,n){var a=(0,e.getRandomNumber)(3,6);return{name:"bagofcoins",text:function(){return"Prendre le sac de pièces ("+a+" pièces)"},img:function(){return"coinsBag.png"},action:function(){t.setCoin(t.getCoin()+a)}}}function k(e,t){return{name:"spinach",text:function(){return"Prendre les épinards (+2 Hp + 2 Force"},img:function(){return"spinach.png"},action:function(){e.setHp(e.getHp()+2,e),e.setStr(e.getStr()+2)}}}function S(e,t){return{name:"magicbook",text:function(){return"Prendre le livre sur la magie (+5 Intel)"},img:function(){return"magicBook.png"},action:function(){e.setIntel(e.getIntel()+5)}}}function C(e,t){return{name:"speedshoes",text:function(){return"Prendre les chaussures (+3 Agilité)"},img:function(){return"speedShoes.png"},action:function(){e.setAgility(e.getAgility()+3)}}}function q(e,n){return{name:"dumbbell",text:function(){return"Prendre l'altère et faire quelques répetitions (+5 Force)"},img:function(){return"DumbBell.png"},action:function(){e.getIntel()>=5?e.setStr(e.getStr()+5):Math.random()<.7?((0,t.feedbackMessage)("Vous n'êtes pas assez intelligent pour porter l'altère, vous vous êtes blaissé"),e.setHp(e.getHp()-5,e)):e.setStr(e.getStr()+5)}}}exports.default={monsterGeneral:[{name:"escape",rarity:1}],monsterGeneralRogue:[{name:"escape",rarity:1}],monsterGeneralMage:[],monsterGeneralWarrior:[],monsterAnimals:[{name:"scream",rarity:1},{name:"feed",rarity:1}],monsterAnimalsRogue:[],monsterAnimalsIntelligence:[{name:"feed",rarity:1}],monsterSmallCreature:[{name:"scream",rarity:1}],monsterHumanoid:[],monsterHumanoidRogue:[{name:"steal",rarity:2}],monsterHumanoidAgility:[{name:"steal",rarity:1}],basicChest:[{name:"hpPotion",rarity:10},{name:"bagOfCoins",rarity:10},{name:"spinach",rarity:5},{name:"magicBook",rarity:4},{name:"speedShoes",rarity:2},{name:"dumbBell",rarity:2}],mushroom:[{name:"toxicMushroom",rarity:20},{name:"sleepMushroom",rarity:12},{name:"stupidMushroom",rarity:8},{name:"magicMushroom",rarity:5},{name:"agilityMushroom",rarity:10},{name:"yummyMushroom",rarity:20}],starting:[{name:"sword",rarity:1},{name:"bow",rarity:1}],actionsGenerator:{wand:s.default.generateWand,sword:s.default.generateSword,bow:s.default.generateBow,toxicMushroom:c.default.generateToxicMushroom,sleepMushroom:c.default.generateSleepMushroom,stupidMushroom:c.default.generateStupidMushroom,magicMushroom:c.default.generateMagicMushroom,agilityMushroom:c.default.generateAgilityMushroom,yummyMushroom:c.default.generateYummyMushroom,hpPotion:a.default.generateHpPotion,bagOfCoins:a.default.generateBagOfCoins,spinach:a.default.generateSpinach,magicBook:a.default.generateMagicBook,speedShoes:a.default.generateSpeedShoes,dumbBell:a.default.generateDumbBell,escape:i.default.generateEscape,scream:i.default.generateScream,feed:i.default.generateFeed,steal:i.default.generateSteal,attack:i.default.generateAttack,noEat:c.default.generateNoEat,giveCoins:i.default.generateGiveCoins}};
-},{"./utils":14,"./game":13,"./actions/actionsLoots":17,"./actions/actionsMonsters":18,"./actions/actionsStarting":20,"./actions/forestMushroom":19}],22:[function(require,module,exports) {
-module.exports="59d074125cf5a06a61465ff611789ea6.svg";
-},{}],37:[function(require,module,exports) {
-module.exports="2a72e5e4c1ee1b727fec072fd3d876a0.svg";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _potionhp = require('../img/loot/potionhp.svg');
+
+var _potionhp2 = _interopRequireDefault(_potionhp);
+
+var _coinsbag = require('../img/loot/coinsbag.svg');
+
+var _coinsbag2 = _interopRequireDefault(_coinsbag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	generateHpPotion: generateHpPotion,
+	generateBagOfCoins: generateBagOfCoins,
+	generateSpinach: generateSpinach,
+	generateMagicBook: generateMagicBook,
+	generateSpeedShoes: generateSpeedShoes,
+	generateDumbBell: generateDumbBell
+};
+
+
+function generateHpPotion(player, swipeActions) {
+	return {
+		name: "hppotion",
+		text: function text() {
+			return "Potion de vie (+5 Hp)";
+		},
+		img: function img() {
+			return _potionhp2.default;
+		},
+		action: function action() {
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateMagicMushroom(player, swipeActions) {
+	return {
+		name: "magicmushroom",
+		text: function text() {
+			return "Champignon magique (+5 MaxHp";
+		},
+		img: function img() {
+			return "champignon.png";
+		},
+		action: function action() {
+			player.setMaxHp(player.getMaxHp() + 5);
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateBagOfCoins(player, swipeActions) {
+	var coinsGained = (0, _utils.getRandomNumber)(3, 6);
+	return {
+		name: "bagofcoins",
+		text: function text() {
+			return "Sac de pièces (" + coinsGained + " pièces)";
+		},
+		img: function img() {
+			return _coinsbag2.default;
+		},
+		action: function action() {
+			player.setCoin(player.getCoin() + coinsGained);
+		}
+	};
+}
+
+function generateSpinach(player, swipeActions) {
+	return {
+		name: "spinach",
+		text: function text() {
+			return "Épinards (+2 Hp, +2 Force";
+		},
+		img: function img() {
+			return "spinach.png";
+		},
+		action: function action() {
+			player.setHp(player.getHp() + 2, player);
+			player.setStr(player.getStr() + 2);
+		}
+	};
+}
+
+function generateMagicBook(player, swipeActions) {
+	return {
+		name: "magicbook",
+		text: function text() {
+			return "Livre sur la magie (+5 Intel)";
+		},
+		img: function img() {
+			return "magicBook.png";
+		},
+		action: function action() {
+			player.setIntel(player.getIntel() + 5);
+		}
+	};
+}
+
+function generateSpeedShoes(player, swipeActions) {
+	return {
+		name: "speedshoes",
+		text: function text() {
+			return "Chaussures (+3 Agilité)";
+		},
+		img: function img() {
+			return "speedShoes.png";
+		},
+		action: function action() {
+			player.setAgility(player.getAgility() + 3);
+		}
+	};
+}
+
+function generateDumbBell(player, swipeActions) {
+	return {
+		name: "dumbbell",
+		text: function text() {
+			return "Haltères (+5 Force)";
+		},
+		img: function img() {
+			return "DumbBell.png";
+		},
+		action: function action() {
+			if (player.getIntel() >= 5) {
+				player.setStr(player.getStr() + 5);
+			} else {
+				if (Math.random() < 0.7) {
+					(0, _game.feedbackMessage)(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé");
+					player.setHp(player.getHp() - 5, player);
+				} else {
+					player.setStr(player.getStr() + 5);
+				}
+			}
+		}
+	};
+}
+},{"../utils":13,"../game":12,"../img/loot/potionhp.svg":27,"../img/loot/coinsbag.svg":28}],8:[function(require,module,exports) {
+module.exports="/dist/ddbcf682c06d1c80b1b0499be65ef159.svg";
+},{}],30:[function(require,module,exports) {
+module.exports="/dist/9fe8c12c396ae19b0a63be53d353a9d4.svg";
+},{}],31:[function(require,module,exports) {
+module.exports="/dist/43dc1314cdca45410295b395092b5614.svg";
+},{}],20:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _feed = require('../img/actions/feed.svg');
+
+var _feed2 = _interopRequireDefault(_feed);
+
+var _escape = require('../img/actions/escape.svg');
+
+var _escape2 = _interopRequireDefault(_escape);
+
+var _givecoins = require('../img/actions/givecoins.svg');
+
+var _givecoins2 = _interopRequireDefault(_givecoins);
+
+var _coinsbag = require('../img/loot/coinsbag.svg');
+
+var _coinsbag2 = _interopRequireDefault(_coinsbag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	generateAttack: generateAttack,
+	generateGiveCoins: generateGiveCoins,
+	generateScream: generateScream,
+	generateEscape: generateEscape,
+	generateFeed: generateFeed,
+	generateSteal: generateSteal
+};
+
+
+function generateAttack(player, swipeActions) {
+	return {
+		name: "attack",
+		damage: 3,
+		text: function text() {
+			return player.stats.defaultAttack;
+		},
+		img: function img() {
+			return player.stats.weaponImg;
+		},
+		action: function action() {
+			switch (player.getRole()) {
+				case "mage":
+					player.setHp(player.getHp() - this.damage, player);
+					break;
+				case "warrior":
+					player.setHp(player.getHp() - this.damage, player);
+					break;
+				case "rogue":
+					if (Math.random() < 0.45) {
+						player.setHp(player.getHp() - this.damage * 2, player);
+						(0, _game.feedbackMessage)(player, "Vous avez raté votre cible");
+					} else {
+						(0, _game.feedbackMessage)(player, "Touché!");
+					}
+					break;
+				default:
+					player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateGiveCoins(player, swipeActions) {
+	return {
+		name: "givecoins",
+		coinsGiven: (0, _utils.getRandomNumber)(1, 3),
+		text: function text() {
+			return "Donner " + this.coinsGiven + " pièces";
+		},
+		img: function img() {
+			return _givecoins2.default;
+		},
+		action: function action() {
+			if (player.getCoin() - this.coinsGiven < 0) {
+				(0, _game.feedbackMessage)(player, "J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
+				player.setCoin(0);
+				player.setHp(player.getHp() - 10, player);
+			} else if (this.coinsGiven == 1) {
+				player.setCoin(player.getCoin() - this.coinsGiven);
+				player.thisRoom.isLastRoom = false;
+				// Permet un noveau dialogue sur la même carte
+				player.thisRoom.nextRoom = {
+					desc: "Seulement une pièce ? Tu te fout de moi ?!",
+					swipeLeft: {
+						coinsGiven2: (0, _utils.getRandomNumber)(2, 5),
+						text: function text() {
+							return "Donner " + this.coinsGiven2 + " pièces en plus";
+						},
+						img: function img() {
+							return _givecoins2.default;
+						},
+						action: function action() {
+							(0, _game.feedbackMessage)(player, "J'aime mieux ça!");
+							player.setCoin(player.getCoin() - this.coinsGiven2);
+						}
+					},
+					swipeRight: swipeActions.actionsGenerator.attack(player, swipeActions)
+				};
+			} else {
+				player.setCoin(player.getCoin() - this.coinsGiven);
+			}
+		}
+	};
+}
+
+function generateScream(player, swipeActions) {
+	return {
+		name: "scream",
+		require: 10,
+		damage: 5,
+		text: function text() {
+			return "Crier";
+		},
+		img: function img() {
+			return "scream.png";
+		},
+		action: function action() {
+			if (player.getStr() >= this.require) {
+				(0, _game.feedbackMessage)(player, "L'ennemi a eu peur et s'est enfuis en courant");
+			} else {
+				(0, _game.feedbackMessage)(player, "Votre cris n'est pas assez fort, gagnez un peu plus de force!");
+				player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateEscape(player, swipeActions) {
+	return {
+		name: "escape",
+		text: function text() {
+			return "S'échapper";
+		},
+		img: function img() {
+			return _escape2.default;
+		},
+		require: 8,
+		damage: 3,
+		action: function action() {
+			if (player.getAgility() >= this.require) {
+				if (Math.random() < 0.3 * 5 / player.getAgility()) {
+					(0, _game.feedbackMessage)(player, 'Pas de chance, vous avez trébuché sur une pierre');
+					player.setHp(player.getHp() - this.damage, player);
+				} else {
+					(0, _game.feedbackMessage)(player, "Vous vous êtes enfuis avec succes");
+				}
+			} else {
+				(0, _game.feedbackMessage)(player, "Vous n'êtes pas assez rapide! Ouch!");
+				player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateFeed(player, swipeActions) {
+	return {
+		name: "feed",
+		text: function text() {
+			return "Nourrir";
+		},
+		img: function img() {
+			return _feed2.default;
+		},
+		action: function action() {
+			if (player.getAgility() <= 5) {
+				(0, _game.feedbackMessage)(player, "Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
+				player.setHp(player.getHp() - 5, player);
+			} else if (player.getIntel() <= 5) {
+				(0, _game.feedbackMessage)(player, "Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent");
+				player.setHp(player.getHp() - 5, player);
+			} else {
+				(0, _game.feedbackMessage)(player, 'Il a tout mangé et ne vous a pas attaqué');
+			}
+		}
+	};
+}
+
+function generateSteal(player, swipeActions) {
+	var coinsStealed = (0, _utils.getRandomNumber)(3, 10);
+	return {
+		name: "steal",
+		text: function text() {
+			return "Voler " + coinsStealed + " pièces";
+		},
+		img: function img() {
+			return _coinsbag2.default;
+		},
+		damage: 5,
+		action: function action() {
+			if (Math.random() < 0.4 * 10 / player.getAgility()) {
+				(0, _game.feedbackMessage)(player, 'Vous avez été pris sur le fait');
+				player.setHp(player.getHp() - this.damage, player);
+			} else {
+				(0, _game.feedbackMessage)(player, "Cool, " + coinsStealed + " pièces recuperées");
+				player.setCoin(player.getCoin() + coinsStealed);
+			}
+		}
+	};
+}
+},{"../utils":13,"../game":12,"../img/actions/feed.svg":8,"../img/actions/escape.svg":30,"../img/actions/givecoins.svg":31,"../img/loot/coinsbag.svg":28}],22:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _sword = require('../img/actions/sword.svg');
+
+var _sword2 = _interopRequireDefault(_sword);
+
+var _bow = require('../img/actions/bow.svg');
+
+var _bow2 = _interopRequireDefault(_bow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	generateWand: generateWand,
+	generateSword: generateSword,
+	generateBow: generateBow
+};
+
+
+function generateWand(player, swipeActions) {
+	return {
+		name: "wandstart",
+		text: function text() {
+			return "Prendre le baton";
+		},
+		img: function img() {
+			return "wand.png";
+		},
+		action: function action() {
+			player.setRole('mage');
+			player.setIntel(player.getIntel() + 5);
+		}
+	};
+}
+
+function generateSword(player, swipeActions) {
+	return {
+		name: "swordstart",
+		text: function text() {
+			return "Prendre l'épée";
+		},
+		img: function img() {
+			return _sword2.default;
+		},
+		action: function action() {
+			player.setRole('warrior');
+			player.setStr(player.getStr() + 5);
+			player.setMaxHp(player.getMaxHp() + 5);
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateBow(player, swipeActions) {
+	return {
+		name: "bowstart",
+		text: function text() {
+			return "Prendre l'arc";
+		},
+		img: function img() {
+			return _bow2.default;
+		},
+		action: function action() {
+			player.setRole('rogue');
+			player.setAgility(player.getAgility() + 5);
+		}
+	};
+}
+},{"../utils":13,"../game":12,"../img/actions/sword.svg":9,"../img/actions/bow.svg":25}],32:[function(require,module,exports) {
+module.exports="/dist/6379f562e3d18f714a957369254bf1d6.svg";
+},{}],33:[function(require,module,exports) {
+module.exports="/dist/d9d88b7ecb495c9d910d61fbcd27be56.svg";
+},{}],23:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _eat = require('../img/actions/eat.svg');
+
+var _eat2 = _interopRequireDefault(_eat);
+
+var _no = require('../img/actions/no.svg');
+
+var _no2 = _interopRequireDefault(_no);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	generateNoEat: generateNoEat,
+
+	generateToxicMushroom: generateToxicMushroom,
+	generateSleepMushroom: generateSleepMushroom,
+	generateStupidMushroom: generateStupidMushroom,
+	generateMagicMushroom: generateMagicMushroom,
+	generateAgilityMushroom: generateAgilityMushroom,
+	generateYummyMushroom: generateYummyMushroom
+};
+
+
+function generateNoEat(player, swipeActions) {
+	return {
+		name: "no",
+		text: function text() {
+			return "Ne pas manger";
+		},
+		img: function img() {
+			return _no2.default;
+		},
+		action: function action() {}
+	};
+}
+
+function generateToxicMushroom(player, swipeActions) {
+	return {
+		name: "toxicMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "C'est un champignon toxique!");
+			player.setHp(player.getHp() - 5, player);
+		}
+	};
+}
+
+function generateSleepMushroom(player, swipeActions) {
+	return {
+		name: "sleepMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "Ce champignon vous a amorti, endormi...");
+			player.setStr(player.getStr() - 2, player);
+			player.setAgility(player.getAgility() - 2, player);
+		}
+	};
+}
+
+function generateStupidMushroom(player, swipeActions) {
+	return {
+		name: "stupidMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "Vous avez perdu quelques neurones");
+			player.setIntel(player.getIntel() - 3, player);
+		}
+	};
+}
+
+function generateMagicMushroom(player, swipeActions) {
+	return {
+		name: "magicMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "Ce champignon vous a fait du bien");
+			player.setMaxHp(player.getMaxHp() + 3);
+			player.setHp(player.getHp() + 3, player);
+		}
+	};
+}
+
+function generateAgilityMushroom(player, swipeActions) {
+	return {
+		name: "agilityMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "Vous vous sentez plus vif");
+			player.setAgility(player.getAgility() + 2, player);
+		}
+	};
+}
+
+function generateYummyMushroom(player, swipeActions) {
+	return {
+		name: "yummyMushroom",
+		text: function text() {
+			return "Manger";
+		},
+		img: function img() {
+			return _eat2.default;
+		},
+		action: function action() {
+			(0, _game.feedbackMessage)(player, "Mhhh... il est délicieux!");
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+},{"../utils":13,"../game":12,"../img/actions/eat.svg":32,"../img/actions/no.svg":33}],11:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _utils = require('./utils');
+
+var _game = require('./game');
+
+var _actionsLoots = require('./actions/actionsLoots');
+
+var _actionsLoots2 = _interopRequireDefault(_actionsLoots);
+
+var _actionsMonsters = require('./actions/actionsMonsters');
+
+var _actionsMonsters2 = _interopRequireDefault(_actionsMonsters);
+
+var _actionsStarting = require('./actions/actionsStarting');
+
+var _actionsStarting2 = _interopRequireDefault(_actionsStarting);
+
+var _forestMushroom = require('./actions/forestMushroom');
+
+var _forestMushroom2 = _interopRequireDefault(_forestMushroom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// -------------------------------- EXPORT DEFAULT -------------------------------------------------- //
+
+exports.default = {
+	monsterGeneral: [{ name: 'escape', rarity: 1 }],
+	monsterGeneralRogue: [{ name: 'escape', rarity: 1 }],
+	monsterGeneralMage: [
+		//{name: 'fireball', rarity: 1},
+	],
+	monsterGeneralWarrior: [
+		//{name: 'block', rarity: 1},
+	],
+
+	monsterAnimals: [{ name: 'scream', rarity: 1 }, { name: 'feed', rarity: 1 }],
+	monsterAnimalsRogue: [
+		//{name: 'trap', rarity: 1},
+	],
+	monsterAnimalsIntelligence: [{ name: 'feed', rarity: 1 }],
+
+	monsterSmallCreature: [{ name: 'scream', rarity: 1 }],
+
+	monsterHumanoid: [],
+	monsterHumanoidRogue: [{ name: 'steal', rarity: 2 }],
+	monsterHumanoidAgility: [{ name: 'steal', rarity: 1 }],
+
+	basicChest: [{ name: 'hpPotion', rarity: 10 }, { name: 'bagOfCoins', rarity: 10 }, { name: 'spinach', rarity: 5 }, { name: 'magicBook', rarity: 4 }, { name: 'speedShoes', rarity: 2 }, { name: 'dumbBell', rarity: 2 }],
+
+	mushroom: [{ name: 'toxicMushroom', rarity: 20 }, { name: 'sleepMushroom', rarity: 12 }, { name: 'stupidMushroom', rarity: 8 }, { name: 'magicMushroom', rarity: 5 }, { name: 'agilityMushroom', rarity: 10 }, { name: 'yummyMushroom', rarity: 20 }],
+
+	starting: [
+	//{name: 'wand', rarity: 1},
+	{ name: 'sword', rarity: 1 }, { name: 'bow', rarity: 1 }],
+
+	actionsGenerator: {
+		wand: _actionsStarting2.default.generateWand,
+		sword: _actionsStarting2.default.generateSword,
+		bow: _actionsStarting2.default.generateBow,
+
+		toxicMushroom: _forestMushroom2.default.generateToxicMushroom,
+		sleepMushroom: _forestMushroom2.default.generateSleepMushroom,
+		stupidMushroom: _forestMushroom2.default.generateStupidMushroom,
+		magicMushroom: _forestMushroom2.default.generateMagicMushroom,
+		agilityMushroom: _forestMushroom2.default.generateAgilityMushroom,
+		yummyMushroom: _forestMushroom2.default.generateYummyMushroom,
+
+		hpPotion: _actionsLoots2.default.generateHpPotion,
+		bagOfCoins: _actionsLoots2.default.generateBagOfCoins,
+		spinach: _actionsLoots2.default.generateSpinach,
+		magicBook: _actionsLoots2.default.generateMagicBook,
+		speedShoes: _actionsLoots2.default.generateSpeedShoes,
+		dumbBell: _actionsLoots2.default.generateDumbBell,
+
+		escape: _actionsMonsters2.default.generateEscape,
+		scream: _actionsMonsters2.default.generateScream,
+		feed: _actionsMonsters2.default.generateFeed,
+		steal: _actionsMonsters2.default.generateSteal,
+
+		attack: _actionsMonsters2.default.generateAttack,
+		noEat: _forestMushroom2.default.generateNoEat,
+		giveCoins: _actionsMonsters2.default.generateGiveCoins
+		/*
+  Faire des actions complexes (en plusieurs cartes)
+  ça rend les actions plus intéressantes que d'avoir 
+  une seule réponse (50% de chance de réussite et c'est tout)
+    Et fonctionner avec plus d'actions typique à la classe
+    certaines actions peuvent loot un objet certaine non
+  (s'echapper ne permettra pas de loot d'objet)
+  les loot sont en général des choix entre deux objets
+  certaines actions finissent le combat, d'autres pas.
+  Voler des pièces en voleur ne finit pas le combat?
+  Quand une action rate ça ne finit pas le combat?
+  
+    Action "préparer son armure"
+  prend du dmg maintenant mais pas la prochaine carte
+  ou donne un certain nombre d'armure
+    action "coup de bouclier"
+  si on a de l'armure a beaucoup de chance d'arriver
+  et permet de ne pas prendre de dmg
+    classe guerrier passif: berserk, si le guerrier a moins de 20% de pv
+  il se passe quelqueschose, plus de dmg, accès à d'autres abilité
+  (Plus de chance de chopper des loot par exemple)
+    Objet bière : gagner 10pv mais rend les 5 prochaines actions aléateoire
+  
+  */
+	} };
+
+// -------------------------------- ACTIONS_FUNCTIONS ------------------------------------------- //
+
+function generateWand(player, swipeActions) {
+	return {
+		name: "wandstart",
+		text: function text() {
+			return "Prendre le baton magique";
+		},
+		img: function img() {
+			return "wand.png";
+		},
+		action: function action() {
+			player.setRole('mage');
+			player.setIntel(player.getIntel() + 5);
+		}
+	};
+}
+
+function generateSword(player, swipeActions) {
+	return {
+		name: "swordstart",
+		text: function text() {
+			return "Prendre l'epée";
+		},
+		img: function img() {
+			return "epee.png";
+		},
+		action: function action() {
+			player.setRole('warrior');
+			player.setStr(player.getStr() + 5);
+			player.setMaxHp(player.getMaxHp() + 5);
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateBow(player, swipeActions) {
+	return {
+		name: "bowstart",
+		text: function text() {
+			return "Prendre l'arc";
+		},
+		img: function img() {
+			return "arc.png";
+		},
+		action: function action() {
+			player.setRole('rogue');
+			player.setAgility(player.getAgility() + 5);
+		}
+	};
+}
+
+// -------------------------------- MONSTERS ------------------------------------------------------------------------------------------ //
+// -------------------------------- MONSTERS ------------------------------------------------------------------------------------------ //
+// -------------------------------- MONSTERS ------------------------------------------------------------------------------------------ //
+
+
+function generateAttack(player, swipeActions) {
+	return {
+		name: "attack",
+		damage: 3,
+		text: function text() {
+			return player.stats.defaultAttack;
+		},
+		img: function img() {
+			return player.stats.weaponImg;
+		},
+		action: function action() {
+			switch (player.getRole()) {
+				case "mage":
+					player.setHp(player.getHp() - this.damage, player);
+					break;
+				case "warrior":
+					player.setHp(player.getHp() - this.damage, player);
+					break;
+				case "rogue":
+					if (Math.random() < 0.45) {
+						player.setHp(player.getHp() - this.damage * 2, player);
+						(0, _game.feedbackMessage)("Vous avez raté votre cible");
+					} else {
+						(0, _game.feedbackMessage)("Touché!");
+					}
+					break;
+				default:
+					player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateGiveCoins(player, swipeActions) {
+	return {
+		name: "givecoins",
+		coinsGiven: (0, _utils.getRandomNumber)(1, 6),
+		text: function text() {
+			return "Donner " + this.coinsGiven + " pièces";
+		},
+		img: function img() {
+			return "giveCoins.png";
+		},
+		action: function action() {
+			if (player.getCoin() - this.coinsGiven < 0) {
+				(0, _game.feedbackMessage)("J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
+				player.setCoin(0);
+				player.setHp(player.getHp() - 10, player);
+			} else if (this.coinsGiven == 1) {
+				(0, _game.feedbackMessage)("Seulement une pièce ? Tu te fout de moi ?!");
+				player.setCoin(player.getCoin() - this.coinsGiven);
+				player.thisRoom.isLastRoom = false;
+				// Permet un noveau dialogue sur la même carte
+				player.thisRoom.nextRoom = {
+					desc: "Seulement une pièce ? Tu te fout de moi ?!",
+					swipeLeft: {
+						coinsGiven2: (0, _utils.getRandomNumber)(3, 8),
+						text: function text() {
+							return "Donner " + this.coinsGiven2 + " pièces en plus";
+						},
+						img: function img() {
+							return "giveCoins.png";
+						},
+						action: function action() {
+							(0, _game.feedbackMessage)("J'aime mieux ça!");
+							player.setCoin(player.getCoin() - this.coinsGiven2);
+						}
+					},
+					swipeRight: swipeActions.actionsGenerator.attack(player, swipeActions)
+				};
+			} else {
+				player.setCoin(player.getCoin() - this.coinsGiven);
+			}
+		}
+	};
+}
+
+function generateScream(player, swipeActions) {
+	return {
+		name: "scream",
+		require: 10,
+		damage: 5,
+		text: function text() {
+			return "Crier pour l'effrayer";
+		},
+		img: function img() {
+			return "scream.png";
+		},
+		action: function action() {
+			if (player.getStr() >= this.require) {
+				(0, _game.feedbackMessage)("L'ennemi a eu peur et s'est enfuis en courant");
+			} else {
+				(0, _game.feedbackMessage)("Votre cris n'est pas assez fort, gagnez un peu plus de force!");
+				player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateEscape(player, swipeActions) {
+	return {
+		name: "escape",
+		text: function text() {
+			return "S'echapper";
+		},
+		img: function img() {
+			return "escape.png";
+		},
+		require: 8,
+		damage: 3,
+		action: function action() {
+			if (player.getAgility() >= this.require) {
+				if (Math.random() < 0.3 * 5 / player.getAgility()) {
+					(0, _game.feedbackMessage)('Pas de chance, vous avez trébucher sur une pierre');
+					player.setHp(player.getHp() - this.damage, player);
+				} else {
+					(0, _game.feedbackMessage)("Vous vous êtes enfuis avec succes");
+				}
+			} else {
+				(0, _game.feedbackMessage)("Vous n'êtes pas assez rapide! Ouch!");
+				player.setHp(player.getHp() - this.damage, player);
+			}
+		}
+	};
+}
+
+function generateFeed(player, swipeActions) {
+	return {
+		name: "feed",
+		text: function text() {
+			return "Nourrir l'animal";
+		},
+		img: function img() {
+			return "feed.png";
+		},
+		action: function action() {
+			if (player.getAgility() <= 5) {
+				(0, _game.feedbackMessage)("Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
+				player.setHp(player.getHp() - 5, player);
+			} else if (player.getIntel() <= 5) {
+				(0, _game.feedbackMessage)("Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent");
+				player.setHp(player.getHp() - 5, player);
+			} else {
+				(0, _game.feedbackMessage)('Il a tout mangé et ne vous a pas attaqué');
+			}
+		}
+	};
+}
+
+function generateSteal(player, swipeActions) {
+	var coinsStealed = (0, _utils.getRandomNumber)(3, 10);
+	return {
+		name: "steal",
+		text: function text() {
+			return "Steal " + coinsStealed + " coins";
+		},
+		img: function img() {
+			return "steal.png";
+		},
+		damage: 5,
+		action: function action() {
+			if (Math.random() < 0.4 * 10 / player.getAgility()) {
+				(0, _game.feedbackMessage)('Vous avez été pris sur le fait');
+				player.setHp(player.getHp() - this.damage, player);
+			} else {
+				(0, _game.feedbackMessage)("Cool, " + coinsStealed + " pièces recuperées");
+				player.setCoin(player.getCoin() + coinsStealed);
+			}
+		}
+	};
+}
+
+// -----------
+
+// -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
+// -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
+// -------------------------------- LOOT ------------------------------------------------------------------------------------------ //
+
+function generateHpPotion(player, swipeActions) {
+	return {
+		name: "hppotion",
+		text: function text() {
+			return "Prendre la potion (+5 Hp)";
+		},
+		img: function img() {
+			return "hpPotion.png";
+		},
+		action: function action() {
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateMagicMushroom(player, swipeActions) {
+	return {
+		name: "magicmushroom",
+		text: function text() {
+			return "Prendre le champignon magique (+5 MaxHp";
+		},
+		img: function img() {
+			return "champignon.png";
+		},
+		action: function action() {
+			player.setMaxHp(player.getMaxHp() + 5);
+			player.setHp(player.getHp() + 5, player);
+		}
+	};
+}
+
+function generateBagOfCoins(player, swipeActions) {
+	var coinsGained = (0, _utils.getRandomNumber)(3, 6);
+	return {
+		name: "bagofcoins",
+		text: function text() {
+			return "Prendre le sac de pièces (" + coinsGained + " pièces)";
+		},
+		img: function img() {
+			return "coinsBag.png";
+		},
+		action: function action() {
+			player.setCoin(player.getCoin() + coinsGained);
+		}
+	};
+}
+
+function generateSpinach(player, swipeActions) {
+	return {
+		name: "spinach",
+		text: function text() {
+			return "Prendre les épinards (+2 Hp + 2 Force";
+		},
+		img: function img() {
+			return "spinach.png";
+		},
+		action: function action() {
+			player.setHp(player.getHp() + 2, player);
+			player.setStr(player.getStr() + 2);
+		}
+	};
+}
+
+function generateMagicBook(player, swipeActions) {
+	return {
+		name: "magicbook",
+		text: function text() {
+			return "Prendre le livre sur la magie (+5 Intel)";
+		},
+		img: function img() {
+			return "magicBook.png";
+		},
+		action: function action() {
+			player.setIntel(player.getIntel() + 5);
+		}
+	};
+}
+
+function generateSpeedShoes(player, swipeActions) {
+	return {
+		name: "speedshoes",
+		text: function text() {
+			return "Prendre les chaussures (+3 Agilité)";
+		},
+		img: function img() {
+			return "speedShoes.png";
+		},
+		action: function action() {
+			player.setAgility(player.getAgility() + 3);
+		}
+	};
+}
+
+function generateDumbBell(player, swipeActions) {
+	return {
+		name: "dumbbell",
+		text: function text() {
+			return "Prendre l'altère et faire quelques répetitions (+5 Force)";
+		},
+		img: function img() {
+			return "DumbBell.png";
+		},
+		action: function action() {
+			if (player.getIntel() >= 5) {
+				player.setStr(player.getStr() + 5);
+			} else {
+				if (Math.random() < 0.7) {
+					(0, _game.feedbackMessage)("Vous n'êtes pas assez intelligent pour porter l'altère, vous vous êtes blaissé");
+					player.setHp(player.getHp() - 5, player);
+				} else {
+					player.setStr(player.getStr() + 5);
+				}
+			}
+		}
+	};
+}
+},{"./utils":13,"./game":12,"./actions/actionsLoots":19,"./actions/actionsMonsters":20,"./actions/actionsStarting":22,"./actions/forestMushroom":23}],6:[function(require,module,exports) {
+module.exports="/dist/59d074125cf5a06a61465ff611789ea6.svg";
 },{}],26:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game"),r=require("../img/monsters/goblin.svg"),a=o(r),n=require("../img/monsters/spider.svg"),i=o(n);function o(e){return e&&e.__esModule?e:{default:e}}function s(e,t){return{name:"gobelin voleur",desc:"Donne moi des pièces ou je te tue!",img:a.default,swipeLeft:t.actionsGenerator.giveCoins(e,t),swipeRight:t.actionsGenerator.attack(e,t)}}function u(t,r){var a="*Le loup hurle et fonce sur toi*",n=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterAnimals"]),i=r.actionsGenerator[(0,e.getObjectByRarity)(n).name](t,r),o=r.actionsGenerator.attack(t,r);if("scream"==i.name)a="*Le loup vous regarde avec des yeux rouges*";return{name:"loup sauvage",desc:a,img:"gobelin.svg",swipeLeft:i,swipeRight:o}}function c(t,r){var a=i.default,n="*Elle est prête à bondir*",o=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterAnimals"]),s=r.actionsGenerator[(0,e.getObjectByRarity)(o).name](t,r),u=r.actionsGenerator.attack(t,r);if("feed"==s.name){n="*On dirait qu'elle veut te manger*";s.damage=2}return{name:"araignée géante",desc:n,img:a,swipeLeft:s,swipeRight:u}}function l(t,r){var n=a.default,i=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterHumanoid"]);return{name:"Petit gobelin",desc:"Je suis sur que tu as pleins de pièces d'or sur toi!",img:n,swipeLeft:r.actionsGenerator[(0,e.getObjectByRarity)(i).name](t,r),swipeRight:r.actionsGenerator.attack(t,r)}}exports.default={rogueGenerator:s,wolfGenerator:u,spiderGenerator:c,gobelinGenerator:l};
-},{"../utils":14,"../game":13,"../img/monsters/goblin.svg":22,"../img/monsters/spider.svg":37}],38:[function(require,module,exports) {
-module.exports="3bcc9b0db987628152208422f9d33251.svg";
-},{}],40:[function(require,module,exports) {
-module.exports="1f424046e13ebda4ea5e072dc371bcd4.svg";
+module.exports="/dist/2a72e5e4c1ee1b727fec072fd3d876a0.svg";
+},{}],15:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _goblin = require('../img/monsters/goblin.svg');
+
+var _goblin2 = _interopRequireDefault(_goblin);
+
+var _spider = require('../img/monsters/spider.svg');
+
+var _spider2 = _interopRequireDefault(_spider);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  rogueGenerator: rogueGenerator,
+  wolfGenerator: wolfGenerator,
+  spiderGenerator: spiderGenerator,
+  gobelinGenerator: gobelinGenerator
+};
+
+
+function rogueGenerator(player, swipeActions) {
+  var name = 'gobelin voleur';
+  var img = _goblin2.default;
+  var desc = "Donne moi des pièces ou je te tue!";
+  var swipeLeft = swipeActions.actionsGenerator.giveCoins(player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function wolfGenerator(player, swipeActions) {
+  var name = 'loup sauvage';
+  var img = 'gobelin.svg';
+  var desc = "*Le loup hurle et fonce sur toi*";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterAnimals']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  if (swipeLeft.name == "scream") {
+    var desc = "*Le loup vous regarde avec des yeux rouges*";
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function spiderGenerator(player, swipeActions) {
+  var name = 'araignée géante';
+  var img = _spider2.default;
+  var desc = "*Elle est prête à bondir*";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterAnimals']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  if (swipeLeft.name == "feed") {
+    var desc = "*On dirait qu'elle veut te manger*";
+    swipeLeft.damage = 2;
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function gobelinGenerator(player, swipeActions) {
+  var name = 'Petit gobelin';
+  var img = _goblin2.default;
+  var desc = "Je suis sur que tu as pleins de pièces d'or sur toi!";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterHumanoid']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+},{"../utils":13,"../game":12,"../img/monsters/goblin.svg":6,"../img/monsters/spider.svg":26}],35:[function(require,module,exports) {
+module.exports="/dist/3bcc9b0db987628152208422f9d33251.svg";
+},{}],37:[function(require,module,exports) {
+module.exports="/dist/1f424046e13ebda4ea5e072dc371bcd4.svg";
+},{}],36:[function(require,module,exports) {
+module.exports="/dist/930c580ccd9d04165fa6241719434b21.svg";
+},{}],38:[function(require,module,exports) {
+module.exports="/dist/93955d777d5d4d5f5590061cd9c67bfe.svg";
 },{}],39:[function(require,module,exports) {
-module.exports="930c580ccd9d04165fa6241719434b21.svg";
-},{}],41:[function(require,module,exports) {
-module.exports="93955d777d5d4d5f5590061cd9c67bfe.svg";
-},{}],42:[function(require,module,exports) {
-module.exports="01e6d347c36b34cd84a538975e1ff638.svg";
-},{}],43:[function(require,module,exports) {
-module.exports="ef1f0b49d661cd8e2115541db2b3cda0.svg";
-},{}],27:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),r=require("../game"),o=require("../img/monsters/mushroom-a1.svg"),s=h(o),t=require("../img/monsters/mushroom-a2.svg"),m=h(t),a=require("../img/monsters/mushroom-b1.svg"),i=h(a),u=require("../img/monsters/mushroom-b2.svg"),n=h(u),f=require("../img/monsters/mushroom-c1.svg"),g=h(f),c=require("../img/monsters/mushroom-c2.svg"),l=h(c);function h(e){return e&&e.__esModule?e:{default:e}}var d=[s.default,m.default,i.default,n.default,g.default,l.default];function p(r,o){var s=o.basicChest,t=(0,e.generateTwoActionsNoDupe)(s);return{name:"coffre",desc:"Il y a deux objets dans ce coffre, lequel utiliser ?",img:"coffre.png",swipeLeft:o.actionsGenerator[t[0].name](r,o),swipeRight:o.actionsGenerator[t[1].name](r,o)}}function v(r,o){var t=s.default,m=o.mushroom,a=o.actionsGenerator.noEat(r,o),i=o.actionsGenerator[(0,e.getObjectByRarity)(m).name](r,o);if("toxicMushroom"==i.name)t=d[0];if("yummyMushroom"==i.name)t=d[1];if("sleepMushroom"==i.name)t=d[2];if("agilityMushroom"==i.name)t=d[3];if("stupidMushroom"==i.name)t=d[4];if("magicMushroom"==i.name)t=d[5];return{name:"Champignon étrange",desc:"Il a l'air commestible, je tente de le manger ?",img:t,swipeLeft:a,swipeRight:i}}d=(0,e.shuffle)(d),exports.default={basicChestGenerator:p,mushroomGenerator:v};
-},{"../utils":14,"../game":13,"../img/monsters/mushroom-a1.svg":38,"../img/monsters/mushroom-a2.svg":40,"../img/monsters/mushroom-b1.svg":39,"../img/monsters/mushroom-b2.svg":41,"../img/monsters/mushroom-c1.svg":42,"../img/monsters/mushroom-c2.svg":43}],31:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),r=require("../game");function t(r,t){var n=t.starting,a=(0,e.generateTwoActionsNoDupe)(n);return{name:"Garde du donjon",desc:"Equipe toi aventurier",img:"dungeonGuard.png",swipeLeft:t.actionsGenerator[a[0].name](r,t),swipeRight:t.actionsGenerator[a[1].name](r,t)}}exports.default={startingGenerator:t};
-},{"../utils":14,"../game":13}],30:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),t=require("../game");function r(e,t){return{name:"voleur",desc:"Donne moi des pièces ou je te tue!",img:"voleur.png",swipeLeft:t.actionsGenerator.giveCoins(e,t),swipeRight:t.actionsGenerator.attack(e,t)}}function a(t,r){var a="*Le loup hurle et fonce sur toi*",n=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterAnimals"]),i=r.actionsGenerator[(0,e.getObjectByRarity)(n).name](t,r),o=r.actionsGenerator.attack(t,r);if("scream"==i.name)a="*Le loup vous regarde avec des yeux rouges*";return{name:"loup sauvage",desc:a,img:"wolf.png",swipeLeft:i,swipeRight:o}}function n(t,r){var a="*Elle est prête à bondir*",n=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterAnimals"]),i=r.actionsGenerator[(0,e.getObjectByRarity)(n).name](t,r),o=r.actionsGenerator.attack(t,r);if("feed"==i.name){a="*On dirait qu'elle veut te manger*";i.damage=2}return{name:"araignée géante",desc:a,img:"spider.png",swipeLeft:i,swipeRight:o}}function i(t,r){var a=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterHumanoid"]);return{name:"Petit gobelin",desc:"Je suis sur que tu as pleins de pièces d'or sur toi!",img:"gobelin.png",swipeLeft:r.actionsGenerator[(0,e.getObjectByRarity)(a).name](t,r),swipeRight:r.actionsGenerator.attack(t,r)}}function o(t,r){var a="*Il a l'air plutôt robuste*",n=(0,e.createAvailableActions)(t,r,["monsterGeneral","monsterHumanoid"]),i=r.actionsGenerator[(0,e.getObjectByRarity)(n).name](t,r),o=r.actionsGenerator.attack(t,r);if(i.damage=5,"escape"==i.name){a=Math.random()<.3?"*Il a l'air facile à esquiver*":"*Il a l'air plutôt robuste*",i.require=2}return{name:"Enorme Ogre",desc:a,img:"ogre.png",swipeLeft:i,swipeRight:o}}exports.default={rogueGenerator:r,wolfGenerator:a,spiderGenerator:n,gobelinGenerator:i,hugeOgreGenerator:o};
-},{"../utils":14,"../game":13}],49:[function(require,module,exports) {
-module.exports="86de26a291a4b1bfe4209e3757148789.svg";
-},{}],32:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("../utils"),r=require("../game"),t=require("../img/monsters/chest.svg"),s=a(t);function a(e){return e&&e.__esModule?e:{default:e}}function n(r,t){var a=s.default,n=t.basicChest,o=(0,e.generateTwoActionsNoDupe)(n);return{name:"coffre",desc:"Il y a deux objets dans ce coffre, lequel prendre ?",img:a,swipeLeft:t.actionsGenerator[o[0].name](r,t),swipeRight:t.actionsGenerator[o[1].name](r,t)}}exports.default={basicChestGenerator:n};
-},{"../utils":14,"../game":13,"../img/monsters/chest.svg":49}],10:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("./utils"),r=require("./swipeActions"),o=g(r),t=require("./rooms/forestMonster"),a=g(t),s=require("./rooms/forestLoot"),i=g(s),n=require("./rooms/startingroom"),u=g(n),l=require("./rooms/monsters"),m=g(l),f=require("./rooms/chest"),d=g(f);function g(e){return e&&e.__esModule?e:{default:e}}exports.default={forestMonsterList:[{name:"wolf",rarity:0},{name:"rogue",rarity:2},{name:"gobelin",rarity:3},{name:"spider",rarity:5},{name:"shroom",rarity:5}],forestLootList:[{name:"shroom",rarity:2},{name:"basicChest",rarity:5}],roomGenerator:{starting:u.default.startingGenerator,shroom:i.default.mushroomGenerator,wolf:a.default.wolfGenerator,rogue:a.default.rogueGenerator,gobelin:a.default.gobelinGenerator,spider:a.default.spiderGenerator,basicChest:d.default.basicChestGenerator,ogre:m.default.hugeOgreGenerator}};
-},{"./utils":14,"./swipeActions":12,"./rooms/forestMonster":26,"./rooms/forestLoot":27,"./rooms/startingroom":31,"./rooms/monsters":30,"./rooms/chest":32}],11:[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.gainLevel=i;var t=require("./utils"),e=require("./img/actions/sword.svg"),s=n(e);function n(t){return t&&t.__esModule?t:{default:t}}function i(t){t.setLevel(t.getLevel()+1)}exports.default={stats:{hp:20,maxHp:20,coin:20,str:(0,t.getRandomNumber)(3,7),intel:(0,t.getRandomNumber)(3,7),agility:(0,t.getRandomNumber)(3,7),level:1,roleStats:5,role:"none",weapon:"sword",weaponImg:"sword.png",defaultAttack:"Attaquer"},thisRoom:{isLastRoom:!0,nextRoom:function(){console.log("newRoom")}},setHp:function(t,e){t>e.getMaxHp()?this.stats.hp=e.getMaxHp():this.stats.hp=t},getHp:function(){return this.stats.hp},setMaxHp:function(t){this.stats.maxHp=t},getMaxHp:function(){return this.stats.maxHp},setCoin:function(t){this.stats.coin=t},getCoin:function(){return this.stats.coin},setStr:function(t){this.stats.str=t},getStr:function(){return this.stats.str},setIntel:function(t){this.stats.intel=t},getIntel:function(){return this.stats.intel},setAgility:function(t){this.stats.agility=t},getAgility:function(){return this.stats.agility},setLevel:function(t){this.stats.level=t},getLevel:function(){return this.stats.level},setRole:function(t){this.stats.role=t},getRole:function(){return this.stats.role},setRoleStats:function(t){this.stats.roleStats=t},getRoleStats:function(){return this.role.mainStats}};
-},{"./utils":14,"./img/actions/sword.svg":24}],3:[function(require,module,exports) {
-"use strict";var e=require("./room"),t=m(e),s=require("./player"),o=m(s),a=require("./swipeActions"),i=m(a),d=require("./utils"),l=require("./game");function m(e){return e&&e.__esModule?e:{default:e}}$(document).ready(function(){var e=(0,l.getNewRoom)(t.default,i.default,o.default);(0,l.writeStats)(o.default),(0,l.writeRoom)(e),console.log(o.default);var a=document.getElementsByClassName("card-visible")[0],d=document.getElementById("card-tracker"),m=new Hammer(d);m.add(new Hammer.Pan({direction:Hammer.DIRECTION_HORIZONTAL,threshold:20})),m.on("pan",function(d){var m=d.target;r||(r=!0,f=m.offsetLeft);m.offsetLeft>50?(a.classList.add("yes"),a.classList.remove("no")):m.offsetLeft<-50?(a.classList.add("no"),a.classList.remove("yes")):(a.classList.remove("yes"),a.classList.remove("no"));var u=d.deltaX+f;m.style.left=u+"px",d.isFinal&&(r=!1,m.offsetLeft>50?(m.style.left="0px",a.classList.add("yesFade"),a.classList.remove("noFade"),setTimeout(function(){a.classList.remove("yesFade"),a.classList.remove("yes")},500),o.default.thisRoom.isLastRoom=!0,e.swipeRight.action(),0==o.default.thisRoom.isLastRoom?(void 0!=o.default.thisRoom.nextRoom.desc&&(e.desc=o.default.thisRoom.nextRoom.desc),e.swipeLeft=o.default.thisRoom.nextRoom.swipeLeft,e.swipeRight=o.default.thisRoom.nextRoom.swipeRight,(0,l.writeStats)(o.default),(0,l.writeRoom)(e)):((0,s.gainLevel)(o.default),e=(0,l.getNewRoom)(t.default,i.default,o.default),(0,l.writeStats)(o.default),(0,l.writeRoom)(e),document.getElementById("card").classList.remove("feedback-message"))):m.offsetLeft<-50?(m.style.left="0px",a.classList.add("noFade"),a.classList.remove("yesFade"),setTimeout(function(){a.classList.remove("noFade"),a.classList.remove("no")},500),o.default.thisRoom.isLastRoom=!0,e.swipeLeft.action(),0==o.default.thisRoom.isLastRoom?(void 0!=o.default.thisRoom.nextRoom.desc&&(e.desc=o.default.thisRoom.nextRoom.desc),e.swipeLeft=o.default.thisRoom.nextRoom.swipeLeft,e.swipeRight=o.default.thisRoom.nextRoom.swipeRight,(0,l.writeStats)(o.default),(0,l.writeRoom)(e)):((0,s.gainLevel)(o.default),e=(0,l.getNewRoom)(t.default,i.default,o.default),(0,l.writeStats)(o.default),(0,l.writeRoom)(e),document.getElementById("card").classList.remove("feedback-message"))):(m.style.left="0px",a.classList.remove("yesFade"),a.classList.remove("noFade")))});var f=0,r=!1});
-},{"./room":10,"./player":11,"./swipeActions":12,"./utils":14,"./game":13}]},{},[3])
+module.exports="/dist/01e6d347c36b34cd84a538975e1ff638.svg";
+},{}],40:[function(require,module,exports) {
+module.exports="/dist/ef1f0b49d661cd8e2115541db2b3cda0.svg";
+},{}],16:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _mushroomA = require('../img/monsters/mushroom-a1.svg');
+
+var _mushroomA2 = _interopRequireDefault(_mushroomA);
+
+var _mushroomA3 = require('../img/monsters/mushroom-a2.svg');
+
+var _mushroomA4 = _interopRequireDefault(_mushroomA3);
+
+var _mushroomB = require('../img/monsters/mushroom-b1.svg');
+
+var _mushroomB2 = _interopRequireDefault(_mushroomB);
+
+var _mushroomB3 = require('../img/monsters/mushroom-b2.svg');
+
+var _mushroomB4 = _interopRequireDefault(_mushroomB3);
+
+var _mushroomC = require('../img/monsters/mushroom-c1.svg');
+
+var _mushroomC2 = _interopRequireDefault(_mushroomC);
+
+var _mushroomC3 = require('../img/monsters/mushroom-c2.svg');
+
+var _mushroomC4 = _interopRequireDefault(_mushroomC3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mushrooms = [_mushroomA2.default, _mushroomA4.default, _mushroomB2.default, _mushroomB4.default, _mushroomC2.default, _mushroomC4.default];
+mushrooms = (0, _utils.shuffle)(mushrooms);
+
+exports.default = {
+  basicChestGenerator: basicChestGenerator,
+  mushroomGenerator: mushroomGenerator
+};
+
+
+function basicChestGenerator(player, swipeActions) {
+  var name = "coffre";
+  var desc = "Il y a deux objets dans ce coffre, lequel utiliser ?";
+  var img = "coffre.png";
+
+  var availableActions = swipeActions.basicChest;
+  var actionNoDupe = (0, _utils.generateTwoActionsNoDupe)(availableActions);
+  var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function mushroomGenerator(player, swipeActions) {
+  var name = "Champignon étrange";
+  var desc = "Il a l'air commestible, je tente de le manger ?";
+  var img = _mushroomA2.default;
+  var availableActions = swipeActions.mushroom;
+  var swipeLeft = swipeActions.actionsGenerator.noEat(player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+
+  if (swipeRight.name == "toxicMushroom") {
+    var img = mushrooms[0];
+  }
+  if (swipeRight.name == "yummyMushroom") {
+    var img = mushrooms[1];
+  }
+  if (swipeRight.name == "sleepMushroom") {
+    var img = mushrooms[2];
+  }
+  if (swipeRight.name == "agilityMushroom") {
+    var img = mushrooms[3];
+  }
+  if (swipeRight.name == "stupidMushroom") {
+    var img = mushrooms[4];
+  }
+  if (swipeRight.name == "magicMushroom") {
+    var img = mushrooms[5];
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+},{"../utils":13,"../game":12,"../img/monsters/mushroom-a1.svg":35,"../img/monsters/mushroom-a2.svg":37,"../img/monsters/mushroom-b1.svg":36,"../img/monsters/mushroom-b2.svg":38,"../img/monsters/mushroom-c1.svg":39,"../img/monsters/mushroom-c2.svg":40}],18:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+exports.default = {
+  startingGenerator: startingGenerator
+};
+
+
+function startingGenerator(player, swipeActions) {
+  var name = 'Garde du donjon';
+  var desc = 'Equipe toi aventurier';
+  var img = 'dungeonGuard.png';
+
+  var availableActions = swipeActions.starting;
+  var actionNoDupe = (0, _utils.generateTwoActionsNoDupe)(availableActions);
+  var actionLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
+  var actionRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: actionLeft,
+    swipeRight: actionRight
+  };
+}
+},{"../utils":13,"../game":12}],17:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+exports.default = {
+  rogueGenerator: rogueGenerator,
+  wolfGenerator: wolfGenerator,
+  spiderGenerator: spiderGenerator,
+  gobelinGenerator: gobelinGenerator,
+  hugeOgreGenerator: hugeOgreGenerator
+};
+
+
+function rogueGenerator(player, swipeActions) {
+  var name = 'voleur';
+  var img = 'voleur.png';
+  var desc = "Donne moi des pièces ou je te tue!";
+  var swipeLeft = swipeActions.actionsGenerator.giveCoins(player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function wolfGenerator(player, swipeActions) {
+  var name = 'loup sauvage';
+  var img = 'wolf.png';
+  var desc = "*Le loup hurle et fonce sur toi*";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterAnimals']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  if (swipeLeft.name == "scream") {
+    var desc = "*Le loup vous regarde avec des yeux rouges*";
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function spiderGenerator(player, swipeActions) {
+  var name = 'araignée géante';
+  var img = 'spider.png';
+  var desc = "*Elle est prête à bondir*";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterAnimals']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  if (swipeLeft.name == "feed") {
+    var desc = "*On dirait qu'elle veut te manger*";
+    swipeLeft.damage = 2;
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function gobelinGenerator(player, swipeActions) {
+  var name = 'Petit gobelin';
+  var img = 'gobelin.png';
+  var desc = "Je suis sur que tu as pleins de pièces d'or sur toi!";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterHumanoid']);
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+
+function hugeOgreGenerator(player, swipeActions) {
+  var name = 'Enorme Ogre';
+  var img = 'ogre.png';
+  var desc = "*Il a l'air plutôt robuste*";
+  var availableActions = (0, _utils.createAvailableActions)(player, swipeActions, ['monsterGeneral', 'monsterHumanoid']);
+  // ajouter l'action fuir en gros nombre dans les availableactions car ça doit arriver plus souvent pour ce mob
+  var swipeLeft = swipeActions.actionsGenerator[(0, _utils.getObjectByRarity)(availableActions).name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
+  // Exceptions 
+  // Prend plus de dmg en général, sur la fuite etc.
+  // Il a l'air facile a esquiver en description (50% de chance d'avoir cette description)
+  swipeLeft.damage = 5;
+  if (swipeLeft.name == "escape") {
+    var descF = function descF() {
+      if (Math.random() < 0.30) {
+        return "*Il a l'air facile à esquiver*";
+      } else {
+        return "*Il a l'air plutôt robuste*";
+      }
+    };
+    desc = descF();
+    swipeLeft.require = 2;
+  }
+
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+},{"../utils":13,"../game":12}],29:[function(require,module,exports) {
+module.exports="/dist/86de26a291a4b1bfe4209e3757148789.svg";
+},{}],21:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = require('../utils');
+
+var _game = require('../game');
+
+var _chest = require('../img/monsters/chest.svg');
+
+var _chest2 = _interopRequireDefault(_chest);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  basicChestGenerator: basicChestGenerator
+};
+
+
+function basicChestGenerator(player, swipeActions) {
+  var name = "coffre";
+  var desc = "Il y a deux objets dans ce coffre, lequel prendre ?";
+  var img = _chest2.default;
+
+  var availableActions = swipeActions.basicChest;
+  var actionNoDupe = (0, _utils.generateTwoActionsNoDupe)(availableActions);
+  var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
+  var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
+  return {
+    name: name,
+    desc: desc,
+    img: img,
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight
+  };
+}
+},{"../utils":13,"../game":12,"../img/monsters/chest.svg":29}],10:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _utils = require('./utils');
+
+var _swipeActions = require('./swipeActions');
+
+var _swipeActions2 = _interopRequireDefault(_swipeActions);
+
+var _forestMonster = require('./rooms/forestMonster');
+
+var _forestMonster2 = _interopRequireDefault(_forestMonster);
+
+var _forestLoot = require('./rooms/forestLoot');
+
+var _forestLoot2 = _interopRequireDefault(_forestLoot);
+
+var _startingroom = require('./rooms/startingroom');
+
+var _startingroom2 = _interopRequireDefault(_startingroom);
+
+var _monsters = require('./rooms/monsters');
+
+var _monsters2 = _interopRequireDefault(_monsters);
+
+var _chest = require('./rooms/chest');
+
+var _chest2 = _interopRequireDefault(_chest);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    forestMonsterList: [{ name: 'wolf', rarity: 0 }, { name: 'rogue', rarity: 2 }, { name: 'gobelin', rarity: 3 }, { name: 'spider', rarity: 5 }, { name: 'shroom', rarity: 5 }],
+
+    forestLootList: [{ name: 'shroom', rarity: 2 }, { name: 'basicChest', rarity: 5 }],
+
+    roomGenerator: {
+        starting: _startingroom2.default.startingGenerator,
+
+        shroom: _forestLoot2.default.mushroomGenerator,
+        wolf: _forestMonster2.default.wolfGenerator,
+        rogue: _forestMonster2.default.rogueGenerator,
+        gobelin: _forestMonster2.default.gobelinGenerator,
+        spider: _forestMonster2.default.spiderGenerator,
+        basicChest: _chest2.default.basicChestGenerator,
+        ogre: _monsters2.default.hugeOgreGenerator
+    }
+
+    /*
+        Sérieusement les actions ont besoins d'avoir accès aux info du monstre (qui a l'action)
+        pour pouvoir personnalisé les feedbackMessage
+        Les actions doivent aussi avoir accès aux loot car on peut loot des objets avec certaines actions
+    
+        Mettre au point le systeme de require (le niveau requis pour qu'une action marche, et le % de réussite)
+        Mettre au point le systeme de difficulté progressive(plus difficile de réussir les actions en fonction du niveau)
+    
+    
+    
+        Monstre zombie : si tu lui suce le sang (si ton perso est devenu un vampire)
+        tu perds de la vie, tu attrappe une maladie(prendre du dmg sur plusieurs tour)
+    
+        possibilité d'apprendre des nouvelles aptitudes au près de personnage divers
+    
+        ce serait une bonne idée de ne pas avoir le choix de droit lock sur une action!
+        --> mettre en point un algorithme qui permet d'avoir toujours 2 choix sensé ?
+        --> peut être juste deux type d'action, les actions attaques (à droite)
+        --> et les actions plus funky à gauche
+    
+    */
+    /*
+    
+        est ce qu'on met un systeme de vie au monstres ?? si oui comment ça fonctionne?
+        avec des action dans le genre nourrir, caresser l'animal, crier etc.
+        est ce que les dmg du monstre seraient indiquer sur la carte (bof, bof..)
+        
+        Scenario:
+        - on commence dans une auberge
+        - un personnage nous parle d'un trésor qui rend immortel caché dans la forêt
+        - grosse partie de dialogue
+        - finalement on décide de partir à la recherche du trésor
+        - que prendre pour partir à l'aventure (un arc, une épée ou un baton magique?)
+        - aller dans la forêt maudite où pourrait trouver le fameux trésor
+        - On peut passer par différentes zone, le chemin feuillu ou le chemin aux arbres morts
+        - puis après quelqu'un indique la direction du trésor, dans une grotte par exemple
+        - le perso rentre dans la grotte pour y trouver le fameux trésor
+    
+    */
+
+};
+},{"./utils":13,"./swipeActions":11,"./rooms/forestMonster":15,"./rooms/forestLoot":16,"./rooms/startingroom":18,"./rooms/monsters":17,"./rooms/chest":21}],14:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.gainLevel = gainLevel;
+
+var _utils = require('./utils');
+
+var _sword = require('./img/actions/sword.svg');
+
+var _sword2 = _interopRequireDefault(_sword);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  stats: {
+    hp: 20,
+    maxHp: 20,
+    coin: 20,
+    str: (0, _utils.getRandomNumber)(3, 7),
+    intel: (0, _utils.getRandomNumber)(3, 7),
+    agility: (0, _utils.getRandomNumber)(3, 7),
+    level: 1,
+    roleStats: 5,
+    role: "none",
+    weapon: "sword",
+    weaponImg: "sword.png",
+    defaultAttack: "Attaquer"
+  },
+  thisRoom: {
+    isLastRoom: true,
+    nextRoom: function nextRoom() {
+      console.log("newRoom");
+    }
+  },
+  setHp: function setHp(nbr, player) {
+    if (nbr > player.getMaxHp()) {
+      this.stats.hp = player.getMaxHp();
+    } else {
+      this.stats.hp = nbr;
+    }
+  },
+  getHp: function getHp() {
+    return this.stats.hp;
+  },
+  setMaxHp: function setMaxHp(nbr) {
+    this.stats.maxHp = nbr;
+  },
+  getMaxHp: function getMaxHp() {
+    return this.stats.maxHp;
+  },
+  setCoin: function setCoin(nbr) {
+    this.stats.coin = nbr;
+  },
+  getCoin: function getCoin() {
+    return this.stats.coin;
+  },
+  setStr: function setStr(nbr) {
+    this.stats.str = nbr;
+  },
+  getStr: function getStr() {
+    return this.stats.str;
+  },
+  setIntel: function setIntel(nbr) {
+    this.stats.intel = nbr;
+  },
+  getIntel: function getIntel() {
+    return this.stats.intel;
+  },
+  setAgility: function setAgility(nbr) {
+    this.stats.agility = nbr;
+  },
+  getAgility: function getAgility() {
+    return this.stats.agility;
+  },
+  setLevel: function setLevel(nbr) {
+    this.stats.level = nbr;
+  },
+  getLevel: function getLevel() {
+    return this.stats.level;
+  },
+  setRole: function setRole(role) {
+    this.stats.role = role;
+  },
+  getRole: function getRole() {
+    return this.stats.role;
+  },
+  setRoleStats: function setRoleStats(nbr) {
+    this.stats.roleStats = nbr;
+  },
+  getRoleStats: function getRoleStats() {
+    return this.role.mainStats;
+  }
+};
+function gainLevel(player) {
+  player.setLevel(player.getLevel() + 1);
+}
+},{"./utils":13,"./img/actions/sword.svg":9}],3:[function(require,module,exports) {
+'use strict';
+
+var _room = require('./room');
+
+var _room2 = _interopRequireDefault(_room);
+
+var _player = require('./player');
+
+var _player2 = _interopRequireDefault(_player);
+
+var _swipeActions = require('./swipeActions');
+
+var _swipeActions2 = _interopRequireDefault(_swipeActions);
+
+var _utils = require('./utils');
+
+var _game = require('./game');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+$(document).ready(function () {
+
+	var currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
+	(0, _game.writeStats)(_player2.default);
+	(0, _game.writeRoom)(currentRoom);
+	console.log(_player2.default);
+
+	var card = document.getElementsByClassName('card-visible')[0];
+	var tracker = document.getElementById('card-tracker');
+	var mc = new Hammer(tracker);
+
+	// add a "PAN" recognizer to it (all directions)
+	mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 20 }));
+
+	// tie in the handler that will be called
+	mc.on("pan", handleDrag);
+
+	var lastPosX = 0;
+	var lastPosY = 0;
+	var isDragging = false;
+	function handleDrag(ev) {
+
+		// for convience, let's get a reference to our object
+		var elem = ev.target;
+
+		// DRAG STARTED
+		// here, let's snag the current position
+		// and keep track of the fact that we're dragging
+		if (!isDragging) {
+			isDragging = true;
+			lastPosX = elem.offsetLeft;
+		}
+
+		if (elem.offsetLeft > 50) {
+			card.classList.add("yes");
+			card.classList.remove("no");
+		} else if (elem.offsetLeft < -50) {
+			card.classList.add("no");
+			card.classList.remove("yes");
+		} else {
+			card.classList.remove("yes");
+			card.classList.remove("no");
+		}
+
+		// we simply need to determine where the x,y of this
+		// object is relative to where it's "last" known position is
+		// NOTE: 
+		//    deltaX and deltaY are cumulative
+		// Thus we need to always calculate 'real x and y' relative
+		// to the "lastPosX/Y"
+		var posX = ev.deltaX + lastPosX;
+
+		// move our element to that position
+		elem.style.left = posX + "px";
+
+		// DRAG ENDED
+		// this is where we simply forget we are dragging
+		if (ev.isFinal) {
+			isDragging = false;
+
+			if (elem.offsetLeft > 50) {
+				elem.style.left = 0 + "px";
+				card.classList.add("yesFade");
+				card.classList.remove("noFade");
+				setTimeout(function () {
+					card.classList.remove("yesFade");card.classList.remove("yes");
+				}, 500);
+				_player2.default.thisRoom.isLastRoom = true;
+				currentRoom.swipeRight.action();
+				if (_player2.default.thisRoom.isLastRoom == false) {
+					if (_player2.default.thisRoom.nextRoom.desc != undefined) {
+						currentRoom.desc = _player2.default.thisRoom.nextRoom.desc;
+					}
+					currentRoom.swipeLeft = _player2.default.thisRoom.nextRoom.swipeLeft;
+					currentRoom.swipeRight = _player2.default.thisRoom.nextRoom.swipeRight;
+					(0, _game.writeStats)(_player2.default);
+					(0, _game.writeRoom)(currentRoom);
+				} else {
+					card.classList.add("yes-swipe");
+					setTimeout(function () {
+						(0, _player.gainLevel)(_player2.default);
+						currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
+						(0, _game.writeStats)(_player2.default);
+						(0, _game.writeRoom)(currentRoom);
+						document.getElementById("card").classList.remove("feedback-message");
+						card.classList.remove("yes-swipe");
+					}, 800);
+				}
+			} else if (elem.offsetLeft < -50) {
+				elem.style.left = 0 + "px";
+				card.classList.add("noFade");
+				card.classList.remove("yesFade");
+				setTimeout(function () {
+					card.classList.remove("noFade");card.classList.remove("no");
+				}, 500);
+				_player2.default.thisRoom.isLastRoom = true;
+				currentRoom.swipeLeft.action();
+				if (_player2.default.thisRoom.isLastRoom == false) {
+					/*
+     Mettre en place un système qui si la desc, l'img ou le swipeLeft/swipeRight n'est pas définis
+     ne pas le remplacer par un "undefined" et donc laisser la valeur existante
+     */
+					if (_player2.default.thisRoom.nextRoom.desc != undefined) {
+						currentRoom.desc = _player2.default.thisRoom.nextRoom.desc;
+					}
+					currentRoom.swipeLeft = _player2.default.thisRoom.nextRoom.swipeLeft;
+					currentRoom.swipeRight = _player2.default.thisRoom.nextRoom.swipeRight;
+					(0, _game.writeStats)(_player2.default);
+					(0, _game.writeRoom)(currentRoom);
+				} else {
+					card.classList.add("no-swipe");
+					setTimeout(function () {
+						(0, _player.gainLevel)(_player2.default);
+						currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
+						(0, _game.writeStats)(_player2.default);
+						(0, _game.writeRoom)(currentRoom);
+						document.getElementById("card").classList.remove("feedback-message");
+						card.classList.remove("no-swipe");
+					}, 800);
+				}
+			} else {
+				elem.style.left = 0 + "px";
+				card.classList.remove("yesFade");
+				card.classList.remove("noFade");
+			}
+		}
+	}
+});
+},{"./room":10,"./player":14,"./swipeActions":11,"./utils":13,"./game":12}],45:[function(require,module,exports) {
+
+var global = (1, eval)('this');
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
+  this.hot = {
+    accept: function (fn) {
+      this._acceptCallback = fn || function () {};
+    },
+    dispose: function (fn) {
+      this._disposeCallback = fn;
+    }
+  };
+}
+
+module.bundle.Module = Module;
+
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = '' || location.hostname;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50146' + '/');
+  ws.onmessage = function (event) {
+    var data = JSON.parse(event.data);
+
+    if (data.type === 'update') {
+      data.assets.forEach(function (asset) {
+        hmrApply(global.require, asset);
+      });
+
+      data.assets.forEach(function (asset) {
+        if (!asset.isNew) {
+          hmrAccept(global.require, asset.id);
+        }
+      });
+    }
+
+    if (data.type === 'reload') {
+      ws.close();
+      ws.onclose = function () {
+        location.reload();
+      };
+    }
+
+    if (data.type === 'error-resolved') {
+      console.log('[parcel] ✨ Error resolved');
+    }
+
+    if (data.type === 'error') {
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + 'data.error.stack');
+    }
+  };
+}
+
+function getParents(bundle, id) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return [];
+  }
+
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
+        parents.push(+k);
+      }
+    }
+  }
+
+  if (bundle.parent) {
+    parents = parents.concat(getParents(bundle.parent, id));
+  }
+
+  return parents;
+}
+
+function hmrApply(bundle, asset) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return;
+  }
+
+  if (modules[asset.id] || !bundle.parent) {
+    var fn = new Function('require', 'module', 'exports', asset.generated.js);
+    asset.isNew = !modules[asset.id];
+    modules[asset.id] = [fn, asset.deps];
+  } else if (bundle.parent) {
+    hmrApply(bundle.parent, asset);
+  }
+}
+
+function hmrAccept(bundle, id) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return;
+  }
+
+  if (!modules[id] && bundle.parent) {
+    return hmrAccept(bundle.parent, id);
+  }
+
+  var cached = bundle.cache[id];
+  if (cached && cached.hot._disposeCallback) {
+    cached.hot._disposeCallback();
+  }
+
+  delete bundle.cache[id];
+  bundle(id);
+
+  cached = bundle.cache[id];
+  if (cached && cached.hot && cached.hot._acceptCallback) {
+    cached.hot._acceptCallback();
+    return true;
+  }
+
+  return getParents(global.require, id).some(function (id) {
+    return hmrAccept(global.require, id);
+  });
+}
+},{}]},{},[45,3])
+//# sourceMappingURL=/dist/7bd5d8033a082abbee597836b698ef37.map

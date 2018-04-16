@@ -90,11 +90,15 @@ $(document).ready(function(){
 	      		writeRoom(currentRoom);	
 			}
 			else{
-				gainLevel(player);
-				currentRoom = getNewRoom(room, swipeActions, player);		
-				writeStats(player);
-				writeRoom(currentRoom);  
-				document.getElementById("card").classList.remove("feedback-message");
+				card.classList.add("yes-swipe");
+				setTimeout(function(){ 
+					gainLevel(player);
+					currentRoom = getNewRoom(room, swipeActions, player);		
+					writeStats(player);
+					writeRoom(currentRoom);  
+					document.getElementById("card").classList.remove("feedback-message");
+					card.classList.remove("yes-swipe");
+				}, 800);
 			}
 	    }
 	    else if (elem.offsetLeft < -50) {
@@ -116,11 +120,15 @@ $(document).ready(function(){
 	      		writeRoom(currentRoom);	
 		    }
 	    	else{
-	    		gainLevel(player);
-		    	currentRoom = getNewRoom(room, swipeActions, player);
-		    	writeStats(player);
-		    	writeRoom(currentRoom);	
-		    	document.getElementById("card").classList.remove("feedback-message");
+	    		card.classList.add("no-swipe");
+	    		setTimeout(function(){
+	    			gainLevel(player);
+		    		currentRoom = getNewRoom(room, swipeActions, player);
+		    		writeStats(player);
+		    		writeRoom(currentRoom);	
+		    		document.getElementById("card").classList.remove("feedback-message");
+		    		card.classList.remove("no-swipe")
+	    		}, 800); 	
 	    	}
 	    }
 	    else{

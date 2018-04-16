@@ -124,6 +124,30 @@
       -ms-transform: rotate(10deg) translateX(50px);
       transform: rotate(10deg) translateX(50px);
     }
+
+    .yes-swipe {
+      animation-name: swipeLeft;
+      animation-duration: .5s;
+      animation-timing-function: ease-out;
+    }
+    @keyframes swipeLeft{
+      0% {
+        -moz-transform: rotate(10deg) translateX(50px);
+        -webkit-transform: rotate(10deg) translateX(50px);
+        -o-transform: rotate(10deg) translateX(50px);
+        -ms-transform: rotate(10deg) translateX(50px);
+        transform: rotate(10deg) translateX(50px);
+      }
+
+      100% {
+        -moz-transform: rotate(25deg) translateX(90vw);
+        -webkit-transform: rotate(25deg) translateX(90vw);
+        -o-transform: rotate(25deg) translateX(90vw);
+        -ms-transform: rotate(25deg) translateX(90vw);
+        transform: rotate(25deg) translateX(90vw);
+      }
+    }
+
     .yes #btn_yes-text {
       opacity: 1;
       transition: .5s;
@@ -135,11 +159,35 @@
     }
 
     .no {
-      -moz-transform: rotate(-10deg) translateX(-50px);
+    -moz-transform: rotate(-10deg) translateX(-50px);
     -webkit-transform: rotate(-10deg) translateX(-50px);
     -o-transform: rotate(-10deg) translateX(-50px);
-    -ms-transform: rotate(-10deg) translateX(-20px);
+    -ms-transform: rotate(-10deg) translateX(-50px);
     transform: rotate(-10deg) translateX(-50px);
+    }
+
+    .no-swipe {
+      animation-name: swipeRight;
+      animation-duration: .5s;
+      animation-timing-function: ease-out;
+    }
+
+    @keyframes swipeRight{
+      0% {
+        -moz-transform: rotate(-10deg) translateX(-50px);
+        -webkit-transform: rotate(-10deg) translateX(-50px);
+        -o-transform: rotate(-10deg) translateX(-50px);
+        -ms-transform: rotate(-10deg) translateX(-50px);
+        transform: rotate(-10deg) translateX(-50px);
+      }
+
+      100% {
+        -moz-transform: rotate(-25deg) translateX(-90vw);
+        -webkit-transform: rotate(-25deg) translateX(-90vw);
+        -o-transform: rotate(-25deg) translateX(-90vw);
+        -ms-transform: rotate(-25deg) translateX(-90vw);
+        transform: rotate(-25deg) translateX(-90vw);
+      }
     }
     .no #btn_no-text {
       opacity: 1;
@@ -168,8 +216,8 @@
       color: white;
       font-size: 22px;
       opacity: 0;
-      
     }
+
     #btn_yes {
       background: url("./img/actions/sword.svg") no-repeat center;
       width: 80px;
@@ -189,8 +237,9 @@
       color: white;
       font-size: 22px;
       opacity: 0;
-      
     }
+
+
     #room_type{margin: 0; padding: 0; line-height: 1;}
     h3{margin: 10px 0; padding: 0; line-height: 0;}
 
