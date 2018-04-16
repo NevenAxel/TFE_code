@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({24:[function(require,module,exports) {
+})({16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -132,13 +132,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":24}],2:[function(require,module,exports) {
+},{"./bundle-url":16}],2:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./img\\texture-wood.svg":5,"./img\\bg\\bg-forest.svg":7,"./img\\monsters\\goblin.svg":6,"./img\\actions\\feed.svg":8,"./img\\actions\\sword.svg":9,"_css_loader":4}],45:[function(require,module,exports) {
+},{"./img\\texture-wood.svg":5,"./img\\bg\\bg-forest.svg":11,"./img\\cardback.svg":6,"./img\\monsters\\goblin.svg":15,"./img\\actions\\feed.svg":14,"./img\\actions\\sword.svg":12,"_css_loader":4}],41:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -160,7 +160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50146' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52572' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -261,7 +261,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}],49:[function(require,module,exports) {
+},{}],43:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -340,7 +340,7 @@ LazyPromise.prototype.then = function (onSuccess, onError) {
 LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
-},{"./bundle-url":24}],0:[function(require,module,exports) {
-var b=require(49);b.load([["39895b98f0d48ddd5ceee1893aeece0f.svg",5],["e40904416d583be2cb57ca10d5414b1e.svg",7],["59d074125cf5a06a61465ff611789ea6.svg",6],["ddbcf682c06d1c80b1b0499be65ef159.svg",8],["d6939278153ea1a9e5e20047a11c31e2.svg",9]]);
-},{}]},{},[45,0])
+},{"./bundle-url":16}],0:[function(require,module,exports) {
+var b=require(43);b.load([["39895b98f0d48ddd5ceee1893aeece0f.svg",5],["e40904416d583be2cb57ca10d5414b1e.svg",11],["6e560b4f6d2ab8411824cffc6db3b09f.svg",6],["59d074125cf5a06a61465ff611789ea6.svg",15],["ddbcf682c06d1c80b1b0499be65ef159.svg",14],["d6939278153ea1a9e5e20047a11c31e2.svg",12]]);
+},{}]},{},[41,0])
 //# sourceMappingURL=/dist/be0a750c3b1a905f801c0b3c6bcfdb54.map

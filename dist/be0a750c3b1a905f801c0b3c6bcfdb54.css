@@ -65,9 +65,15 @@
       line-height: 250px;
       border-radius: 30px 30px 0 0;
       background: url("e40904416d583be2cb57ca10d5414b1e.svg");
-      
-
     }
+    #cardback{
+      background: url("6e560b4f6d2ab8411824cffc6db3b09f.svg");
+      height: 340px;
+      width: 290px;
+      border-radius: 30px;
+      border: 5px solid #333333;
+    }
+
     #feedback{
       color: white;
       position: absolute;
@@ -196,6 +202,7 @@
 
     .noFade {
       opacity: 0;
+      transition: .5s;
     }
     #btn_no {
       background: url("ddbcf682c06d1c80b1b0499be65ef159.svg") no-repeat center;

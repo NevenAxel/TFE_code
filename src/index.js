@@ -98,7 +98,7 @@ $(document).ready(function(){
 					writeRoom(currentRoom);  
 					document.getElementById("card").classList.remove("feedback-message");
 					card.classList.remove("yes-swipe");
-				}, 800);
+				}, 500);
 			}
 	    }
 	    else if (elem.offsetLeft < -50) {
@@ -128,7 +128,7 @@ $(document).ready(function(){
 		    		writeRoom(currentRoom);	
 		    		document.getElementById("card").classList.remove("feedback-message");
 		    		card.classList.remove("no-swipe")
-	    		}, 800); 	
+	    		}, 500); 	
 	    	}
 	    }
 	    else{

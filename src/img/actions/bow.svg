@@ -3,14 +3,15 @@
 <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#B34A30;}
-	.st1{fill:#213533;}
-	.st2{fill:#936342;}
-	.st3{fill:#AB734C;}
-	.st4{fill:#684730;}
-	.st5{fill:#AAAAAA;}
+	.st0{fill:none;}
+	.st1{fill:#B34A30;}
+	.st2{fill:#213533;}
+	.st3{fill:#936342;}
+	.st4{fill:#AB734C;}
+	.st5{fill:#684730;}
+	.st6{fill:#AAAAAA;}
 </style>
-<image style="display:none;overflow:visible;" width="1300" height="1300" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAZABkAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcU
+<image style="display:none;overflow:visible;enable-background:new    ;" width="1300" height="1300" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAZABkAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcU
 FhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgo
 KCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAUUBRQDASIA
 AhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAIGAQMFBwT/xAAaAQEBAQEBAQEAAAAAAAAAAAAA
@@ -1087,13 +1088,27 @@ TO03pKKhsHgKAAABYD8fPAuCKLadqENTIJpGXm2/DMyIWee50AWdvq7O9NBuLsi4vtRQEq3VxXX9
 Fci4wnXZ2q6tFlsK9qgLFYs3Q23oAAAGAfrJSr4MYLrFRCSt1cV1f0caIWFoAAAFgP8A4r//2Q==" transform="matrix(5.217949e-02 0 0 5.217949e-02 -90 10.4)">
 </image>
 <g>
-	<polygon class="st0" points="52.5,54.9 69,62.6 61.8,62.8 63,70 	"/>
-	<polygon class="st1" points="66.7,18.7 63.1,62.6 61.9,63.8 19.5,73.8 19.9,74.4 63.6,66 65.4,63.3 67.4,18.9 	"/>
-	<polygon class="st0" points="61.8,62.8 63,70 53,55.5 	"/>
-	<path class="st2" d="M23.4,29.8c-18.9,22.3-3.5,44.6-3.5,44.6S13.7,52,29.6,33.3s37.8-14.4,37.8-14.4S41.4,8.6,23.4,29.8z"/>
-	<path class="st3" d="M23.4,29.7C4.4,52,19.9,74.4,19.9,74.4s1.6,0.9,0.9-0.2c-3.6-5.9-6.2-26.4,7-41.9
-		c15.9-18.7,39.6-13.5,39.6-13.5s1.4-0.4-0.1-0.8C60.6,16.1,38.2,12.3,23.4,29.7z"/>
-	<polygon class="st4" points="63.1,62.6 19.6,25.3 18.3,26.9 62.1,64.2 	"/>
-	<polygon class="st5" points="25,25.8 11,19.5 19.6,32.3 19.8,26.8 	"/>
+	<path class="st0" d="M19.1,69.9c0.4,1.5,0.9,2.7,1.4,3.7l38.7-9.1l-4.7-6.8L28.1,35.2C18.1,48.3,18.2,62.7,19.1,69.9z"/>
+	<path class="st0" d="M29.6,33.3c-0.1,0.1-0.2,0.2-0.3,0.3l26.7,22.9l7.3,3.4l3.4-41.2C62.8,18.2,43.8,16.6,29.6,33.3z"/>
+	<polygon class="st1" points="63.1,62.6 63.3,59.9 56.1,56.6 	"/>
+	<polygon class="st1" points="69,62.6 65.5,61 65.4,62.7 	"/>
+	<path class="st2" d="M19.5,73.8l0.3,0.5C19.8,74.2,19.7,74,19.5,73.8L19.5,73.8z"/>
+	<path class="st2" d="M59.2,64.4L59.2,64.4l-38.7,9.1c0.1,0.2,0.2,0.4,0.3,0.6c0,0,0,0,0,0l39.8-7.7l0,0L59.2,64.4z"/>
+	<path class="st2" d="M65.5,61l1.9-42.1c0,0-0.3,0-0.7-0.1l-3.4,41.2l-0.2,2.7l-1,1.6L62,64.1l0.4,2.1l1.2-0.2l1.8-2.7l0-0.6
+		L65.5,61z"/>
+	<polygon class="st1" points="54.4,57.7 59.1,64.5 59.2,64.4 60.6,66.6 60.6,66.6 63,70 62.4,66.2 62,64.1 	"/>
+	<path class="st3" d="M30.1,23.5c0.2-0.1,0.4-0.3,0.6-0.4C30.5,23.2,30.3,23.3,30.1,23.5z"/>
+	<path class="st3" d="M30.9,22.9c5.9-4,12.3-5.8,18.2-6.4C43.4,17,37,18.7,30.9,22.9z"/>
+	<path class="st3" d="M27.8,32.3C27.8,32.3,27.8,32.3,27.8,32.3l1.5,1.3c0.1-0.1,0.2-0.2,0.3-0.3c14.2-16.7,33.2-15.1,37.1-14.5
+		c0.5,0.1,0.7,0.1,0.7,0.1s-0.2-0.1-0.6-0.2C63.1,18,42.2,15.3,27.8,32.3z"/>
+	<path class="st3" d="M28.1,35.2l-1.5-1.3c-9.6,12.5-9.6,27.7-7.4,36C18.2,62.7,18.1,48.3,28.1,35.2z"/>
+	<path class="st4" d="M20.5,73.6c-0.5-1-1-2.2-1.4-3.7c-2.2-8.2-2.2-23.4,7.4-36l-3.9-3.3c-16.1,19.9-5.4,39.5-3.1,43.2
+		c0.1,0.2,0.2,0.4,0.3,0.5c0,0.1,0.1,0.1,0.1,0.1s1.6,0.9,0.9-0.2c0,0,0,0,0,0C20.7,74,20.6,73.8,20.5,73.6z"/>
+	<path class="st4" d="M27.8,32.3C27.8,32.3,27.8,32.3,27.8,32.3c14.5-17,35.3-14.3,39-13.6c0.4,0.1,0.6,0.1,0.6,0.1s1.4-0.4-0.1-0.8
+		c-3.3-0.9-10.2-2.3-18.2-1.5c-5.8,0.6-12.2,2.4-18.2,6.4c-0.1,0-0.1,0.1-0.2,0.1c-0.2,0.1-0.4,0.3-0.6,0.4C28,25,25.9,26.9,24,29.1
+		L27.8,32.3z"/>
+	<polygon class="st5" points="26.5,33.9 28.1,35.2 54.4,57.7 62,64.1 62.1,64.2 63.1,62.6 56.1,56.6 29.3,33.6 27.8,32.3 24,29.1 
+		21.1,26.6 19.8,26.8 19.8,28.1 22.7,30.6 	"/>
+	<polygon class="st6" points="21.1,26.6 25,25.8 11,19.5 19.6,32.3 19.8,28.1 19.8,26.8 	"/>
 </g>
 </svg>
