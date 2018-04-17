@@ -11,40 +11,46 @@
   
 <script src="/dist/be0a750c3b1a905f801c0b3c6bcfdb54.js"></script></head>
 <body>
+<div class="mobile-simulation">
   <h2 class="niveau">Niveau <span id="level"></span></h2>
 
-<div id="card-container">
-  <div class="card-visible">
-    <div id="card">
-      <div id="name"><p id="room_name">Araignée géante</p></div>
-      <div id="room_img"></div>
-      <div id="btn_no">
-        <p id="btn_no-text">Left choice(No)</p>
+  <div id="card-container">
+    <div class="card-visible">
+      <div id="card">
+        <div id="name"><p id="room_name">Araignée géante</p></div>
+        <div id="room_img"></div>
+        <div id="btn_no">
+          <p id="btn_no-text">Left choice(No)</p>
+        </div>
+        <div id="btn_yes">
+          <p id="btn_yes-text">Right choice(Yes)</p>
+        </div>
+        <p id="room_desc">Description of room</p>
       </div>
-      <div id="btn_yes">
-        <p id="btn_yes-text">Right choice(Yes)</p>
-      </div>
-      <p id="room_desc">Description of room</p>
+      
+      <div id="feedback"></div>  
     </div>
-    
-    <div id="feedback"></div>  
+
+    <div id="card-tracker"></div>
+    <div id="cardback"></div>
+    <div class="cardback-pile"></div>
   </div>
 
-  <div id="card-tracker"></div>
-  <div id="cardback"></div>
+
+
+  <div class="character">
+    <p><span id="stats_class"></span></p>
+    <ul class="ul-stats">
+      <li class="hp-bar"><div id="hpRemaining"></div><span id="stats_hp"></span> / <span id="stats_maxhp"></span></li>
+      <li><span class="stats" id="stats_coins"></span><span class="stats_name">pièces</span></li>
+      <li><span class="stats" id="stats_str"></span><span class="stats_name">force</span></li>
+      <li><span class="stats" id="stats_intel"></span><span class="stats_name">intellect</span></li>
+      <li><span class="stats" id="stats_agility"></span><span class="stats_name">agilité</span></li>
+    </ul>
+  </div>
+  <div class="bg"></div>
 </div>
 
-
-
-
-<p>Classe : <span id="stats_class"></span></p>
-<ul>
-  <li>HP : <span id="stats_hp"></span> / <span id="stats_maxhp"></span></li>
-  <li>Pièces : <span id="stats_coins"></span></li>
-  <li>Force : <span id="stats_str"></span></li>
-  <li>Intelligence : <span id="stats_intel"></span></li>
-  <li>Agilité : <span id="stats_agility"></span></li>
-</ul>
 	<script charset="UTF-8" src="/dist/7bd5d8033a082abbee597836b698ef37.js"></script>
 </body>
 </html>

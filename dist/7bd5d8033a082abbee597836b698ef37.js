@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -211,11 +211,11 @@ function createAvailableActions(player, swipeActions, objectList) {
 
   return availableActions;
 }
-},{}],12:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 module.exports="/dist/d6939278153ea1a9e5e20047a11c31e2.svg";
-},{}],24:[function(require,module,exports) {
+},{}],30:[function(require,module,exports) {
 module.exports="/dist/536f3a044d2e30a4c2d68fb73583a656.svg";
-},{}],13:[function(require,module,exports) {
+},{}],18:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -240,19 +240,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function writeStats(player) {
     switch (player.getRole()) {
-        case "mage":
+        case "Mage":
             player.setRoleStats(player.getIntel());
             player.stats.weapon = "wand";
             player.stats.weaponImg = "wand.png";
             player.stats.defaultAttack = "Attaquer";
             break;
-        case "warrior":
+        case "Guerrier":
             player.setRoleStats(player.getStr());
             player.stats.weapon = "sword";
             player.stats.weaponImg = _sword2.default;
             player.stats.defaultAttack = "Attaquer";
             break;
-        case "rogue":
+        case "Archer":
             player.setRoleStats(player.getAgility());
             player.stats.weapon = "bow";
             player.stats.weaponImg = _bow2.default;
@@ -332,11 +332,11 @@ function feedbackMessage(player, message) {
     setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
     */
 }
-},{"./utils":10,"./img/actions/sword.svg":12,"./img/actions/bow.svg":24}],35:[function(require,module,exports) {
+},{"./utils":16,"./img/actions/sword.svg":17,"./img/actions/bow.svg":30}],42:[function(require,module,exports) {
 module.exports="/dist/5256562c4f963db96a9a7a1004b83c02.svg";
-},{}],33:[function(require,module,exports) {
+},{}],41:[function(require,module,exports) {
 module.exports="/dist/eb62ca2dc8c549ea7c4034501a7cdefa.svg";
-},{}],22:[function(require,module,exports) {
+},{}],27:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -483,11 +483,11 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":10,"../game":13,"../img/loot/potionhp.svg":35,"../img/loot/coinsbag.svg":33}],14:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/loot/potionhp.svg":42,"../img/loot/coinsbag.svg":41}],11:[function(require,module,exports) {
 module.exports="/dist/ddbcf682c06d1c80b1b0499be65ef159.svg";
 },{}],40:[function(require,module,exports) {
 module.exports="/dist/9fe8c12c396ae19b0a63be53d353a9d4.svg";
-},{}],39:[function(require,module,exports) {
+},{}],43:[function(require,module,exports) {
 module.exports="/dist/43dc1314cdca45410295b395092b5614.svg";
 },{}],26:[function(require,module,exports) {
 'use strict';
@@ -540,13 +540,13 @@ function generateAttack(player, swipeActions) {
 		},
 		action: function action() {
 			switch (player.getRole()) {
-				case "mage":
+				case "Mage":
 					player.setHp(player.getHp() - this.damage, player);
 					break;
-				case "warrior":
+				case "Guerrier":
 					player.setHp(player.getHp() - this.damage, player);
 					break;
-				case "rogue":
+				case "Archer":
 					if (Math.random() < 0.45) {
 						player.setHp(player.getHp() - this.damage * 2, player);
 						(0, _game.feedbackMessage)(player, "Vous avez raté votre cible");
@@ -698,7 +698,7 @@ function generateSteal(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":10,"../game":13,"../img/actions/feed.svg":14,"../img/actions/escape.svg":40,"../img/actions/givecoins.svg":39,"../img/loot/coinsbag.svg":33}],23:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/actions/feed.svg":11,"../img/actions/escape.svg":40,"../img/actions/givecoins.svg":43,"../img/loot/coinsbag.svg":41}],28:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -736,7 +736,7 @@ function generateWand(player, swipeActions) {
 			return "wand.png";
 		},
 		action: function action() {
-			player.setRole('mage');
+			player.setRole('Mage');
 			player.setIntel(player.getIntel() + 5);
 		}
 	};
@@ -752,7 +752,7 @@ function generateSword(player, swipeActions) {
 			return _sword2.default;
 		},
 		action: function action() {
-			player.setRole('warrior');
+			player.setRole('Guerrier');
 			player.setStr(player.getStr() + 5);
 			player.setMaxHp(player.getMaxHp() + 5);
 			player.setHp(player.getHp() + 5, player);
@@ -770,16 +770,16 @@ function generateBow(player, swipeActions) {
 			return _bow2.default;
 		},
 		action: function action() {
-			player.setRole('rogue');
+			player.setRole('Archer');
 			player.setAgility(player.getAgility() + 5);
 		}
 	};
 }
-},{"../utils":10,"../game":13,"../img/actions/sword.svg":12,"../img/actions/bow.svg":24}],37:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/actions/sword.svg":17,"../img/actions/bow.svg":30}],45:[function(require,module,exports) {
 module.exports="/dist/6379f562e3d18f714a957369254bf1d6.svg";
-},{}],38:[function(require,module,exports) {
+},{}],44:[function(require,module,exports) {
 module.exports="/dist/d9d88b7ecb495c9d910d61fbcd27be56.svg";
-},{}],25:[function(require,module,exports) {
+},{}],29:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -922,7 +922,7 @@ function generateYummyMushroom(player, swipeActions) {
 		}
 	};
 }
-},{"../utils":10,"../game":13,"../img/actions/eat.svg":37,"../img/actions/no.svg":38}],9:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/actions/eat.svg":45,"../img/actions/no.svg":44}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1387,11 +1387,11 @@ function generateDumbBell(player, swipeActions) {
 		}
 	};
 }
-},{"./utils":10,"./game":13,"./actions/actionsLoots":22,"./actions/actionsMonsters":26,"./actions/actionsStarting":23,"./actions/forestMushroom":25}],15:[function(require,module,exports) {
+},{"./utils":16,"./game":18,"./actions/actionsLoots":27,"./actions/actionsMonsters":26,"./actions/actionsStarting":28,"./actions/forestMushroom":29}],12:[function(require,module,exports) {
 module.exports="/dist/59d074125cf5a06a61465ff611789ea6.svg";
-},{}],27:[function(require,module,exports) {
+},{}],32:[function(require,module,exports) {
 module.exports="/dist/2a72e5e4c1ee1b727fec072fd3d876a0.svg";
-},{}],18:[function(require,module,exports) {
+},{}],21:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1498,19 +1498,19 @@ function gobelinGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":10,"../game":13,"../img/monsters/goblin.svg":15,"../img/monsters/spider.svg":27}],36:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/monsters/goblin.svg":12,"../img/monsters/spider.svg":32}],35:[function(require,module,exports) {
 module.exports="/dist/3bcc9b0db987628152208422f9d33251.svg";
-},{}],29:[function(require,module,exports) {
+},{}],33:[function(require,module,exports) {
 module.exports="/dist/1f424046e13ebda4ea5e072dc371bcd4.svg";
-},{}],30:[function(require,module,exports) {
-module.exports="/dist/930c580ccd9d04165fa6241719434b21.svg";
 },{}],34:[function(require,module,exports) {
+module.exports="/dist/930c580ccd9d04165fa6241719434b21.svg";
+},{}],36:[function(require,module,exports) {
 module.exports="/dist/93955d777d5d4d5f5590061cd9c67bfe.svg";
-},{}],31:[function(require,module,exports) {
+},{}],37:[function(require,module,exports) {
 module.exports="/dist/01e6d347c36b34cd84a538975e1ff638.svg";
-},{}],32:[function(require,module,exports) {
+},{}],39:[function(require,module,exports) {
 module.exports="/dist/ef1f0b49d661cd8e2115541db2b3cda0.svg";
-},{}],21:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1609,7 +1609,7 @@ function mushroomGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":10,"../game":13,"../img/monsters/mushroom-a1.svg":36,"../img/monsters/mushroom-a2.svg":29,"../img/monsters/mushroom-b1.svg":30,"../img/monsters/mushroom-b2.svg":34,"../img/monsters/mushroom-c1.svg":31,"../img/monsters/mushroom-c2.svg":32}],17:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/monsters/mushroom-a1.svg":35,"../img/monsters/mushroom-a2.svg":33,"../img/monsters/mushroom-b1.svg":34,"../img/monsters/mushroom-b2.svg":36,"../img/monsters/mushroom-c1.svg":37,"../img/monsters/mushroom-c2.svg":39}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1642,7 +1642,7 @@ function startingGenerator(player, swipeActions) {
     swipeRight: actionRight
   };
 }
-},{"../utils":10,"../game":13}],20:[function(require,module,exports) {
+},{"../utils":16,"../game":18}],23:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1773,9 +1773,9 @@ function hugeOgreGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":10,"../game":13}],28:[function(require,module,exports) {
+},{"../utils":16,"../game":18}],38:[function(require,module,exports) {
 module.exports="/dist/86de26a291a4b1bfe4209e3757148789.svg";
-},{}],19:[function(require,module,exports) {
+},{}],25:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1814,7 +1814,7 @@ function basicChestGenerator(player, swipeActions) {
     swipeRight: swipeRight
   };
 }
-},{"../utils":10,"../game":13,"../img/monsters/chest.svg":28}],7:[function(require,module,exports) {
+},{"../utils":16,"../game":18,"../img/monsters/chest.svg":38}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1907,7 +1907,7 @@ exports.default = {
     */
 
 };
-},{"./utils":10,"./swipeActions":9,"./rooms/forestMonster":18,"./rooms/forestLoot":21,"./rooms/startingroom":17,"./rooms/monsters":20,"./rooms/chest":19}],8:[function(require,module,exports) {
+},{"./utils":16,"./swipeActions":15,"./rooms/forestMonster":21,"./rooms/forestLoot":24,"./rooms/startingroom":22,"./rooms/monsters":23,"./rooms/chest":25}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1933,7 +1933,7 @@ exports.default = {
     agility: (0, _utils.getRandomNumber)(3, 7),
     level: 1,
     roleStats: 5,
-    role: "none",
+    role: "Aventurier",
     weapon: "sword",
     weaponImg: "sword.png",
     defaultAttack: "Attaquer"
@@ -1950,6 +1950,7 @@ exports.default = {
     } else {
       this.stats.hp = nbr;
     }
+    document.getElementById("hpRemaining").style.width = this.stats.hp / player.getMaxHp() * 100 + "%";
   },
   getHp: function getHp() {
     return this.stats.hp;
@@ -1961,24 +1962,72 @@ exports.default = {
     return this.stats.maxHp;
   },
   setCoin: function setCoin(nbr) {
+    if (this.stats.coin < nbr) {
+      document.getElementById("stats_coins").classList.add("stats-up");
+      setTimeout(function () {
+        document.getElementById("stats_coins").classList.remove("stats-up");
+      }, 500);
+    }
+    if (this.stats.coin > nbr) {
+      document.getElementById("stats_coins").classList.add("stats-down");
+      setTimeout(function () {
+        document.getElementById("stats_coins").classList.remove("stats-down");
+      }, 500);
+    }
     this.stats.coin = nbr;
   },
   getCoin: function getCoin() {
     return this.stats.coin;
   },
   setStr: function setStr(nbr) {
+    if (this.stats.str < nbr) {
+      document.getElementById("stats_str").classList.add("stats-up");
+      setTimeout(function () {
+        document.getElementById("stats_str").classList.remove("stats-up");
+      }, 500);
+    }
+    if (this.stats.str > nbr) {
+      document.getElementById("stats_str").classList.add("stats-down");
+      setTimeout(function () {
+        document.getElementById("stats_str").classList.remove("stats-down");
+      }, 500);
+    }
     this.stats.str = nbr;
   },
   getStr: function getStr() {
     return this.stats.str;
   },
   setIntel: function setIntel(nbr) {
+    if (this.stats.intel < nbr) {
+      document.getElementById("stats_intel").classList.add("stats-up");
+      setTimeout(function () {
+        document.getElementById("stats_intel").classList.remove("stats-up");
+      }, 500);
+    }
+    if (this.stats.intel > nbr) {
+      document.getElementById("stats_intel").classList.add("stats-down");
+      setTimeout(function () {
+        document.getElementById("stats_intel").classList.remove("stats-down");
+      }, 500);
+    }
     this.stats.intel = nbr;
   },
   getIntel: function getIntel() {
     return this.stats.intel;
   },
   setAgility: function setAgility(nbr) {
+    if (this.stats.agility < nbr) {
+      document.getElementById("stats_agility").classList.add("stats-up");
+      setTimeout(function () {
+        document.getElementById("stats_agility").classList.remove("stats-up");
+      }, 500);
+    }
+    if (this.stats.agility > nbr) {
+      document.getElementById("stats_agility").classList.add("stats-down");
+      setTimeout(function () {
+        document.getElementById("stats_agility").classList.remove("stats-down");
+      }, 500);
+    }
     this.stats.agility = nbr;
   },
   getAgility: function getAgility() {
@@ -2006,7 +2055,7 @@ exports.default = {
 function gainLevel(player) {
   player.setLevel(player.getLevel() + 1);
 }
-},{"./utils":10,"./img/actions/sword.svg":12}],3:[function(require,module,exports) {
+},{"./utils":16,"./img/actions/sword.svg":17}],6:[function(require,module,exports) {
 'use strict';
 
 var _room = require('./room');
@@ -2035,6 +2084,7 @@ $(document).ready(function () {
 	console.log(_player2.default);
 
 	var card = document.getElementsByClassName('card-visible')[0];
+	var cardback = document.getElementById('cardback');
 	var tracker = document.getElementById('card-tracker');
 	var mc = new Hammer(tracker);
 
@@ -2093,7 +2143,7 @@ $(document).ready(function () {
 				card.classList.remove("noFade");
 				setTimeout(function () {
 					card.classList.remove("yesFade");card.classList.remove("yes");
-				}, 500);
+				}, 200);
 				_player2.default.thisRoom.isLastRoom = true;
 				currentRoom.swipeRight.action();
 				if (_player2.default.thisRoom.isLastRoom == false) {
@@ -2106,6 +2156,8 @@ $(document).ready(function () {
 					(0, _game.writeRoom)(currentRoom);
 				} else {
 					card.classList.add("yes-swipe");
+					card.classList.remove("front");
+					cardback.classList.remove("back");
 					setTimeout(function () {
 						(0, _player.gainLevel)(_player2.default);
 						currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
@@ -2113,6 +2165,8 @@ $(document).ready(function () {
 						(0, _game.writeRoom)(currentRoom);
 						document.getElementById("card").classList.remove("feedback-message");
 						card.classList.remove("yes-swipe");
+						card.classList.add("front");
+						cardback.classList.add("back");
 					}, 500);
 				}
 			} else if (elem.offsetLeft < -50) {
@@ -2121,7 +2175,7 @@ $(document).ready(function () {
 				card.classList.remove("yesFade");
 				setTimeout(function () {
 					card.classList.remove("noFade");card.classList.remove("no");
-				}, 500);
+				}, 200);
 				_player2.default.thisRoom.isLastRoom = true;
 				currentRoom.swipeLeft.action();
 				if (_player2.default.thisRoom.isLastRoom == false) {
@@ -2138,6 +2192,8 @@ $(document).ready(function () {
 					(0, _game.writeRoom)(currentRoom);
 				} else {
 					card.classList.add("no-swipe");
+					card.classList.remove("front");
+					cardback.classList.remove("back");
 					setTimeout(function () {
 						(0, _player.gainLevel)(_player2.default);
 						currentRoom = (0, _game.getNewRoom)(_room2.default, _swipeActions2.default, _player2.default);
@@ -2145,6 +2201,8 @@ $(document).ready(function () {
 						(0, _game.writeRoom)(currentRoom);
 						document.getElementById("card").classList.remove("feedback-message");
 						card.classList.remove("no-swipe");
+						card.classList.add("front");
+						cardback.classList.add("back");
 					}, 500);
 				}
 			} else {
@@ -2155,7 +2213,7 @@ $(document).ready(function () {
 		}
 	}
 });
-},{"./room":7,"./player":8,"./swipeActions":9,"./utils":10,"./game":13}],41:[function(require,module,exports) {
+},{"./room":13,"./player":14,"./swipeActions":15,"./utils":16,"./game":18}],126:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -2177,7 +2235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52572' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53048' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -2278,5 +2336,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[41,3])
+},{}]},{},[126,6])
 //# sourceMappingURL=/dist/7bd5d8033a082abbee597836b698ef37.map

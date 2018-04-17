@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({16:[function(require,module,exports) {
+})({20:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -101,7 +101,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],4:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,13 +132,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":16}],2:[function(require,module,exports) {
+},{"./bundle-url":20}],5:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./img\\texture-wood.svg":5,"./img\\bg\\bg-forest.svg":11,"./img\\cardback.svg":6,"./img\\monsters\\goblin.svg":15,"./img\\actions\\feed.svg":14,"./img\\actions\\sword.svg":12,"_css_loader":4}],41:[function(require,module,exports) {
+},{"./img\\texture-wood.svg":9,"./img\\bg\\bg-forest.svg":10,"./img\\cardback.svg":8,"./img\\monsters\\goblin.svg":12,"./img\\actions\\feed.svg":11,"./img\\actions\\sword.svg":17,"./img\\texture-paper.svg":83,"./img\\stats\\coins.svg":70,"./img\\stats\\agility.svg":53,"./img\\stats\\force.svg":56,"./img\\stats\\intelligence.svg":57,"_css_loader":7}],126:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -160,7 +160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52572' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53048' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -261,7 +261,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}],43:[function(require,module,exports) {
+},{}],127:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -340,7 +340,7 @@ LazyPromise.prototype.then = function (onSuccess, onError) {
 LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
-},{"./bundle-url":16}],0:[function(require,module,exports) {
-var b=require(43);b.load([["39895b98f0d48ddd5ceee1893aeece0f.svg",5],["e40904416d583be2cb57ca10d5414b1e.svg",11],["6e560b4f6d2ab8411824cffc6db3b09f.svg",6],["59d074125cf5a06a61465ff611789ea6.svg",15],["ddbcf682c06d1c80b1b0499be65ef159.svg",14],["d6939278153ea1a9e5e20047a11c31e2.svg",12]]);
-},{}]},{},[41,0])
+},{"./bundle-url":20}],0:[function(require,module,exports) {
+var b=require(127);b.load([["39895b98f0d48ddd5ceee1893aeece0f.svg",9],["e40904416d583be2cb57ca10d5414b1e.svg",10],["6e560b4f6d2ab8411824cffc6db3b09f.svg",8],["59d074125cf5a06a61465ff611789ea6.svg",12],["ddbcf682c06d1c80b1b0499be65ef159.svg",11],["d6939278153ea1a9e5e20047a11c31e2.svg",17],["891854726b1d792c7f256b6ec04a9d8d.svg",83],["573da1cb9c8c4e864e50741e488154f9.svg",70],["7bdb87b1f32e522bb0e505773a49dcf6.svg",53],["c2138c141abacf4d568619a95ebedae2.svg",56],["010e2d84ace7873e8bf459a13cb7f64b.svg",57]]);
+},{}]},{},[126,0])
 //# sourceMappingURL=/dist/be0a750c3b1a905f801c0b3c6bcfdb54.map

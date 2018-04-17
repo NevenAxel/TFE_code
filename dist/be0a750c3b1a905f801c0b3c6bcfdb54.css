@@ -3,25 +3,27 @@
       overflow: hidden;
       font-family: 'Lato', sans-serif;
       user-select: none;
+      color: #2D2D2D;
       background: url("39895b98f0d48ddd5ceee1893aeece0f.svg") center; 
     }
     li{
       list-style-type: none;
+      margin: 0;
     }
     ul{
-      text-align: left;
-      width: 300px;
-      margin: 0 auto;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-padding-start: 0;
     }
     .niveau{
       background: #724C33;
       color: #AF7643;
       border-radius: 10px;
-      padding: 5px;
-      font-size: 40px;
+      padding-bottom: 5px;
+      font-size: 20px;
       font-weight: 400;
       width: 300px;
-      margin: 20px auto 25px auto;
+      margin: 10px auto 10px auto;
       box-shadow: inset -2px -2px 0px 2px #7C5337;
     }
     #card-container{
@@ -72,6 +74,16 @@
       width: 290px;
       border-radius: 30px;
       border: 5px solid #333333;
+    }
+    .cardback-pile{
+      background: url("6e560b4f6d2ab8411824cffc6db3b09f.svg");
+      height: 340px;
+      width: 290px;
+      border-radius: 30px;
+      border: 5px solid #333333;
+      position: absolute;
+      top: 0;
+      z-index: -1;
     }
 
     #feedback{
@@ -244,11 +256,7 @@
       color: white;
       font-size: 22px;
       opacity: 0;
-    }
-
-
-    #room_type{margin: 0; padding: 0; line-height: 1;}
-    h3{margin: 10px 0; padding: 0; line-height: 0;}
+    }    
 
     .feedback-message{
       filter: brightness(.25);
@@ -257,3 +265,169 @@
       0% {opacity: 0; transform: scale(0);}
       100% {opacity: 1; transform: scale(1);}
     } 
+
+/* ---------------------------- STATS ------------- */
+.bg{
+  background: #E5CEAC;
+  width: 100vw;
+  height: 50vh;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  top: 500px;
+
+}
+.character{
+  margin-top: 15px;
+  padding-top: 25px;
+  background: url("891854726b1d792c7f256b6ec04a9d8d.svg") top repeat-x; 
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  height: 60vh;
+}
+.ul-stats{
+  margin: 10px auto 0 auto;
+  width: 300px;
+  display: block;
+  background: white;
+}
+.ul-stats li{
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+}
+
+.stats{
+  width: 65px;
+  height: 65px;
+  display: block;
+  text-align: right;
+  line-height: 3;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.stats-up{
+  color:#3b8420;
+  transform: scale(1.2);
+}
+.stats-down{
+  color:#e5414d;
+  transform: scale(0.8);
+}
+.hp-bar{
+  width: 300px;
+  background: #ccb79e;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.5;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  z-index: 1
+}
+.hp-bar span{
+  z-index: 3;
+}
+#hpRemaining{
+  transition: .5s;
+  width: 100%;
+  background: #e5414d;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  border-radius: 10px;
+}
+
+
+
+#stats_class{
+  font-weight: 700;
+  font-size: 25px;
+}
+
+#stats_coins{
+  background: url("573da1cb9c8c4e864e50741e488154f9.svg") no-repeat top left;
+  margin-right: 13.33px;
+  transition: 0.25s;
+}
+
+#stats_agility{
+  background: url("7bdb87b1f32e522bb0e505773a49dcf6.svg") no-repeat center;
+  transition: 0.25s;
+  
+}
+#stats_str{
+  background: url("c2138c141abacf4d568619a95ebedae2.svg") no-repeat center;
+  margin-right: 13.33px;
+  transition: 0.25s;
+}
+#stats_intel{
+  background: url("010e2d84ace7873e8bf459a13cb7f64b.svg") no-repeat center;
+  margin-right: 13.33px;
+  transition: 0.25s;
+}
+
+
+/*--------------------- ANIMATION  FLIP CARD */
+
+.back {
+  transform: rotateY(180deg);
+  animation-duration: 1s;
+  animation-name: zoom2;
+}
+.front {
+  opacity: 1;
+  animation-duration: 1s;
+  animation-name: zoom, flip;
+  z-index: 2;
+}
+
+
+@keyframes flip{
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1) rotateY(-180deg);
+  }
+  
+  50% {
+    transform: scale(1.1) rotateY(0deg); 
+  }
+
+  75% {
+    transform: scale(1) rotateY(0deg)
+  }
+}
+
+@keyframes zoom2 {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+  
+  50% {
+    transform: scale(1.1) rotateY(180deg); 
+  }
+
+  75% {
+    transform: scale(1) rotateY(0deg)
+  }
+}

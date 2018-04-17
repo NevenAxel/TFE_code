@@ -7,19 +7,19 @@ import bow_svg from './img/actions/bow.svg';
 
 export function writeStats(player){
     switch(player.getRole()) {
-    case "mage":
+    case "Mage":
         player.setRoleStats(player.getIntel());
         player.stats.weapon = "wand";
         player.stats.weaponImg = "wand.png";
         player.stats.defaultAttack = "Attaquer";
         break;
-    case "warrior":
+    case "Guerrier":
         player.setRoleStats(player.getStr());
         player.stats.weapon = "sword";
         player.stats.weaponImg = sword_svg;
         player.stats.defaultAttack = "Attaquer";
         break;
-    case "rogue":
+    case "Archer":
         player.setRoleStats(player.getAgility());
         player.stats.weapon = "bow";
         player.stats.weaponImg = bow_svg;

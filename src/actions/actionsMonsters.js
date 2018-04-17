@@ -23,17 +23,17 @@ function generateAttack(player, swipeActions){
 		img: function () {return player.stats.weaponImg},
 		action: function() {
 			switch(player.getRole()) {
-			    case "mage":
+			    case "Mage":
 			        player.setHp(
 						player.getHp() - this.damage, player
 					);
 			        break;
-			    case "warrior":
+			    case "Guerrier":
 			        player.setHp(
 						player.getHp() - this.damage, player
 					);
 			        break;
-			    case "rogue":		        
+			    case "Archer":		        
 			        if(Math.random() < 0.45){
 						player.setHp(
 							player.getHp() - this.damage * 2, player

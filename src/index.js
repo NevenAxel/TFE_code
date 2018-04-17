@@ -19,6 +19,7 @@ $(document).ready(function(){
 
 
 	var card = document.getElementsByClassName('card-visible')[0];
+	var cardback = document.getElementById('cardback');
 	var tracker = document.getElementById('card-tracker');
 	var mc = new Hammer(tracker);
 
@@ -79,7 +80,7 @@ $(document).ready(function(){
 	      elem.style.left = 0 + "px";
 	      card.classList.add("yesFade");
 	      card.classList.remove("noFade");
-	      setTimeout(function(){ card.classList.remove("yesFade"); card.classList.remove("yes"); }, 500);
+	      setTimeout(function(){ card.classList.remove("yesFade"); card.classList.remove("yes"); }, 200);
 	      	player.thisRoom.isLastRoom = true;
 	      	currentRoom.swipeRight.action();
 	      	if(player.thisRoom.isLastRoom == false){
@@ -91,6 +92,8 @@ $(document).ready(function(){
 			}
 			else{
 				card.classList.add("yes-swipe");
+				card.classList.remove("front")
+		    	cardback.classList.remove("back")
 				setTimeout(function(){ 
 					gainLevel(player);
 					currentRoom = getNewRoom(room, swipeActions, player);		
@@ -98,6 +101,8 @@ $(document).ready(function(){
 					writeRoom(currentRoom);  
 					document.getElementById("card").classList.remove("feedback-message");
 					card.classList.remove("yes-swipe");
+					card.classList.add("front")
+		    		cardback.classList.add("back")
 				}, 500);
 			}
 	    }
@@ -105,7 +110,7 @@ $(document).ready(function(){
 	      elem.style.left = 0 + "px"; 
 	      card.classList.add("noFade");
 	      card.classList.remove("yesFade");
-	      setTimeout(function(){ card.classList.remove("noFade"); card.classList.remove("no"); }, 500);
+	      setTimeout(function(){ card.classList.remove("noFade"); card.classList.remove("no"); }, 200);
 	      	player.thisRoom.isLastRoom = true;
 	      	currentRoom.swipeLeft.action();
 	      	if(player.thisRoom.isLastRoom == false){
@@ -121,13 +126,17 @@ $(document).ready(function(){
 		    }
 	    	else{
 	    		card.classList.add("no-swipe");
+	    		card.classList.remove("front")
+		    	cardback.classList.remove("back")
 	    		setTimeout(function(){
 	    			gainLevel(player);
 		    		currentRoom = getNewRoom(room, swipeActions, player);
 		    		writeStats(player);
 		    		writeRoom(currentRoom);	
 		    		document.getElementById("card").classList.remove("feedback-message");
-		    		card.classList.remove("no-swipe")
+		    		card.classList.remove("no-swipe");
+		    		card.classList.add("front")
+		    		cardback.classList.add("back")
 	    		}, 500); 	
 	    	}
 	    }

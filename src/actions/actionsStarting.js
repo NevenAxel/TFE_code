@@ -16,7 +16,7 @@ function generateWand(player, swipeActions){
 		text: function () {return "Prendre le baton"},
 		img: function () {return "wand.png"},
 		action: function() {
-			player.setRole('mage')
+			player.setRole('Mage')
 			player.setIntel(
 				player.getIntel() + 5
 			);
@@ -30,7 +30,7 @@ function generateSword(player, swipeActions){
 		text: function () {return "Prendre l'épée"},
 		img: function () {return sword_svg},
 		action: function() {
-			player.setRole('warrior')
+			player.setRole('Guerrier')
 			player.setStr(
 				player.getStr() + 5
 			);
@@ -50,7 +50,7 @@ function generateBow(player, swipeActions){
 		text: function () {return "Prendre l'arc"},
 		img: function () {return bow_svg},
 		action: function() {
-			player.setRole('rogue')
+			player.setRole('Archer')
 			player.setAgility(
 				player.getAgility() + 5
 			);
