@@ -45,20 +45,20 @@ export default {
   monsterHumanoid: [
   ],
   monsterHumanoidRogue: [
-  	{name: 'steal', rarity: 2},
+  	{name: 'steal', rarity: 1},
   ],
   monsterHumanoidAgility: [
-  	{name: 'steal', rarity: 1},
+  	{name: 'steal', rarity: 3},
   ],
 
 
   basicChest: [
   	{name: 'hpPotion', rarity: 10},
   	{name: 'bagOfCoins', rarity: 10},
-  	{name: 'spinach', rarity: 5},
+  	{name: 'spinach', rarity: 0},
   	{name: 'magicBook', rarity: 4},
-  	{name: 'speedShoes', rarity: 2},
-  	{name: 'dumbBell', rarity: 2},
+  	{name: 'speedShoes', rarity: 0},
+  	{name: 'dumbBell', rarity: 4},
   ],
 
   mushroom: [

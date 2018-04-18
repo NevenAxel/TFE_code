@@ -3,6 +3,8 @@ import { feedbackMessage } from '../game';
 
 import potionhp_svg from '../img/loot/potionhp.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
+import dumbbell_svg from '../img/loot/dumbbell.svg';
+import magicbook_svg from '../img/loot/magicbook.svg';
 
 export default {
   generateHpPotion,
@@ -76,7 +78,7 @@ function generateMagicBook(player, swipeActions){
   	return {
   		name: "magicbook",
 		text: function () {return "Livre sur la magie (+5 Intel)"},
-		img: function () {return "magicBook.png"},
+		img: function () {return magicbook_svg},
 		action: function() {
 			player.setIntel(
 				player.getIntel() + 5
@@ -102,7 +104,7 @@ function generateDumbBell(player, swipeActions){
   	return {
   		name: "dumbbell",
 		text: function () {return "Haltères (+5 Force)"},
-		img: function () {return "DumbBell.png"},
+		img: function () {return dumbbell_svg},
 		action: function() {
 			if(player.getIntel() >= 5){
 			player.setStr(

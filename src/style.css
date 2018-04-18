@@ -1,10 +1,12 @@
     body{
       text-align: center;
-      overflow: hidden;
       font-family: 'Lato', sans-serif;
       user-select: none;
       color: #2D2D2D;
-      background: url("./img/texture-wood.svg") center; 
+      margin: 0;
+      overflow-x: hidden;
+      background: #3F2A19;
+      transform:translateZ(0)
     }
     li{
       list-style-type: none;
@@ -15,6 +17,64 @@
       -webkit-margin-after: 0;
       -webkit-padding-start: 0;
     }
+    button:focus {outline:0;}
+    button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+  }
+    .mobile-simulation{
+      background: url("./img/texture-wood.svg") center; 
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    @media (min-width: 500px) {
+      .mobile-simulation{
+        width: 400px;
+        height: 620px;
+        border-radius: 20px;
+        margin: 8vh auto;
+      }
+    }
+    #gameover-filter{
+      background: black;
+      display: none;
+      position: absolute;
+      border-radius: 20px;
+      height: 100%;
+      width: 100%;
+      z-index: 5;
+      opacity: 0;
+      transition-property: opacity;
+      transition: 1s;
+    }
+    @media (min-width: 500px) {
+      #gameover-filter{
+        border-radius: 0;
+      }
+    }
+    
+
     .niveau{
       background: #724C33;
       color: #AF7643;
@@ -51,8 +111,12 @@
       right: 0;
       position: absolute;
       transition: 0.1s;
-      border-radius: 30px;
-      box-shadow: 6px 6px 29px -9px rgba(0,0,0,0.65);
+      border-radius: 30px;   
+    }
+    @media (min-width: 500px) {
+      .card-visible{
+        box-shadow: 6px 6px 29px -9px rgba(0,0,0,0.65);
+      }
     }
     #card{
       height: 280px;
@@ -120,7 +184,7 @@
     #room_img{
       background: url("./img/monsters/goblin.svg") center no-repeat;
       width: 220px;
-      height: 220px;
+      height: 240px;
       margin: 0 auto;
       margin-top: 40px;
     }
@@ -128,7 +192,7 @@
       background: #D8D3AF;
       height: 46px;
       line-height: 1;
-      margin-top: 20px;
+      margin-top: 0px;
       padding: 12px;
       line-height: 1.4;
       
@@ -141,12 +205,14 @@
       -o-transform: rotate(10deg) translateX(50px);
       -ms-transform: rotate(10deg) translateX(50px);
       transform: rotate(10deg) translateX(50px);
+      transform-style: preserve-3d;
     }
 
     .yes-swipe {
       animation-name: swipeLeft;
       animation-duration: .5s;
       animation-timing-function: ease-out;
+      transform-style: preserve-3d;
     }
     @keyframes swipeLeft{
       0% {
@@ -158,11 +224,11 @@
       }
 
       100% {
-        -moz-transform: rotate(25deg) translateX(90vw);
-        -webkit-transform: rotate(25deg) translateX(90vw);
-        -o-transform: rotate(25deg) translateX(90vw);
-        -ms-transform: rotate(25deg) translateX(90vw);
-        transform: rotate(25deg) translateX(90vw);
+        -moz-transform: rotate(15deg) translateX(500px);
+        -webkit-transform: rotate(15deg) translateX(500px);
+        -o-transform: rotate(15deg) translateX(500px);
+        -ms-transform: rotate(15deg) translateX(500px);
+        transform: rotate(15deg) translateX(500px);
       }
     }
 
@@ -182,12 +248,14 @@
     -o-transform: rotate(-10deg) translateX(-50px);
     -ms-transform: rotate(-10deg) translateX(-50px);
     transform: rotate(-10deg) translateX(-50px);
+    transform-style: preserve-3d;
     }
 
     .no-swipe {
       animation-name: swipeRight;
       animation-duration: .5s;
       animation-timing-function: ease-out;
+      transform-style: preserve-3d;
     }
 
     @keyframes swipeRight{
@@ -200,11 +268,11 @@
       }
 
       100% {
-        -moz-transform: rotate(-25deg) translateX(-90vw);
-        -webkit-transform: rotate(-25deg) translateX(-90vw);
-        -o-transform: rotate(-25deg) translateX(-90vw);
-        -ms-transform: rotate(-25deg) translateX(-90vw);
-        transform: rotate(-25deg) translateX(-90vw);
+        -moz-transform: rotate(-15deg) translateX(-500px);
+        -webkit-transform: rotate(-15deg) translateX(-500px);
+        -o-transform: rotate(-15deg) translateX(-500px);
+        -ms-transform: rotate(-15deg) translateX(-500px);
+        transform: rotate(-15deg) translateX(-500px);
       }
     }
     .no #btn_no-text {
@@ -217,14 +285,18 @@
       transition: .5s;
     }
     #btn_no {
-      background: url("./img/actions/feed.svg") no-repeat center;
+      background: no-repeat center;
       width: 80px;
       height: 80px;
       position: absolute;
       left: -30px;
       bottom: 30px;
       line-height: 1;
-      filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
+    }
+    @media (min-width: 500px) {
+      #btn_no {
+        filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
+      }
     }
     #btn_no-text{
       position: absolute;
@@ -238,15 +310,20 @@
     }
 
     #btn_yes {
-      background: url("./img/actions/sword.svg") no-repeat center;
+      background: no-repeat center;
       width: 80px;
       height: 80px;
       position: absolute;
       right: -30px;
       bottom: 30px;
       line-height: 1;
-      filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
     }
+    @media (min-width: 500px) {
+      #btn_no {
+        filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
+      }
+    }
+
     #btn_yes-text{
       position: absolute;
       bottom: -45px;
@@ -267,32 +344,23 @@
     } 
 
 /* ---------------------------- STATS ------------- */
-.bg{
-  background: #E5CEAC;
-  width: 100vw;
-  height: 50vh;
-  position: absolute;
-  left: 0;
-  z-index: -1;
-  top: 500px;
-
-}
 .character{
-  margin-top: 15px;
-  padding-top: 25px;
-  background: url("./img/texture-paper.svg") top repeat-x; 
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  height: 60vh;
+  width: 100%;
+  height: 150px;
+  padding: 10px 0px 10px 0px;
+  margin: 25px auto;
+  background: #D8D3AF;
+}
+
+#stats_class{
+  margin: 0 0 8px 0;
 }
 .ul-stats{
-  margin: 10px auto 0 auto;
-  width: 300px;
+  margin: 0 auto;
+  width: 280px;
   display: block;
-  background: white;
 }
-.ul-stats li{
+.ul-stats_li{
   float: left;
   text-align: center;
   font-size: 16px;
@@ -312,23 +380,25 @@
 .stats-up{
   color:#3b8420;
   transform: scale(1.2);
+  transform-style: preserve-3d;
 }
 .stats-down{
   color:#e5414d;
   transform: scale(0.8);
+  transform-style: preserve-3d;
 }
 .hp-bar{
-  width: 300px;
+  width: 280px;
+  margin-top: 10px;
   background: #ccb79e;
   color: white;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.5;
   display: block;
   text-align: center;
-  margin-bottom: 10px;
   border-radius: 10px;
-  z-index: 1
+  z-index: 1;
 }
 .hp-bar span{
   z-index: 3;
@@ -343,8 +413,6 @@
   border-radius: 10px;
 }
 
-
-
 #stats_class{
   font-weight: 700;
   font-size: 25px;
@@ -352,7 +420,7 @@
 
 #stats_coins{
   background: url("./img/stats/coins.svg") no-repeat top left;
-  margin-right: 13.33px;
+  margin-right: 6.66px;
   transition: 0.25s;
 }
 
@@ -363,19 +431,78 @@
 }
 #stats_str{
   background: url("./img/stats/force.svg") no-repeat center;
-  margin-right: 13.33px;
+  margin-right: 6.66px;
   transition: 0.25s;
 }
 #stats_intel{
   background: url("./img/stats/intelligence.svg") no-repeat center;
-  margin-right: 13.33px;
+  margin-right: 6.66px;
   transition: 0.25s;
 }
 
+/* --------------------- GAME OVER MESSAGE */
+.off{
+  display: none;
+}
+
+.on{
+  display: block;
+}
+
+.gameover{
+  width: 330px;
+  padding: 10px;
+  background: #D8D3AF;
+  position: absolute;
+  border-radius: 20px;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 17%;
+  animation-name: popup;
+  animation-duration: .2s;
+}
+#gameover-message{
+  margin-top: 10px;
+}
+#gameover-retry{
+  margin-bottom: 10px
+}
+
+.btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  -webkit-box-shadow: 0px 3px 0px #000000;
+  -moz-box-shadow: 0px 3px 0px #000000;
+  box-shadow: 0px 3px 0px #000000;
+  color: #ffffff;
+  font-size: 20px;
+  background: #4C4A3F;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  text-decoration: none;
+  box-shadow: none;
+  transform: translateY(3px);
+}
+.gameover p{
+  font-size: 20px;
+}
+
+@keyframes popup{
+  0%{ transform: scale(0.1); }
+  100%{ transform: scale(1); }
+}
 
 /*--------------------- ANIMATION  FLIP CARD */
 
 .back {
+  transform-style: preserve-3d;
   transform: rotateY(180deg);
   animation-duration: 1s;
   animation-name: zoom2;
@@ -386,7 +513,6 @@
   animation-name: zoom, flip;
   z-index: 2;
 }
-
 
 @keyframes flip{
   0% {

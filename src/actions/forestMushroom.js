@@ -78,7 +78,7 @@ function generateMagicMushroom(player, swipeActions){
 		text: function () {return "Manger"},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "Ce champignon vous a fait du bien");
+			feedbackMessage(player, "Vous vous sentez plus grand");
 			player.setMaxHp(
 				player.getMaxHp() + 3
 			);

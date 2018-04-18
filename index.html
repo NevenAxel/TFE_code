@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="mobile-simulation">
+  <div id="gameover-filter"></div>
   <h2 class="niveau">Niveau <span id="level"></span></h2>
 
   <div id="card-container">
@@ -36,19 +37,37 @@
     <div class="cardback-pile"></div>
   </div>
 
-
-
   <div class="character">
-    <p><span id="stats_class"></span></p>
+    <p id="stats_class"></p>
     <ul class="ul-stats">
-      <li class="hp-bar"><div id="hpRemaining"></div><span id="stats_hp"></span> / <span id="stats_maxhp"></span></li>
-      <li><span class="stats" id="stats_coins"></span><span class="stats_name">pièces</span></li>
-      <li><span class="stats" id="stats_str"></span><span class="stats_name">force</span></li>
-      <li><span class="stats" id="stats_intel"></span><span class="stats_name">intellect</span></li>
-      <li><span class="stats" id="stats_agility"></span><span class="stats_name">agilité</span></li>
+      <li class="ul-stats_li">
+        <span class="stats" id="stats_coins"></span>
+        <span class="stats_name"></span>
+      </li>
+      <li class="ul-stats_li">
+        <span class="stats" id="stats_str"></span>
+        <span class="stats_name"></span>
+      </li>
+      <li class="ul-stats_li">
+        <span class="stats" id="stats_intel"></span>
+        <span class="stats_name"></span>
+      </li>
+      <li class="ul-stats_li">
+        <span class="stats" id="stats_agility"></span>
+        <span class="stats_name"></span>
+      </li>
+      <li class="ul-stats_li hp-bar">
+        <div id="hpRemaining"></div>
+        <span id="stats_hp"></span> / <span id="stats_maxhp"></span>
+      </li>
     </ul>
   </div>
-  <div class="bg"></div>
+
+  <div class="gameover off">
+    <p id="gameover-message">Vous êtes mort!</p>
+    <p>Bravo, Vous avez atteint le niveau <span id="gameover-lvl">4</span> !</p>
+    <button class="btn" id="gameover-retry">Réessayer ?</button>
+  </div>
 </div>
 
 	<script charset="UTF-8" src="./src/index.js"></script>

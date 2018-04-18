@@ -4,15 +4,17 @@ import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
 
+import forgeron_svg from '../img/monsters/forgeron.svg';
+
 export default {
   startingGenerator
 };
   
 
 function startingGenerator(player, swipeActions) {
-  var name = 'Garde du donjon';
+  var name = 'Forgeron';
   var desc = 'Equipe toi aventurier';
-  var img = 'dungeonGuard.png';
+  var img = forgeron_svg;
 
   var availableActions = swipeActions.starting;
   var actionNoDupe = generateTwoActionsNoDupe(availableActions);
