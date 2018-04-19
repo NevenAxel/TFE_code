@@ -3,6 +3,8 @@ import { getRandomNumber } from './utils';
 
 import sword_svg from './img/actions/sword.svg';
 import bow_svg from './img/actions/bow.svg';
+import swipeleft_svg from './img/actions/swipeleft.svg';
+import swiperight_svg from './img/actions/swiperight.svg';
 
 
 export function writeStats(player){
@@ -66,22 +68,24 @@ export function feedbackMessage(player, message){
     player.thisRoom.isLastRoom = false; 
     player.thisRoom.nextRoom = {
         swipeLeft: {
-            img: function () {return },
+            img: function () {return swipeleft_svg},
             action: function() {
                 document.getElementById("feedback").style.display = "none";
+                document.getElementById("filter-feedback").style.display = "none";
             },
-            text: function () {return ""},
+            text: function () {return "Carte suivante"},
         },
         swipeRight: {
-            img: function () {return },
+            img: function () {return swiperight_svg},
             action: function() {
                 document.getElementById("feedback").style.display = "none";
+                document.getElementById("filter-feedback").style.display = "none";
             },
-            text: function () {return ""},
+            text: function () {return "Carte suivante"},
         }
     }  
     var feedbackMessage = document.getElementById("card");
-    feedbackMessage.classList.add("feedback-message");
+    document.getElementById("filter-feedback").style.display = "block";
     document.getElementById("feedback").style.display = "block";
     document.getElementById("feedback").innerHTML = message;
 }
