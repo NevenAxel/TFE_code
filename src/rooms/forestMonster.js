@@ -87,7 +87,7 @@ export default {
   function gobelinGenerator(player, swipeActions) {
     var name = 'Petit gobelin';
     var img = goblin_svg;
-    var desc = "Je suis sur que tu as pleins de pièces d'or sur toi!";
+    var desc = "Je vais te dépouiller!";
     var availableActions = createAvailableActions(player, swipeActions,[
       'monsterGeneral',
       'monsterHumanoid',

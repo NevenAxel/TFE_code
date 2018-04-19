@@ -91,19 +91,22 @@ $(document).ready(function(){
 	      		writeRoom(currentRoom);	
 			}
 			else{
-				card.classList.add("yes-swipe");
-				card.classList.remove("front")
-		    	cardback.classList.remove("back")
-				setTimeout(function(){ 
-					gainLevel(player);
-					currentRoom = getNewRoom(room, swipeActions, player);		
-					writeStats(player);
-					writeRoom(currentRoom);  
-					document.getElementById("card").classList.remove("feedback-message");
-					card.classList.remove("yes-swipe");
-					card.classList.add("front")
-		    		cardback.classList.add("back")
-				}, 500);
+				writeStats(player);
+				if(player.stats.alive){
+					card.classList.add("yes-swipe");
+					card.classList.remove("front")
+		    		cardback.classList.remove("back")
+					setTimeout(function(){ 
+						gainLevel(player);
+						currentRoom = getNewRoom(room, swipeActions, player);		
+						writeRoom(currentRoom);  
+						document.getElementById("card").classList.remove("feedback-message");
+						card.classList.remove("yes-swipe");
+						card.classList.add("front")
+			    		cardback.classList.add("back")
+					}, 500);
+				}
+				
 			}
 	    }
 	    else if (elem.offsetLeft < -50) {
@@ -114,10 +117,6 @@ $(document).ready(function(){
 	      	player.thisRoom.isLastRoom = true;
 	      	currentRoom.swipeLeft.action();
 	      	if(player.thisRoom.isLastRoom == false){
-	      		/*
-				Mettre en place un système qui si la desc, l'img ou le swipeLeft/swipeRight n'est pas définis
-				ne pas le remplacer par un "undefined" et donc laisser la valeur existante
-	      		*/
 	      		if (player.thisRoom.nextRoom.desc != undefined){currentRoom.desc = player.thisRoom.nextRoom.desc;}
 	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
 	      		currentRoom.swipeRight = player.thisRoom.nextRoom.swipeRight;
@@ -125,19 +124,21 @@ $(document).ready(function(){
 	      		writeRoom(currentRoom);	
 		    }
 	    	else{
-	    		card.classList.add("no-swipe");
-	    		card.classList.remove("front")
-		    	cardback.classList.remove("back")
-	    		setTimeout(function(){
-	    			gainLevel(player);
-		    		currentRoom = getNewRoom(room, swipeActions, player);
-		    		writeStats(player);
-		    		writeRoom(currentRoom);	
-		    		document.getElementById("card").classList.remove("feedback-message");
-		    		card.classList.remove("no-swipe");
-		    		card.classList.add("front")
-		    		cardback.classList.add("back")
-	    		}, 500); 	
+	    		writeStats(player);
+	    		if(player.stats.alive){
+		    		card.classList.add("no-swipe");
+		    		card.classList.remove("front")
+			    	cardback.classList.remove("back")
+		    		setTimeout(function(){
+		    			gainLevel(player);
+			    		currentRoom = getNewRoom(room, swipeActions, player);
+			    		writeRoom(currentRoom);	
+			    		document.getElementById("card").classList.remove("feedback-message");
+			    		card.classList.remove("no-swipe");
+			    		card.classList.add("front")
+			    		cardback.classList.add("back")
+		    		}, 500); 	
+		    	}
 	    	}
 	    }
 	    else{

@@ -54,7 +54,7 @@ export function createAvailableActions(player, swipeActions, objectList){
   });
 
   // Ajouter les actions spécifique à la classe si le joueur est de cette classe
-  if(player.getRole() == "rogue"){
+  if(player.getRole() == "Voleur"){
     objectList.forEach(function(element) {
       var actionList = element + 'Rogue';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -65,7 +65,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getRole() == "mage"){
+  if(player.getRole() == "Mage"){
     objectList.forEach(function(element) {
       var actionList = element + 'Mage';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -76,7 +76,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getRole() == "warrior"){
+  if(player.getRole() == "Guerrier"){
     objectList.forEach(function(element) {
       var actionList = element + 'Warrior';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -87,7 +87,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getRole() == "agility"){
+  if(player.getAgility() > 10){
     objectList.forEach(function(element) {
       var actionList = element + 'Agility';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -98,7 +98,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getRole() == "intelligence"){
+  if(player.getIntel() > 10){
     objectList.forEach(function(element) {
       var actionList = element + 'Intelligence';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -109,7 +109,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getRole() == "strenght"){
+  if(player.getStr() > 10){
     objectList.forEach(function(element) {
       var actionList = element + 'Strenght';
       if(typeof swipeActions[actionList] !== "undefined"){

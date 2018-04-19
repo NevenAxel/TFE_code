@@ -1,4 +1,5 @@
 import { getRandomNumber } from './utils';
+import { gameOver } from './game';
 
 import sword_svg from './img/actions/sword.svg';
 
@@ -6,7 +7,7 @@ export default {
   stats: {
     hp: 20,
     maxHp: 20,
-    coin: 20,
+    coin: 5,
     str: getRandomNumber(3, 7),
     intel: getRandomNumber(3, 7),
     agility: getRandomNumber(3, 7),
@@ -16,12 +17,17 @@ export default {
     weapon: "sword",
     weaponImg: "sword.png",
     defaultAttack: "Attaquer",
+    alive: true,
   },  
   thisRoom: {
     isLastRoom: true,
     nextRoom: function() {console.log("newRoom")},
   },
   setHp: function(nbr, player) {
+    if(nbr <= 0){
+      this.stats.hp = 0;
+      gameOver(player, "Vous êtes mort!");
+    }
     if(nbr > player.getMaxHp()){
       this.stats.hp = player.getMaxHp();
     }

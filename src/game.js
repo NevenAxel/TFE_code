@@ -3,6 +3,8 @@ import { getRandomNumber } from './utils';
 
 import sword_svg from './img/actions/sword.svg';
 import bow_svg from './img/actions/bow.svg';
+import swipeleft_svg from './img/actions/swipeleft.svg';
+import swiperight_svg from './img/actions/swiperight.svg';
 
 
 export function writeStats(player){
@@ -65,32 +67,50 @@ export function getNewRoom(room, swipeActions, player){
 export function feedbackMessage(player, message){
     player.thisRoom.isLastRoom = false; 
     player.thisRoom.nextRoom = {
-                    swipeLeft: {
-                        img: function () {return },
-                        action: function() {
-                            document.getElementById("feedback").style.opacity = 0;
-                        },
-                        text: function () {return ""},
-                    },
-                    swipeRight: {
-                        img: function () {return },
-                        action: function() {
-                            document.getElementById("feedback").style.opacity = 0;
-                        },
-                        text: function () {return ""},
-                    }
-                }
-
-    
+        swipeLeft: {
+            img: function () {return swipeleft_svg},
+            action: function() {
+                document.getElementById("feedback").style.display = "none";
+                document.getElementById("filter-feedback").style.display = "none";
+            },
+            text: function () {return "Carte suivante"},
+        },
+        swipeRight: {
+            img: function () {return swiperight_svg},
+            action: function() {
+                document.getElementById("feedback").style.display = "none";
+                document.getElementById("filter-feedback").style.display = "none";
+            },
+            text: function () {return "Carte suivante"},
+        }
+    }  
     var feedbackMessage = document.getElementById("card");
-    feedbackMessage.classList.add("feedback-message");
-    document.getElementById("feedback").style.opacity = 1;
+    document.getElementById("filter-feedback").style.display = "block";
+    document.getElementById("feedback").style.display = "block";
     document.getElementById("feedback").innerHTML = message;
-    
+}
 
-    /*
-    document.getElementById("feedback-message").innerHTML = message;
-    document.getElementById("feedback-message").style.opacity = 1;
-    setTimeout(function(){ document.getElementById("feedback-message").style.opacity = 0; }, 8000);
-    */
+export function gameOver(player, deathMessage){
+    player.stats.alive = false;
+    document.getElementById('gameover-message').innerHTML = deathMessage;
+    document.getElementById('gameover-lvl').innerHTML = player.stats.level;
+    document.getElementById('card-tracker').style.display = "none";
+    function retry(){
+        window.location.reload(false);
+    }
+    document.getElementById("gameover-retry").addEventListener("click", retry);
+    if(document.getElementById("feedback").style.display != "none"){
+        setTimeout(function(){
+            document.getElementsByClassName("gameover")[0].classList.add("on")
+            document.getElementById('gameover-filter').style.display = "block";
+            document.getElementById('gameover-filter').style.opacity = ".75";
+        }, 1500);   
+    }
+    else{
+        setTimeout(function(){ 
+            document.getElementsByClassName("gameover")[0].classList.add("on")
+            document.getElementById('gameover-filter').style.display = "block";
+            document.getElementById('gameover-filter').style.opacity = ".75";
+        }, 1500); 
+    }
 }

@@ -5,6 +5,7 @@ import feed_svg from '../img/actions/feed.svg';
 import escape_svg from '../img/actions/escape.svg';
 import givecoins_svg from '../img/actions/givecoins.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
+import scream_svg from '../img/actions/scream.svg';
 
 export default {
   generateAttack,
@@ -61,7 +62,7 @@ function generateGiveCoins(player, swipeActions){
 		img: function () {return givecoins_svg},
 		action: function () {
 			if (player.getCoin() - this.coinsGiven < 0){
-				feedbackMessage(player, "J'ai vu que tu n'avais pas assez de pièces, j'aime pas les arnaqueur moi!");
+				feedbackMessage(player, "Tu n'as pas assez de pièces! J'aime pas les arnaqueurs moi!");
 				player.setCoin(0);
 				player.setHp(
 					player.getHp() - 10, player
@@ -80,10 +81,20 @@ function generateGiveCoins(player, swipeActions){
 						text: function () {return "Donner " + this.coinsGiven2 + " pièces en plus"},
 						img: function () {return givecoins_svg},
 						action: function() {
-							feedbackMessage(player, "J'aime mieux ça!");
-							player.setCoin(
-								player.getCoin() - this.coinsGiven2
-							);
+							if (player.getCoin() - this.coinsGiven2 < 0){
+								feedbackMessage(player, "Tu n'as pas assez de pièces! J'aime pas les arnaqueurs moi!");
+								player.setCoin(0);
+								player.setHp(
+									player.getHp() - 10, player
+								);
+							}
+							else{
+								feedbackMessage(player, "J'aime mieux ça!");
+								player.setCoin(
+									player.getCoin() - this.coinsGiven2
+								);	
+							}
+							
 						}
 					},
 					swipeRight: swipeActions.actionsGenerator.attack(player, swipeActions),
@@ -105,10 +116,10 @@ function generateScream(player, swipeActions){
 		require: 10,
 		damage: 5,
 		text: function () {return "Crier"},
-		img: function () {return "scream.png"},
+		img: function () {return scream_svg},
 		action: function() {
 			if (player.getStr() >= this.require) {
-				feedbackMessage(player, "L'ennemi a eu peur et s'est enfuis en courant")
+				feedbackMessage(player, "L'ennemi a eu peur et s'est enfuis")
 			}
 			else {
 				feedbackMessage(player, "Votre cris n'est pas assez fort, gagnez un peu plus de force!")
@@ -168,7 +179,7 @@ function generateFeed(player, swipeActions){
 				);
 			}
 			else {
-				feedbackMessage(player, 'Il a tout mangé et ne vous a pas attaqué');
+				feedbackMessage(player, "L'animal a tout mangé et ne vous a pas attaqué");
 			}			
 		},
 	}
