@@ -15,14 +15,9 @@ export function shuffle(a) {
     return a;
 }
 
-export function randomOne() {
-	var args = Array.prototype.slice.call(arguments);
-	return randomProperties(args)
-}
-
-export function getRandomAction(actionList) {
-    return actionList[Math.floor(Math.random() * actionList.length)];
-  };
+export function getRandomArray(arrayList) {
+    return arrayList[Math.floor(Math.random() * arrayList.length)];
+};
 
 
 

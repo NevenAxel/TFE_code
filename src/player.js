@@ -23,6 +23,10 @@ export default {
     isLastRoom: true,
     nextRoom: function() {console.log("newRoom")},
   },
+  special: {
+    frogFriend: 0,
+    frogHater: 0,
+  },
   setHp: function(nbr, player) {
     if(nbr <= 0){
       this.stats.hp = 0;

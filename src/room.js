@@ -15,8 +15,9 @@ export default {
     {name: 'wolf', rarity: 0},
     {name: 'rogue', rarity: 2},
     {name: 'gobelin', rarity: 3},
-    {name: 'spider', rarity: 5},
+    {name: 'spider', rarity: 0},
     {name: 'shroom', rarity: 5},
+    {name: 'frog', rarity: 50},
   ],
 
   forestLootList : [
@@ -32,6 +33,7 @@ export default {
     rogue: forestMonster.rogueGenerator,
     gobelin: forestMonster.gobelinGenerator,
     spider: forestMonster.spiderGenerator,
+    frog: forestMonster.frogGenerator,
     basicChest: chest.basicChestGenerator,
     ogre: monsters.hugeOgreGenerator,
   }
