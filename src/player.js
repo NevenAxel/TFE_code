@@ -5,12 +5,12 @@ import sword_svg from './img/actions/sword.svg';
 
 export default {
   stats: {
-    hp: 20,
-    maxHp: 20,
+    hp: 30,
+    maxHp: 30,
     coin: 5,
-    str: getRandomNumber(3, 7),
-    intel: getRandomNumber(3, 7),
-    agility: getRandomNumber(3, 7),
+    str: 5,
+    intel: 5,
+    agility: 5,
     level: 1,
     roleStats: 5,
     role: "Aventurier",
@@ -21,11 +21,12 @@ export default {
   },  
   thisRoom: {
     isLastRoom: true,
-    nextRoom: function() {console.log("newRoom")},
+    nextRoom: function() {},
   },
   special: {
     frogFriend: 0,
     frogHater: 0,
+    frogKingNotPresent: true,
   },
   setHp: function(nbr, player) {
     if(nbr <= 0){
@@ -45,6 +46,7 @@ export default {
   },
   setMaxHp: function(nbr) {
     this.stats.maxHp = nbr;
+
   },
   getMaxHp: function() {
     return this.stats.maxHp;

@@ -13,7 +13,7 @@ export default {
 
 function startingGenerator(player, swipeActions) {
   var name = 'Forgeron';
-  var desc = 'Equipe toi aventurier';
+  var desc = 'Equipe-toi aventurier';
   var img = forgeron_svg;
 
   var availableActions = swipeActions.starting;

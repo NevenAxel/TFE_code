@@ -15,7 +15,6 @@ $(document).ready(function(){
 	var currentRoom = getNewRoom(room, swipeActions, player);
 	writeStats(player);
 	writeRoom(currentRoom);
-	console.log(player);
 
 
 	var card = document.getElementsByClassName('card-visible')[0];
@@ -100,6 +99,7 @@ $(document).ready(function(){
 						gainLevel(player);
 						currentRoom = getNewRoom(room, swipeActions, player);		
 						writeRoom(currentRoom);  
+						writeStats(player);
 						document.getElementById("card").classList.remove("feedback-message");
 						card.classList.remove("yes-swipe");
 						card.classList.add("front")
@@ -133,6 +133,7 @@ $(document).ready(function(){
 		    			gainLevel(player);
 			    		currentRoom = getNewRoom(room, swipeActions, player);
 			    		writeRoom(currentRoom);	
+			    		writeStats(player);
 			    		document.getElementById("card").classList.remove("feedback-message");
 			    		card.classList.remove("no-swipe");
 			    		card.classList.add("front")

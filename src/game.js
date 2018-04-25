@@ -28,16 +28,18 @@ export function writeStats(player){
         player.stats.defaultAttack = "Tirer";
         break;
     default:
-        console.log("NO Role STATS")
+       
     }
     document.getElementById("level").innerHTML = player.getLevel();
     document.getElementById("stats_hp").innerHTML = player.getHp();
+    document.getElementById("hpRemaining").style.width = player.stats.hp / player.getMaxHp() * 100 + "%";
     document.getElementById("stats_maxhp").innerHTML = player.getMaxHp();
     document.getElementById("stats_coins").innerHTML = player.getCoin();
     document.getElementById("stats_str").innerHTML = player.getStr();
     document.getElementById("stats_intel").innerHTML = player.getIntel();
     document.getElementById("stats_agility").innerHTML = player.getAgility();
     document.getElementById("stats_class").innerHTML = player.getRole();
+
   }
 
 export function writeRoom(currentRoom){
@@ -51,6 +53,7 @@ export function writeRoom(currentRoom){
   }
 
 export function getNewRoom(room, swipeActions, player){
+    console.log("Friend : " + player.special.frogFriend + " Hater " + player.special.frogHater)
     if (player.getLevel() === 1) {
         return room.roomGenerator.starting(player, swipeActions);
     }
@@ -58,8 +61,14 @@ export function getNewRoom(room, swipeActions, player){
         var currentRoom = getObjectByRarity(room.forestLootList);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
-    else {       
-        var currentRoom = getObjectByRarity(room.forestMonsterList);
+    else {
+
+        var availableRoom = room.forestMonsterList.slice();
+        if((player.special.frogHater >= 4 || player.special.frogFriend >= 4) && player.special.frogKingNotPresent){
+            availableRoom.push(room.unique.frogKing)
+            console.log("frogKing In the game")
+        };
+        var currentRoom = getObjectByRarity(availableRoom);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
     }
 }

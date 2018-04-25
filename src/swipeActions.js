@@ -72,9 +72,16 @@ export default {
   ],
 
   frog: [
-    {name: 'eatFrog', rarity: 0},
+    {name: 'eatFrog', rarity: 10},
     {name: 'kissFrog', rarity: 0},
     {name: 'talkFrog', rarity: 10},
+    {name: 'feedFrog', rarity: 10},
+    {name: 'killFrog', rarity: 10},
+  ],
+  toad:[
+    {name: 'eatFrog', rarity: 0},
+    {name: 'kissFrog', rarity: 0},
+    {name: 'talkToad', rarity: 10},
     {name: 'feedFrog', rarity: 10},
     {name: 'killFrog', rarity: 10},
   ],
@@ -102,7 +109,9 @@ export default {
   	talkFrog: frog.generateTalkFrog,
   	feedFrog: frog.generateFeedFrog,
   	killFrog: frog.generateKillFrog,
-
+    talkToad: frog.generateTalkToad,
+    frogBenediction: frog.generateFrogBenediction,
+    frogCurse: frog.generateFrogCurse,
 
   	hpPotion: loot.generateHpPotion,
   	bagOfCoins: loot.generateBagOfCoins,

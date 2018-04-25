@@ -11,32 +11,51 @@ import chest from './rooms/chest';
 
 
 export default {
+    /*
+  forestMonsterList : [
+    {name: 'wolf', rarity: 0},
+    {name: 'rogue', rarity: 0},
+    {name: 'gobelin', rarity: 0},
+    {name: 'spider', rarity: 0},
+    {name: 'shroom', rarity: 0},
+    {name: 'frog', rarity: 3},
+    {name: 'toad', rarity: 1},
+  ],
+*/
   forestMonsterList : [
     {name: 'wolf', rarity: 0},
     {name: 'rogue', rarity: 2},
     {name: 'gobelin', rarity: 3},
-    {name: 'spider', rarity: 0},
-    {name: 'shroom', rarity: 5},
-    {name: 'frog', rarity: 50},
+    {name: 'spider', rarity: 5},
+    {name: 'shroom', rarity: 2},
+    {name: 'frog', rarity: 3},
+    {name: 'toad', rarity: 2},
   ],
+
 
   forestLootList : [
     {name: 'shroom', rarity: 2},
     {name: 'basicChest', rarity: 5},
   ],
 
+  unique : {
+    frogKing: {name: 'frogKing', rarity: 20},
+  },
+
   roomGenerator : {
     starting: startingroom.startingGenerator,
 
-    shroom: forestLoot.mushroomGenerator,
     wolf: forestMonster.wolfGenerator,
     rogue: forestMonster.rogueGenerator,
     gobelin: forestMonster.gobelinGenerator,
     spider: forestMonster.spiderGenerator,
     frog: forestMonster.frogGenerator,
+    toad: forestMonster.toadGenerator,
+    frogKing: forestMonster.frogKingGenerator,
+
+    shroom: forestLoot.mushroomGenerator,
     basicChest: chest.basicChestGenerator,
-    ogre: monsters.hugeOgreGenerator,
-  }
+  },
 }
 
 

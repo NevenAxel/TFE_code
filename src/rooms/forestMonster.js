@@ -8,6 +8,7 @@ import goblin_svg from '../img/monsters/goblin.svg';
 import spider_svg from '../img/monsters/spider.svg';
 import frogregular_svg from '../img/monsters/frog-regular.svg';
 import frogtoxic_svg from '../img/monsters/frog-toxic.svg';
+import frogmagic_svg from '../img/monsters/frog-magic.svg';
 
 
 
@@ -17,6 +18,8 @@ export default {
   spiderGenerator,
   gobelinGenerator,  
   frogGenerator,
+  toadGenerator,
+  frogKingGenerator,
 }
 
   function rogueGenerator(player, swipeActions) {
@@ -92,19 +95,64 @@ export default {
     var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
     var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
     // Exceptions 
-    if(Math.random() < 0.50){
-      var img = frogregular_svg;
-    }
-    else{
-      var img = frogtoxic_svg;
-    }
-
     if(Math.random() < 0.60){
       var desc = "Croâ Croâ!";
     }
     else{
       var desc = "Est-ce un crapaud ou une grenouille ?";
     }
+
+    return {
+      name: name,
+      desc: desc,
+      img: img, 
+      swipeLeft: swipeLeft,
+      swipeRight: swipeRight,
+    }
+  }
+
+  function toadGenerator(player, swipeActions) {
+    var name = 'Un amphibien';
+    var img = frogtoxic_svg;
+    var desc = "Croâ Croâ!";
+    var availableActions = swipeActions.toad;
+    var actionNoDupe = generateTwoActionsNoDupe(availableActions);
+    var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
+    var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
+    // Exceptions 
+    if(Math.random() < 0.60){
+      var desc = "Croâ Croâ!";
+    }
+    else{
+      var desc = "Est-ce un crapaud ou une grenouille ?";
+    }
+
+    return {
+      name: name,
+      desc: desc,
+      img: img, 
+      swipeLeft: swipeLeft,
+      swipeRight: swipeRight,
+    }
+  }
+
+  function frogKingGenerator(player, swipeActions) {
+    var name = 'Le roi grenouille';
+    var img = frogmagic_svg;
+    var desc = "Je te lance ce sort de protection, pour les grenouilles!!";
+    var swipeLeft = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
+    var swipeRight = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
+    if(player.special.frogHater >= 4){
+      var desc = "Es-tu fier du génocide amphibien que tu viens de provoquer ?! Je te maudis!";
+      var swipeLeft = swipeActions.actionsGenerator.frogCurse(player, swipeActions);
+      var swipeRight = swipeActions.actionsGenerator.frogCurse(player, swipeActions);
+    }
+    else if(player.special.frogFriend >= 4){
+      var desc = "Tu as été bon avec les grenouilles, je te lance ce sort de protection";
+      var swipeLeft = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
+      var swipeRight = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
+    }
+    
 
     return {
       name: name,

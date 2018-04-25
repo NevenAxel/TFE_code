@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({44:[function(require,module,exports) {
+})({18:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -101,7 +101,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],21:[function(require,module,exports) {
+},{}],4:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,13 +132,13 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":44}],5:[function(require,module,exports) {
+},{"./bundle-url":18}],2:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./img\\texture-wood.svg":22,"./img\\bg\\bg-forest.svg":25,"./img\\cardback.svg":24,"./img\\monsters\\goblin.svg":27,"./img\\actions\\feed.svg":34,"./img\\actions\\sword.svg":26,"./img\\texture-paper.svg":23,"./img\\stats\\coins.svg":29,"./img\\stats\\agility.svg":31,"./img\\stats\\force.svg":30,"./img\\stats\\intelligence.svg":28,"_css_loader":21}],74:[function(require,module,exports) {
+},{"./img\\texture-wood.svg":11,"./img\\bg\\bg-forest.svg":12,"./img\\cardback.svg":10,"./img\\monsters\\goblin.svg":13,"./img\\stats\\coins.svg":16,"./img\\stats\\agility.svg":15,"./img\\stats\\force.svg":14,"./img\\stats\\intelligence.svg":17,"_css_loader":4}],55:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -160,7 +160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50228' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51530' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -261,7 +261,7 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}],75:[function(require,module,exports) {
+},{}],57:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -340,7 +340,7 @@ LazyPromise.prototype.then = function (onSuccess, onError) {
 LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
-},{"./bundle-url":44}],0:[function(require,module,exports) {
-var b=require(75);b.load([["edae6525a6a781b6a4e20ead3d6ca2fe.svg",22],["845bc018acac1986e047b6904fa67b66.svg",25],["60900170c66018605c857324aa313d36.svg",24],["35e2de55efce6747bb987a53a67e84e3.svg",27],["97fb19066fb387b7db5c10c7b78ec113.svg",34],["a56ed14cb19445fa7e69776a35c2e8da.svg",26],["008340e7a99838394c9cfd604d415177.svg",23],["65c4449251826d40afa49556671274e2.svg",29],["4de4eee8a754fdfe34a202b49731d54f.svg",31],["901c630b1b37dbdaa87e2e60e54ed6d9.svg",30],["44d22db11cc954670861e027ec2efa85.svg",28]]);
-},{}]},{},[74,0])
+},{"./bundle-url":18}],0:[function(require,module,exports) {
+var b=require(57);b.load([["edae6525a6a781b6a4e20ead3d6ca2fe.svg",11],["845bc018acac1986e047b6904fa67b66.svg",12],["60900170c66018605c857324aa313d36.svg",10],["35e2de55efce6747bb987a53a67e84e3.svg",13],["65c4449251826d40afa49556671274e2.svg",16],["4de4eee8a754fdfe34a202b49731d54f.svg",15],["901c630b1b37dbdaa87e2e60e54ed6d9.svg",14],["44d22db11cc954670861e027ec2efa85.svg",17]]);
+},{}]},{},[55,0])
 //# sourceMappingURL=/dist/6ebacad3dba99b5e8902237bcc134250.map
