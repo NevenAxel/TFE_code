@@ -14,6 +14,7 @@ export default {
   generateTalkFrog,
   generateKissFrog,  
   generateEatFrog,
+  generateEatToad,
   generateTalkToad,
 
   generateFrogBenediction,
@@ -23,13 +24,13 @@ export default {
 function generateKillFrog(player, swipeActions){
 	return {
 		name: "killfrog",
-		coinsGiven: getRandomNumber(3, 8),
+		coinsGiven: getRandomNumber(2, 5),
 		text: function () {return "Dépecer"},
 		img: function () {return depecer_svg},
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend = -3;
-			if(Math.random() < 0.3 * 10 / player.getAgility()){
+			if(Math.random() < 0.5 * player.getAgility() / 10){
 			player.special.frogFriend = -3;
 				if(Math.random() < 0.5){
 					player.setCoin(
@@ -172,13 +173,13 @@ function generateEatFrog(player, swipeActions){
 			player.special.frogFriend = -1;
 			/* Ajouter le choix de la cuisiner avec du feu en mage! */
 			if(player.getIntel() < 10){
-				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os, soyez plus malin!");
+				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os de grenouille, soyez plus malin!");
 				player.setHp(
 					player.getHp() - 5, player
 				);
 			}
 			else {
-				if(Math.random() < 0.40){
+				if(Math.random() < 0.30){
 					feedbackMessage(player, "Vous avez mal au ventre...");
 					player.setHp(
 						player.getHp() - 2, player
@@ -192,6 +193,21 @@ function generateEatFrog(player, swipeActions){
 				}
 				
 			}	
+		},
+	}
+}
+function generateEatToad(player, swipeActions){
+	return {
+  		name: "eatFrog",
+		text: function () {return "Manger"},
+		img: function () {return eat_svg},
+		action: function() {
+			player.special.frogHater += 1;
+			player.special.frogFriend = -1;
+			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée!");
+			player.setHp(
+				player.getHp() - 5, player
+			);
 		},
 	}
 }

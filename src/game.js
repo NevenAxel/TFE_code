@@ -111,13 +111,13 @@ export function gameOver(player, deathMessage){
             document.getElementsByClassName("gameover")[0].classList.add("on")
             document.getElementById('gameover-filter').style.display = "block";
             document.getElementById('gameover-filter').style.opacity = ".75";
-        }, 1500);   
+        }, 3500);   
     }
     else{
         setTimeout(function(){ 
             document.getElementsByClassName("gameover")[0].classList.add("on")
             document.getElementById('gameover-filter').style.display = "block";
             document.getElementById('gameover-filter').style.opacity = ".75";
-        }, 1500); 
+        }, 3500); 
     }
 }

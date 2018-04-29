@@ -79,7 +79,7 @@ export default {
     {name: 'killFrog', rarity: 10},
   ],
   toad:[
-    {name: 'eatFrog', rarity: 0},
+    {name: 'eatToad', rarity: 10},
     {name: 'kissFrog', rarity: 0},
     {name: 'talkToad', rarity: 10},
     {name: 'feedFrog', rarity: 10},
@@ -105,6 +105,7 @@ export default {
   	yummyMushroom: mushroom.generateYummyMushroom,
 
   	eatFrog: frog.generateEatFrog,
+  	eatToad: frog.generateEatToad,
   	kissFrog: frog.generateKissFrog,
   	talkFrog: frog.generateTalkFrog,
   	feedFrog: frog.generateFeedFrog,
