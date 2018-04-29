@@ -99,7 +99,7 @@ export default {
       var desc = "Croâ Croâ!";
     }
     else{
-      var desc = "Est-ce un crapaud ou une grenouille ?";
+      var desc = "Cet amphibien pourrait être une grenouille ou un crapaud";
     }
 
     return {
@@ -124,7 +124,7 @@ export default {
       var desc = "Croâ Croâ!";
     }
     else{
-      var desc = "Est-ce un crapaud ou une grenouille ?";
+      var desc = "Cet amphibien pourrait être un crapaud ou une grenouille";
     }
 
     return {
@@ -139,7 +139,7 @@ export default {
   function frogKingGenerator(player, swipeActions) {
     var name = 'Le roi grenouille';
     var img = frogmagic_svg;
-    var desc = "Je te lance ce sort de protection, pour les grenouilles!!";
+    var desc = "Tu as aidé quelques grenouilles, je te lance ce sort de protection";
     var swipeLeft = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
     var swipeRight = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
     if(player.special.frogHater >= 4){

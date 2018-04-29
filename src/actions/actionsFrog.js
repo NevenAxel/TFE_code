@@ -5,6 +5,8 @@ import { feedbackMessage } from '../game';
 import feed_svg from '../img/actions/feed.svg';
 import escape_svg from '../img/actions/escape.svg';
 import eat_svg from '../img/actions/eat.svg';
+import depecer_svg from '../img/actions/depecer.svg';
+import speak_svg from '../img/actions/speak.svg';
 
 export default {
   generateKillFrog,
@@ -23,9 +25,10 @@ function generateKillFrog(player, swipeActions){
 		name: "killfrog",
 		coinsGiven: getRandomNumber(3, 8),
 		text: function () {return "Dépecer"},
-		img: function () {return "knife_svg"},
+		img: function () {return depecer_svg},
 		action: function() {
 			player.special.frogHater += 1;
+			player.special.frogFriend = -3;
 			if(Math.random() < 0.3 * 10 / player.getAgility()){
 			player.special.frogFriend = -3;
 				if(Math.random() < 0.5){
@@ -59,6 +62,7 @@ function generateFeedFrog(player, swipeActions){
 		img: function () {return feed_svg},
 		action: function () {
 			player.special.frogFriend += 1;
+			player.special.frogHater -= 0.5;
 			if(Math.random() < 0.20){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
@@ -75,32 +79,30 @@ function generateTalkFrog(player, swipeActions){
   	return {
   		name: "talkFrog",
 		text: function () {return "Lui parler"},
-		img: function () {return "speak_svg"},
+		img: function () {return speak_svg},
 		action: function() {
 			player.thisRoom.isLastRoom = false;	
 			player.thisRoom.nextRoom = {
 				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix",
 				swipeRight: {
 					text: function () {return "Se raprocher"},
-					img: function () {return "givecoins_svg"},
+					img: function () {return speak_svg},
 					action: function() {
-						if(player.special.frogFriend > 2){
-							player.special.frogFriend += 1;
-							feedbackMessage(player, "Merci d'avoir nourrit mes amies, je t'offre ma bénédiction")
-							player.setMaxHp(
-								player.getMaxHp() + 4
-							);
-						}
-						else if(player.special.frogHater > 2){
+						
+						if(player.special.frogHater > 3){
 							feedbackMessage(player, "Elle vous a sauté dans la bouche pour toutes les autres que vous avez dépecées et mangées avant!")
 							player.setHp(
 								player.getHp() - 7, player
 							);
 						}
+						else if(player.special.frogFriend > 2){
+							feedbackMessage(player, "Merci d'avoir nourrit mes amies, je t'offre ma bénédiction")
+							player.setMaxHp(
+								player.getMaxHp() + 2
+							);
+						}
 						else{
-							player.special.frogFriend += 1;
 							var message = getRandomArray([
-								"Croâ Croâ, t'es moche",
 								"Croâ Croâ, si tu m'avais embrassé, je me serai transformé",
 								"Croâ Croâ, tu sens mauvais",
 								"Croâ Croâ, je veux un bisou magique",
@@ -123,14 +125,14 @@ function generateTalkToad(player, swipeActions){
   	return {
   		name: "talkToad",
 		text: function () {return "Lui parler"},
-		img: function () {return "speak_svg"},
+		img: function () {return speak_svg},
 		action: function() {
 			player.thisRoom.isLastRoom = false;	
 			player.thisRoom.nextRoom = {
 				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix",
 				swipeRight: {
 					text: function () {return "Se raprocher"},
-					img: function () {return "givecoins_svg"},
+					img: function () {return speak_svg},
 					action: function() {
 						feedbackMessage(player, "Le crapaud vous a sauté dessus, beurk!")
 						player.setHp(
@@ -167,9 +169,9 @@ function generateEatFrog(player, swipeActions){
 		img: function () {return eat_svg},
 		action: function() {
 			player.special.frogHater += 1;
-			player.special.frogFriend = -3;
+			player.special.frogFriend = -1;
 			/* Ajouter le choix de la cuisiner avec du feu en mage! */
-			if(player.getIntel() <= 10){
+			if(player.getIntel() < 10){
 				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os, soyez plus malin!");
 				player.setHp(
 					player.getHp() - 5, player

@@ -42,7 +42,7 @@ function basicChestGenerator(player, swipeActions) {
 
 function mushroomGenerator(player, swipeActions) {
     var name = "Champignon étrange";
-    var desc = "Il a l'air commestible, je tente de le manger ?";
+    var desc = "Il a l'air comestible, je tente de le manger ?";
     var img = mushroomA1_svg;
     var availableActions = swipeActions.mushroom;
     var swipeLeft = swipeActions.actionsGenerator.noEat(player, swipeActions);

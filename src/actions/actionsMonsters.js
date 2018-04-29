@@ -137,7 +137,7 @@ function generateEscape(player, swipeActions){
 		text: function () {return "S'échapper"},
 		img: function () {return escape_svg},
 		require: 8,
-		damage: 3,
+		damage: 4,
 		action: function() {
 			if (player.getAgility() >= this.require) {
 				if(Math.random() < 0.3 * 5 / player.getAgility()){
@@ -193,7 +193,7 @@ function generateSteal(player, swipeActions){
 		img: function () {return coinsbag_svg},
 		damage: 5,
 		action: function() {
-			if(Math.random() < 0.4 * 10 / player.getAgility()){
+			if(Math.random() < 0.6 * 10 / player.getAgility()){
 				feedbackMessage(player, 'Vous avez été pris sur le fait')
 				player.setHp(
 					player.getHp() - this.damage, player

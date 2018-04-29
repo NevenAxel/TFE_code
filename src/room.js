@@ -28,7 +28,7 @@ export default {
     {name: 'gobelin', rarity: 3},
     {name: 'spider', rarity: 5},
     {name: 'shroom', rarity: 2},
-    {name: 'frog', rarity: 3},
+    {name: 'frog', rarity: 8},
     {name: 'toad', rarity: 2},
   ],
 
@@ -39,7 +39,7 @@ export default {
   ],
 
   unique : {
-    frogKing: {name: 'frogKing', rarity: 20},
+    frogKing: {name: 'frogKing', rarity: 50},
   },
 
   roomGenerator : {

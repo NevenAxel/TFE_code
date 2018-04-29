@@ -4,7 +4,7 @@ import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
 
-import forgeron_svg from '../img/monsters/forgeron.svg';
+import forgeron_svg from '../img/monsters/princess.svg';
 
 export default {
   startingGenerator

@@ -3,8 +3,6 @@ import { getRandomNumber } from './utils';
 
 import sword_svg from './img/actions/sword.svg';
 import bow_svg from './img/actions/bow.svg';
-import swipeleft_svg from './img/actions/swipeleft.svg';
-import swiperight_svg from './img/actions/swiperight.svg';
 
 
 export function writeStats(player){
@@ -49,7 +47,7 @@ export function writeRoom(currentRoom){
     document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_no").style.backgroundImage = "url("+ currentRoom.swipeLeft.img() + ")";
     document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
-    document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";
+    document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";   
   }
 
 export function getNewRoom(room, swipeActions, player){
@@ -77,7 +75,7 @@ export function feedbackMessage(player, message){
     player.thisRoom.isLastRoom = false; 
     player.thisRoom.nextRoom = {
         swipeLeft: {
-            img: function () {return swipeleft_svg},
+            img: function () {return "swipe_svg"},
             action: function() {
                 document.getElementById("feedback").style.display = "none";
                 document.getElementById("filter-feedback").style.display = "none";
@@ -85,7 +83,7 @@ export function feedbackMessage(player, message){
             text: function () {return "Carte suivante"},
         },
         swipeRight: {
-            img: function () {return swiperight_svg},
+            img: function () {return "swipe_svg"},
             action: function() {
                 document.getElementById("feedback").style.display = "none";
                 document.getElementById("filter-feedback").style.display = "none";

@@ -118,6 +118,9 @@
         box-shadow: 6px 6px 29px -9px rgba(0,0,0,0.65);
       }
     }
+    #card-tracker:hover{cursor: -webkit-grab}
+
+
     #card{
       height: 280px;
       width: 300px;
@@ -153,10 +156,13 @@
     #feedback{
       color: white;
       position: absolute;
-      width: 280px;
-      left: 10px;
+      width: 260px;
+      top: 45%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform: translateY(-45%);
       line-height: 1.4;
-      top: 135px;
       filter: none;
       font-size: 20px;
       z-index: 2;
@@ -237,10 +243,9 @@
       opacity: 1;
       transition: .5s;
     }
-
-    .yesFade {
-      opacity: 0;
-      transition: .5s;
+    .yes #btn_no{
+      opacity: .4;
+      transition: .3s;
     }
 
     .no {
@@ -280,11 +285,12 @@
       opacity: 1;
     }
 
-
-    .noFade {
-      opacity: 0;
-      transition: .5s;
+    .no #btn_yes{
+      opacity: .4;
+      transition: .3s;
     }
+
+
     #btn_no {
       background: no-repeat center;
       width: 80px;
@@ -302,13 +308,14 @@
     }
     #btn_no-text{
       position: absolute;
-      bottom: -45px;
-      left: 45px;
+      bottom: -128px;
+      left: 12px;
       width: 300px;
       text-align: left;
       color: white;
       font-size: 22px;
       opacity: 0;
+      z-index: 2;
     }
 
     #btn_yes {
@@ -320,6 +327,7 @@
       bottom: 30px;
       line-height: 1;
       z-index: 2;
+      transform: scaleX(-1);
     }
     @media (min-width: 500px) {
       #btn_no {
@@ -329,13 +337,14 @@
 
     #btn_yes-text{
       position: absolute;
-      bottom: -45px;
-      right: 45px;
+      bottom: -128px;
+      right: 12px;
       width: 300px;
       text-align: right;
       color: white;
       font-size: 22px;
       opacity: 0;
+      z-index: 2;
     }    
     #filter-feedback{
       display: none;

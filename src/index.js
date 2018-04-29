@@ -25,8 +25,10 @@ $(document).ready(function(){
 	// add a "PAN" recognizer to it (all directions)
 	mc.add( new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 20 }) );
 
+
 	// tie in the handler that will be called
 	mc.on("pan", handleDrag);
+	
 
 	var lastPosX = 0;
 	var lastPosY = 0;
@@ -72,6 +74,33 @@ $(document).ready(function(){
 	  
 	  // DRAG ENDED
 	  // this is where we simply forget we are dragging
+	  mc.on("tap", function(ev) {
+		if ($('#feedback').css('display') == 'block'){
+	   	  elem.style.left = 0 + "px";
+	      card.classList.add("yesFade");
+	      card.classList.remove("noFade");
+	      setTimeout(function(){ card.classList.remove("yesFade"); card.classList.remove("yes"); }, 200);
+	      	player.thisRoom.isLastRoom = true;
+	      	currentRoom.swipeRight.action();
+			writeStats(player);
+			if(player.stats.alive){
+				card.classList.add("yes-swipe");
+				card.classList.remove("front")
+	    		cardback.classList.remove("back")
+				setTimeout(function(){ 
+					
+					gainLevel(player);
+					currentRoom = getNewRoom(room, swipeActions, player);		
+					writeRoom(currentRoom);  
+					writeStats(player);
+					
+					card.classList.remove("yes-swipe");
+					card.classList.add("front")
+		    		cardback.classList.add("back")
+				}, 500);
+			}	
+		  }
+	});
 	  if (ev.isFinal) {
 	    isDragging = false;
 	    
@@ -96,11 +125,12 @@ $(document).ready(function(){
 					card.classList.remove("front")
 		    		cardback.classList.remove("back")
 					setTimeout(function(){ 
+						
 						gainLevel(player);
 						currentRoom = getNewRoom(room, swipeActions, player);		
 						writeRoom(currentRoom);  
 						writeStats(player);
-						document.getElementById("card").classList.remove("feedback-message");
+						
 						card.classList.remove("yes-swipe");
 						card.classList.add("front")
 			    		cardback.classList.add("back")
@@ -130,11 +160,12 @@ $(document).ready(function(){
 		    		card.classList.remove("front")
 			    	cardback.classList.remove("back")
 		    		setTimeout(function(){
+		    			
 		    			gainLevel(player);
 			    		currentRoom = getNewRoom(room, swipeActions, player);
 			    		writeRoom(currentRoom);	
 			    		writeStats(player);
-			    		document.getElementById("card").classList.remove("feedback-message");
+			    		
 			    		card.classList.remove("no-swipe");
 			    		card.classList.add("front")
 			    		cardback.classList.add("back")
