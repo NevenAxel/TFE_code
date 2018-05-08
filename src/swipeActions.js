@@ -64,19 +64,19 @@ export default {
 
   mushroom: [
   	{name: 'toxicMushroom', rarity: 20},
-  	{name: 'sleepMushroom', rarity: 12},
-  	{name: 'stupidMushroom', rarity: 8},
-  	{name: 'magicMushroom', rarity: 5},
+  	{name: 'sleepMushroom', rarity: 6},
+  	{name: 'stupidMushroom', rarity: 10},
+  	{name: 'magicMushroom', rarity: 6},
   	{name: 'agilityMushroom', rarity: 10},
   	{name: 'yummyMushroom', rarity: 20},
   ],
 
   frog: [
-    {name: 'eatFrog', rarity: 10},
-    {name: 'kissFrog', rarity: 0},
-    {name: 'talkFrog', rarity: 10},
+    {name: 'eatFrog', rarity: 7},
+    {name: 'kissFrog', rarity: 4},
+    {name: 'talkFrog', rarity: 4},
     {name: 'feedFrog', rarity: 10},
-    {name: 'killFrog', rarity: 10},
+    {name: 'killFrog', rarity: 7},
   ],
   toad:[
     {name: 'eatToad', rarity: 10},

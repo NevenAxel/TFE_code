@@ -74,6 +74,8 @@ $(document).ready(function(){
 	  
 	  // DRAG ENDED
 	  // this is where we simply forget we are dragging
+	  /*
+	  // Il y a plein de bug avec le tap
 	  mc.on("tap", function(ev) {
 		if ($('#feedback').css('display') == 'block'){
 	   	  elem.style.left = 0 + "px";
@@ -101,6 +103,7 @@ $(document).ready(function(){
 			}	
 		  }
 	});
+	*/
 	  if (ev.isFinal) {
 	    isDragging = false;
 	    
@@ -113,6 +116,8 @@ $(document).ready(function(){
 	      	currentRoom.swipeRight.action();
 	      	if(player.thisRoom.isLastRoom == false){
 				if (player.thisRoom.nextRoom.desc != undefined){currentRoom.desc = player.thisRoom.nextRoom.desc;}
+				if (player.thisRoom.nextRoom.img != undefined){currentRoom.img = player.thisRoom.nextRoom.img;}
+				if (player.thisRoom.nextRoom.name != undefined){currentRoom.name = player.thisRoom.nextRoom.name;}
 	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
 	      		currentRoom.swipeRight = player.thisRoom.nextRoom.swipeRight;
 	      		writeStats(player);
@@ -148,6 +153,8 @@ $(document).ready(function(){
 	      	currentRoom.swipeLeft.action();
 	      	if(player.thisRoom.isLastRoom == false){
 	      		if (player.thisRoom.nextRoom.desc != undefined){currentRoom.desc = player.thisRoom.nextRoom.desc;}
+	      		if (player.thisRoom.nextRoom.img != undefined){currentRoom.img = player.thisRoom.nextRoom.img;}
+	      		if (player.thisRoom.nextRoom.name != undefined){currentRoom.name = player.thisRoom.nextRoom.name;}
 	      		currentRoom.swipeLeft = player.thisRoom.nextRoom.swipeLeft;
 	      		currentRoom.swipeRight = player.thisRoom.nextRoom.swipeRight;
 	      		writeStats(player);

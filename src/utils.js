@@ -49,7 +49,7 @@ export function createAvailableActions(player, swipeActions, objectList){
   });
 
   // Ajouter les actions spécifique à la classe si le joueur est de cette classe
-  if(player.getRole() == "Voleur"){
+  if(player.getRole() == "Archer"){
     objectList.forEach(function(element) {
       var actionList = element + 'Rogue';
       if(typeof swipeActions[actionList] !== "undefined"){
@@ -82,7 +82,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getAgility() > 10){
+  if(player.getAgility() > 12){
     objectList.forEach(function(element) {
       var actionList = element + 'Agility';
       if(typeof swipeActions[actionList] !== "undefined"){

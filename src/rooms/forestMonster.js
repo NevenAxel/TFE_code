@@ -51,8 +51,12 @@ export default {
     // Exceptions 
     if(swipeLeft.name == "feed"){
       var desc = "*On dirait qu'elle veut te manger*";
-      swipeLeft.damage = 2;
+
     }
+    if(swipeLeft.name == "escape"){
+      swipeLeft.require = 10;
+    }
+
 
     return {
       name: name,
@@ -142,12 +146,12 @@ export default {
     var desc = "Tu as aidé quelques grenouilles, je te lance ce sort de protection";
     var swipeLeft = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
     var swipeRight = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
-    if(player.special.frogHater >= 4){
+    if(player.special.frogHater >= player.special.frogFriend){
       var desc = "Es-tu fier du génocide amphibien que tu viens de provoquer ?! Je te maudis!";
       var swipeLeft = swipeActions.actionsGenerator.frogCurse(player, swipeActions);
       var swipeRight = swipeActions.actionsGenerator.frogCurse(player, swipeActions);
     }
-    else if(player.special.frogFriend >= 4){
+    else if(player.special.frogFriend > player.special.frogHater){
       var desc = "Tu as été bon avec les grenouilles, je te lance ce sort de protection";
       var swipeLeft = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);
       var swipeRight = swipeActions.actionsGenerator.frogBenediction(player, swipeActions);

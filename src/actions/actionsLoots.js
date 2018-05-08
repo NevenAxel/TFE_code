@@ -18,7 +18,7 @@ export default {
 function generateHpPotion(player, swipeActions){
   	return {
   		name: "hppotion",
-		text: function () {return "Potion de vie (+5 Hp)"},
+		text: function () {return "Potion de vie (+5 Pv)"},
 		img: function () {return potionhp_svg},
 		action: function() {
 			player.setHp(
@@ -31,7 +31,7 @@ function generateHpPotion(player, swipeActions){
 function generateMagicMushroom(player, swipeActions){
   	return {
   		name: "magicmushroom",
-		text: function () {return "Champignon magique (+5 MaxHp"},
+		text: function () {return "Champignon magique (+5 MaxPv"},
 		img: function () {return "champignon.png"},
 		action: function() {
 			player.setMaxHp(
@@ -45,7 +45,7 @@ function generateMagicMushroom(player, swipeActions){
 }
 
 function generateBagOfCoins(player, swipeActions){
-	var coinsGained = getRandomNumber(3, 6);
+	var coinsGained = getRandomNumber(3, 10);
   	return {
   		name: "bagofcoins",
 		text: function () {return "Sac de pièces (" + coinsGained + " pièces)" },
@@ -61,7 +61,7 @@ function generateBagOfCoins(player, swipeActions){
 function generateSpinach(player, swipeActions){
   	return {
   		name: "spinach",
-		text: function () {return "Épinards (+2 Hp, +2 Force"},
+		text: function () {return "Épinards (+2 Pv, +2 Force"},
 		img: function () {return "spinach.png"},
 		action: function() {
 			player.setHp(
@@ -106,7 +106,7 @@ function generateDumbBell(player, swipeActions){
 		text: function () {return "Haltères (+5 Force)"},
 		img: function () {return dumbbell_svg},
 		action: function() {
-			if(player.getIntel() >= 5){
+			if(player.getIntel() >= 6){
 			player.setStr(
 				player.getStr() + 5
 			);

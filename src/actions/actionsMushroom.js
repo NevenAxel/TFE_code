@@ -28,7 +28,7 @@ function generateNoEat(player, swipeActions){
 function generateToxicMushroom(player, swipeActions){
   	return {
   		name: "toxicMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (-5 Pv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "C'est un champignon toxique!");
@@ -43,7 +43,7 @@ function generateToxicMushroom(player, swipeActions){
 function generateSleepMushroom(player, swipeActions){
   	return {
   		name: "sleepMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (-2 Force, -2 Agilité)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "Ce champignon vous a amorti, endormi...");
@@ -60,7 +60,7 @@ function generateSleepMushroom(player, swipeActions){
 function generateStupidMushroom(player, swipeActions){
   	return {
   		name: "stupidMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (-2 Intel)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "Vous avez perdu quelques neurones");
@@ -75,7 +75,7 @@ function generateStupidMushroom(player, swipeActions){
 function generateMagicMushroom(player, swipeActions){
   	return {
   		name: "magicMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (+3 MaxPv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "Vous vous sentez plus grand");
@@ -92,7 +92,7 @@ function generateMagicMushroom(player, swipeActions){
 function generateAgilityMushroom(player, swipeActions){
   	return {
   		name: "agilityMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (+2 Agilité)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "Vous vous sentez plus vif");
@@ -106,7 +106,7 @@ function generateAgilityMushroom(player, swipeActions){
 function generateYummyMushroom(player, swipeActions){
   	return {
   		name: "yummyMushroom",
-		text: function () {return "Manger"},
+		text: function () {if(player.special.mushroomKnowledge){return "Manger (+5 Pv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
 			feedbackMessage(player, "Mhhh... il est délicieux!");

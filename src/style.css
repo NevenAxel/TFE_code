@@ -133,7 +133,6 @@
       opacity: 1;
       line-height: 250px;
       border-radius: 30px 30px 0 0;
-      background: url("./img/bg/bg-forest.svg");
     }
     #cardback{
       background: url("./img/cardback.svg");
@@ -189,7 +188,7 @@
       clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
     }
     #room_img{
-      background: url("./img/monsters/goblin.svg") center no-repeat;
+      background: center no-repeat;
       width: 220px;
       height: 240px;
       margin: 0 auto;
@@ -368,7 +367,8 @@
   height: 150px;
   padding: 10px 0px 10px 0px;
   margin: 25px auto;
-  background: #D8D3AF;
+  background: #724C33;
+  color: #FFFFFF;
 }
 
 #stats_class{

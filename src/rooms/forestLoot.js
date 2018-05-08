@@ -18,27 +18,8 @@ mushrooms = shuffle(mushrooms);
 
 
 export default{
-  basicChestGenerator,
   mushroomGenerator,
 }
-
-function basicChestGenerator(player, swipeActions) {
-    var name = "coffre";
-    var desc = "Il y a deux objets dans ce coffre, lequel utiliser ?";
-    var img = "coffre.png";
-
-    var availableActions = swipeActions.basicChest;
-    var actionNoDupe = generateTwoActionsNoDupe(availableActions);
-    var swipeLeft = swipeActions.actionsGenerator[actionNoDupe[0].name](player, swipeActions);
-    var swipeRight = swipeActions.actionsGenerator[actionNoDupe[1].name](player, swipeActions);
-    return {
-      name: name,
-      desc: desc, 
-      img: img, 
-      swipeLeft: swipeLeft,
-      swipeRight: swipeRight,
-    }
-  }
 
 function mushroomGenerator(player, swipeActions) {
     var name = "Champignon étrange";
@@ -50,21 +31,39 @@ function mushroomGenerator(player, swipeActions) {
 
     if(swipeRight.name == "toxicMushroom"){
       var img = mushrooms[0];
+      if(player.special.mushroomKnowledge){
+        var name = "Champignon Toxique"
+      }
     }
     if(swipeRight.name == "yummyMushroom"){
       var img = mushrooms[1];
+      if(player.special.mushroomKnowledge){
+        var name = "Champignon Délicieux"
+      }
     }
     if(swipeRight.name == "sleepMushroom"){
       var img = mushrooms[2];
+      if(player.special.mushroomKnowledge){
+        var name = "ChampignHann ouais"
+      }
     }
     if(swipeRight.name == "agilityMushroom"){
       var img = mushrooms[3];
+      if(player.special.mushroomKnowledge){
+        var name = "Champignon Vivace"
+      }
     }
     if(swipeRight.name == "stupidMushroom"){
       var img = mushrooms[4];
+      if(player.special.mushroomKnowledge){
+        var name = "Champignon Abrutissant"
+      }
     }
     if(swipeRight.name == "magicMushroom"){
       var img = mushrooms[5];
+      if(player.special.mushroomKnowledge){
+        var name = "Champignon Magique"
+      }
     }
 
     return {

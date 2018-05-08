@@ -2,12 +2,13 @@ import { getRandomNumber } from './utils';
 import { gameOver } from './game';
 
 import sword_svg from './img/actions/sword.svg';
+import forestbg_svg from './img/bg/bg-forest.svg';
 
 export default {
   stats: {
     hp: 30,
     maxHp: 30,
-    coin: 5,
+    coin: 10,
     str: 5,
     intel: 5,
     agility: 5,
@@ -18,8 +19,11 @@ export default {
     weaponImg: "sword.png",
     defaultAttack: "Attaquer",
     alive: true,
+    eloquence: 3,
   },  
   thisRoom: {
+    theme: forestbg_svg,
+    background: forestbg_svg,
     isLastRoom: true,
     nextRoom: function() {},
   },
@@ -27,6 +31,8 @@ export default {
     frogFriend: 0,
     frogHater: 0,
     frogKingNotPresent: true,
+
+    mushroomKnowledge: false,
   },
   setHp: function(nbr, player) {
     if(nbr <= 0){

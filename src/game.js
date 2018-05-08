@@ -25,9 +25,9 @@ export function writeStats(player){
         player.stats.weaponImg = bow_svg;
         player.stats.defaultAttack = "Tirer";
         break;
-    default:
-       
+    default:  
     }
+
     document.getElementById("level").innerHTML = player.getLevel();
     document.getElementById("stats_hp").innerHTML = player.getHp();
     document.getElementById("hpRemaining").style.width = player.stats.hp / player.getMaxHp() * 100 + "%";
@@ -37,21 +37,20 @@ export function writeStats(player){
     document.getElementById("stats_intel").innerHTML = player.getIntel();
     document.getElementById("stats_agility").innerHTML = player.getAgility();
     document.getElementById("stats_class").innerHTML = player.getRole();
-
+    document.getElementById("card").style.backgroundImage = "url("+ player.thisRoom.background  + ")";
   }
 
 export function writeRoom(currentRoom){
-    document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img; + ")";
+    document.getElementById("room_img").style.backgroundImage = "url("+ currentRoom.img + ")";
     document.getElementById("room_name").innerHTML= currentRoom.name.charAt(0).toUpperCase() + currentRoom.name.slice(1);
     document.getElementById("room_desc").innerHTML= currentRoom.desc;
     document.getElementById("btn_no-text").textContent = currentRoom.swipeLeft.text();
     document.getElementById("btn_no").style.backgroundImage = "url("+ currentRoom.swipeLeft.img() + ")";
     document.getElementById("btn_yes-text").textContent = currentRoom.swipeRight.text();
-    document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";   
+    document.getElementById("btn_yes").style.backgroundImage = "url("+ currentRoom.swipeRight.img() + ")";
   }
 
 export function getNewRoom(room, swipeActions, player){
-    console.log("Friend : " + player.special.frogFriend + " Hater " + player.special.frogHater)
     if (player.getLevel() === 1) {
         return room.roomGenerator.starting(player, swipeActions);
     }
@@ -64,7 +63,6 @@ export function getNewRoom(room, swipeActions, player){
         var availableRoom = room.forestMonsterList.slice();
         if((player.special.frogHater >= 4 || player.special.frogFriend >= 4) && player.special.frogKingNotPresent){
             availableRoom.push(room.unique.frogKing)
-            console.log("frogKing In the game")
         };
         var currentRoom = getObjectByRarity(availableRoom);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
@@ -79,6 +77,7 @@ export function feedbackMessage(player, message){
             action: function() {
                 document.getElementById("feedback").style.display = "none";
                 document.getElementById("filter-feedback").style.display = "none";
+                player.thisRoom.background = player.thisRoom.theme;
             },
             text: function () {return "Carte suivante"},
         },
@@ -87,6 +86,7 @@ export function feedbackMessage(player, message){
             action: function() {
                 document.getElementById("feedback").style.display = "none";
                 document.getElementById("filter-feedback").style.display = "none";
+                player.thisRoom.background = player.thisRoom.theme;
             },
             text: function () {return "Carte suivante"},
         }

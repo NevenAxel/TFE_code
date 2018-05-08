@@ -57,7 +57,7 @@ function generateAttack(player, swipeActions){
 function generateGiveCoins(player, swipeActions){
   	return {
   		name: "givecoins",
-  		coinsGiven: getRandomNumber(1, 3),
+  		coinsGiven: getRandomNumber(1, 4),
 		text: function () {return "Donner " + this.coinsGiven + " pièces"},
 		img: function () {return givecoins_svg},
 		action: function () {
@@ -136,11 +136,11 @@ function generateEscape(player, swipeActions){
   		name: "escape",
 		text: function () {return "S'échapper"},
 		img: function () {return escape_svg},
-		require: 8,
+		require: 7,
 		damage: 4,
 		action: function() {
 			if (player.getAgility() >= this.require) {
-				if(Math.random() < 0.3 * 5 / player.getAgility()){
+				if(Math.random() < 0.3 * 10 / player.getAgility()){
 					feedbackMessage(player, 'Pas de chance, vous avez trébuché sur une pierre')
 					player.setHp(
 						player.getHp() - this.damage, player
@@ -191,7 +191,7 @@ function generateSteal(player, swipeActions){
   		name: "steal",
 		text: function () {return "Voler " + coinsStealed + " pièces"},
 		img: function () {return coinsbag_svg},
-		damage: 5,
+		damage: 6,
 		action: function() {
 			if(Math.random() < 0.6 * 10 / player.getAgility()){
 				feedbackMessage(player, 'Vous avez été pris sur le fait')
