@@ -20,7 +20,7 @@ export default {
     {name: 'spider', rarity: 5},
     {name: 'shroom', rarity: 3},
     {name: 'frog', rarity: 4},
-    {name: 'toad', rarity: 3},
+    {name: 'toad', rarity: 2},
   ],
 
   forestLootList : [

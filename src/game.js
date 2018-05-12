@@ -4,6 +4,10 @@ import { getRandomNumber } from './utils';
 import sword_svg from './img/actions/sword.svg';
 import bow_svg from './img/actions/bow.svg';
 
+import warrior_svg from './img/stats/warrior.svg';
+import archer_svg from './img/stats/archer.svg';
+
+
 
 export function writeStats(player){
     switch(player.getRole()) {
@@ -18,12 +22,14 @@ export function writeStats(player){
         player.stats.weapon = "sword";
         player.stats.weaponImg = sword_svg;
         player.stats.defaultAttack = "Attaquer";
+        player.stats.roleImg = warrior_svg
         break;
     case "Archer":
         player.setRoleStats(player.getAgility());
         player.stats.weapon = "bow";
         player.stats.weaponImg = bow_svg;
         player.stats.defaultAttack = "Tirer";
+        player.stats.roleImg = archer_svg
         break;
     default:  
     }
@@ -36,7 +42,7 @@ export function writeStats(player){
     document.getElementById("stats_str").innerHTML = player.getStr();
     document.getElementById("stats_intel").innerHTML = player.getIntel();
     document.getElementById("stats_agility").innerHTML = player.getAgility();
-    document.getElementById("stats_class").innerHTML = player.getRole();
+    document.getElementById("stats_class").style.backgroundImage = "url("+ player.stats.roleImg  + ")";
     document.getElementById("card").style.backgroundImage = "url("+ player.thisRoom.background  + ")";
   }
 
@@ -75,23 +81,30 @@ export function feedbackMessage(player, message){
         swipeLeft: {
             img: function () {return "swipe_svg"},
             action: function() {
-                document.getElementById("feedback").style.display = "none";
-                document.getElementById("filter-feedback").style.display = "none";
-                player.thisRoom.background = player.thisRoom.theme;
+                setTimeout(function(){
+                    document.getElementById("feedback").style.display = "none";
+                    document.getElementById("filter-feedback").style.display = "none";
+                    player.thisRoom.background = player.thisRoom.theme;
+                }, 500);  
+                player.feedback = false;
             },
             text: function () {return "Carte suivante"},
         },
         swipeRight: {
             img: function () {return "swipe_svg"},
             action: function() {
-                document.getElementById("feedback").style.display = "none";
-                document.getElementById("filter-feedback").style.display = "none";
-                player.thisRoom.background = player.thisRoom.theme;
+                setTimeout(function(){
+                    document.getElementById("feedback").style.display = "none";
+                    document.getElementById("filter-feedback").style.display = "none";
+                    player.thisRoom.background = player.thisRoom.theme;
+                }, 500);  
+                player.feedback = false;
             },
             text: function () {return "Carte suivante"},
         }
     }  
     var feedbackMessage = document.getElementById("card");
+    player.feedback = true;
     document.getElementById("filter-feedback").style.display = "block";
     document.getElementById("feedback").style.display = "block";
     document.getElementById("feedback").innerHTML = message;

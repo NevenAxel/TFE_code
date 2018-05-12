@@ -74,10 +74,10 @@ $(document).ready(function(){
 	  
 	  // DRAG ENDED
 	  // this is where we simply forget we are dragging
-	  /*
+	  
 	  // Il y a plein de bug avec le tap
 	  mc.on("tap", function(ev) {
-		if ($('#feedback').css('display') == 'block'){
+		if (player.feedback){
 	   	  elem.style.left = 0 + "px";
 	      card.classList.add("yesFade");
 	      card.classList.remove("noFade");
@@ -103,7 +103,7 @@ $(document).ready(function(){
 			}	
 		  }
 	});
-	*/
+	
 	  if (ev.isFinal) {
 	    isDragging = false;
 	    

@@ -13,8 +13,21 @@
 <body>
 <div class="mobile-simulation">
   <div id="gameover-filter"></div>
+  <div class="character">
+    <ul class="ul-stats">
+      <li class="ul-stats_li hp-bar">
+        <div id="hpRemaining"></div>
+        <span id="stats_hp"></span> / <span id="stats_maxhp"></span>
+      </li>
+      <li class="ul-stats_li" id="stats_class"></li>
+      <li class="ul-stats_li" id="stats_coins"></li>
+      <li class="ul-stats_li" id="stats_str"></li>
+      <li class="ul-stats_li" id="stats_intel"></li>
+      <li class="ul-stats_li" id="stats_agility"></li>
+      
+    </ul>
+  </div>
   <h2 class="niveau">Niveau <span id="level"></span></h2>
-
   <div id="card-container">
     <div class="card-visible">
       <div id="filter-feedback"></div>
@@ -40,31 +53,7 @@
     <div class="cardback-pile"></div>
   </div>
 
-  <div class="character">
-    <p id="stats_class"></p>
-    <ul class="ul-stats">
-      <li class="ul-stats_li">
-        <span class="stats" id="stats_coins"></span>
-        <span class="stats_name"></span>
-      </li>
-      <li class="ul-stats_li">
-        <span class="stats" id="stats_str"></span>
-        <span class="stats_name"></span>
-      </li>
-      <li class="ul-stats_li">
-        <span class="stats" id="stats_intel"></span>
-        <span class="stats_name"></span>
-      </li>
-      <li class="ul-stats_li">
-        <span class="stats" id="stats_agility"></span>
-        <span class="stats_name"></span>
-      </li>
-      <li class="ul-stats_li hp-bar">
-        <div id="hpRemaining"></div>
-        <span id="stats_hp"></span> / <span id="stats_maxhp"></span>
-      </li>
-    </ul>
-  </div>
+  
 
   <div class="gameover off">
     <p id="gameover-message">Vous êtes mort!</p>

@@ -21,6 +21,7 @@ import merchantbg_svg from '../img/bg/bg-merchant.svg';
 
 import no_svg from '../img/actions/no.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
+import givecoins_svg from '../img/actions/givecoins.svg';
 
 export default{
   merchantGenerator,
@@ -54,7 +55,7 @@ var currentShopList = []
 var currentItem = 0;
 
 function merchantGenerator(player, swipeActions) {
-  var name = "Marchand ambulant";
+  var name = "Dealer de potions";
   var desc = getRandomArray([
     "Vous cherchez quelque-chose ?",
     "J'ai tout ce qui vous intéresse !",
@@ -66,6 +67,7 @@ function merchantGenerator(player, swipeActions) {
   var swipeLeft = generateNoShop(player, swipeActions);
   var swipeRight = generateYesShop(player, swipeActions);
   swipeRight.text = function () {return "Voir les objets"}
+  swipeRight.img = function () {return coinsbag_svg},
   swipeRight.action = function () {    
     generateShopList()
     player.thisRoom.background = merchantbg_svg;
@@ -98,7 +100,7 @@ function generateNoShop(player, swipeActions){
         currentItem += 1;
       }
       else{
-        player.thisRoom.background = player.thisRoom.theme;
+        setTimeout(function(){ player.thisRoom.background = player.thisRoom.theme; }, 500);
       }
     },
   }
@@ -108,7 +110,7 @@ function generateYesShop(player, swipeActions){
   return {
       name: "buy",
       text: function () {return "Acheter"},
-      img: function () {return coinsbag_svg},
+      img: function () {return givecoins_svg},
       action: function() {},
     }
 }

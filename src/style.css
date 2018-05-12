@@ -5,7 +5,7 @@
       color: #2D2D2D;
       margin: 0;
       overflow-x: hidden;
-      background: #3F2A19;
+      background: gray;
       transform:translateZ(0)
     }
     li{
@@ -88,12 +88,13 @@
     }
     #card-container{
       width: 300px;
-      height: 350px;
+      height: 340px;
       margin: 0 auto;
       position: relative;
     }
+    
     #card-tracker{
-      height: 350px;
+      height: 340px;
       width: 500px;
       left: 0;   
       right: 0;
@@ -105,8 +106,8 @@
       transform: translateX(-100px);
     }
     .card-visible{
-      height: 350px;
-      width: 300px;
+      height: 100%;
+      width: 100%;
       left: 0;
       right: 0;
       position: absolute;
@@ -118,12 +119,13 @@
         box-shadow: 6px 6px 29px -9px rgba(0,0,0,0.65);
       }
     }
+
     #card-tracker:hover{cursor: -webkit-grab}
 
 
     #card{
-      height: 280px;
-      width: 300px;
+      height: 80%;
+      width: 100%;
       left: 0;
       right: 0;
       position: absolute;
@@ -133,18 +135,19 @@
       opacity: 1;
       line-height: 250px;
       border-radius: 30px 30px 0 0;
+      background: top center;
     }
     #cardback{
-      background: url("./img/cardback.svg");
-      height: 340px;
-      width: 290px;
+      background: url("./img/cardback.svg") center;
+      height: calc(100% - 10px);
+      width: calc(100% - 10px);
       border-radius: 30px;
       border: 5px solid #333333;
     }
     .cardback-pile{
-      background: url("./img/cardback.svg");
-      height: 340px;
-      width: 290px;
+      background: url("./img/cardback.svg") center;
+      height: calc(100% - 10px);
+      width: calc(100% - 10px);
       border-radius: 30px;
       border: 5px solid #333333;
       position: absolute;
@@ -155,7 +158,7 @@
     #feedback{
       color: white;
       position: absolute;
-      width: 260px;
+      width: 85%;
       top: 45%;
       left: 0;
       right: 0;
@@ -165,7 +168,31 @@
       filter: none;
       font-size: 20px;
       z-index: 2;
+      display: none;
       /* Le placement pour centrer est à refaire!*/
+    }
+    #feedback:after{
+      content: "";
+      display: block;
+      margin: 20px auto;
+      width: 50px;
+      height: 50px;
+      background: url("./img/tap-icon.svg") no-repeat center;
+      animation-name: blink;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+    @keyframes blink{
+      0% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
     }
     #name{
       position: absolute;
@@ -189,22 +216,24 @@
     }
     #room_img{
       background: center no-repeat;
-      width: 220px;
-      height: 240px;
+      width: 100%;
+      height: 83%;
       margin: 0 auto;
-      margin-top: 40px;
+      margin-top: 15%;
     }
     #room_desc{
       background: #D8D3AF;
-      height: 46px;
+      height: 21%;
       line-height: 1;
-      margin-top: 0px;
-      padding: 12px;
+      margin: 0px;
+      padding: 4%;
+      padding-bottom: 0;
       line-height: 1.4;
       
       border-radius: 0 0 30px 30px;
       color: #1A1A1A;
     }
+   
     .yes {
       -moz-transform: rotate(10deg) translateX(50px);
       -webkit-transform: rotate(10deg) translateX(50px);
@@ -296,7 +325,7 @@
       height: 80px;
       position: absolute;
       left: -30px;
-      bottom: 30px;
+      bottom: 14%;
       line-height: 1;
       z-index: 2;
     }
@@ -307,7 +336,7 @@
     }
     #btn_no-text{
       position: absolute;
-      bottom: -128px;
+      bottom: -122px;
       left: 12px;
       width: 300px;
       text-align: left;
@@ -323,20 +352,20 @@
       height: 80px;
       position: absolute;
       right: -30px;
-      bottom: 30px;
+      bottom: 14%;
       line-height: 1;
       z-index: 2;
       transform: scaleX(-1);
     }
     @media (min-width: 500px) {
-      #btn_no {
-        filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.3));
+      #btn_no, #btn_yes {
+        filter: drop-shadow( 3px 3px 4px rgba(0,0,0,0.2));
       }
     }
 
     #btn_yes-text{
       position: absolute;
-      bottom: -128px;
+      bottom: -122px;
       right: 12px;
       width: 300px;
       text-align: right;
@@ -348,8 +377,8 @@
     #filter-feedback{
       display: none;
       background: black;
-      width: 300px;
-      height: 350px;
+      width: 100%;
+      height: 100%;
       position: absolute;
       z-index: 1;
       border-radius: 30px;
@@ -364,36 +393,39 @@
 /* ---------------------------- STATS ------------- */
 .character{
   width: 100%;
-  height: 150px;
-  padding: 10px 0px 10px 0px;
-  margin: 25px auto;
-  background: #724C33;
+  height: 105px;
+  padding-top: 13.5px;
+  padding-bottom: 4.5px;
+  position: relative;
+  background: url(./img/character-background.svg);
   color: #FFFFFF;
 }
 
 #stats_class{
-  margin: 0 0 8px 0;
+  margin: 0 0 0 0;
 }
 .ul-stats{
   margin: 0 auto;
-  width: 280px;
+  width: 325px;
   display: block;
 }
+@media (max-width: 375px) {
+  .ul-stats{
+    width: 90%;
+  }
+}
+
 .ul-stats_li{
   float: left;
   text-align: center;
-  font-size: 16px;
   position: relative;
-}
-
-.stats{
-  width: 65px;
-  height: 65px;
-  display: block;
+  width: 15%;
+  margin-left: 4%;
   text-align: right;
-  line-height: 3;
-  font-size: 30px;
+  line-height: 4;
+  font-size: 20px;
   font-weight: 700;
+  display: block;
 }
 
 .stats-up{
@@ -407,13 +439,15 @@
   transform-style: preserve-3d;
 }
 .hp-bar{
-  width: 280px;
+  width: 84%;
+  margin-left: 16%;
   margin-top: 10px;
   background: #ccb79e;
   color: white;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 2px;
   display: block;
   text-align: center;
   border-radius: 10px;
@@ -433,30 +467,35 @@
 }
 
 #stats_class{
-  font-weight: 700;
-  font-size: 25px;
+  position: absolute;
+  z-index: 2;
+  width: 20%;
+  height: 75px;
+  background: top no-repeat;
 }
 
 #stats_coins{
-  background: url("./img/stats/coins.svg") no-repeat top left;
-  margin-right: 6.66px;
+  background: url("./img/stats/coins.svg") no-repeat center;
   transition: 0.25s;
+  height: 60px;
+  margin-left: 24%;
 }
 
 #stats_agility{
   background: url("./img/stats/agility.svg") no-repeat center;
   transition: 0.25s;
+  height: 60px;
   
 }
 #stats_str{
   background: url("./img/stats/force.svg") no-repeat center;
-  margin-right: 6.66px;
   transition: 0.25s;
+  height: 60px;
 }
 #stats_intel{
   background: url("./img/stats/intelligence.svg") no-repeat center;
-  margin-right: 6.66px;
   transition: 0.25s;
+  height: 60px;
 }
 
 /* --------------------- GAME OVER MESSAGE */
@@ -576,3 +615,27 @@
     transform: scale(1) rotateY(0deg)
   }
 }
+ @media (max-width: 400px) {
+      #card-container {
+        width: 75vw;
+        height: 85vw;
+        font-size: 0.9em;
+      }
+      #room_name{
+        padding: 4px 30px 6px 30px;
+      }
+      .niveau{
+        width: 75vw;
+        font-size: 16px;
+      }
+      #feedback{
+        font-size: 17px;
+      }
+      #btn_no-text, #btn_yes-text{
+        font-size: 20px;
+      }
+      #btn_yes, #btn_no{
+        width: 70px;
+        height: 70px;
+      }
+    }

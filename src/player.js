@@ -3,6 +3,8 @@ import { gameOver } from './game';
 
 import sword_svg from './img/actions/sword.svg';
 import forestbg_svg from './img/bg/bg-forest.svg';
+import noclass_svg from './img/stats/noclass.svg';
+
 
 export default {
   stats: {
@@ -15,6 +17,7 @@ export default {
     level: 1,
     roleStats: 5,
     role: "Aventurier",
+    roleImg: noclass_svg,
     weapon: "sword",
     weaponImg: "sword.png",
     defaultAttack: "Attaquer",
