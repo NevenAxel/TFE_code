@@ -19,9 +19,11 @@ import goblin_svg from '../img/monsters/goblin.svg';
 
 export default {
   generateKillFrog,
+  generateKillToad,
   generateFeedFrog,
   generateTalkFrog,
-  generateKissFrog,  
+  generateKissFrog,
+  generateKissToad, 
   generateEatFrog,
   generateEatToad,
   generateTalkToad,
@@ -39,6 +41,39 @@ function generateKillFrog(player, swipeActions){
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend = -3;
+			if(Math.random() < 0.5 * player.getAgility() / 10){
+				if(Math.random() < 0.5){
+					player.setCoin(
+						player.getCoin() + this.coinsGiven
+					);
+					var message = "Vous avez trouvé " + this.coinsGiven + " pièces dans son estomac"
+					feedbackMessage(player, message);
+				}
+				else{
+					feedbackMessage(player, "Cet exercice méticuleux a augmenté votre dextérité");
+					player.setAgility(
+						player.getAgility() + 1
+					);
+				}
+				
+			}
+			else{
+				feedbackMessage(player, "Ça ne vous a rien apporter à part la souffrance d'un animal...");
+			}
+			
+		},
+	}
+}
+
+function generateKillToad(player, swipeActions){
+	return {
+		name: "killtoad",
+		coinsGiven: getRandomNumber(3, 6),
+		text: function () {return "Dépecer"},
+		img: function () {return depecer_svg},
+		action: function() {
+			player.special.frogHater += 1;
+			player.special.frogFriend -= -1;
 			if(Math.random() < 0.5 * player.getAgility() / 10){
 				if(Math.random() < 0.5){
 					player.setCoin(
@@ -97,7 +132,7 @@ function generateTalkFrog(player, swipeActions){
 					text: function () {return "Se raprocher"},
 					img: function () {return speak_svg},
 					action: function() {
-						
+						player.special.frogFriend += 0.5;
 						if(player.special.frogHater > 3){
 							feedbackMessage(player, "Elle vous a sauté dans la bouche pour toutes les autres que vous avez dépecées et mangées avant!")
 							player.setHp(
@@ -349,11 +384,14 @@ function generateKissFrog(player, swipeActions){
 
 function generateKissToad(player, swipeActions){
   	return {
-  		name: "kissFrog",
+  		name: "kissToad",
 		text: function () {return "L'embrasser"},
-		img: function () {return "kiss_svg"},
+		img: function () {return kiss_svg},
 		action: function() {
-			
+			feedbackMessage(player, "Beurk, vous avez attraper de l'herpès en embrassant ce crapaud!");
+			player.setHp(
+				player.getHp() - 5, player
+			);
 		},
 	}
 }
@@ -398,7 +436,7 @@ function generateEatToad(player, swipeActions){
 		img: function () {return eat_svg},
 		action: function() {
 			player.special.frogHater += 1;
-			player.special.frogFriend = -0.5;
+			player.special.frogFriend -= 1;
 			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée!");
 			player.setHp(
 				player.getHp() - 5, player

@@ -33,6 +33,36 @@ $(document).ready(function(){
 	var lastPosX = 0;
 	var lastPosY = 0;
 	var isDragging = false;
+	var tutoAnimationOn = true;
+	var tutoAnimationLoop;
+	setTimeout(function() {
+		startTutoAnimation();
+	}, 2500);
+	
+	function startTutoAnimation(){	
+		if(tutoAnimationOn){
+			card.classList.add("yes")
+			card.classList.remove("no")
+			card.classList.add("yes-exemple");
+			card.classList.add("no-exemple");
+			tutoAnimationLoop = setInterval(tutoAnimation, 2000);
+		}		
+	}  
+	function tutoAnimation() {
+    	card.classList.toggle("yes");
+	    card.classList.toggle("no");
+	}
+	function stopTutoAnimation() {
+		tutoAnimationOn = false;
+		card.classList.remove("yes");
+		card.classList.remove("no");
+		card.classList.remove("yes-exemple");
+		card.classList.remove("no-exemple");
+  		clearInterval(tutoAnimationLoop);
+	}
+
+	
+	
 	function handleDrag(ev) {
 	  
 	  // for convience, let's get a reference to our object
@@ -43,10 +73,14 @@ $(document).ready(function(){
 	  // and keep track of the fact that we're dragging
 	  if ( ! isDragging ) {
 	    isDragging = true;
-	    lastPosX = elem.offsetLeft;  
+	    lastPosX = elem.offsetLeft;
+	  }
+	  if(tutoAnimationOn){
+	  	stopTutoAnimation()
 	  }
 	  
-	   if (elem.offsetLeft > 50) {
+	  
+	  if (elem.offsetLeft > 50) {
 	      card.classList.add("yes");
 	      card.classList.remove("no");
 	  }
@@ -106,6 +140,7 @@ $(document).ready(function(){
 	
 	  if (ev.isFinal) {
 	    isDragging = false;
+	    
 	    
 	    if (elem.offsetLeft > 50) {
 	      elem.style.left = 0 + "px";

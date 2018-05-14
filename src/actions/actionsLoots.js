@@ -113,7 +113,7 @@ function generateDumbBell(player, swipeActions){
 			}
 			else{
 				if(Math.random() < 0.7){
-					feedbackMessage(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blaissé")
+					feedbackMessage(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blessé")
 					player.setHp(
 						player.getHp() - 5, player
 					);

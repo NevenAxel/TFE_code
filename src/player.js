@@ -14,7 +14,7 @@ export default {
     str: 5,
     intel: 5,
     agility: 5,
-    level: 1,
+    level: 0,
     roleStats: 5,
     role: "Aventurier",
     roleImg: noclass_svg,
@@ -27,6 +27,8 @@ export default {
   thisRoom: {
     theme: forestbg_svg,
     background: forestbg_svg,
+    isTuto: true,
+    tutoLevel: 0,
     isLastRoom: true,
     nextRoom: function() {},
   },

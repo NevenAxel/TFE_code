@@ -6,6 +6,7 @@ import escape_svg from '../img/actions/escape.svg';
 import givecoins_svg from '../img/actions/givecoins.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
 import scream_svg from '../img/actions/scream.svg';
+import meditate_svg from '../img/actions/meditate.svg';
 
 export default {
   generateAttack,
@@ -14,6 +15,7 @@ export default {
   generateEscape,  
   generateFeed,
   generateSteal,
+  generateMeditate,
 }
 
 function generateAttack(player, swipeActions){
@@ -204,6 +206,29 @@ function generateSteal(player, swipeActions){
 				player.setCoin(
 					player.getCoin() + coinsStealed
 				);
+			}
+		},
+	}
+}
+
+function generateMeditate(player, swipeActions){
+  	return {
+  		name: "meditate",
+		text: function () {return "Méditer"},
+		img: function () {return meditate_svg},
+		damage: 5,
+		action: function() {
+			if(Math.random() > 0.25 * player.getIntel() / 5){
+				feedbackMessage(player, 'Vous vous êtes fais attaqué pendant votre méditation, vous avez malgré tout gagné +2 Intel')
+				player.setHp(
+					player.getHp() - this.damage, player
+				);
+				player.setIntel(
+					player.getIntel() + 2
+				);
+			}
+			else{
+				feedbackMessage(player, "Votre force mentale a su détruire l'ennemi")
 			}
 		},
 	}

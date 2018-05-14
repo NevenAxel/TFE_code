@@ -12,6 +12,7 @@ import frog from './actions/actionsFrog';
 export default {
   monsterGeneral: [
   	{name: 'escape', rarity: 1},
+    {name: 'meditate', rarity: 1},
   ],
   monsterGeneralRogue: [
   	{name: 'escape', rarity: 1},
@@ -21,6 +22,9 @@ export default {
   ],
   monsterGeneralWarrior: [
   	//{name: 'block', rarity: 1},
+  ],
+  monsterGeneralIntelligence: [
+    {name: 'meditate', rarity: 5},
   ],
 
 
@@ -73,17 +77,17 @@ export default {
 
   frog: [
     {name: 'eatFrog', rarity: 7},
-    {name: 'kissFrog', rarity: 4},
-    {name: 'talkFrog', rarity: 4},
+    {name: 'kissFrog', rarity: 5},
+    {name: 'talkFrog', rarity: 5},
     {name: 'feedFrog', rarity: 10},
-    {name: 'killFrog', rarity: 7},
+    {name: 'killFrog', rarity: 6},
   ],
   toad:[
-    {name: 'eatToad', rarity: 10},
-    {name: 'kissFrog', rarity: 0},
-    {name: 'talkToad', rarity: 10},
+    {name: 'eatToad', rarity: 7},
+    {name: 'kissToad', rarity: 5},
+    {name: 'talkToad', rarity: 5},
     {name: 'feedFrog', rarity: 10},
-    {name: 'killFrog', rarity: 10},
+    {name: 'killToad', rarity: 6},
   ],
 
   starting: [
@@ -107,9 +111,11 @@ export default {
   	eatFrog: frog.generateEatFrog,
   	eatToad: frog.generateEatToad,
   	kissFrog: frog.generateKissFrog,
+    kissToad: frog.generateKissToad,
   	talkFrog: frog.generateTalkFrog,
   	feedFrog: frog.generateFeedFrog,
   	killFrog: frog.generateKillFrog,
+    killToad: frog.generateKillToad,
     talkToad: frog.generateTalkToad,
     frogBenediction: frog.generateFrogBenediction,
     frogCurse: frog.generateFrogCurse,
@@ -125,6 +131,7 @@ export default {
   	scream: monster.generateScream,
   	feed: monster.generateFeed,
   	steal: monster.generateSteal,
+    meditate: monster.generateMeditate,
 
   	attack: monster.generateAttack,
   	noEat: mushroom.generateNoEat,

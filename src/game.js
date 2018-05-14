@@ -33,8 +33,21 @@ export function writeStats(player){
         break;
     default:  
     }
-
-    document.getElementById("level").innerHTML = player.getLevel();
+    if(player.getLevel() === 0){
+        if(player.thisRoom.tutoLevel === 0){
+            document.getElementById("level").innerHTML = "Tutoriel";
+        }
+        else if(player.thisRoom.tutoLevel === 8){
+            document.getElementById("level").innerHTML = "Niveau 0";
+        }
+        else{
+           document.getElementById("level").innerHTML = "Tutoriel " + player.thisRoom.tutoLevel + "/7"; 
+        }  
+    }
+    else{
+        document.getElementById("level").innerHTML = "Niveau " + player.getLevel(); 
+    }
+   
     document.getElementById("stats_hp").innerHTML = player.getHp();
     document.getElementById("hpRemaining").style.width = player.stats.hp / player.getMaxHp() * 100 + "%";
     document.getElementById("stats_maxhp").innerHTML = player.getMaxHp();
@@ -57,7 +70,7 @@ export function writeRoom(currentRoom){
   }
 
 export function getNewRoom(room, swipeActions, player){
-    if (player.getLevel() === 1) {
+    if (player.getLevel() === 0) {
         return room.roomGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
