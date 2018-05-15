@@ -1,5 +1,6 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
+import { generateDifficultyMultiplier } from '../game';
 
 import feed_svg from '../img/actions/feed.svg';
 import escape_svg from '../img/actions/escape.svg';
@@ -21,7 +22,7 @@ export default {
 function generateAttack(player, swipeActions){
 	return {
 		name: "attack",
-		damage: 3,
+		damage: generateDifficultyMultiplier(player, 3, 1.1),
 		text: function () {return player.stats.defaultAttack},
 		img: function () {return player.stats.weaponImg},
 		action: function() {
@@ -67,7 +68,7 @@ function generateGiveCoins(player, swipeActions){
 				feedbackMessage(player, "Tu n'as pas assez de pièces! J'aime pas les arnaqueurs moi!");
 				player.setCoin(0);
 				player.setHp(
-					player.getHp() - 10, player
+					player.getHp() - generateDifficultyMultiplier(player, 10, 1.1), player
 				);
 			}
 			else if(this.coinsGiven == 1){
@@ -87,7 +88,7 @@ function generateGiveCoins(player, swipeActions){
 								feedbackMessage(player, "Tu n'as pas assez de pièces! J'aime pas les arnaqueurs moi!");
 								player.setCoin(0);
 								player.setHp(
-									player.getHp() - 10, player
+									player.getHp() - generateDifficultyMultiplier(player, 10, 1.1), player
 								);
 							}
 							else{
@@ -115,8 +116,8 @@ function generateGiveCoins(player, swipeActions){
 function generateScream(player, swipeActions){
   	return {
   		name: "scream",
-		require: 10,
-		damage: 5,
+		require: generateDifficultyMultiplier(player, 10, 1.2),
+		damage: generateDifficultyMultiplier(player, 5, 1.1),
 		text: function () {return "Crier"},
 		img: function () {return scream_svg},
 		action: function() {
@@ -138,8 +139,8 @@ function generateEscape(player, swipeActions){
   		name: "escape",
 		text: function () {return "S'échapper"},
 		img: function () {return escape_svg},
-		require: 7,
-		damage: 4,
+		require: generateDifficultyMultiplier(player, 10, 1.2),
+		damage: generateDifficultyMultiplier(player, 4, 1.1),
 		action: function() {
 			if (player.getAgility() >= this.require) {
 				if(Math.random() < 0.3 * 10 / player.getAgility()){
@@ -167,17 +168,19 @@ function generateFeed(player, swipeActions){
   		name: "feed",
 		text: function () {return "Nourrir"},
 		img: function () {return feed_svg},
+		damage: generateDifficultyMultiplier(player, 5, 1.1),
+		require: generateDifficultyMultiplier(player, 4, 1.2),
 		action: function() {
-			if(player.getAgility() <= 5){
+			if(player.getAgility() <= this.require){
 				feedbackMessage(player, "Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
 				player.setHp(
-					player.getHp() - 5, player
+					player.getHp() - this.damage, player
 				);
 			}
-			else if(player.getIntel() <= 5){
+			else if(player.getIntel() <= this.require){
 				feedbackMessage(player, "Vous avez oublié de retirer votre main, l'animal l'a mangé, essayez d'être plus intelligent");
 				player.setHp(
-					player.getHp() - 5, player
+					player.getHp() - this.damage, player
 				);
 			}
 			else {
@@ -193,9 +196,10 @@ function generateSteal(player, swipeActions){
   		name: "steal",
 		text: function () {return "Voler " + coinsStealed + " pièces"},
 		img: function () {return coinsbag_svg},
-		damage: 6,
+		damage: generateDifficultyMultiplier(player, 6, 1.1),
+		require: generateDifficultyMultiplier(player, 10, 1.2),
 		action: function() {
-			if(Math.random() < 0.6 * 10 / player.getAgility()){
+			if(Math.random() < 0.6 * this.require / player.getAgility()){
 				feedbackMessage(player, 'Vous avez été pris sur le fait')
 				player.setHp(
 					player.getHp() - this.damage, player
@@ -216,9 +220,10 @@ function generateMeditate(player, swipeActions){
   		name: "meditate",
 		text: function () {return "Méditer"},
 		img: function () {return meditate_svg},
-		damage: 5,
+		damage: generateDifficultyMultiplier(player, 5, 1.1),
+		require: generateDifficultyMultiplier(player, 5, 1.25),
 		action: function() {
-			if(Math.random() > 0.25 * player.getIntel() / 5){
+			if(Math.random() > 0.25 * player.getIntel() / this.require){
 				feedbackMessage(player, 'Vous vous êtes fais attaqué pendant votre méditation, vous avez malgré tout gagné +2 Intel')
 				player.setHp(
 					player.getHp() - this.damage, player

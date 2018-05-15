@@ -147,3 +147,13 @@ export function gameOver(player, deathMessage){
         }, 3500); 
     }
 }
+export function generateDifficultyMultiplier(player, number, difficultyMultiplier){
+    var LevelRequiredForMultiplier = 30;
+    var realMultiplier = (difficultyMultiplier - 1) / 2 + player.getLevel() / LevelRequiredForMultiplier / 10 + 0.9;
+    var finalNumber = number * Math.pow(realMultiplier, 2);
+    console.log("First Number " + difficultyMultiplier + " : " + number);
+    console.log("realMultiplier " + difficultyMultiplier + " : " + Math.pow(realMultiplier, 2));
+    console.log("Final Number " + difficultyMultiplier + " : " + Math.round(finalNumber));
+
+    return Math.round(finalNumber);
+}

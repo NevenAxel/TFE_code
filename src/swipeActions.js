@@ -60,9 +60,7 @@ export default {
   basicChest: [
   	{name: 'hpPotion', rarity: 10},
   	{name: 'bagOfCoins', rarity: 10},
-  	{name: 'spinach', rarity: 0},
   	{name: 'magicBook', rarity: 4},
-  	{name: 'speedShoes', rarity: 0},
   	{name: 'dumbBell', rarity: 4},
   ],
 
@@ -122,9 +120,7 @@ export default {
 
   	hpPotion: loot.generateHpPotion,
   	bagOfCoins: loot.generateBagOfCoins,
-  	spinach: loot.generateSpinach,
   	magicBook: loot.generateMagicBook,
-  	speedShoes: loot.generateSpeedShoes,
   	dumbBell: loot.generateDumbBell,
 
   	escape: monster.generateEscape,

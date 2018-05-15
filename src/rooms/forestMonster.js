@@ -3,9 +3,11 @@ import { feedbackMessage } from '../game';
 import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
+import { generateDifficultyMultiplier } from '../game';
 
 import goblin_svg from '../img/monsters/goblin.svg';
 import spider_svg from '../img/monsters/spider.svg';
+import wolf_svg from '../img/monsters/wolf.svg';
 import frogregular_svg from '../img/monsters/frog-regular.svg';
 import frogtoxic_svg from '../img/monsters/frog-toxic.svg';
 import frogmagic_svg from '../img/monsters/frog-magic.svg';
@@ -41,7 +43,7 @@ export default {
   function spiderGenerator(player, swipeActions) {
     var name = 'araignée géante';
     var img = spider_svg;
-    var desc = "*Elle est prête à bondir*";
+    var desc = "Elle est prête à bondir";
     var availableActions = createAvailableActions(player, swipeActions,[
       'monsterGeneral',
       'monsterAnimals',
@@ -50,11 +52,16 @@ export default {
     var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
     // Exceptions 
     if(swipeLeft.name == "feed"){
-      var desc = "*On dirait qu'elle veut te manger*";
+      var desc = "On dirait qu'elle veut te manger";
 
     }
+    if(swipeLeft.name == "scream"){
+      swipeLeft.require = generateDifficultyMultiplier(player, 12, 1.2);
+      var desc = "Elle n'a pas peur de vous";
+    }
     if(swipeLeft.name == "escape"){
-      swipeLeft.require = 10;
+      swipeLeft.require = generateDifficultyMultiplier(player, 12, 1.2);
+      var desc = "Elle a l'air plus rapide qu'un loup";
     }
 
 
@@ -166,11 +173,11 @@ export default {
       swipeRight: swipeRight,
     }
   }
-  
+
   function wolfGenerator(player, swipeActions) {
     var name = 'loup sauvage';
-    var img = 'gobelin.svg';
-    var desc = "*Le loup hurle et fonce sur toi*";
+    var img = wolf_svg;
+    var desc = "Wouaf wouaf!";
     var availableActions = createAvailableActions(player, swipeActions,[
       'monsterGeneral',
       'monsterAnimals',
@@ -178,9 +185,8 @@ export default {
     var swipeLeft = swipeActions.actionsGenerator[getObjectByRarity(availableActions).name](player, swipeActions);
     var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
     // Exceptions 
-
-    if(swipeLeft.name == "scream"){
-      var desc = "*Le loup vous regarde avec des yeux rouges*";
+    if(swipeLeft.name == "feed"){
+      var desc = "Grrr... Wouaf Wouaf!";
     }
 
     return {

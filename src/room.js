@@ -6,7 +6,6 @@ import forestMonster from './rooms/forestMonster';
 import forestLoot from './rooms/forestLoot';
 
 import startingroom from './rooms/startingroom';
-import monsters from './rooms/monsters';
 import chest from './rooms/chest';
 import merchant from './rooms/merchant';
 
@@ -14,10 +13,10 @@ import merchant from './rooms/merchant';
 export default {
 
   forestMonsterList : [
-    {name: 'wolf', rarity: 0},
+    {name: 'wolf', rarity: 3},
     {name: 'rogue', rarity: 2},
     {name: 'gobelin', rarity: 3},
-    {name: 'spider', rarity: 5},
+    {name: 'spider', rarity: 2},
     {name: 'shroom', rarity: 3},
     {name: 'frog', rarity: 4},
     {name: 'toad', rarity: 2},

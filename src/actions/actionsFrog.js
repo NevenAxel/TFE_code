@@ -3,6 +3,7 @@ import { getRandomArray } from '../utils';
 import { getObjectByRarity } from '../utils';
 import { feedbackMessage } from '../game';
 import { createAvailableActions } from '../utils';
+import { generateDifficultyMultiplier } from '../game';
 
 import feed_svg from '../img/actions/feed.svg';
 import escape_svg from '../img/actions/escape.svg';
@@ -41,7 +42,7 @@ function generateKillFrog(player, swipeActions){
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend = -3;
-			if(Math.random() < 0.5 * player.getAgility() / 10){
+			if(Math.random() < 0.5 * player.getAgility() / generateDifficultyMultiplier(player, 10, 1.2)){
 				if(Math.random() < 0.5){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
@@ -74,7 +75,7 @@ function generateKillToad(player, swipeActions){
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend -= -1;
-			if(Math.random() < 0.5 * player.getAgility() / 10){
+			if(Math.random() < 0.5 * player.getAgility() / generateDifficultyMultiplier(player, 10, 1.2)){
 				if(Math.random() < 0.5){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
@@ -136,7 +137,7 @@ function generateTalkFrog(player, swipeActions){
 						if(player.special.frogHater > 3){
 							feedbackMessage(player, "Elle vous a sauté dans la bouche pour toutes les autres que vous avez dépecées et mangées avant!")
 							player.setHp(
-								player.getHp() - 7, player
+								player.getHp() - generateDifficultyMultiplier(player, 6, 1.1), player
 							);
 						}
 						else if(player.special.frogFriend > 2){
@@ -180,7 +181,7 @@ function generateTalkToad(player, swipeActions){
 					action: function() {
 						feedbackMessage(player, "Le crapaud vous a sauté dessus, beurk!")
 						player.setHp(
-							player.getHp() - 4, player
+							player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 						);						
 					},
 				},
@@ -296,7 +297,7 @@ function generateKissFrog(player, swipeActions){
 							img: function () {return speak_svg},
 							coinsGiven: getRandomNumber(13, 17),
 							action: function() {
-								if(player.stats.eloquence < 5 && Math.random() < 0.60){
+								if(player.stats.eloquence < generateDifficultyMultiplier(player, 5, 1.2) && Math.random() < 0.60){
 									feedbackMessage(player, "Tu pourrai demander plus poliment, je ne te donnes qu'une pièce!");
 									player.setCoin(
 										player.getCoin() + 1
@@ -390,7 +391,7 @@ function generateKissToad(player, swipeActions){
 		action: function() {
 			feedbackMessage(player, "Beurk, vous avez attraper de l'herpès en embrassant ce crapaud!");
 			player.setHp(
-				player.getHp() - 5, player
+				player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 			);
 		},
 	}
@@ -405,17 +406,17 @@ function generateEatFrog(player, swipeActions){
 			player.special.frogHater += 1;
 			player.special.frogFriend = -2;
 			/* Ajouter le choix de la cuisiner avec du feu en mage! */
-			if(player.getIntel() < 6){
+			if(player.getIntel() < generateDifficultyMultiplier(player, 6, 1.2)){
 				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os de grenouille, soyez plus malin!");
 				player.setHp(
-					player.getHp() - 5, player
+					player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 				);
 			}
 			else {
 				if(Math.random() < 0.30){
 					feedbackMessage(player, "Vous avez mal au ventre...");
 					player.setHp(
-						player.getHp() - 2, player
+						player.getHp() - generateDifficultyMultiplier(player, 2, 1.1), player
 					);	
 				}
 				else{
@@ -439,7 +440,7 @@ function generateEatToad(player, swipeActions){
 			player.special.frogFriend -= 1;
 			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée!");
 			player.setHp(
-				player.getHp() - 5, player
+				player.getHp() - generateDifficultyMultiplier(player, 5, 1.1), player
 			);
 		},
 	}
@@ -452,7 +453,7 @@ function generateFrogBenediction(player, swipeActions){
 		action: function() {
 			player.special.frogKingNotPresent = false
 			player.setMaxHp(
-				player.getMaxHp() +10
+				player.getMaxHp() + 10
 			);
 			player.setHp(
 				player.getHp() + 10, player
