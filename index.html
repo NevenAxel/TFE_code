@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>SwipeAdventure</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
   <link href="./src/style.css" rel="stylesheet" type="text/css">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="SwipeAdventure est un jeu de type RogueLike basé sur la mécanique du swipe">
+  <meta name="keywords" content="swipeadventure, swipe game, swipe card game, indie game, webgame">
+  <meta name="robots" content="index, nofollow">
+  <meta name="web_author" content="Axel Neven">
+  <meta name="language" content="French">
+  <meta property="og:image:height" content="307">
+  <meta property="og:image:width" content="587">
+  <meta property="og:title" content="SwipeAdventure">
+  <meta property="og:description" content="SwipeAdventure est un jeu de type RogueLike bas&eacute; sur la m&eacute;canique du swipe">
+  <meta property="og:url" content="http://nevenaxel.be/projets/swipeadventure-landing/">
+  <meta property="og:image" content="http://nevenaxel.be/projets/swipeadventure-landing/og-image.jpg">
   
 </head>
 <body>
@@ -30,22 +48,19 @@
   <h2 class="niveau"><span id="level"></span></h2>
   <div id="card-container">
     <div class="card-visible">
-      <div id="filter-feedback"></div>
+      <div class="filter-feedback"></div>
       <div id="card">
         <div id="name"><p id="room_name">Araignée géante</p></div>
         <div id="room_img"></div>
-        <div id="btn_no">
-          
-        </div>
+        <div id="btn_no"></div>
         <p id="btn_no-text">Left choice(No)</p>
-        <div id="btn_yes">
-          
-        </div>
+        <div id="btn_yes"></div>
         <p id="btn_yes-text">Right choice(Yes)</p>
         <p id="room_desc">Description of room</p>
+        <div class="feedback"></div>  
       </div>
       
-      <div id="feedback"></div>  
+      
     </div>
 
     <div id="card-tracker"></div>
@@ -53,13 +68,13 @@
     <div class="cardback-pile"></div>
   </div>
 
-  <footer>
+  <footer class="bottom-menu">
     
   </footer>  
 
   <div class="gameover off">
     <p id="gameover-message">Vous êtes mort!</p>
-    <p>Bravo, Vous avez atteint le niveau <span id="gameover-lvl">4</span> !</p>
+    <p>Mais vous avez atteint le niveau <span id="gameover-lvl">4</span>, bravo !</p>
     <button class="btn" id="gameover-retry">Réessayer ?</button>
   </div>
 </div>

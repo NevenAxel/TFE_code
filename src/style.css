@@ -2,10 +2,10 @@
       text-align: center;
       font-family: 'Lato', sans-serif;
       user-select: none;
-      color: #2D2D2D;
+      color: #21160E;
       margin: 0;
       overflow-x: hidden;
-      background: #5B3C27;
+      background: #21160E;
       transform:translateZ(0)
     }
     li{
@@ -16,6 +16,8 @@
       -webkit-margin-before: 0;
       -webkit-margin-after: 0;
       -webkit-padding-start: 0;
+      padding: 0;
+      margin: 0;
     }
     button:focus {outline:0;}
     button {
@@ -42,7 +44,8 @@
     -webkit-appearance: none;
   }
     .mobile-simulation{
-      background: url("./img/texture-wood.svg") center; 
+      background: url("./img/texture-wood.svg") center repeat; 
+      background-size: cover;
       overflow: hidden;
       height: 100vh;
       position: relative;
@@ -163,11 +166,11 @@
       z-index: -1;
     }
 
-    #feedback{
+    .feedback{
       color: white;
       position: absolute;
       width: 85%;
-      top: 45%;
+      top: 55%;
       left: 0;
       right: 0;
       margin: auto;
@@ -175,11 +178,10 @@
       line-height: 1.4;
       filter: none;
       font-size: 20px;
-      z-index: 2;
+      z-index: 3;
       display: none;
-      /* Le placement pour centrer est à refaire!*/
     }
-    #feedback:after{
+    .feedback:after{
       content: "";
       display: block;
       margin: 20px auto;
@@ -394,7 +396,7 @@
     .no-exemple #btn_yes-text{
       transition: .5s;
     }   
-    #filter-feedback{
+    .filter-feedback{
       display: none;
       background: black;
       width: 100%;
@@ -426,7 +428,7 @@
 }
 .ul-stats{
   margin: 0 auto;
-  width: 325px;
+  width: 300px;
   display: block;
 }
 @media (max-width: 375px) {
@@ -654,7 +656,7 @@
         width: 75vw;
         font-size: 16px;
       }
-      #feedback{
+      .feedback{
         font-size: 17px;
       }
       #btn_no-text, #btn_yes-text{
@@ -665,3 +667,16 @@
         height: 70px;
       }
     }
+
+    /*--------------------- BOTTOM MENU */
+
+    .bottom-menu{
+      margin-top: 20px;
+       width: 100%;
+        background: url(./img/bottom-background.svg) repeat-x;
+        background-size: 14px 130px;
+        height: 100px;
+        z-index: 0;
+        box-shadow: 0 50vh 0 50vh rgba(0,0,0,.62);
+    }
+

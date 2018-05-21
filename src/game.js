@@ -80,7 +80,7 @@ export function getNewRoom(room, swipeActions, player){
     else {
 
         var availableRoom = room.forestMonsterList.slice();
-        if((player.special.frogHater >= 4 || player.special.frogFriend >= 4) && player.special.frogKingNotPresent){
+        if((player.special.frogHater >= 5 || player.special.frogFriend >= 5) && player.special.frogKingNotPresent){
             availableRoom.push(room.unique.frogKing)
         };
         var currentRoom = getObjectByRarity(availableRoom);
@@ -89,14 +89,16 @@ export function getNewRoom(room, swipeActions, player){
 }
 
 export function feedbackMessage(player, message){
+    var feedback = document.getElementsByClassName('feedback')[0];
+    var filterFeedback = document.getElementsByClassName('filter-feedback')[0];
     player.thisRoom.isLastRoom = false; 
     player.thisRoom.nextRoom = {
         swipeLeft: {
-            img: function () {return "swipe_svg"},
+            img: function () {},
             action: function() {
                 setTimeout(function(){
-                    document.getElementById("feedback").style.display = "none";
-                    document.getElementById("filter-feedback").style.display = "none";
+                    feedback.classList.remove("on");
+                    filterFeedback.classList.remove("on");
                     player.thisRoom.background = player.thisRoom.theme;
                 }, 500);  
                 player.feedback = false;
@@ -104,11 +106,11 @@ export function feedbackMessage(player, message){
             text: function () {return "Carte suivante"},
         },
         swipeRight: {
-            img: function () {return "swipe_svg"},
+            img: function () {},
             action: function() {
                 setTimeout(function(){
-                    document.getElementById("feedback").style.display = "none";
-                    document.getElementById("filter-feedback").style.display = "none";
+                    feedback.classList.remove("on");
+                    filterFeedback.classList.remove("on");
                     player.thisRoom.background = player.thisRoom.theme;
                 }, 500);  
                 player.feedback = false;
@@ -116,11 +118,11 @@ export function feedbackMessage(player, message){
             text: function () {return "Carte suivante"},
         }
     }  
-    var feedbackMessage = document.getElementById("card");
     player.feedback = true;
-    document.getElementById("filter-feedback").style.display = "block";
-    document.getElementById("feedback").style.display = "block";
-    document.getElementById("feedback").innerHTML = message;
+    filterFeedback.classList.add("on");
+    feedback.innerHTML = message;
+    feedback.classList.add("on");
+    
 }
 
 export function gameOver(player, deathMessage){
@@ -132,28 +134,21 @@ export function gameOver(player, deathMessage){
         window.location.reload(false);
     }
     document.getElementById("gameover-retry").addEventListener("click", retry);
-    if(document.getElementById("feedback").style.display != "none"){
-        setTimeout(function(){
-            document.getElementsByClassName("gameover")[0].classList.add("on")
-            document.getElementById('gameover-filter').style.display = "block";
-            document.getElementById('gameover-filter').style.opacity = ".75";
-        }, 3500);   
-    }
-    else{
         setTimeout(function(){ 
             document.getElementsByClassName("gameover")[0].classList.add("on")
             document.getElementById('gameover-filter').style.display = "block";
             document.getElementById('gameover-filter').style.opacity = ".75";
-        }, 3500); 
-    }
+        }, 3000); 
 }
 export function generateDifficultyMultiplier(player, number, difficultyMultiplier){
     var LevelRequiredForMultiplier = 30;
     var realMultiplier = (difficultyMultiplier - 1) / 2 + player.getLevel() / LevelRequiredForMultiplier / 10 + 0.9;
     var finalNumber = number * Math.pow(realMultiplier, 2);
+    /* ConsoleLog pour traquer le changement de chiffre par rapport à la difficultée */ 
+    /*
     console.log("First Number " + difficultyMultiplier + " : " + number);
     console.log("realMultiplier " + difficultyMultiplier + " : " + Math.pow(realMultiplier, 2));
     console.log("Final Number " + difficultyMultiplier + " : " + Math.round(finalNumber));
-
+    */
     return Math.round(finalNumber);
 }
