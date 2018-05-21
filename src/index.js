@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 
 	var card = document.getElementsByClassName('card-visible')[0];
+	var cardToFlip = document.getElementsByClassName('the-card')[0];
 	var cardback = document.getElementById('cardback');
 	var tracker = document.getElementById('card-tracker');
 	var mc = new Hammer(tracker);
@@ -121,8 +122,7 @@ $(document).ready(function(){
 			writeStats(player);
 			if(player.stats.alive){
 				card.classList.add("yes-swipe");
-				card.classList.remove("front")
-	    		cardback.classList.remove("back")
+				
 				setTimeout(function(){ 
 					
 					gainLevel(player);
@@ -131,9 +131,9 @@ $(document).ready(function(){
 					writeStats(player);
 					
 					card.classList.remove("yes-swipe");
-					card.classList.add("front")
-		    		cardback.classList.add("back")
+					cardToFlip.classList.add('is-flipped');
 				}, 500);
+				cardToFlip.classList.remove('is-flipped');
 			}	
 		  }
 	});
@@ -162,8 +162,7 @@ $(document).ready(function(){
 				writeStats(player);
 				if(player.stats.alive){
 					card.classList.add("yes-swipe");
-					card.classList.remove("front")
-		    		cardback.classList.remove("back")
+					
 					setTimeout(function(){ 
 						
 						gainLevel(player);
@@ -172,9 +171,9 @@ $(document).ready(function(){
 						writeStats(player);
 						
 						card.classList.remove("yes-swipe");
-						card.classList.add("front")
-			    		cardback.classList.add("back")
+						cardToFlip.classList.add('is-flipped');
 					}, 500);
+					cardToFlip.classList.remove('is-flipped');
 				}
 				
 			}
@@ -199,8 +198,7 @@ $(document).ready(function(){
 	    		writeStats(player);
 	    		if(player.stats.alive){
 		    		card.classList.add("no-swipe");
-		    		card.classList.remove("front")
-			    	cardback.classList.remove("back")
+		    		
 		    		setTimeout(function(){
 		    			
 		    			gainLevel(player);
@@ -209,9 +207,9 @@ $(document).ready(function(){
 			    		writeStats(player);
 			    		
 			    		card.classList.remove("no-swipe");
-			    		card.classList.add("front")
-			    		cardback.classList.add("back")
+			    		cardToFlip.classList.add('is-flipped');
 		    		}, 500); 	
+		    		cardToFlip.classList.remove('is-flipped');
 		    	}
 	    	}
 	    }
