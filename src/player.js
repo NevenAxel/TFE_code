@@ -36,7 +36,7 @@ export default {
     frogFriend: 0,
     frogHater: 0,
     frogKingNotPresent: true,
-
+    powerStone: false,
     mushroomKnowledge: false,
   },
   setHp: function(nbr, player) {

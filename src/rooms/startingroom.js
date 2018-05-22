@@ -240,7 +240,7 @@ function strTutoGenerator(player, swipeActions){
 }
 function intelTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "L'intelligence permet de nourrir les animaux, porter des poids...";
+  var desc = "L'intelligence permet nourrir les animaux, mieux méditer...";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",

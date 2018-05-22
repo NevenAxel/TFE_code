@@ -33,36 +33,42 @@ function mushroomGenerator(player, swipeActions) {
       var img = mushrooms[0];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Toxique"
+        var desc = "C'est un champignon toxique, mieux vaut ne pas le manger";
       }
     }
     if(swipeRight.name == "yummyMushroom"){
       var img = mushrooms[1];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Délicieux"
+        var desc = "Il est comestible, il nous rend même des points de vie";
       }
     }
     if(swipeRight.name == "sleepMushroom"){
       var img = mushrooms[2];
       if(player.special.mushroomKnowledge){
-        var name = "ChampignHann ouais"
+        var name = "Champignon de Charleroi"
+        var desc = "C'est un champignon qui endors, qui amorti si vous préférez";
       }
     }
     if(swipeRight.name == "agilityMushroom"){
       var img = mushrooms[3];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Vivace"
+        var desc = "Ce champignon vous redonnera votre vigueur d'antant!";
       }
     }
     if(swipeRight.name == "stupidMushroom"){
       var img = mushrooms[4];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Abrutissant"
+        var desc = "Plus vous en mangez et plus vous êtes heureux! Et bête par la même occasion";
       }
     }
     if(swipeRight.name == "magicMushroom"){
       var img = mushrooms[5];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Magique"
+        var desc = "Ce champignon rare est le meilleur de la forêt, il vous augmente vos PvMax";
       }
     }
 

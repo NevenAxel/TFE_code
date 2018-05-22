@@ -16,6 +16,7 @@ import m_intelpotion_svg from '../img/merchantObjets/m-intelpotion.svg';
 import m_intelbook_svg from '../img/merchantObjets/m-intelbook.svg';
 import m_eloquencebook_svg from '../img/merchantObjets/m-eloquencebook.svg';
 import m_mushroombook_svg from '../img/merchantObjets/m-mushroombook.svg';
+import m_powerstone_svg from '../img/merchantObjets/m-powerstone.svg';
 
 import merchantbg_svg from '../img/bg/bg-merchant.svg';
 
@@ -36,6 +37,7 @@ var objectsList = [
 
   {name: 'm_eloquenceBook', rarity: 1},
   {name: 'm_intelBook', rarity: 1},
+  {name: 'm_powerStone', rarity: 10},
   {name: 'm_mushroomBook', rarity: 2},
 ]
 
@@ -49,6 +51,7 @@ var objectsGenerator = {
   m_eloquenceBook: m_eloquenceBookGenerator,
   m_intelBook: m_intelBookGenerator,
   m_mushroomBook: m_mushroomBookGenerator,
+  m_powerStone: m_powerStoneGenerator,
 }
 
 var currentShopList = []
@@ -69,7 +72,7 @@ function merchantGenerator(player, swipeActions) {
   swipeRight.text = function () {return "Voir les objets"}
   swipeRight.img = function () {return coinsbag_svg},
   swipeRight.action = function () {    
-    generateShopList()
+    generateShopList(player)
     player.thisRoom.background = merchantbg_svg;
     if(currentItem < currentShopList.length){
       player.thisRoom.isLastRoom = false; 
@@ -118,6 +121,7 @@ function generateYesShop(player, swipeActions){
 function generateShopList(player){
   var numberOfObjects = getRandomNumber(3, 5);
   var shopObjects = objectsList;
+  if(player.getRole() != "Mage"){shopObjects = shopObjects.filter(element => element.name != "m_powerStone")}
   var shopList = [];
   
   for (var i = numberOfObjects - 1; i >= 0; i--) {
@@ -389,6 +393,45 @@ function m_mushroomBookGenerator(player, swipeActions){
       );
       objectsList = objectsList.filter(element => element.name != "m_mushroomBook")
       player.special.mushroomKnowledge = true;
+    }
+    else{
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+    }
+  }
+
+  return {
+    name: name,
+    desc: desc, 
+    img: img, 
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight,
+  }
+}
+
+
+function m_powerStoneGenerator(player, swipeActions){
+  var price = 20;
+  var name = "Pierre bleue";
+  var desc = "Changez la pierre de votre baguette défectueuse pour " + price +" pièces"
+  var img =  m_powerstone_svg;
+
+  var swipeLeft = generateNoShop(player, swipeActions);
+  var swipeRight = generateYesShop(player, swipeActions);
+  swipeRight.action = function() {
+    if(player.getCoin() - price >= 0){
+      if(currentItem < currentShopList.length){
+        player.thisRoom.isLastRoom = false; 
+        player.thisRoom.nextRoom = objectsGenerator[currentShopList[currentItem].name](player, swipeActions);
+        currentItem += 1;
+      }
+      else{
+        player.thisRoom.background = player.thisRoom.theme;
+      }
+      player.setCoin(
+        player.getCoin() - price
+      );
+      objectsList = objectsList.filter(element => element.name != "m_powerStone")
+      player.special.powerStone = true;
     }
     else{
       feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")

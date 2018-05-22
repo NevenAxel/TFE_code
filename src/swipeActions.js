@@ -40,6 +40,9 @@ export default {
   	{name: 'feed', rarity: 1},
   	//{name: 'pet', rarity: 1},
   ],
+  monsterAnimalsMage: [
+    {name: 'cook', rarity: 2},
+  ],
 
 
   monsterSmallCreature: [
@@ -89,7 +92,7 @@ export default {
   ],
 
   starting: [
-  	//{name: 'wand', rarity: 1},
+  	{name: 'wand', rarity: 1},
   	{name: 'sword', rarity: 1},
   	{name: 'bow', rarity: 1},
   ],
@@ -128,6 +131,7 @@ export default {
   	feed: monster.generateFeed,
   	steal: monster.generateSteal,
     meditate: monster.generateMeditate,
+    cook: monster.generateCook,
 
   	attack: monster.generateAttack,
   	noEat: mushroom.generateNoEat,

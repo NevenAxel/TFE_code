@@ -3,9 +3,13 @@ import { getRandomNumber } from './utils';
 
 import sword_svg from './img/actions/sword.svg';
 import bow_svg from './img/actions/bow.svg';
+import wand_svg from './img/actions/wand.svg';
+import powerwand_svg from './img/actions/powerwand.svg';
 
 import warrior_svg from './img/stats/warrior.svg';
 import archer_svg from './img/stats/archer.svg';
+import mage_svg from './img/stats/mage.svg';
+import powermage_svg from './img/stats/powermage.svg';
 
 
 
@@ -14,8 +18,13 @@ export function writeStats(player){
     case "Mage":
         player.setRoleStats(player.getIntel());
         player.stats.weapon = "wand";
-        player.stats.weaponImg = "wand.png";
-        player.stats.defaultAttack = "Attaquer";
+        player.stats.weaponImg = wand_svg;
+        player.stats.defaultAttack = "Lancer un sort";
+        player.stats.roleImg = mage_svg
+        if(player.special.powerStone){
+            player.stats.weaponImg = powerwand_svg;
+            player.stats.roleImg = powermage_svg;
+        }
         break;
     case "Guerrier":
         player.setRoleStats(player.getStr());

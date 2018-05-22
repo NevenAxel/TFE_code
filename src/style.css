@@ -5,7 +5,8 @@
       color: #21160E;
       margin: 0;
       overflow-x: hidden;
-      background: #21160E;
+      background: url("./img/bg/bg-forest-desktop.svg") top no-repeat #253B2F;
+      background-size: cover;
       transform:translateZ(0)
     }
     li{
@@ -673,3 +674,5 @@
         box-shadow: 0 50vh 0 50vh rgba(0,0,0,.62);
     }
 
+
+/*---------------------- Achievements part */

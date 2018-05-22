@@ -1,4 +1,5 @@
 import { getRandomNumber } from '../utils';
+import { getObjectByRarity } from '../utils';
 import { feedbackMessage } from '../game';
 import { generateDifficultyMultiplier } from '../game';
 
@@ -8,6 +9,7 @@ import givecoins_svg from '../img/actions/givecoins.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
 import scream_svg from '../img/actions/scream.svg';
 import meditate_svg from '../img/actions/meditate.svg';
+import cook_svg from '../img/actions/cook.svg';
 
 export default {
   generateAttack,
@@ -17,6 +19,7 @@ export default {
   generateFeed,
   generateSteal,
   generateMeditate,
+  generateCook,
 }
 
 function generateAttack(player, swipeActions){
@@ -28,15 +31,67 @@ function generateAttack(player, swipeActions){
 		action: function() {
 			switch(player.getRole()) {
 			    case "Mage":
-			        player.setHp(
-						player.getHp() - this.damage, player
-					);
-			        break;
+			    	if(player.special.powerStone){
+			    		var availableActions = [
+			    		{name: 'polymorph', rarity: 0},
+			    		{name: 'protection', rarity: 4},
+			    		{name: 'destruction', rarity: 1},
+			    		{name: 'bonus', rarity: 1},
+				    	]
+				    	var theAction = getObjectByRarity(availableActions).name
+				    	switch(theAction) {
+				    		case "protection":
+					    		player.setHp(
+									player.getHp() - (this.damage - 2), player
+								);
+								feedbackMessage(player, "Vous avez pris moins de dégât grâce à un sort de protection")
+							break;
+							case "destruction":
+								feedbackMessage(player, "Votre sort de destruction a marché à merveille, il ne reste que des cendres")
+							break;
+							case "bonus":
+								player.setHp(
+									player.getHp() + Math.round(this.damage / 3), player
+								);
+								feedbackMessage(player, "Vous avez battu l'ennemi et absorbé son energie")
+							break;
+				    	}
+			    	}
+			    	else{
+			    		var availableActions = [
+			    		{name: 'polymorph', rarity: 0},
+			    		{name: 'explode', rarity: 2},
+			    		{name: 'reparo', rarity: 1},
+			    		{name: 'leviosa', rarity: 1},
+				    	]
+				    	var theAction = getObjectByRarity(availableActions).name
+				    	switch(theAction) {
+				    		case "explode":
+					    		player.setHp(
+									player.getHp() - Math.round(this.damage * 1.5), player
+								);
+								feedbackMessage(player, "Votre baguette a explosé, elle est surêment défectueuse")
+							break;
+							case "reparo":
+								player.setHp(
+									player.getHp() - this.damage, player
+								);
+								feedbackMessage(player, "*Occulus Reparo* :Vos lunettes sont réparées, mais vous vous êtes quand même fait attaqué")
+							break;
+							case "leviosa":
+								player.setHp(
+									player.getHp() - this.damage, player
+								);
+								feedbackMessage(player, "*Wingardium Leviosa* : Non! c'est LEV-I-OSA et ça n'a eu aucun effet")
+							break;
+				    	}
+			    	}
+			    break;
 			    case "Guerrier":
 			        player.setHp(
 						player.getHp() - this.damage, player
 					);
-			        break;
+			    break;
 			    case "Archer":		        
 			        if(Math.random() < 0.45){
 						player.setHp(
@@ -47,7 +102,7 @@ function generateAttack(player, swipeActions){
 					else{
 						feedbackMessage(player, "Touché!")
 					}
-			        break;
+			    break;
 			    default:
         			player.setHp(
 						player.getHp() - this.damage, player
@@ -140,7 +195,7 @@ function generateEscape(player, swipeActions){
 		text: function () {return "S'échapper"},
 		img: function () {return escape_svg},
 		require: generateDifficultyMultiplier(player, 10, 1.2),
-		damage: generateDifficultyMultiplier(player, 4, 1.1),
+		damage: generateDifficultyMultiplier(player, 5, 1.1),
 		action: function() {
 			if (player.getAgility() >= this.require) {
 				if(Math.random() < 0.3 * 10 / player.getAgility()){
@@ -234,6 +289,29 @@ function generateMeditate(player, swipeActions){
 			}
 			else{
 				feedbackMessage(player, "Votre force mentale a su détruire l'ennemi")
+			}
+		},
+	}
+}
+function generateCook(player, swipeActions){
+  	return {
+  		name: "cook",
+		text: function () {return "brûler, cuir, manger"},
+		img: function () {return cook_svg},
+		damage: generateDifficultyMultiplier(player, 5, 1.1),
+		require: generateDifficultyMultiplier(player, 6, 1.2),
+		action: function() {
+			if(Math.random() > 0.25 * player.getIntel() / this.require){
+				feedbackMessage(player, "Vous avez raté votre sort de cuisson, vous avez besoin de plus d'intelligence")
+				player.setHp(
+					player.getHp() - this.damage, player
+				);
+			}
+			else{
+				feedbackMessage(player, "C'était bien bon!")
+				player.setHp(
+					player.getHp() + 5, player
+				);
 			}
 		},
 	}

@@ -13,6 +13,7 @@ import speak_svg from '../img/actions/speak.svg';
 import kiss_svg from '../img/actions/kiss.svg';
 import curse_svg from '../img/actions/curse.svg';
 import benediction_svg from '../img/actions/benediction.svg';
+import cook_svg from '../img/actions/cook.svg';
 
 import princess_svg from '../img/monsters/princess.svg';
 import prince_svg from '../img/monsters/prince.svg';
@@ -400,48 +401,65 @@ function generateKissToad(player, swipeActions){
 function generateEatFrog(player, swipeActions){
   	return {
   		name: "eatFrog",
-		text: function () {return "Manger"},
-		img: function () {return eat_svg},
+		text: function () {if(player.getRole() == "Mage"){return "La cuir et la manger"} else{return "Manger"}},
+		img: function () {if(player.getRole() == "Mage"){return cook_svg} else{return eat_svg}},
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend = -2;
 			/* Ajouter le choix de la cuisiner avec du feu en mage! */
-			if(player.getIntel() < generateDifficultyMultiplier(player, 6, 1.2)){
+			if(player.getRole() == "Mage"){
+				feedbackMessage(player, "C'est quand même meilleur quand c'est cuit!");
+						player.setHp(
+							player.getHp() + 5, player
+						);	
+			}
+			else{
+				if(player.getIntel() < generateDifficultyMultiplier(player, 6, 1.2)){
 				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os de grenouille, soyez plus malin!");
 				player.setHp(
 					player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 				);
+				}
+				else {
+					if(Math.random() < 0.30){
+						feedbackMessage(player, "Vous avez mal au ventre...");
+						player.setHp(
+							player.getHp() - generateDifficultyMultiplier(player, 2, 1.1), player
+						);	
+					}
+					else{
+						feedbackMessage(player, "C'est un délice!");
+						player.setHp(
+							player.getHp() + 3, player
+						);	
+					}
+					
+				}	
 			}
-			else {
-				if(Math.random() < 0.30){
-					feedbackMessage(player, "Vous avez mal au ventre...");
-					player.setHp(
-						player.getHp() - generateDifficultyMultiplier(player, 2, 1.1), player
-					);	
-				}
-				else{
-					feedbackMessage(player, "C'est un délice!");
-					player.setHp(
-						player.getHp() + 3, player
-					);	
-				}
-				
-			}	
+			
 		},
 	}
 }
 function generateEatToad(player, swipeActions){
 	return {
   		name: "eatFrog",
-		text: function () {return "Manger"},
-		img: function () {return eat_svg},
+		text: function () {if(player.getRole() == "Mage"){return "Le cuir et le manger"} else{return "Manger"}},
+		img: function () {if(player.getRole() == "Mage"){return cook_svg} else{return eat_svg}},
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend -= 1;
+			if(player.getRole() == "Mage"){
+				feedbackMessage(player, "Le crapaud c'est pas fameux, mais c'est toujours ça");
+						player.setHp(
+							player.getHp() + 2, player
+						);	
+			}
+			else{
 			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée!");
 			player.setHp(
 				player.getHp() - generateDifficultyMultiplier(player, 5, 1.1), player
 			);
+			}
 		},
 	}
 }

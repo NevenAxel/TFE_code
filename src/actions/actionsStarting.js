@@ -3,6 +3,7 @@ import { feedbackMessage } from '../game';
 
 import sword_svg from '../img/actions/sword.svg';
 import bow_svg from '../img/actions/bow.svg';
+import wand_svg from '../img/actions/wand.svg';
 
 export default {
   generateWand,
@@ -14,7 +15,7 @@ function generateWand(player, swipeActions){
 	return {
 		name: "wandstart",
 		text: function () {return "Prendre le baton"},
-		img: function () {return "wand.png"},
+		img: function () {return wand_svg},
 		action: function() {
 			player.thisRoom.isTuto = false;
 			player.setRole('Mage')
