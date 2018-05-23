@@ -410,7 +410,7 @@ function generateEatFrog(player, swipeActions){
 			if(player.getRole() == "Mage"){
 				feedbackMessage(player, "C'est quand même meilleur quand c'est cuit!");
 						player.setHp(
-							player.getHp() + 5, player
+							player.getHp() + 4, player
 						);	
 			}
 			else{
