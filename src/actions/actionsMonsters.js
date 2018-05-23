@@ -224,7 +224,7 @@ function generateFeed(player, swipeActions){
 		text: function () {return "Nourrir"},
 		img: function () {return feed_svg},
 		damage: generateDifficultyMultiplier(player, 5, 1.1),
-		require: generateDifficultyMultiplier(player, 4, 1.2),
+		require: generateDifficultyMultiplier(player, 5, 1.2),
 		action: function() {
 			if(player.getAgility() <= this.require){
 				feedbackMessage(player, "Maladroit comme vous l'êtes, vous êtes tombé sur l'animal en le nourissant, il vous a attaqué");
