@@ -410,7 +410,7 @@ function m_mushroomBookGenerator(player, swipeActions){
 
 
 function m_powerStoneGenerator(player, swipeActions){
-  var price = 20;
+  var price = 30;
   var name = "Pierre bleue";
   var desc = "Changez la pierre de votre baguette défectueuse pour " + price +" pièces"
   var img =  m_powerstone_svg;

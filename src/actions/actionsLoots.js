@@ -44,11 +44,11 @@ function generateBagOfCoins(player, swipeActions){
 function generateMagicBook(player, swipeActions){
   	return {
   		name: "magicbook",
-		text: function () {return "Livre sur la magie (+5 Intel)"},
+		text: function () {return "Livre sur la magie (+3 Intel)"},
 		img: function () {return magicbook_svg},
 		action: function() {
 			player.setIntel(
-				player.getIntel() + 5
+				player.getIntel() + 3
 			);
 		},
 	}

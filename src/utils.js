@@ -93,7 +93,7 @@ export function createAvailableActions(player, swipeActions, objectList){
     });
   }
 
-  if(player.getIntel() > 10){
+  if(player.getIntel() > 12){
     objectList.forEach(function(element) {
       var actionList = element + 'Intelligence';
       if(typeof swipeActions[actionList] !== "undefined"){
