@@ -604,7 +604,7 @@
 
 /* CARD FLIPPED */
 .the-card.is-flipped{
-  animation-duration: .6s;
+  animation-duration: .55s;
   animation-name: flipping;
   animation-timing-function: linear;
   transition: none;
