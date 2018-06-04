@@ -44,7 +44,7 @@ function generateAttack(player, swipeActions){
 					    		player.setHp(
 									player.getHp() - (this.damage - 2), player
 								);
-								feedbackMessage(player, "Vous avez pris moins de dégât grâce à un sort de protection")
+								feedbackMessage(player, "Vous avez pris moins de dégât grâce à votre sort de protection")
 							break;
 							case "destruction":
 								feedbackMessage(player, "Votre sort de destruction a marché à merveille, il ne reste que des cendres")
@@ -53,7 +53,7 @@ function generateAttack(player, swipeActions){
 								player.setHp(
 									player.getHp() + Math.round(this.damage / 3), player
 								);
-								feedbackMessage(player, "Vous avez battu l'ennemi et absorbé son energie")
+								feedbackMessage(player, "Vous avez détruis l'ennemi et absorbé son energie")
 							break;
 				    	}
 			    	}
