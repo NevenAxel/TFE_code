@@ -1,5 +1,6 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
+import { getRandomArray } from '../utils';
 
 import eat_svg from '../img/actions/eat.svg';
 import no_svg from '../img/actions/no.svg';
@@ -31,7 +32,7 @@ function generateToxicMushroom(player, swipeActions){
 		text: function () {if(player.special.mushroomKnowledge){return "Manger (-5 Pv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "C'est un champignon toxique!");
+			feedbackMessage(player, "C'est un champignon toxique !");
 			player.setHp(
 				player.getHp() - 5, player
 			);
@@ -63,7 +64,7 @@ function generateStupidMushroom(player, swipeActions){
 		text: function () {if(player.special.mushroomKnowledge){return "Manger (-2 Intel)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "Vous avez perdu quelques neurones");
+			feedbackMessage(player, "Vous avez perdu quelques neurones.");
 			player.setIntel(
 				player.getIntel() - 3, player
 			);
@@ -78,7 +79,7 @@ function generateMagicMushroom(player, swipeActions){
 		text: function () {if(player.special.mushroomKnowledge){return "Manger (+3 MaxPv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "Vous vous sentez plus grand");
+			feedbackMessage(player, "Vous ne vous êtes jamais senti aussi vivant !");
 			player.setMaxHp(
 				player.getMaxHp() + 3
 			);
@@ -95,7 +96,7 @@ function generateAgilityMushroom(player, swipeActions){
 		text: function () {if(player.special.mushroomKnowledge){return "Manger (+2 Agilité)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "Vous vous sentez plus vif");
+			feedbackMessage(player, "Vous vous sentez plus vif.");
 			player.setAgility(
 				player.getAgility() + 2, player
 			);
@@ -109,7 +110,7 @@ function generateYummyMushroom(player, swipeActions){
 		text: function () {if(player.special.mushroomKnowledge){return "Manger (+5 Pv)"} else{return "Manger"}},
 		img: function () {return eat_svg},
 		action: function() {
-			feedbackMessage(player, "Mhhh... il est délicieux!");
+			feedbackMessage(player, "Mhhh... il est délicieux !");
 			player.setHp(
 				player.getHp() + 5, player
 			);

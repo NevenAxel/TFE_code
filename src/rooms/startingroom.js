@@ -3,6 +3,7 @@ import { feedbackMessage } from '../game';
 import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
+import { getRandomArray } from '../utils';
 
 import forgeron_svg from '../img/monsters/forgeron.svg';
 import no_svg from '../img/actions/no.svg';
@@ -18,7 +19,7 @@ export default {
 
 function startingGenerator(player, swipeActions) {
   var name = 'Forgeron';
-  var desc = 'Voulez-vous suivre le tutoriel ? Glissez la carte pour choisir';
+  var desc = 'Voulez-vous suivre le tutoriel ? Glissez la carte pour choisir.';
   var img = forgeron_svg;
   var actionLeft = {
     name: "no",
@@ -64,7 +65,7 @@ function startingGenerator(player, swipeActions) {
 
 function lifeTutoGenerator(player, swipeActions) {
   var name = 'Forgeron';
-  var desc = "Votre barre de vie augmente et diminue en fonction de vos décision";
+  var desc = "Votre barre de vie augmente et diminue en fonction de vos décisions.";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -108,7 +109,7 @@ function lifeTutoGenerator(player, swipeActions) {
 }
 function lifeTuto2Generator(player, swipeActions) {
   var name = 'Forgeron';
-  var desc = "Si vous tombez à 0 point de vie (Pv), vous perdez la partie";
+  var desc = "Si vous tombez à 0 point de vie (Pv), vous perdez la partie.";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -152,7 +153,7 @@ function lifeTuto2Generator(player, swipeActions) {
 }
 function coinsTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "Les pièces permettent d'acheter des objets";
+  var desc = "Les pièces permettent d'acheter des objets.";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -196,7 +197,7 @@ function coinsTutoGenerator(player, swipeActions){
 }
 function strTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "La force permet de réussir certaines actions (crier par exemple)";
+  var desc = "La force permet de réussir certaines actions (crier par exemple).";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -240,7 +241,7 @@ function strTutoGenerator(player, swipeActions){
 }
 function intelTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "L'intelligence permet nourrir les animaux, mieux méditer...";
+  var desc = "L'intelligence permet de nourrir les animaux, mieux méditer...";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -284,7 +285,7 @@ function intelTutoGenerator(player, swipeActions){
 }
 function agilityTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "L'agilité permet de fuir, mieux dépecer, voler des pièces...";
+  var desc = "L'agilité permet de fuir, dépecer, voler des pièces...";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -328,7 +329,7 @@ function agilityTutoGenerator(player, swipeActions){
 }
 function finalTutoGenerator(player, swipeActions){
   var name = 'Forgeron';
-  var desc = "Tu as toutes les clés pour réussir ton aventure, je t'offre une arme";
+  var desc = "Tu as toutes les clés pour réussir ton aventure, je t'offre une arme !";
   var img = forgeron_svg;
   var actionLeft = {
     name: "next",
@@ -374,7 +375,7 @@ function finalTutoGenerator(player, swipeActions){
 
 function weaponChoiceGenerator(player, swipeActions) {
   var name = 'Forgeron';
-  var desc = 'Equipe-toi aventurier';
+  var desc = 'Equipe-toi aventurier.';
   var img = forgeron_svg;
 
   var availableActions = swipeActions.starting;

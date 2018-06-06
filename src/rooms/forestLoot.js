@@ -4,6 +4,7 @@ import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
 import { shuffle } from '../utils';
+import { getRandomArray } from '../utils';
 
 import mushroomA1_svg from '../img/monsters/mushroom-a1.svg';
 import mushroomA2_svg from '../img/monsters/mushroom-a2.svg';
@@ -33,42 +34,42 @@ function mushroomGenerator(player, swipeActions) {
       var img = mushrooms[0];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Toxique"
-        var desc = "C'est un champignon toxique, mieux vaut ne pas le manger";
+        var desc = "C'est un champignon toxique, mieux vaut ne pas le manger.";
       }
     }
     if(swipeRight.name == "yummyMushroom"){
       var img = mushrooms[1];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Délicieux"
-        var desc = "Il est comestible, il nous rend même des points de vie";
+        var desc = "Il est comestible et vous rendra même des points de vie.";
       }
     }
     if(swipeRight.name == "sleepMushroom"){
       var img = mushrooms[2];
       if(player.special.mushroomKnowledge){
         var name = "Champignon de Charleroi"
-        var desc = "C'est un champignon qui endors, qui amorti si vous préférez";
+        var desc = "C'est un champignon qui endort, qui amortit si vous préférez.";
       }
     }
     if(swipeRight.name == "agilityMushroom"){
       var img = mushrooms[3];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Vivace"
-        var desc = "Ce champignon vous redonnera votre vigueur d'antant!";
+        var desc = "Ce champignon vous redonnera votre vigueur d'antan !";
       }
     }
     if(swipeRight.name == "stupidMushroom"){
       var img = mushrooms[4];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Abrutissant"
-        var desc = "Plus vous en mangez et plus vous êtes heureux! Et bête par la même occasion";
+        var desc = "Plus vous en mangez et plus vous êtes heureux ! Et bête par la même occasion.";
       }
     }
     if(swipeRight.name == "magicMushroom"){
       var img = mushrooms[5];
       if(player.special.mushroomKnowledge){
         var name = "Champignon Magique"
-        var desc = "Ce champignon rare est le meilleur de la forêt, il vous augmente vos PvMax";
+        var desc = "Ce champignon rare est le meilleur de la forêt, il vous augmente vos PvMax.";
       }
     }
 

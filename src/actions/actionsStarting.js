@@ -1,5 +1,6 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
+import { getRandomArray } from '../utils';
 
 import sword_svg from '../img/actions/sword.svg';
 import bow_svg from '../img/actions/bow.svg';
@@ -14,7 +15,7 @@ export default {
 function generateWand(player, swipeActions){
 	return {
 		name: "wandstart",
-		text: function () {return "Prendre le baton"},
+		text: function () {return "Prendre la baguette"},
 		img: function () {return wand_svg},
 		action: function() {
 			player.thisRoom.isTuto = false;

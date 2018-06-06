@@ -1,6 +1,7 @@
 import { getRandomNumber } from '../utils';
 import { feedbackMessage } from '../game';
 import { generateDifficultyMultiplier } from '../game';
+import { getRandomArray } from '../utils';
 
 import potionhp_svg from '../img/loot/potionhp.svg';
 import coinsbag_svg from '../img/loot/coinsbag.svg';
@@ -67,7 +68,7 @@ function generateDumbBell(player, swipeActions){
 			}
 			else{
 				if(Math.random() < 0.7){
-					feedbackMessage(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blessé")
+					feedbackMessage(player, "Vous n'êtes pas assez intelligent pour porter l'haltère, vous vous êtes blessé.")
 					player.setHp(
 						player.getHp() - 5, player
 					);

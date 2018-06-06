@@ -3,6 +3,7 @@ import { feedbackMessage } from '../game';
 import { generateTwoActionsNoDupe } from '../utils';
 import { getRandomNumber } from '../utils';
 import { getObjectByRarity } from '../utils';
+import { getRandomArray } from '../utils';
 
 import chest_svg from '../img/monsters/chest.svg';
 

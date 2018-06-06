@@ -48,11 +48,11 @@ function generateKillFrog(player, swipeActions){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
 					);
-					var message = "Vous avez trouvé " + this.coinsGiven + " pièces dans son estomac"
+					var message = "Vous avez trouvé " + this.coinsGiven + " pièces dans son estomac."
 					feedbackMessage(player, message);
 				}
 				else{
-					feedbackMessage(player, "Cet exercice méticuleux a augmenté votre dextérité");
+					feedbackMessage(player, "Cet exercice méticuleux a augmenté votre dextérité.");
 					player.setAgility(
 						player.getAgility() + 1
 					);
@@ -60,7 +60,7 @@ function generateKillFrog(player, swipeActions){
 				
 			}
 			else{
-				feedbackMessage(player, "Ça ne vous a rien apporter à part la souffrance d'un animal...");
+				feedbackMessage(player, "Ça ne vous a rien apporté à part la souffrance d'un animal...");
 			}
 			
 		},
@@ -81,11 +81,11 @@ function generateKillToad(player, swipeActions){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
 					);
-					var message = "Vous avez trouvé " + this.coinsGiven + " pièces dans son estomac"
+					var message = "Vous avez trouvé " + this.coinsGiven + " pièces dans son estomac."
 					feedbackMessage(player, message);
 				}
 				else{
-					feedbackMessage(player, "Cet exercice méticuleux a augmenté votre dextérité");
+					feedbackMessage(player, "Cet exercice méticuleux a augmenté votre dextérité.");
 					player.setAgility(
 						player.getAgility() + 1
 					);
@@ -93,7 +93,7 @@ function generateKillToad(player, swipeActions){
 				
 			}
 			else{
-				feedbackMessage(player, "Ça ne vous a rien apporter à part la souffrance d'un animal...");
+				feedbackMessage(player, "Ça ne vous a rien apporté à part la souffrance d'un animal...");
 			}
 			
 		},
@@ -113,7 +113,7 @@ function generateFeedFrog(player, swipeActions){
 					player.setCoin(
 						player.getCoin() + this.coinsGiven
 					);
-					var message = this.coinsGiven + " pièces sont tombées quand l'amphibien a ouvert la bouche pour manger"
+					var message = this.coinsGiven + " pièces sont tombées quand l'amphibien a ouvert la bouche pour manger."
 					feedbackMessage(player, message);
 			}
 		}
@@ -129,29 +129,29 @@ function generateTalkFrog(player, swipeActions){
 		action: function() {
 			player.thisRoom.isLastRoom = false;	
 			player.thisRoom.nextRoom = {
-				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix",
+				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix.",
 				swipeRight: {
-					text: function () {return "Se raprocher"},
+					text: function () {return "Se rapprocher"},
 					img: function () {return speak_svg},
 					action: function() {
 						player.special.frogFriend += 0.5;
 						if(player.special.frogHater > 3){
-							feedbackMessage(player, "Elle vous a sauté dans la bouche pour toutes les autres que vous avez dépecées et mangées avant!")
+							feedbackMessage(player, "Elle vous a sauté dans la bouche pour toutes les autres que vous avez dépecées et mangées avant !")
 							player.setHp(
 								player.getHp() - generateDifficultyMultiplier(player, 6, 1.1), player
 							);
 						}
 						else if(player.special.frogFriend > 2){
-							feedbackMessage(player, "Merci d'avoir nourrit mes amies, je t'offre ma bénédiction")
+							feedbackMessage(player, "Merci d'avoir nourri mes amies, je t'offre ma bénédiction.")
 							player.setMaxHp(
 								player.getMaxHp() + 2
 							);
 						}
 						else{
 							var message = getRandomArray([
-								"Croâ Croâ, si tu m'avais embrassé, je me serai transformé",
-								"Croâ Croâ, tu sens mauvais",
-								"Croâ Croâ, je veux un bisou magique",
+								"Croâ Croâ, si tu m'avais embrassée, je me serais transformée.",
+								"Croâ Croâ, tu sens mauvais.",
+								"Croâ Croâ, je veux un bisou magique.",
 							])
 							feedbackMessage(player, message)
 						}							
@@ -175,12 +175,12 @@ function generateTalkToad(player, swipeActions){
 		action: function() {
 			player.thisRoom.isLastRoom = false;	
 			player.thisRoom.nextRoom = {
-				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix",
+				desc: "Vous entendez un bruit bizarre mais difficile de distinguer si c'est une voix.",
 				swipeRight: {
-					text: function () {return "Se raprocher"},
+					text: function () {return "Se rapprocher"},
 					img: function () {return speak_svg},
 					action: function() {
-						feedbackMessage(player, "Le crapaud vous a sauté dessus, beurk!")
+						feedbackMessage(player, "Le crapaud vous a sauté dessus, beurk !")
 						player.setHp(
 							player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 						);						
@@ -214,18 +214,18 @@ function generateKissFrog(player, swipeActions){
 			    case "princess":
 			        player.thisRoom.isLastRoom = false;	
 					player.thisRoom.nextRoom = {
-						desc: "Merci de m'avoir délivré de ma malédiction!",
+						desc: "Merci de m'avoir délivrée de ma malédiction !",
 						img: princess_svg,
 						name: "Princesse grenouille",
 						swipeRight: {
-							text: function () {return "De rien!"},
+							text: function () {return "De rien !"},
 							img: function () {return speak_svg},
 							action: function() {
 								player.thisRoom.isLastRoom = false;	
 								player.thisRoom.nextRoom = {
-									desc: "Je t'offre ces quelques pièces pour ton audace",
+									desc: "Je t'offre ces quelques pièces pour ton audace.",
 									swipeRight: {
-										text: function () {return "Merci!"},
+										text: function () {return "Merci !"},
 										img: function () {return speak_svg},
 										coinsGiven: getRandomNumber(5, 10),
 										action: function() {
@@ -237,7 +237,7 @@ function generateKissFrog(player, swipeActions){
 										},
 									},
 									swipeLeft: {
-										text: function () {return "Quelle gentilesse!"},
+										text: function () {return "Quelle gentillesse !"},
 										img: function () {return speak_svg},
 										coinsGiven: getRandomNumber(7, 8),
 										action: function() {
@@ -252,14 +252,14 @@ function generateKissFrog(player, swipeActions){
 							},
 						},
 						swipeLeft: {
-							text: function () {return "C'est normal!"},
+							text: function () {return "C'est normal !"},
 							img: function () {return speak_svg},
 							action: function() {
 								player.thisRoom.isLastRoom = false;	
 								player.thisRoom.nextRoom = {
-									desc: "Je t'offre ces quelques pièces, continues de délivrer mes amies !",
+									desc: "Je t'offre ces quelques pièces, continue de délivrer mes amies !",
 									swipeRight: {
-										text: function () {return "Merci!"},
+										text: function () {return "Merci !"},
 										img: function () {return speak_svg},
 										coinsGiven: getRandomNumber(5, 10),
 										action: function() {
@@ -271,7 +271,7 @@ function generateKissFrog(player, swipeActions){
 										},
 									},
 									swipeLeft: {
-										text: function () {return "J'en ambrasserai d'autres"},
+										text: function () {return "J'en embrasserai d'autres"},
 										img: function () {return speak_svg},
 										coinsGiven: getRandomNumber(7, 8),
 										action: function() {
@@ -290,22 +290,22 @@ function generateKissFrog(player, swipeActions){
 			    case "prince":
 			        player.thisRoom.isLastRoom = false;	
 					player.thisRoom.nextRoom = {
-						desc: "Je ne sais comment vous remercier pour m'avoir délivré",
+						desc: "Je ne sais comment vous remercier de m'avoir délivré.",
 						img: prince_svg,
 						name: "Un prince",
 						swipeRight: {
-							text: function () {return "Donne tes pièces!"},
+							text: function () {return "Donne tes pièces !"},
 							img: function () {return speak_svg},
 							coinsGiven: getRandomNumber(13, 17),
 							action: function() {
-								if(player.stats.eloquence < generateDifficultyMultiplier(player, 5, 1.2) && Math.random() < 0.60){
-									feedbackMessage(player, "Tu pourrai demander plus poliment, je ne te donnes qu'une pièce!");
+								if(player.stats.eloquence < generateDifficultyMultiplier(player, 5, 1) && Math.random() < 0.60){
+									feedbackMessage(player, "Tu pourrais demander plus poliment, je ne te donne qu'une pièce !");
 									player.setCoin(
 										player.getCoin() + 1
 									);
 								}
 								else{
-									feedbackMessage(player, "Il ne me reste que " + this.coinsGiven + " pièces, je te donnes ce que j'ai!");
+									feedbackMessage(player, "Il ne me reste que " + this.coinsGiven + " pièces, je te donne ce que j'ai!");
 									player.setCoin(
 										player.getCoin() + this.coinsGiven
 									);
@@ -314,14 +314,14 @@ function generateKissFrog(player, swipeActions){
 							},
 						},
 						swipeLeft: {
-							text: function () {return "Je n'ai pas besoin de rien"},
+							text: function () {return "Je n'ai besoin de rien"},
 							img: function () {return speak_svg},
 							action: function() {
 								player.thisRoom.isLastRoom = false;	
 								player.thisRoom.nextRoom = {
-									desc: "Vous êtes une bonne personne, prenez cette potion magique",
+									desc: "Quelle belle âme, prenez cette potion magique.",
 									swipeRight: {
-										text: function () {return "Merci!"},
+										text: function () {return "Merci !"},
 										img: function () {return speak_svg},
 										action: function() {
 											player.setAgility(
@@ -369,7 +369,7 @@ function generateKissFrog(player, swipeActions){
 			    case "gobelin":
 			        player.thisRoom.isLastRoom = false;	
 					player.thisRoom.nextRoom = {
-						desc: "La grenouille était en fait un gobelin ! Il veut vos pièces",
+						desc: "La grenouille était en fait un gobelin ! Il veut vos pièces.",
 						img: goblin_svg,
 						name: "Petit gobelin",
 					    swipeLeft : swipeActions.actionsGenerator.giveCoins(player, swipeActions),
@@ -390,7 +390,7 @@ function generateKissToad(player, swipeActions){
 		text: function () {return "L'embrasser"},
 		img: function () {return kiss_svg},
 		action: function() {
-			feedbackMessage(player, "Beurk, vous avez attraper de l'herpès en embrassant ce crapaud!");
+			feedbackMessage(player, "Beurk, vous avez attrapé de l'herpès en embrassant ce crapaud !");
 			player.setHp(
 				player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 			);
@@ -401,21 +401,21 @@ function generateKissToad(player, swipeActions){
 function generateEatFrog(player, swipeActions){
   	return {
   		name: "eatFrog",
-		text: function () {if(player.getRole() == "Mage"){return "La cuir et la manger"} else{return "Manger"}},
+		text: function () {if(player.getRole() == "Mage"){return "La cuire et la manger"} else{return "Manger"}},
 		img: function () {if(player.getRole() == "Mage"){return cook_svg} else{return eat_svg}},
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend = -2;
 			/* Ajouter le choix de la cuisiner avec du feu en mage! */
 			if(player.getRole() == "Mage"){
-				feedbackMessage(player, "C'est quand même meilleur quand c'est cuit!");
+				feedbackMessage(player, "C'est quand même meilleur quand c'est cuit !");
 						player.setHp(
 							player.getHp() + 4, player
 						);	
 			}
 			else{
 				if(player.getIntel() < generateDifficultyMultiplier(player, 6, 1.2)){
-				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os de grenouille, soyez plus malin!");
+				feedbackMessage(player, "Vous vous êtes fait mal en mangeant les os de grenouille, soyez plus malin !");
 				player.setHp(
 					player.getHp() - generateDifficultyMultiplier(player, 4, 1.1), player
 				);
@@ -428,7 +428,7 @@ function generateEatFrog(player, swipeActions){
 						);	
 					}
 					else{
-						feedbackMessage(player, "C'est un délice!");
+						feedbackMessage(player, "C'est un délice !");
 						player.setHp(
 							player.getHp() + 3, player
 						);	
@@ -443,19 +443,19 @@ function generateEatFrog(player, swipeActions){
 function generateEatToad(player, swipeActions){
 	return {
   		name: "eatFrog",
-		text: function () {if(player.getRole() == "Mage"){return "Le cuir et le manger"} else{return "Manger"}},
+		text: function () {if(player.getRole() == "Mage"){return "Le cuire et le manger"} else{return "Manger"}},
 		img: function () {if(player.getRole() == "Mage"){return cook_svg} else{return eat_svg}},
 		action: function() {
 			player.special.frogHater += 1;
 			player.special.frogFriend -= 1;
 			if(player.getRole() == "Mage"){
-				feedbackMessage(player, "Le crapaud c'est pas fameux, mais c'est toujours ça");
+				feedbackMessage(player, "Le crapaud c'est pas fameux, mais c'est toujours ça.");
 						player.setHp(
 							player.getHp() + 2, player
 						);	
 			}
 			else{
-			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée!");
+			feedbackMessage(player, "Manger un crapaud ? Mais quelle idée !");
 			player.setHp(
 				player.getHp() - generateDifficultyMultiplier(player, 5, 1.1), player
 			);

@@ -60,9 +60,9 @@ var currentItem = 0;
 function merchantGenerator(player, swipeActions) {
   var name = "Dealer de potions";
   var desc = getRandomArray([
-    "Vous cherchez quelque-chose ?",
+    "Vous cherchez quelque chose ?",
     "J'ai tout ce qui vous intéresse !",
-    "Vous voulez...des potions ?",
+    "Vous voulez... des potions ?",
     "C'est de la bonne, venez voir !",
     ]);
   var img =  merchant_svg;
@@ -136,7 +136,7 @@ function generateShopList(player){
 function m_hpPotionGenerator(player, swipeActions){
   var price = getRandomNumber(4, 6)
   var name = "Potion de vie";
-  var desc = "Vous rend 5 point de vie pour " + price +" pièces"
+  var desc = "Vous rend 5 point de vie pour " + price +" pièces."
   var img =  m_hppotion_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -159,7 +159,7 @@ function m_hpPotionGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -175,7 +175,7 @@ function m_hpPotionGenerator(player, swipeActions){
 function m_vigorPotionGenerator(player, swipeActions){
   var price = getRandomNumber(6, 9)
   var name = "Potion de vigueur";
-  var desc = "Vous donne 2 d'agilité pour " + price +" pièces"
+  var desc = "Vous donne 2 d'agilité pour " + price +" pièces."
   var img =  m_vigorpotion_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -199,7 +199,7 @@ function m_vigorPotionGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -215,7 +215,7 @@ function m_vigorPotionGenerator(player, swipeActions){
 function m_strPotionGenerator(player, swipeActions){
   var price = getRandomNumber(6, 9)
   var name = "Potion de force";
-  var desc = "Vous donne 2 de force pour " + price +" pièces"
+  var desc = "Vous donne 2 de force pour " + price +" pièces."
   var img =  m_strpotion_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -239,7 +239,7 @@ function m_strPotionGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -255,7 +255,7 @@ function m_strPotionGenerator(player, swipeActions){
 function m_intelPotionGenerator(player, swipeActions){
   var price = getRandomNumber(6, 9)
   var name = "Potion d'intelligence";
-  var desc = "Vous donne 2 d'intelligence pour " + price +" pièces"
+  var desc = "Vous donne 2 d'intelligence pour " + price +" pièces."
   var img =  m_intelpotion_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -279,7 +279,7 @@ function m_intelPotionGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -297,7 +297,7 @@ function m_intelPotionGenerator(player, swipeActions){
 function m_intelBookGenerator(player, swipeActions){
   var price = getRandomNumber(10, 14)
   var name = "Livre jaune";
-  var desc = "Vous donne 5 d'intelligence pour " + price +" pièces"
+  var desc = "Vous donne 5 d'intelligence pour " + price +" pièces."
   var img =  m_intelbook_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -320,7 +320,7 @@ function m_intelBookGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -336,7 +336,7 @@ function m_intelBookGenerator(player, swipeActions){
 function m_eloquenceBookGenerator(player, swipeActions){
   var price = getRandomNumber(10, 14)
   var name = "Livre orange";
-  var desc = "Augmente votre éloquence pour " + price +" pièces"
+  var desc = "Augmente votre éloquence pour " + price +" pièces."
   var img =  m_eloquencebook_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -357,7 +357,7 @@ function m_eloquenceBookGenerator(player, swipeActions){
       );
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -373,7 +373,7 @@ function m_eloquenceBookGenerator(player, swipeActions){
 function m_mushroomBookGenerator(player, swipeActions){
   var price = getRandomNumber(3, 12)
   var name = "Livre bleu";
-  var desc = "Vous permet d'identifier les différents champignons pour " + price +" pièces"
+  var desc = "Vous permet d'identifier les différents champignons pour " + price +" pièces."
   var img =  m_mushroombook_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -395,7 +395,7 @@ function m_mushroomBookGenerator(player, swipeActions){
       player.special.mushroomKnowledge = true;
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
@@ -412,7 +412,7 @@ function m_mushroomBookGenerator(player, swipeActions){
 function m_powerStoneGenerator(player, swipeActions){
   var price = 25;
   var name = "Pierre bleue";
-  var desc = "Changez la pierre de votre baguette défectueuse pour " + price +" pièces"
+  var desc = "Votre baguette est défectueuse ? Changez la pierre pour " + price +" pièces."
   var img =  m_powerstone_svg;
 
   var swipeLeft = generateNoShop(player, swipeActions);
@@ -434,7 +434,7 @@ function m_powerStoneGenerator(player, swipeActions){
       player.special.powerStone = true;
     }
     else{
-      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres")
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
     }
   }
 
