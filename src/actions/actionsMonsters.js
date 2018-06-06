@@ -124,7 +124,7 @@ function generateGiveCoins(player, swipeActions){
 				feedbackMessage(player, "Tu n'as pas assez de pièces ! J'aime pas les arnaqueurs moi !");
 				player.setCoin(0);
 				player.setHp(
-					player.getHp() - generateDifficultyMultiplier(player, 10, 1.1), player
+					player.getHp() - generateDifficultyMultiplier(player, 7, 1.1), player
 				);
 			}
 			else if(this.coinsGiven == 1){
@@ -144,7 +144,7 @@ function generateGiveCoins(player, swipeActions){
 								feedbackMessage(player, "Tu n'as pas assez de pièces ! J'aime pas les arnaqueurs moi !");
 								player.setCoin(0);
 								player.setHp(
-									player.getHp() - generateDifficultyMultiplier(player, 10, 1.1), player
+									player.getHp() - generateDifficultyMultiplier(player, 7, 1.1), player
 								);
 							}
 							else{
@@ -172,7 +172,7 @@ function generateGiveCoins(player, swipeActions){
 function generateScream(player, swipeActions){
   	return {
   		name: "scream",
-		require: generateDifficultyMultiplier(player, 10, 1.2),
+		require: generateDifficultyMultiplier(player, 9, 1.2),
 		damage: generateDifficultyMultiplier(player, 5, 1.1),
 		text: function () {return "Crier"},
 		img: function () {return scream_svg},
@@ -195,7 +195,7 @@ function generateEscape(player, swipeActions){
   		name: "escape",
 		text: function () {return "S'échapper"},
 		img: function () {return escape_svg},
-		require: generateDifficultyMultiplier(player, 10, 1.2),
+		require: generateDifficultyMultiplier(player, 9, 1.2),
 		damage: generateDifficultyMultiplier(player, 5, 1.1),
 		action: function() {
 			if (player.getAgility() >= this.require) {

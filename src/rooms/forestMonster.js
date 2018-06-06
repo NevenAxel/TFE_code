@@ -99,6 +99,10 @@ export default {
     var swipeLeft = swipeActions.actionsGenerator[getObjectByRarity(availableActions).name](player, swipeActions);
     var swipeRight = swipeActions.actionsGenerator.attack(player, swipeActions);
     // Exceptions 
+    if(swipeLeft.name == "escape"){
+      swipeLeft.require = generateDifficultyMultiplier(player, 4, 1.2);
+      var desc = "Il avance vers vous en boitant.";
+    }
 
     return {
       name: name,
