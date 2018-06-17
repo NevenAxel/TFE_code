@@ -16,6 +16,7 @@ import m_intelpotion_svg from '../img/merchantObjets/m-intelpotion.svg';
 import m_intelbook_svg from '../img/merchantObjets/m-intelbook.svg';
 import m_eloquencebook_svg from '../img/merchantObjets/m-eloquencebook.svg';
 import m_mushroombook_svg from '../img/merchantObjets/m-mushroombook.svg';
+import m_equalityscroll_svg from '../img/merchantObjets/m-equalityscroll.svg';
 import m_powerstone_svg from '../img/merchantObjets/m-powerstone.svg';
 
 import merchantbg_svg from '../img/bg/bg-merchant.svg';
@@ -29,16 +30,17 @@ export default{
 }
 
 var objectsList = [
-  {name: 'm_hpPotion', rarity: 10},
+  {name: 'm_hpPotion', rarity: 11},
 
-  {name: 'm_vigorPotion', rarity: 3},
-  {name: 'm_intelPotion', rarity: 3},
-  {name: 'm_strPotion', rarity: 3},
+  {name: 'm_vigorPotion', rarity: 4},
+  {name: 'm_intelPotion', rarity: 4},
+  {name: 'm_strPotion', rarity: 4},
 
   {name: 'm_eloquenceBook', rarity: 1},
-  {name: 'm_intelBook', rarity: 1},
-  {name: 'm_powerStone', rarity: 10},
+  {name: 'm_intelBook', rarity: 2},
+  {name: 'm_powerStone', rarity: 11},
   {name: 'm_mushroomBook', rarity: 2},
+  {name: 'm_equalityScroll', rarity: 1},
 ]
 
 var objectsGenerator = {
@@ -52,6 +54,7 @@ var objectsGenerator = {
   m_intelBook: m_intelBookGenerator,
   m_mushroomBook: m_mushroomBookGenerator,
   m_powerStone: m_powerStoneGenerator,
+  m_equalityScroll: m_equalityScrollGenerator,
 }
 
 var currentShopList = []
@@ -334,7 +337,7 @@ function m_intelBookGenerator(player, swipeActions){
 }
 
 function m_eloquenceBookGenerator(player, swipeActions){
-  var price = getRandomNumber(10, 14)
+  var price = getRandomNumber(5, 10)
   var name = "Livre orange";
   var desc = "Augmente votre éloquence pour " + price +" pièces."
   var img =  m_eloquencebook_svg;
@@ -432,6 +435,47 @@ function m_powerStoneGenerator(player, swipeActions){
       );
       objectsList = objectsList.filter(element => element.name != "m_powerStone")
       player.special.powerStone = true;
+    }
+    else{
+      feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")
+    }
+  }
+
+  return {
+    name: name,
+    desc: desc, 
+    img: img, 
+    swipeLeft: swipeLeft,
+    swipeRight: swipeRight,
+  }
+}
+
+function m_equalityScrollGenerator(player, swipeActions){
+  var price = getRandomNumber(6, 9)
+  var name = "Parchemin d'égalité";
+  var desc = "Egalise le niveau de vos aptitudes pour " + price +" pièces."
+  var img =  m_equalityscroll_svg;
+
+  var swipeLeft = generateNoShop(player, swipeActions);
+  var swipeRight = generateYesShop(player, swipeActions);
+  swipeRight.action = function() {
+    if(player.getCoin() - price >= 0){
+      if(currentItem < currentShopList.length){
+        player.thisRoom.isLastRoom = false; 
+        player.thisRoom.nextRoom = objectsGenerator[currentShopList[currentItem].name](player, swipeActions);
+        currentItem += 1;
+      }
+      else{
+        player.thisRoom.background = player.thisRoom.theme;
+      }
+      var statsTotal = player.getIntel() + player.getStr() + player.getAgility();
+      var equalStat = Math.round(statsTotal / 3);
+      player.setIntel(equalStat);
+      player.setAgility(equalStat);
+      player.setStr(equalStat);
+      player.setCoin(
+        player.getCoin() - price
+      );
     }
     else{
       feedbackMessage(player, "Vous n'avez pas assez de pièces, je ne vends pas aux pauvres.")

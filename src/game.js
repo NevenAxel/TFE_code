@@ -83,8 +83,18 @@ export function getNewRoom(room, swipeActions, player){
         return room.roomGenerator.starting(player, swipeActions);
     }
     if (player.getLevel() % 5 === 0) {
+        if(player.getLevel() % 10 === 0){
+           return room.roomGenerator['merchant'](player, swipeActions);
+        }
+        else{
+           return room.roomGenerator['basicChest'](player, swipeActions);
+        }
+        /*
+        // random loot generator
         var currentRoom = getObjectByRarity(room.forestLootList);
         return room.roomGenerator[currentRoom.name](player, swipeActions);
+        */
+
     }
     else {
 

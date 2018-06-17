@@ -11,6 +11,7 @@ import coinsbag_svg from '../img/loot/coinsbag.svg';
 import scream_svg from '../img/actions/scream.svg';
 import meditate_svg from '../img/actions/meditate.svg';
 import cook_svg from '../img/actions/cook.svg';
+import sheep_svg from '../img/monsters/sheep.svg';
 
 export default {
   generateAttack,
@@ -34,10 +35,9 @@ function generateAttack(player, swipeActions){
 			    case "Mage":
 			    	if(player.special.powerStone){
 			    		var availableActions = [
-			    		{name: 'polymorph', rarity: 0},
+			    		{name: 'polymorph', rarity: 1},
 			    		{name: 'protection', rarity: 4},
 			    		{name: 'destruction', rarity: 1},
-			    		{name: 'bonus', rarity: 1},
 				    	]
 				    	var theAction = getObjectByRarity(availableActions).name
 				    	switch(theAction) {
@@ -50,20 +50,45 @@ function generateAttack(player, swipeActions){
 							case "destruction":
 								feedbackMessage(player, "Votre sort de destruction a marché à merveille, il ne reste que des cendres.")
 							break;
-							case "bonus":
-								player.setHp(
-									player.getHp() + Math.round(this.damage / 3), player
-								);
-								feedbackMessage(player, "Vous avez détruit l'ennemi et absorbé son energie.")
+							case "polymorph":
+								player.thisRoom.isLastRoom = false;	
+								player.thisRoom.nextRoom = {
+									desc: "Vous l'avez transformé en mouton !",
+									img: sheep_svg,
+									swipeRight: {
+										text: function () {return "brûler, cuire, manger"},
+										img: function () {return cook_svg},
+										action: function() {
+											feedbackMessage(player, "Miam... Quoi de mieux que de manger ses adversaires ?")
+											player.setHp(
+												player.getHp() + 3, player
+											);
+										},
+									},
+									swipeLeft: {
+										coinsGiven: getRandomNumber(2, 5),
+										text: function () {return "Nourrir"},
+										img: function () {return feed_svg},
+										action: function() {
+											if(Math.random() < 0.60){
+													player.setCoin(
+														player.getCoin() + this.coinsGiven
+													);
+													var message = "Après l'avoir nourri le mouton a sorti " + this.coinsGiven + " crottes dorées de son postérieur (+" + this.coinsGiven + " pièces)."
+													feedbackMessage(player, message);
+											}
+										},
+									},
+								}
 							break;
 				    	}
 			    	}
 			    	else{
 			    		var availableActions = [
-			    		{name: 'polymorph', rarity: 0},
-			    		{name: 'explode', rarity: 2},
-			    		{name: 'reparo', rarity: 1},
-			    		{name: 'leviosa', rarity: 1},
+			    		{name: 'polymorph', rarity: 1},
+			    		{name: 'explode', rarity: 6},
+			    		{name: 'reparo', rarity: 3},
+			    		{name: 'leviosa', rarity: 3},
 				    	]
 				    	var theAction = getObjectByRarity(availableActions).name
 				    	switch(theAction) {
@@ -84,6 +109,37 @@ function generateAttack(player, swipeActions){
 									player.getHp() - this.damage, player
 								);
 								feedbackMessage(player, "*Wingardium Leviosa* : Non! c'est LEV-I-OSA et ça n'a eu aucun effet.")
+							break;
+							case "polymorph":
+								player.thisRoom.isLastRoom = false;	
+								player.thisRoom.nextRoom = {
+									desc: "Vous l'avez transformé en mouton!",
+									img: sheep_svg,
+									swipeRight: {
+										text: function () {return "brûler, cuire, manger"},
+										img: function () {return cook_svg},
+										action: function() {
+											feedbackMessage(player, "Miam... Quoi de mieux que de manger ses adversaires ?")
+											player.setHp(
+												player.getHp() + 2, player
+											);
+										},
+									},
+									swipeLeft: {
+										coinsGiven: getRandomNumber(2, 4),
+										text: function () {return "Nourrir"},
+										img: function () {return feed_svg},
+										action: function() {
+											if(Math.random() < 0.60){
+													player.setCoin(
+														player.getCoin() + this.coinsGiven
+													);
+													var message = "Après l'avoir nourri le mouton a sorti 4 crottes dorées de son postérieur (+" + this.coinsGiven + " pièces)"
+													feedbackMessage(player, message);
+											}
+										},
+									},
+								}
 							break;
 				    	}
 			    	}
@@ -199,7 +255,7 @@ function generateEscape(player, swipeActions){
 		damage: generateDifficultyMultiplier(player, 5, 1.1),
 		action: function() {
 			if (player.getAgility() >= this.require) {
-				if(Math.random() < 0.3 * 10 / player.getAgility()){
+				if(Math.random() < 0.3 * this.require / player.getAgility()){
 					feedbackMessage(player, 'Pas de chance, vous avez trébuché sur une pierre.')
 					player.setHp(
 						player.getHp() - this.damage, player

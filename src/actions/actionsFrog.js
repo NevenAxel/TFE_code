@@ -296,7 +296,7 @@ function generateKissFrog(player, swipeActions){
 						swipeRight: {
 							text: function () {return "Donne tes pièces !"},
 							img: function () {return speak_svg},
-							coinsGiven: getRandomNumber(13, 17),
+							coinsGiven: getRandomNumber(15, 25),
 							action: function() {
 								if(player.stats.eloquence < generateDifficultyMultiplier(player, 5, 1) && Math.random() < 0.60){
 									feedbackMessage(player, "Tu pourrais demander plus poliment, je ne te donne qu'une pièce !");

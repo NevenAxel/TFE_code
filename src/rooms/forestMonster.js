@@ -7,11 +7,15 @@ import { generateDifficultyMultiplier } from '../game';
 import { getRandomArray } from '../utils';
 
 import goblin_svg from '../img/monsters/goblin.svg';
+import goblinorgan_svg from '../img/monsters/goblin-organ.svg';
 import spider_svg from '../img/monsters/spider.svg';
 import wolf_svg from '../img/monsters/wolf.svg';
 import frogregular_svg from '../img/monsters/frog-regular.svg';
 import frogtoxic_svg from '../img/monsters/frog-toxic.svg';
 import frogmagic_svg from '../img/monsters/frog-magic.svg';
+
+import givekidney_svg from '../img/actions/givekidney.svg';
+import no_svg from '../img/actions/no.svg';
 
 
 
@@ -23,6 +27,7 @@ export default {
   frogGenerator,
   toadGenerator,
   frogKingGenerator,
+  gobelinOrganGenerator,
 }
 
   function rogueGenerator(player, swipeActions) {
@@ -204,6 +209,63 @@ export default {
     // Exceptions 
     if(swipeLeft.name == "feed"){
       var desc = "Wouaf Wouaf !";
+    }
+
+    return {
+      name: name,
+      desc: desc,
+      img: img, 
+      swipeLeft: swipeLeft,
+      swipeRight: swipeRight,
+    }
+  }
+
+  function gobelinOrganGenerator(player, swipeActions) {
+    var availableActions = createAvailableActions(player, swipeActions,['monsterGeneral','monsterHumanoid',]);
+    var name = "trafiquant d'organes";
+    var img = goblinorgan_svg;
+    var coinsGiven = getRandomNumber(15, 40);
+    var desc = "J'achète ton rein pour " + coinsGiven + " pièces";
+    var swipeLeft = {
+      text: function () {return "Non !"},
+      img: function () {return no_svg},
+      action: function() {
+        if(player.stats.eloquence > generateDifficultyMultiplier(player, 5, 1) || Math.random() < 0.15){
+          feedbackMessage(player, "Dégage de là alors!")
+        }
+        else{
+          player.thisRoom.isLastRoom = false;
+          player.thisRoom.nextRoom = {
+            desc: "Si c'est comme ça j'irai le prendre moi même !",
+            img: goblin_svg,
+            availableActions: createAvailableActions(player, swipeActions,[
+              'monsterGeneral',
+              'monsterHumanoid',
+            ]),
+            swipeLeft: swipeActions.actionsGenerator[getObjectByRarity(availableActions).name](player, swipeActions),
+            swipeRight: swipeActions.actionsGenerator.attack(player, swipeActions),
+          }
+        }
+      },
+    }
+    var swipeRight = {
+      text: function () {return "Donner son rein"},
+      img: function () {return givekidney_svg},
+      action: function() {
+
+        feedbackMessage(player, "Ça fait plutôt mal mais j'ai gagné " + coinsGiven + " pièces")
+        player.setMaxHp(
+          player.getMaxHp() - 10, player
+        );
+        // update hp to not be over maxHp
+        player.setHp(
+          player.getHp(), player
+        );
+        player.setCoin(
+          player.getCoin() + coinsGiven
+        );
+
+      },
     }
 
     return {
